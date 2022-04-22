@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author IEUser
  */
-public class Treillis extends Groupe {
+public class Treillis {
     private List<Noeud> noeudsTreillis ;
     private List<Barre> barresTreillis ;
     

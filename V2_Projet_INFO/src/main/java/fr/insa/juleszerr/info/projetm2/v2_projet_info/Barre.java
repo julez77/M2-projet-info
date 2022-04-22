@@ -4,7 +4,13 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import java.awt.Point;
 import static java.lang.Math.sqrt;
+import java.util.List;
+import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
+import static javafx.scene.paint.Color.RED;
+import javafx.scene.shape.Line;
 
 /**
  *
@@ -17,6 +23,10 @@ private double prix ;
 private double traction ;
 private double compre;
 private int id ;
+
+    Barre(Point p1, Point p2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 public Vecteur2d vecteurBarre(){
@@ -175,6 +185,47 @@ public Vecteur2d vecteurBarre(){
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public double maxX() {
+        return Math.max(this.noeud1.maxX(), this.noeud2.maxX());
+    }
+
+    @Override
+    public double minX() {
+        return Math.min(this.noeud1.minX(), this.noeud2.minX());
+    }
+
+    @Override
+    public double maxY() {
+        return Math.max(this.noeud1.maxY(), this.noeud2.maxY());
+    }
+
+    @Override
+    public double minY() {
+        return Math.min(this.noeud1.minY(), this.noeud2.minY());
+    }
+
+    /*
+    @Override
+    public Groupe dessine(GraphicsContext context) {
+        context.setStroke(RED);
+        context.strokeLine(this.noeud1.getPx(), this.noeud1.getPy(), this.noeud2.getPx(), this.noeud2.getPy());
+        return null;
+    }
+*/
+    
+    @Override
+    public Group dessine() {
+         Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(RED);
+        res.setFill(RED);
+        Group g = new Group( res);
+        
+        return g;
+        
     }
 
 }

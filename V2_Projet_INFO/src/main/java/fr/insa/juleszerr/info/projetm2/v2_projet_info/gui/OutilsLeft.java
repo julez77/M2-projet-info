@@ -4,7 +4,6 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.FxUtils;
 
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;

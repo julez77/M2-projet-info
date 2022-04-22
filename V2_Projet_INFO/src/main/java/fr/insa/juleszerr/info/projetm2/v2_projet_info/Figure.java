@@ -4,25 +4,38 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import javafx.scene.Group;
+
 /**
  *
  * @author IEUser
  */
 public abstract class Figure {
-    private Groupe contenuDans ;
+    private Groupe groupe ;
     
     
     public Figure (){
-        this.contenuDans = null;
+        this.groupe = null;
     }
 
-    Groupe getContenuDAns() {
-       return contenuDans;
+    Groupe getGroupe() {
+       return groupe;
     }
 
-   void setContenuDans(Groupe contenuDans) {
-       this.contenuDans= contenuDans ;
+   void setGroupe(Groupe contenuDans) {
+       this.groupe = contenuDans ;
     }
    public abstract double maxX();
-   public abstract Groupe dessine();
+   
+   public abstract double minX();
+
+   public abstract double maxY();
+
+   public abstract double minY();
+   
+  // public abstract Groupe dessine(GraphicsContext context);
+   
+    public abstract Group dessine();
+   
+   
 }

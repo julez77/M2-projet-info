@@ -4,6 +4,9 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import java.util.List;
+import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.scene.shape.Ellipse;
 
@@ -13,7 +16,7 @@ import javafx.scene.shape.Ellipse;
  */
 public class NoeudSimple extends Noeud {
     
-    public static final double  TAILLE_POINT = 5;
+    public static  double  RAYON_IN_DRAW = 5;
      public NoeudSimple (double px , double py ){
         super(px,py);      
     }
@@ -25,22 +28,51 @@ public class NoeudSimple extends Noeud {
      */
     @Override
     public String toString(){
-      return  "["+this.getPx()+","+this.getPy()+"] noeudsimple id " + this.getId();
+      return  "("+this.getPx()+","+this.getPy()+")";
   }
 
+    
     @Override
     public double maxX() {
         return this.px;
             
     }
+    
+    @Override
+    public double minX() {
+        return this.px;
+    }
 
     @Override
-    public Groupe dessine() {
-        Ellipse res = new Ellipse (this.px, this.py ,TAILLE_POINT, TAILLE_POINT );
+    public double maxY() {
+      return this.py;
+    }
+
+    @Override
+    public double minY() {
+        return this.py;
+    }
+
+   /*
+    @Override
+    public Groupe dessine(GraphicsContext context) {
+       context.setFill(BLUE);
+       context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW); 
+        return null;
+    }
+*/
+
+  
+    @Override
+        public  Group dessine() {
+        Ellipse res = new Ellipse(this.px, this.py, RAYON_IN_DRAW, RAYON_IN_DRAW);
+        //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
         res.setStroke(BLUE);
         res.setFill(BLUE);
-        Groupe g = new Groupe;
-        return g; 
-        
+        Group g = new Group( res);       
+        return g;              
     }
+
+   
+    
 }

@@ -8,6 +8,6 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
  *
  * @author IEUser
  */
-public class Terrain extends Groupe {
+public class Terrain {
     
 }

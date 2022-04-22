@@ -4,9 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.DessinPane;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Groupe;
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.OutilsTop;
 import javafx.scene.layout.BorderPane;
 
 /**

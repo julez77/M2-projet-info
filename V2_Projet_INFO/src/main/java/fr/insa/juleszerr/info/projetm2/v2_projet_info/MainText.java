@@ -42,7 +42,7 @@ public class MainText {
        Groupe G = new Groupe();
        //G.ajouterNoeud(n3);
       //G.ajouterNoeud(n2);
-       G.ajouterBarre(new Barre(n1,n2));
+       G.add(new Barre(n1,n2));
        
        G.menuTexte();
        

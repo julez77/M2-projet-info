@@ -6,6 +6,8 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Groupe;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -15,8 +17,15 @@ import javafx.stage.Stage;
 public class MainFX extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception{
-       Groupe test = Groupe.groupeTest();
-       System.out.println("nb barre"+ test.getListebarre().size()+"nbnoeud"+test.getListenoeud().size());
-       MainPanel main = new MainePanel(test);
+      Groupe test = Groupe.groupeTest();
+            System.out.println("taille " + test.getContient().size());
+        MainPanel main = new MainPanel(test);
+        Scene s = new Scene(main);
+        primaryStage.setScene(s);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

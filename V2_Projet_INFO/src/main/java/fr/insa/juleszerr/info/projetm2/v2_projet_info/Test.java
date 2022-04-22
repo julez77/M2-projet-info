@@ -4,6 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+
+
 /**
  *
  * @author IEUser
@@ -24,13 +26,24 @@ System.out.println(penaldo.noeudOppose(benz));
 double angl = penaldo.angle();
 System.out.println(angl);
 Groupe teste = new Groupe();
-teste.ajouterBarre(penaldo);
+teste.add(penaldo);
 
-teste.maxIDbarre();
-System.out.println(teste.maxIDbarre());
-System.out.println(teste.maxIDnoeud());
+
+
 teste.menuTexte();
 // TODO code application logic here
+
+NoeudSimple p1 = new NoeudSimple(2, 2);
+NoeudSimple p2 = new NoeudSimple(5, 3);
+Barre b = new Barre(p1, p2);
+Groupe e = new Groupe();
+e.add(b);
+e.add(p2);
+e.add(p2);
+
+
+
+
     }
     
 }
