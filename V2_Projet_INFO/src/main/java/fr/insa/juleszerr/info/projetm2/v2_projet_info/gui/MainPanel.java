@@ -30,7 +30,7 @@ public class MainPanel extends BorderPane {
        this.outilsLeft = new OutilsLeft();
        this.dessin = new DessinPane(this);
        
-       this.setTop(this.outilsTop);
+       this.setRight(this.outilsTop);
        this.setLeft(this.outilsLeft);
        this.setCenter(this.dessin);
        
