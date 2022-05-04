@@ -164,7 +164,12 @@ public List<Barre> barreincidentes(){
                       "\n");
         }
     }
-
+public void sauvnoeud(File noeuds) throws IOException {
+        Numeroteur<Figure> numn = new Numeroteur<Figure>();
+        try (BufferedWriter noeub = new BufferedWriter(new FileWriter(noeuds))) {
+            this.save(noeub, numn);
+        }
+    }
     }
 
 

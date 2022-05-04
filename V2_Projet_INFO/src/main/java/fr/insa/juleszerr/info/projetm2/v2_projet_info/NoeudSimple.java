@@ -18,7 +18,8 @@ public class NoeudSimple extends Noeud {
     
     public static  double  RAYON_IN_DRAW = 5;
      public NoeudSimple (double px , double py ){
-        super(px,py);      
+        super(px,py);  
+        
     }
     
     
