@@ -11,7 +11,8 @@ import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
-
+import java.io.IOException;
+import java.io.Writer;
 /**
  *
  * @author IEUser
@@ -75,7 +76,7 @@ public Vecteur2d vecteurBarre(){
         this.compre = 0;
         this.id=0;
         this.prix = 0;
-      
+        
         noeud2.addnoeud2(this);
         noeud1.addnoeud1(this);
     }
@@ -228,4 +229,14 @@ public Vecteur2d vecteurBarre(){
         
     }
 
+    public void saveb(Writer w, Numeroteur<Figure> numb, Numeroteur<Figure> numn) throws IOException {
+        if (!numb.objExist(this)) {
+            int id = numb.creeID(this);
+            this.noeud1.save(w, numn);
+            this.noeud2.save(w, numn);
+            w.append("Segment;" + id + ";" +
+                    numn.getID(this.noeud1) + ";" + numn.getID(this.noeud2) +
+                    ";  \n");
+        }
+    }
 }
