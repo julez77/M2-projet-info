@@ -7,7 +7,13 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 import fr.insa.zerr.projetm2.Lire;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 /**
  *
  * @author IEUser
@@ -150,4 +156,19 @@ public List<Barre> barreincidentes(){
     public void setId(int id) {
         this.id = id;
     }
-}
+   
+    public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
+        if(! numn.objExist(this)) {
+            int id = numn.creeID(this);
+            w.append("Point;"+id+";"+this.px+";"+this.py+
+                      "\n");
+        }
+    }
+
+    }
+
+
+
+
+
+
