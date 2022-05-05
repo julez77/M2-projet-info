@@ -4,6 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
@@ -73,7 +75,14 @@ public class NoeudSimple extends Noeud {
         Group g = new Group( res);       
         return g;              
     }
-
+    @Override
+    public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
+        if(! numn.objExist(this)) {
+            int id = numn.creeID(this);
+            w.append("NoeudSimple;"+id+";"+this.px+";"+this.py+
+                      "\n");
+        }
+    }
    
     
 }

@@ -5,6 +5,8 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import static fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple.RAYON_IN_DRAW;
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.Group;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.scene.shape.Ellipse;
@@ -63,5 +65,12 @@ public class AppuiSimple extends NoeudAppui {
         Group g = new Group( res);       
         return g;              
     }
-
+    @Override
+    public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
+        if(! numn.objExist(this)) {
+            int id = numn.creeID(this);
+            w.append("AppuiSimple;"+id+";"+this.px+";"+this.py+
+                      "\n");
+        }
+    }
 }

@@ -157,19 +157,8 @@ public List<Barre> barreincidentes(){
         this.id = id;
     }
    
-    public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
-        if(! numn.objExist(this)) {
-            int id = numn.creeID(this);
-            w.append("Point;"+id+";"+this.px+";"+this.py+
-                      "\n");
-        }
-    }
-public void sauvnoeud(File noeuds) throws IOException {
-        Numeroteur<Figure> numn = new Numeroteur<Figure>();
-        try (BufferedWriter noeub = new BufferedWriter(new FileWriter(noeuds))) {
-            this.save(noeub, numn);
-        }
-    }
+
+
     }
 
 

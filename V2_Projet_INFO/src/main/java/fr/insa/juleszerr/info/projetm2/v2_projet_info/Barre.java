@@ -228,14 +228,14 @@ public Vecteur2d vecteurBarre(){
         return g;
         
     }
-
-    public void saveb(Writer w, Numeroteur<Figure> numb, Numeroteur<Figure> numn) throws IOException {
-        if (!numb.objExist(this)) {
-            int id = numb.creeID(this);
-            this.noeud1.save(w, numn);
-            this.noeud2.save(w, numn);
-            w.append("Segment;" + id + ";" +
-                    numn.getID(this.noeud1) + ";" + numn.getID(this.noeud2) +
+    @Override
+    public void save(Writer w, Numeroteur<Figure> num) throws IOException {
+        if (!num.objExist(this)) {
+            int ind = num.creeID(this);
+            this.noeud1.save(w, num);
+            this.noeud2.save(w, num);
+            w.append("Barre;" + ind + ";" +
+                    num.getID(this.noeud1) + ";" + num.getID(this.noeud2) +
                     ";  \n");
         }
     }

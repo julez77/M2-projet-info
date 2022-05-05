@@ -4,6 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +13,20 @@ import java.util.List;
  *
  * @author IEUser
  */
-public class Treillis {
-    private List<Noeud> noeudsTreillis ;
-    private List<Barre> barresTreillis ;
+public class Treillis extends Figure {
+    private List<Figure> élements ;
+    
     
     public Treillis(){
-        this.noeudsTreillis = new ArrayList() ;
-        this.barresTreillis = new ArrayList() ;
+        this.élements = new ArrayList() ;
+        
         
     }
     
     
-    public Treillis(List<Noeud> noeudsTreillis , List<Barre> barresTreillis){
-    this.setNoeudsTreillis(noeudsTreillis) ;
-    this.setBarresTreillis(barresTreillis) ;    
+    public Treillis(List<Noeud> élements){
+    this.setÉlements(élements);
+        
     
 }
 @Override
@@ -108,6 +110,39 @@ public class Treillis {
         
     
     }
+    public void add(Figure f) {
+        if (f.getTreillis() != this) {
+            if (f.getTreillis() != null) {
+                throw new Error("figure déja dans un autre treillis");
+            }
+            this.élements.add(f);
+            f.setTreillis(this);
+        }
+    }
+    public void remove(Figure f) {
+        if (f.getTreillis() != this) {
+            throw new Error("la figure n'est pas dans le groupe");
+        }
+        this.élements.remove(f);
+        f.setTreillis(null);
+    }
+
+    public void removeAll(List<Figure> lf) {
+        for (Figure f : lf) {
+            this.remove(f);
+        }
+    }
+
+    public void clear() {
+        List<Figure> toRemove = new ArrayList<>(this.élements);
+        this.removeAll(toRemove);
+    }
+
+    public int size() {
+        return this.élements.size();
+    }
+    
+    
     
     public void ajouteBarre(Barre barre){
         boolean barreexiste = false ;
@@ -134,31 +169,38 @@ public class Treillis {
     
     }
 
-    /**
-     * @return the noeudsTreillis
-     */
-    public List<Noeud> getNoeudsTreillis() {
-        return noeudsTreillis;
+
+    
+    @Override
+    public void save(Writer w, Numeroteur<Figure> num) throws IOException {
+        if (!num.objExist(this)) {
+            int id = num.creeID(this);
+            for (Figure f : this.élements) {
+                f.save(w, num);
+            }
+            w.append("Treillis;" + id);
+            for (Figure f : this.élements) {
+                w.append(";" + num.getID(f));
+            }
+            w.append("\n");
+        }
     }
 
     /**
-     * @param noeudsTreillis the noeudsTreillis to set
+     * @return the élements
      */
-    public void setNoeudsTreillis(List<Noeud> noeudsTreillis) {
-        this.noeudsTreillis = noeudsTreillis;
+    public List<Figure> getÉlements() {
+        return élements;
     }
 
     /**
-     * @return the barresTreillis
+     * @param élements the élements to set
      */
-    public List<Barre> getBarresTreillis() {
-        return barresTreillis;
+    public void setÉlements(List<Figure> élements) {
+        this.élements = élements;
     }
-
-    /**
-     * @param barresTreillis the barresTreillis to set
-     */
-    public void setBarresTreillis(List<Barre> barresTreillis) {
-        this.barresTreillis = barresTreillis;
-    }
+    
+    
+    
+    
 }

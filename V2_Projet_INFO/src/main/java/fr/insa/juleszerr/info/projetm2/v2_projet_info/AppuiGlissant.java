@@ -5,6 +5,8 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import static fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple.RAYON_IN_DRAW;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 import javafx.scene.Group;
 import static javafx.scene.paint.Color.BLUE;
@@ -70,7 +72,14 @@ public class AppuiGlissant extends NoeudAppui{
         return g;              
     }
  
- 
+     @Override
+    public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
+        if(! numn.objExist(this)) {
+            int id = numn.creeID(this);
+            w.append("AppuiGlissant;"+id+";"+this.px+";"+this.py+
+                      "\n");
+        }
+    }
  
  
 }
