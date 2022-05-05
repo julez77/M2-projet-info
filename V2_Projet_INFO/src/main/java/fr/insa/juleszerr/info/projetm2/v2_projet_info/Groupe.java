@@ -18,7 +18,7 @@ import javafx.scene.Group;
  *
  * @author IEUser
  */
-public class Groupe extends Figure{
+public class Groupe {
 
    private List<Figure> contient  ;
 
@@ -34,7 +34,6 @@ public class Groupe extends Figure{
        this.contient = new ArrayList<>();
     }
     
-    @Override
     public double  maxX(){
         if ( this.getContient().isEmpty()) {
             return 0;
@@ -50,7 +49,6 @@ public class Groupe extends Figure{
         }
     }
 
-   @Override
     public double minX() {
         if (this.contient.isEmpty()) {
             return 0;
@@ -66,7 +64,6 @@ public class Groupe extends Figure{
         }
     }  
     
-     @Override
     public double maxY() {
         if (this.contient.isEmpty()) {
             return 0;
@@ -82,7 +79,6 @@ public class Groupe extends Figure{
         }
     }
     
-     @Override
     public double minY() {
         if (this.contient.isEmpty()) {
             return 0;
@@ -99,15 +95,15 @@ public class Groupe extends Figure{
     }
     
     
-     public void add(Figure f) {
-        if (f.getGroupe() != this) {
-            if (f.getGroupe() != null) {
-                throw new Error("figure déja dans un autre groupe");
-            }
-            this.contient.add(f);
-            f.setGroupe(this);
-        }
-    }
+   //  public void add(Figure f) {
+        //   if (f.getGroupe() != this) {
+       //        if (f.getGroupe() != null) {
+     //              throw new Error("figure déja dans un autre groupe");
+            //   }
+      //         this.contient.add(f);
+          //     f.setGroupe(this);
+         // //    }
+     //  }
     
     public int size() {
         return (this.contient.size());
@@ -147,15 +143,15 @@ public void menuTexte(){
        System.out.println(this.toString());
    } 
    if ( choice == 2){
-     Noeud n =entrenoeud();
-       this.add(n);
+     //   Noeud n =entrenoeud();
+     //     this.add(n);
    }
     if ( choice == 3){
         
-       this.add(new Barre(this.choisiNoeud(),this.choisiNoeud()));
+        //  this.add(new Barre(this.choisiNoeud(),this.choisiNoeud()));
    }
     if ( choice == 4){
-       this.remove((Figure) this.choisiFigures());
+       //   this.remove((Figure) this.choisiFigures());
         
    }
 
@@ -168,7 +164,6 @@ public void menuTexte(){
    choice = Lire.i();
 }     
 }
- @Override
     public Group dessine() {
         
         Group g = new Group();
@@ -212,103 +207,102 @@ public Noeud choisinoeud(){
 */
     
     public void remove(Figure f) {
-        if (f.getGroupe() != this) {
-            throw new Error("la figure n'est pas dans le groupe");
-        }
-        this.contient.remove(f);
-        f.setGroupe(null);
+        //   if (f.getGroupe() != this) {
+       //        throw new Error("la figure n'est pas dans le groupe");
+       //    }
+       //    this.contient.remove(f);
+       //    f.setGroupe(null);
     }
     
     
     
 public void remove(Barre b) {
-        if (b.getGroupe() != this) {
-            throw new Error("la figure n'est pas dans le groupe");
+      //     if (b.getGroupe() != this) {
+     //   //          throw new Error("la figure n'est pas dans le groupe");
         }
-        this.getContient().remove(b);
-        b.setGroupe(null);
+        //   this.getContient().remove(b);
+     //      b.setGroupe(null);
     }
 
-public Noeud choisiNoeud() {
-        List<Noeud> ln = new ArrayList<>();
-        System.out.println("liste des points disponibles : ");
-        int nbr = 0;
-        for (int i = 0; i < this.contient.size(); i++) {
-            Figure f = this.contient.get(i);
-            if (f instanceof Noeud) {
-                nbr++;
-                ln.add((Noeud) f);
-                System.out.println(nbr + ") " + f);
-            }
-        }
-        if (nbr == 0) {
-            System.out.println("Aucun point disponible");
-            return null;
-        } else {
-            int rep = -1;
-            while (rep < 0 || rep > nbr) {
-                System.out.println("votre choix (0 pour annuler) : ");
-                rep = Lire.i();
-            }
-            if (rep == 0) {
-                return null;
-            } else {
-                return ln.get(rep - 1);
-            }
-        }
-    }
+  // public Noeud choisiNoeud() {
+      //     List<Noeud> ln = new ArrayList<>();
+        //   System.out.println("liste des points disponibles : ");
+   //        int nbr = 0;
+       //    for (int i = 0; i < this.contient.size(); i++) {
+     //          Figure f = this.contient.get(i);
+         //      if (f instanceof Noeud) {
+    //               nbr++;
+     //              ln.add((Noeud) f);
+            //       System.out.println(nbr + ") " + f);
+      //         }
+        //   }
+    //       if (nbr == 0) {
+      //         System.out.println("Aucun point disponible");
+        //       return null;
+     //      } else {
+      //         int rep = -1;
+          //     while (rep < 0 || rep > nbr) {
+        //           System.out.println("votre choix (0 pour annuler) : ");
+    //               rep = Lire.i();
+        //       }
+       //        if (rep == 0) {
+    //               return null;
+       //        } else {
+    //               return ln.get(rep - 1);
+   //            }
+  //         }
+   //    }
 
-    public List<Figure> choisiFigures() {
-        List<Figure> res = new ArrayList<>();
-        int rep = -1;
-        while (rep != 0) {
-            System.out.println("liste des figures disponibles : ");
-            for (int i = 0; i < this.contient.size(); i++) {
-                System.out.println((i + 1) + ") " + this.contient.get(i));
-            }
-            System.out.println("votre choix (0 pour finir) : ");
-            rep = Lire.i();
-            if (rep > 0 && rep <= this.contient.size()) {
-                Figure f = this.contient.get(rep - 1);
-                if (res.contains(f)) {
-                    System.out.println("déja selectionnée !!");
-                } else {
-                    res.add(f);
-                }
-                System.out.println(res.size() + " figure(s) séléctionnée(s)");
-            }
-        }
-        return res;
-    }
+    //   public List<Figure> choisiFigures() {
+       //    List<Figure> res = new ArrayList<>();
+     //      int rep = -1;
+       //        System.out.println("liste des figures disponibles : ");
+       //        for (int i = 0; i < this.contient.size(); i++) {
+      //             System.out.println((i + 1) + ") " + this.contient.get(i));
+      //         }
+      //         System.out.println("votre choix (0 pour finir) : ");
+     //          rep = Lire.i();
+      //         if (rep > 0 && rep <= this.contient.size()) {
+     //              Figure f = this.contient.get(rep - 1);
+         //          if (res.contains(f)) {
+        //               System.out.println("déja selectionnée !!");
+     //              } else {
+             //          res.add(f);
+          //         }
+     //   //              System.out.println(res.size() + " figure(s) séléctionnée(s)");
+         //      }
+     //      }
+     //      return res;
+  //     }
 
-
-    public static Groupe groupeTest() {
-        NoeudSimple p1 = new NoeudSimple(10, 10);
-        NoeudSimple p2 = new NoeudSimple(100, 10);
+/////
+   //    public static Groupe groupeTest() {
+   //        NoeudSimple p1 = new NoeudSimple(10, 10);
+    //       NoeudSimple p2 = new NoeudSimple(100, 10);
         //NoeudSimple p3 = new NoeudSimple(100, 100);
         //NoeudSimple p4 = new NoeudSimple(10, 100);
-        AppuiGlissant p5 = new AppuiGlissant(50, 50);
+    //       AppuiGlissant p5 = new AppuiGlissant(50, 50);
         //AppuiGlissant p6 = new AppuiGlissant(500, 500);
-        Barre s1 = new Barre(p1, p2);
+    //       Barre s1 = new Barre(p1, p2);
         //Barre s2 = new Barre(p2, p3);
         //Barre s3 = new Barre(p3, p1);
         //Barre s4 = new Barre(p1, p4);
-        Groupe treillis1 = new Groupe();
-        treillis1.add(s1);
+     //      Groupe treillis1 = new Groupe();
+      //     treillis1.add(s1);
         //treillis1.ajouterBarre(s2);
        // treillis1.ajouterBarre(s3);
-        Groupe treillis2 = new Groupe();
-        treillis2.add(p5);
+      //     Groupe treillis2 = new Groupe();
+     //      treillis2.add(p5);
         //treillis2.ajouterNoeud(p6);
         //treillis2.ajouterBarre(s4);
        
-        for (int i = 0; i < 5; i++) {
-            treillis2.add(new NoeudSimple(Math.random() * 500, Math.random() * 500 ));
-        }
-        for (int i = 0; i < 3; i++) {
-            treillis2.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
-                    new NoeudSimple(Math.random() * 500, Math.random() * 500)));
-        }
-        return treillis2; 
-}
-}
+      //     for (int i = 0; i < 5; i++) {
+      //         treillis2.add(new NoeudSimple(Math.random() * 500, Math.random() * 500 ));
+     //      }
+     //      for (int i = 0; i < 3; i++) {
+     //          treillis2.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
+       //                new NoeudSimple(Math.random() * 500, Math.random() * 500)));
+     //      }
+     //      return treillis2; 
+
+
