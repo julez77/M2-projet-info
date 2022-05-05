@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -24,92 +26,92 @@ public class Treillis extends Figure {
     }
     
     
-    public Treillis(List<Noeud> élements){
+    public Treillis(List<Figure> élements){
     this.setÉlements(élements);
         
     
 }
-@Override
-    public String toString(){
-        String treillis = "[";
-        for(int i=0 ; i<noeudsTreillis.size() ; i++){
-            Noeud noeud = noeudsTreillis.get(i) ;
-            treillis = treillis + noeud.toString()+", " ;
-        }
-       treillis = treillis +" / " ;
+// @Override
+   //  public String toString(){
+    //     String treillis = "[";
+    //     for(int i=0 ; i<noeudsTreillis.size() ; i++){
+    //         Noeud noeud = noeudsTreillis.get(i) ;
+         //    treillis = treillis + noeud.toString()+", " ;
+    //     }
+     //   treillis = treillis +" / " ;
        
-       for(int j=0 ; j<barresTreillis.size(); j++){
-           Barre barre = barresTreillis.get(j) ;
-           treillis = treillis + barre.toString()+", " ;
-       }
-       treillis = treillis + "]" ;
+     //   for(int j=0 ; j<barresTreillis.size(); j++){
+     //       Barre barre = barresTreillis.get(j) ;
+         //   treillis = treillis + barre.toString()+", " ;
+     //   }
+    //    treillis = treillis + "]" ;
        
-       return treillis ;
-    }
+   //     return treillis ;
+//     }
     
             
             
-    public int maxIdNoeud(){
+ //    public int maxIdNoeud(){
         
         
-        if (this.noeudsTreillis.isEmpty()) {
-       return 0;
-   }
-        else{
-            int max=0 ;
+ //        if (this.noeudsTreillis.isEmpty()) {
+ //       return 0;
+ //   }
+ //        else{
+ //            int max=0 ;
         
-        for(int j=0 ; j<noeudsTreillis.size(); j++){
-            Noeud noeud = noeudsTreillis.get(j) ;
-            int id = noeud.getId() ;
-            if(id>max){
-                max=id;
-            }
-            
-        }
-                    
-          return max ;         
-            }
-    }
+  //       for(int j=0 ; j<noeudsTreillis.size(); j++){
+   //          Noeud noeud = noeudsTreillis.get(j) ;
+        //     int id = noeud.getId() ;
+     //        if(id>max){
+   //              max=id;
+       //      }
+     //        
+     //    }
+     //                
+     //      return max ;         
+    //         }
+  //   }
     
-    public int maxIdBarre(){
-        int max=0 ;
+  //   public int maxIdBarre(){
+   //      int max=0 ;
+ //        
+   //      if (this.barresTreillis.isEmpty()) {
+     //   return 0;
+  //  }
         
-        if (this.barresTreillis.isEmpty()) {
-       return 0;
-   }
-        
-        for(int j=0 ; j<barresTreillis.size() ; j++){
-            Barre barre = barresTreillis.get(j) ;
-            int id = barre.getId();
-            if(id>max){
-                max=id ;
-            }
-        }
-        return max ;
-    }
+    //     for(int j=0 ; j<barresTreillis.size() ; j++){
+   //          Barre barre = barresTreillis.get(j) ;
+       //      int id = barre.getId();
+    //         if(id>max){
+       //          max=id ;
+    //         }
+     //    }
+    //     return max ;
+   //  }
                 
-    public void ajouteNoeud(Noeud noeud){
-        boolean noeudexiste = false ;
-        if (this.noeudsTreillis.isEmpty()){
-            noeudexiste = false ;
-        }
+ ////   public void ajouteNoeud(Noeud noeud){
+   ///     boolean noeudexiste = false ;
+  //     if (this.noeudsTreillis.isEmpty()){
+  //           noeudexiste = false ;
+    //    }
         
-        else{
-            
-       for(int i=0 ; i<noeudsTreillis.size() ; i++){
-            if(noeud==noeudsTreillis.get(i)){
-                noeudexiste = true ;
+     //    else{
+      //       
+     //   for(int i=0 ; i<noeudsTreillis.size() ; i++){
+    //         if(noeud==noeudsTreillis.get(i)){
+      //           noeudexiste = true ;
                 
-            }
-       }
-        }
-            if(noeudexiste==false){
-                noeud.setId((this.maxIdNoeud() + 1));
-                noeudsTreillis.add(noeud) ;
-            }
+    //         }
+ //       }
+    //     }
+   //          if(noeudexiste==false){
+          //       noeud.setId((this.maxIdNoeud() + 1));
+     //            noeudsTreillis.add(noeud) ;
+     //        }
         
     
-    }
+//     }
     public void add(Figure f) {
         if (f.getTreillis() != this) {
             if (f.getTreillis() != null) {
@@ -144,30 +146,30 @@ public class Treillis extends Figure {
     
     
     
-    public void ajouteBarre(Barre barre){
-        boolean barreexiste = false ;
-        if(this.barresTreillis.isEmpty()){
-            barreexiste = false ;
-        }
-        else{
+  ///  public void ajouteBarre(Barre barre){
+     //   boolean barreexiste = false ;
+     //   if(this.barresTreillis.isEmpty()){
+        //    barreexiste = false ;
+  ///      }
+  //      else{
         
-       for(int i=0; i<barresTreillis.size() ; i++){
-            if(barre==barresTreillis.get(i)){
-                barreexiste = true ;
+ //      for(int i=0; i<barresTreillis.size() ; i++){
+        //    if(barre==barresTreillis.get(i)){
+             //   barreexiste = true ;
                 
-            }
-       }
-        }
-            if(barreexiste == false){
-            ajouteNoeud(barre.getNoeud1());
-            ajouteNoeud(barre.getNoeud2());
+     //       }
+   ///    }
+    ///    }
+        ///    if(barreexiste == false){
+           // ajouteNoeud(barre.getNoeud1());
+        //    ajouteNoeud(barre.getNoeud2());
             
-                barre.setId((this.maxIdBarre() + 1));
-                barresTreillis.add(barre) ;
-            }
+           //     barre.setId((this.maxIdBarre() + 1));
+            ///    barresTreillis.add(barre) ;
+      //      }
         
     
-    }
+    //}
 
 
     
@@ -199,7 +201,36 @@ public class Treillis extends Figure {
     public void setÉlements(List<Figure> élements) {
         this.élements = élements;
     }
-    
+    public void dessine(GraphicsContext context) {
+        for (Figure f : this.élements) {
+          //  f.dessine(context);
+        }
+    }  
+
+    @Override
+    public double maxX() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public double minX() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public double maxY() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public double minY() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Group dessine() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
     
