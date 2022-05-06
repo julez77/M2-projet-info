@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -201,36 +202,111 @@ public class Treillis extends Figure {
     public void setÉlements(List<Figure> élements) {
         this.élements = élements;
     }
-    public void dessine(GraphicsContext context) {
-        for (Figure f : this.élements) {
-          //  f.dessine(context);
+    @Override
+    public Group dessine() {
+        
+        Group g = new Group();
+        for(int i = 0 ; i < this.getÉlements().size() ; i ++) {
+            g.getChildren().add(this.getÉlements().get(i).dessine());
         }
+        return g;
     }  
-
+public static Treillis treillisTest() {
+        NoeudSimple p1 = new  NoeudSimple(10, 10);
+         NoeudSimple p2 = new  NoeudSimple(100, 10);
+         NoeudSimple p3 = new  NoeudSimple(100, 100);
+         NoeudSimple p4 = new  NoeudSimple(10, 100);
+         NoeudSimple p5 = new  NoeudSimple(50, 50);
+         NoeudSimple p6 = new  NoeudSimple(500, 500);
+        Barre s1 = new Barre(p1, p2);
+        Barre s2 = new Barre(p2, p3);
+        Barre s3 = new Barre(p3, p1);
+        Barre s4 = new Barre(p1, p4);
+        Treillis triangle = new Treillis();
+        triangle.add(s1);
+        triangle.add(s2);
+        triangle.add(s3);
+        Treillis res = new Treillis();
+        res.add(p5);
+        res.add(p6);
+        res.add(s4);
+        res.add(triangle);
+        for (int i = 0; i < 10; i++) {
+            res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
+                   ));
+        }
+        for (int i = 0; i < 5; i++) {
+            res.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
+                    new NoeudSimple(Math.random() * 500, Math.random() * 500)
+                    ));
+        }
+        return res;
+    }
     @Override
     public double maxX() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+              if (this.élements.isEmpty()) {
+            return 0;
+        } else {
+            double max = this.élements.get(0).maxX();
+            for (int i = 1; i < this.élements.size(); i++) {
+                double cur = this.élements.get(i).maxX();
+                if (cur > max) {
+                    max = cur;
+                }
+            }
+            return max;
+        }
     }
 
     @Override
     public double minX() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         if (this.élements.isEmpty()) {
+            return 0;
+        } else {
+            double min = this.élements.get(0).minX();
+            for (int i = 1; i < this.élements.size(); i++) {
+                double cur = this.élements.get(i).minX();
+                if (cur < min) {
+                    min = cur;
+                }
+            }
+            return min;
+        }
     }
 
     @Override
     public double maxY() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       if (this.élements.isEmpty()) {
+            return 0;
+        } else {
+            double max = this.élements.get(0).maxY();
+            for (int i = 1; i < this.élements.size(); i++) {
+                double cur = this.élements.get(i).maxY();
+                if (cur > max) {
+                    max = cur;
+                }
+            }
+            return max;
+        }
     }
 
     @Override
     public double minY() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         if (this.élements.isEmpty()) {
+            return 0;
+        } else {
+            double min = this.élements.get(0).minY();
+            for (int i = 1; i < this.élements.size(); i++) {
+                double cur = this.élements.get(i).minY();
+                if (cur < min) {
+                    min = cur;
+                }
+            }
+            return min;
+        }
     }
 
-    @Override
-    public Group dessine() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
     
     

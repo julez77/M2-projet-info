@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import javafx.scene.Group;
 import java.io.IOException;
 import java.io.Writer;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 /**
  *

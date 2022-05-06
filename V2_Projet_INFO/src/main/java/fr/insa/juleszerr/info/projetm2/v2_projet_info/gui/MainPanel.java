@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
-
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.Groupe;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -13,18 +12,18 @@ import javafx.scene.layout.BorderPane;
  */
 public class MainPanel extends BorderPane {
     
-     public Groupe getModel() {
+     public Treillis getModel() {
         return model;
     }
     
     
-    private Groupe model;
+    private Treillis model;
     private OutilsTop outilsTop;
     private OutilsLeft outilsLeft;
     private DessinPane dessin;
     
     
-    public MainPanel (Groupe model){
+    public MainPanel (Treillis model){
        this.model = model;
        this.outilsTop = new OutilsTop();
        this.outilsLeft = new OutilsLeft();

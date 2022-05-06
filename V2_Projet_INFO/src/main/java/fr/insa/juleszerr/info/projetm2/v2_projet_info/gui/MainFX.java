@@ -4,8 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.Groupe;
-import javafx.application.Application;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+;import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 public class MainFX extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception{
-      Groupe test = Groupe.groupeTest();
-            System.out.println("taille " + test.getContient().size());
+      Treillis test = Treillis.treillisTest();
+            System.out.println("taille " + test.getÉlements().size());
         MainPanel main = new MainPanel(test);
         Scene s = new Scene(main);
         primaryStage.setScene(s);

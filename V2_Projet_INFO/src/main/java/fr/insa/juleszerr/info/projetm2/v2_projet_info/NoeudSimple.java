@@ -72,7 +72,7 @@ public class NoeudSimple extends Noeud {
         //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
         res.setStroke(BLUE);
         res.setFill(BLUE);
-        Group g = new Group( res);       
+         Group g = new Group( res);       
         return g;              
     }
     @Override
@@ -83,6 +83,6 @@ public class NoeudSimple extends Noeud {
                       "\n");
         }
     }
-   
+  
     
 }

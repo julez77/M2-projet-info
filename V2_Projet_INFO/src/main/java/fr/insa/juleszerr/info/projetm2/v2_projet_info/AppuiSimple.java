@@ -8,6 +8,7 @@ import static fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple.RAYON_I
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.scene.shape.Ellipse;
 
@@ -73,4 +74,11 @@ public class AppuiSimple extends NoeudAppui {
                       "\n");
         }
     }
+    
+    
+    
+    
+    
+    
+    
 }

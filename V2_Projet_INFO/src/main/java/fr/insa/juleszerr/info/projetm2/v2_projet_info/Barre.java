@@ -225,7 +225,7 @@ public Vecteur2d vecteurBarre(){
         res.setFill(RED);
         Group g = new Group( res);
         
-        return g;
+       return g;
         
     }
     @Override

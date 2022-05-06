@@ -168,7 +168,7 @@ public void menuTexte(){
         
         Group g = new Group();
         for(int i = 0 ; i < this.getContient().size() ; i ++) {
-            g.getChildren().add(this.getContient().get(i).dessine());
+   //         g.getChildren().add(this.getContient().get(i).dessine());
         }
         return g;
     }
