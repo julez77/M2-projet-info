@@ -42,7 +42,7 @@ public class MainText {
       //G.ajouterNoeud(n2);
       // G.add(new Barre(n1,n2));
        
-       G.menuTexte();
+      // G.menuTexte();
        
        
        

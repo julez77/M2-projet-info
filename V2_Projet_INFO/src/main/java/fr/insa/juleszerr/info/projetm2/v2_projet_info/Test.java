@@ -25,7 +25,7 @@ System.out.println(penaldo);
 System.out.println(penaldo.noeudOppose(benz));
 double angl = penaldo.angle();
 System.out.println(angl);
-Groupe teste = new Groupe();
+Treillis teste = new Treillis();
 //teste.add(penaldo);
 
 
@@ -36,7 +36,7 @@ teste.menuTexte();
 NoeudSimple p1 = new NoeudSimple(2, 2);
 NoeudSimple p2 = new NoeudSimple(5, 3);
 Barre b = new Barre(p1, p2);
-Groupe e = new Groupe();
+Treillis e = new Treillis();
 //e.add(b);
 //e.add(p2);
 //e.add(p2);
