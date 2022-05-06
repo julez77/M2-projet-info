@@ -74,7 +74,13 @@ public class AppuiSimple extends NoeudAppui {
                       "\n");
         }
     }
-    
+    @Override
+    public double distanceNoeud(Noeud p) {
+        double dx = this.px - p.px;
+        double dy = this.py - p.py;
+        return Math.sqrt(dx*dx+dy*dy);
+
+    }
     
     
     

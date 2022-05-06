@@ -18,6 +18,10 @@ import java.io.Writer;
  * @author IEUser
  */
 public  class Barre extends Figure  {
+
+    static Barre demandeBarre() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     private Noeud noeud1 ;
     private Noeud noeud2 ;
 private double prix ;
@@ -112,7 +116,7 @@ public Vecteur2d vecteurBarre(){
         return new Barre(noeud1, noeud2);   
     
   }
-    
+
     public Noeud noeudOppose(Noeud  N){
     if (N==noeud2){
  return noeud1  ; }
@@ -208,14 +212,26 @@ public Vecteur2d vecteurBarre(){
         return Math.min(this.noeud1.minY(), this.noeud2.minY());
     }
 
-    /*
-    @Override
-    public Groupe dessine(GraphicsContext context) {
-        context.setStroke(RED);
-        context.strokeLine(this.noeud1.getPx(), this.noeud1.getPy(), this.noeud2.getPx(), this.noeud2.getPy());
-        return null;
+  @Override
+    public double distanceNoeud(Noeud p) {
+        double x1 = this.noeud1.getPx();
+        double y1 = this.noeud1.getPy();
+        double x2 = this.noeud2.getPx();
+        double y2 = this.noeud2.getPy();
+        double x3 = p.getPx();
+        double y3 = p.getPy();
+        double up = ((x3 - x1) * (x2 - x1) + (y3 - y1) * (y2 - y1))
+                / (Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        if (up < 0) {
+            return this.noeud1.distanceNoeud(p);
+        } else if (up > 1) {
+            return this.noeud2.distanceNoeud(p);
+        } else {
+            NoeudSimple p4 = new NoeudSimple(x1 + up * (x2 - x1),
+                    y1 + up * (y2 - y1));
+            return p4.distanceNoeud(p);
+        }
     }
-*/
     
     @Override
     public Group dessine() {

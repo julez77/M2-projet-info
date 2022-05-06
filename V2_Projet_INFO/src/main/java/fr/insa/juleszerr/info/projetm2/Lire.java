@@ -1,14 +1,17 @@
-package fr.insa.juleszerr.info.projetm2.v2_projet_info;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package fr.insa.juleszerr.info.projetm2;
 
-import java.io.*;
+import java.io.IOException;
 
 /**
-version améliorée par Raphaël Schruoffeneger ; MIQ2 INSA Strasbourg 2013 
-*/
-
-public class Lire
-{    
-    //-------------------------------------------------------
+ *
+ * @author corin
+ */
+public class Lire {
+        //-------------------------------------------------------
     public static String S() // lire une chaine de caracteres
     {
         String x;

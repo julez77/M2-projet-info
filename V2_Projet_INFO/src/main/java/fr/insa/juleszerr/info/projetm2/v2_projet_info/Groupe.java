@@ -6,7 +6,7 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import static fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud.entrenoeud;
 
-import fr.insa.zerr.projetm2.Lire;
+import fr.insa.juleszerr.info.projetm2.Lire;
 
 import java.util.ArrayList;
 import java.util.List;

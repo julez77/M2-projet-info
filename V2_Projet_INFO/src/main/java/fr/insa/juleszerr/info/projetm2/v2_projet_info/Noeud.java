@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
+import fr.insa.juleszerr.info.projetm2.Lire;
 
-import fr.insa.zerr.projetm2.Lire;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
@@ -19,6 +19,12 @@ import java.io.Writer;
  * @author IEUser
  */
 public abstract class Noeud extends Figure{
+
+    static Noeud demandeNoeud() {
+        
+        return null;
+        
+    }
     public double px ;
   double  py ;
     private List<Barre> barredebut ;
@@ -155,6 +161,13 @@ public List<Barre> barreincidentes(){
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public double distanceNoeud(Noeud p) {
+      double dx = this.px - p.px;
+        double dy = this.py - p.py;
+        return Math.sqrt(dx*dx+dy*dy);
     }
    
 

@@ -34,7 +34,7 @@ public abstract class Figure {
    public abstract double maxY();
 
    public abstract double minY();
-   
+   public abstract double distanceNoeud(Noeud p);
   // public abstract Groupe dessine(GraphicsContext context);
    
     public abstract Group dessine();

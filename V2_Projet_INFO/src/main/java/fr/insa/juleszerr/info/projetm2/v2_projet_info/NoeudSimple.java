@@ -56,14 +56,13 @@ public class NoeudSimple extends Noeud {
         return this.py;
     }
 
-   /*
-    @Override
-    public Groupe dessine(GraphicsContext context) {
-       context.setFill(BLUE);
-       context.fillOval(this.px-RAYON_IN_DRAW, this.py-RAYON_IN_DRAW, 2*RAYON_IN_DRAW, 2*RAYON_IN_DRAW); 
-        return null;
+@Override
+    public double distanceNoeud(Noeud p) {
+        double dx = this.px - p.px;
+        double dy = this.py - p.py;
+        return Math.sqrt(dx*dx+dy*dy);
+
     }
-*/
 
   
     @Override
