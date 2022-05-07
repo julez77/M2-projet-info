@@ -24,6 +24,7 @@ public  class Barre extends Figure  {
     }
     private Noeud noeud1 ;
     private Noeud noeud2 ;
+    
 private double prix ;
 private double traction ;
 private double compre;
@@ -34,7 +35,7 @@ private int id ;
     }
 
 
-public Vecteur2d vecteurBarre(){
+public Vecteur2d vecteurBarre(){                                         //renvoie le vecteur associé à une barre (direction du vecteur : point de départ vers point d'arrivée)
     double px = this.getNoeud2().getPx() - this.getNoeud1().getPx() ;
     double py =  this.getNoeud2().getPy() - this.getNoeud1().getPy() ;
     Vecteur2d vecteur = new Vecteur2d (px, py) ;
@@ -133,6 +134,11 @@ public Vecteur2d vecteurBarre(){
         
     double temp = (dot/(magv1*magv2));
     return Math.acos(temp);
+    }
+    
+    public double longueurBarre(){
+      
+        return sqrt(Math.pow(noeud1.getPx() + noeud2.getPx(), 2) + Math.pow(noeud1.getPy() + noeud2.getPy(), 2)) ;
     }
     
     
@@ -255,4 +261,7 @@ public Vecteur2d vecteurBarre(){
                     ";  \n");
         }
     }
+
+    
+    
 }

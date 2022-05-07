@@ -17,6 +17,9 @@ import javafx.scene.shape.Ellipse;
  * @author IEUser
  */
 public class AppuiGlissant extends NoeudAppui{
+    
+    private Barre poseSur ;
+    
      public AppuiGlissant(double px, double py){
       
       super(px,py);     
@@ -28,7 +31,7 @@ public class AppuiGlissant extends NoeudAppui{
   
     @Override
  public String toString(){
-      return  "["+this.getPx()+","+this.getPy()+"] appuiglissant id "+this.getId();
+      return  "["+this.getPx()+","+this.getPy()+"] appuiglissant id "+this.getId()+ "posé sur barre "+ this.getPoseSur();
   }   
  
   @Override
@@ -86,6 +89,20 @@ public class AppuiGlissant extends NoeudAppui{
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);
 
+    }
+
+    /**
+     * @return the poseSur
+     */
+    public Barre getPoseSur() {
+        return poseSur;
+    }
+
+    /**
+     * @param poseSur the poseSur to set
+     */
+    public void setPoseSur(Barre poseSur) {
+        this.poseSur = poseSur;
     }
  
 }

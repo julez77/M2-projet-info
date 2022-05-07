@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.acos;
 import static java.lang.Math.sqrt;
 
@@ -20,22 +21,30 @@ public class Vecteur2d {
        
    }
    
-   public double length(){
+   public double length(){                                                  //renvoie la norme d'un vecteur 
        return sqrt(Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) ;
               
    }
    
-   public static double angleVecteurs (Vecteur2d v1, Vecteur2d v2){
-       double produitScalaire = v1.getVx() * v2.getVx() + v1.getVy() * v2.getVy() ;
-       return acos(produitScalaire/(v1.length()* v2.length())) ;
+   //public static double angleVecteurs (Vecteur2d v1, Vecteur2d v2){                //renvoie l'angle entre deux vecteurs mais c'est inutile
+       //double produitScalaire = v1.getVx() * v2.getVx() + v1.getVy() * v2.getVy() ;
+       //return acos(produitScalaire/(v1.length()* v2.length())) ;
        
+   //}
+   
+   public double angleHorizontale (){              //renvoie l'angle entre le vecteur et l'horizontale
+       
+      double angle = acos(abs(this.getVx())/this.length()) ;
+       
+       if (vy<0){
+           return -angle ;
+           
+       }else{
+           return angle ;
+           
+       }    
    }
    
-   public double angleHorizontale (){
-       
-       return acos(this.getVx()/this.length());
-       
-   }
    
     /**
      * @return the vx
@@ -70,11 +79,11 @@ public class Vecteur2d {
      
  }   
     
- public static void main(String[] args){
-     Vecteur2d v1 = new Vecteur2d (0, 1);
-     Vecteur2d v2 = new Vecteur2d (1, -1);
-     System.out.println( angleVecteurs(v1, v2));
- }   
+ //public static void main(String[] args){
+     //Vecteur2d v1 = new Vecteur2d (0, 1);
+     //Vecteur2d v2 = new Vecteur2d (1, -1);
+     //System.out.println( angleVecteurs(v1, v2));
+ //}   
     
     
     

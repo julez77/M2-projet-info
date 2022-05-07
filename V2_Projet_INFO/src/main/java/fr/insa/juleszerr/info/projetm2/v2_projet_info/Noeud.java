@@ -98,8 +98,8 @@ public abstract class Noeud extends Figure{
 public Noeud (double px , double py){
     this.px = px;
     this.py = py;    
-    this.barredebut = new ArrayList<>();
-    this.barrefin  = new ArrayList<>(); 
+    this.barredebut = new ArrayList<>(); //la liste des barres dont le noeud est le point de départ
+    this.barrefin  = new ArrayList<>(); //la liste des barres dont le noeud est le point d'arrivée
     this.id=0;
 }
     /**
@@ -133,7 +133,7 @@ public void addnoeud2(Barre b) {
             b.setNoeud2(this);
         }
     }
-public List<Barre> barreincidentes(){
+public List<Barre> barreincidentes(){             //renvoie la liste des barres incidentes au noeud
      List<Barre> liste = new ArrayList<>(); 
      
      for(int  i = 0;  i < this.barredebut.size(); i++){
@@ -164,7 +164,7 @@ public List<Barre> barreincidentes(){
     }
 
     @Override
-    public double distanceNoeud(Noeud p) {
+    public double distanceNoeud(Noeud p) {          //distance entre deux noeuds
       double dx = this.px - p.px;
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);

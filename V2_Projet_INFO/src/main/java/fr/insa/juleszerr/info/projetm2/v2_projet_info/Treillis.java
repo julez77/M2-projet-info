@@ -19,26 +19,26 @@ import javafx.scene.paint.Color;
  * @author IEUser
  */
 public class Treillis extends Figure {
-    private List<Figure> élements ;
+    private List<Figure> elements ;
     
     
     public Treillis(){
-        this.élements = new ArrayList() ;
+        this.elements = new ArrayList() ;
         
         
     }
     
     
-    public Treillis(List<Figure> élements){
-    this.setÉlements(élements);
+    public Treillis(List<Figure> elements){
+    this.setElements(elements);
         
     
 }
  @Override
     public String toString() {
         String res = "Groupe {\n";
-        for (int i = 0; i < this.élements.size(); i++) {
-            res = res + indente(this.élements.get(i).toString(), "  ") + "\n";
+        for (int i = 0; i < this.elements.size(); i++) {
+            res = res + indente(this.elements.get(i).toString(), "  ") + "\n";
         }
         return res + "}";
     
@@ -105,20 +105,61 @@ public class Treillis extends Figure {
         
     
 //     }
+    
+    
+    // à faire : afficher un message d'erreur si la distance saisie est plus élevée que la longueur de la barre 
+    public void poserAppuiSimple(Barre b, double distance){
+        
+        double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
+        double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
+        double D = b.longueurBarre() ;
+        AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
+        add(noeud) ;
+       
+    }
+    
+    public void poserAppuiGlissant(Barre b, double distance){
+        
+        double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
+        double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
+        double D = b.longueurBarre() ;
+        AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
+        add(noeud) ;
+        
+        noeud.setPoseSur(b) ;
+    }
+    
+   public void poserNoeudSimple(Barre b, double distance){
+        double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
+        double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
+        double D = b.longueurBarre() ;
+        NoeudSimple noeud = new NoeudSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
+        add(noeud) ;
+        
+        Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
+        Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
+        
+        add(newBarre1) ;
+        add(newBarre2) ;
+        remove(b) ;
+        
+   }
+        
+    
     public void add(Figure f) {
         if (f.getTreillis() != this) {
             if (f.getTreillis() != null) {
                 throw new Error("figure déja dans un autre treillis");
             }
-            this.élements.add(f);
+            this.elements.add(f);
             f.setTreillis(this);
         }
     }
-    public void remove(Figure f) {
+    public void remove(Figure f) {                          // supprime une figure (barre, noeud, treillis)
         if (f.getTreillis() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
-        this.élements.remove(f);
+        this.elements.remove(f);
         f.setTreillis(null);
     }
 
@@ -129,12 +170,12 @@ public class Treillis extends Figure {
     }
 
     public void clear() {
-        List<Figure> toRemove = new ArrayList<>(this.élements);
+        List<Figure> toRemove = new ArrayList<>(this.elements);
         this.removeAll(toRemove);
     }
 
     public int size() {
-        return this.élements.size();
+        return this.elements.size();
     }
     
     
@@ -170,11 +211,11 @@ public class Treillis extends Figure {
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
             int id = num.creeID(this);
-            for (Figure f : this.élements) {
+            for (Figure f : this.elements) {
                 f.save(w, num);
             }
             w.append("Treillis;" + id);
-            for (Figure f : this.élements) {
+            for (Figure f : this.elements) {
                 w.append(";" + num.getID(f));
             }
             w.append("\n");
@@ -185,14 +226,14 @@ public class Treillis extends Figure {
      * @return the élements
      */
     public List<Figure> getÉlements() {
-        return élements;
+        return elements;
     }
 
     /**
      * @param élements the élements to set
      */
-    public void setÉlements(List<Figure> élements) {
-        this.élements = élements;
+    public void setElements(List<Figure> élements) {
+        this.elements = élements;
     }
     @Override
     public Group dessine() {
@@ -236,12 +277,12 @@ public static Treillis treillisTest() {
     }
     @Override
     public double maxX() {
-              if (this.élements.isEmpty()) {
+              if (this.elements.isEmpty()) {
             return 0;
         } else {
-            double max = this.élements.get(0).maxX();
-            for (int i = 1; i < this.élements.size(); i++) {
-                double cur = this.élements.get(i).maxX();
+            double max = this.elements.get(0).maxX();
+            for (int i = 1; i < this.elements.size(); i++) {
+                double cur = this.elements.get(i).maxX();
                 if (cur > max) {
                     max = cur;
                 }
@@ -252,12 +293,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double minX() {
-         if (this.élements.isEmpty()) {
+         if (this.elements.isEmpty()) {
             return 0;
         } else {
-            double min = this.élements.get(0).minX();
-            for (int i = 1; i < this.élements.size(); i++) {
-                double cur = this.élements.get(i).minX();
+            double min = this.elements.get(0).minX();
+            for (int i = 1; i < this.elements.size(); i++) {
+                double cur = this.elements.get(i).minX();
                 if (cur < min) {
                     min = cur;
                 }
@@ -268,12 +309,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double maxY() {
-       if (this.élements.isEmpty()) {
+       if (this.elements.isEmpty()) {
             return 0;
         } else {
-            double max = this.élements.get(0).maxY();
-            for (int i = 1; i < this.élements.size(); i++) {
-                double cur = this.élements.get(i).maxY();
+            double max = this.elements.get(0).maxY();
+            for (int i = 1; i < this.elements.size(); i++) {
+                double cur = this.elements.get(i).maxY();
                 if (cur > max) {
                     max = cur;
                 }
@@ -284,12 +325,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double minY() {
-         if (this.élements.isEmpty()) {
+         if (this.elements.isEmpty()) {
             return 0;
         } else {
-            double min = this.élements.get(0).minY();
-            for (int i = 1; i < this.élements.size(); i++) {
-                double cur = this.élements.get(i).minY();
+            double min = this.elements.get(0).minY();
+            for (int i = 1; i < this.elements.size(); i++) {
+                double cur = this.elements.get(i).minY();
                 if (cur < min) {
                     min = cur;
                 }
@@ -373,12 +414,12 @@ public void menuTexte() {
      */
     @Override
     public double distanceNoeud(Noeud p) {
-              if (this.élements.isEmpty()) {
+              if (this.elements.isEmpty()) {
             return new NoeudSimple(0, 0).distanceNoeud(p);
         } else {
-            double dist = this.élements.get(0).distanceNoeud(p);
-            for (int i = 1; i < this.élements.size(); i++) {
-                double cur = this.élements.get(i).distanceNoeud(p);
+            double dist = this.elements.get(0).distanceNoeud(p);
+            for (int i = 1; i < this.elements.size(); i++) {
+                double cur = this.elements.get(i).distanceNoeud(p);
                 if (cur < dist) {
                     dist = cur;
                 }
@@ -391,8 +432,8 @@ public void menuTexte() {
        List<Noeud> lp = new ArrayList<>();
         System.out.println("liste des points disponibles : ");
         int nbr = 0;
-        for (int i = 0; i < this.élements.size(); i++) {
-            Figure f = this.élements.get(i);
+        for (int i = 0; i < this.elements.size(); i++) {
+            Figure f = this.elements.get(i);
             if (f instanceof Noeud) {
                 nbr++;
                 lp.add((Noeud) f);
@@ -422,13 +463,13 @@ public void menuTexte() {
         int rep = -1;
         while (rep != 0) {
             System.out.println("liste des figures disponibles : ");
-            for (int i = 0; i < this.élements.size(); i++) {
-                System.out.println((i + 1) + ") " + this.élements.get(i));
+            for (int i = 0; i < this.elements.size(); i++) {
+                System.out.println((i + 1) + ") " + this.elements.get(i));
             }
             System.out.println("votre choix (0 pour finir) : ");
             rep = Lire.i();
-            if (rep > 0 && rep <= this.élements.size()) {
-                Figure f = this.élements.get(rep - 1);
+            if (rep > 0 && rep <= this.elements.size()) {
+                Figure f = this.elements.get(rep - 1);
                 if (res.contains(f)) {
                     System.out.println("déja selectionnée !!");
                 } else {
@@ -448,7 +489,7 @@ public void menuTexte() {
             if (f.getTreillis()!= this) {
                 throw new Error(f + " n'appartient pas au groupe " + this);
             }
-            this.élements.remove(f);
+            this.elements.remove(f);
             f.setTreillis(null);
         }
         Treillis sg = new Treillis();
@@ -472,9 +513,20 @@ public void menuTexte() {
     }
     
     
-    
-    
-    
+    public static void main(String[] args) {
+       
+        NoeudSimple noeud1 = new NoeudSimple(1,1) ;
+        NoeudSimple noeud2 = new NoeudSimple(4,3) ;
+        Barre barre = new Barre(noeud1, noeud2) ;
+        Treillis ora = new Treillis() ;
+        ora.add(noeud1);
+        ora.add(noeud2);
+        ora.add(barre);
+        System.out.println(ora);
+        //ora.poserNoeudSimple(barre, 1);
+        ora.poserAppuiGlissant(barre, 1);
+        System.out.println(ora);
+    }
     
     }
     
