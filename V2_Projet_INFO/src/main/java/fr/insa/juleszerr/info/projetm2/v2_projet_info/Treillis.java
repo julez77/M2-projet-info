@@ -18,12 +18,14 @@ import javafx.scene.Group;
  */
 public class Treillis extends Figure {
     private List<Figure> elements ;
-    
-    
+    private List<Noeud> noeuds ;
+    private List<Barre> barres;
+    private List<Treillis> treillise ;
     public Treillis(){
         this.elements = new ArrayList() ;
-        
-        
+        this.barres = new ArrayList() ;
+        this.noeuds = new ArrayList() ;
+        this.treillise = new ArrayList();
     }
     
     
@@ -35,8 +37,8 @@ public class Treillis extends Figure {
  @Override
     public String toString() {
         String res = "Groupe {\n";
-        for (int i = 0; i < this.elements.size(); i++) {
-            res = res + indente(this.elements.get(i).toString(), "  ") + "\n";
+        for (int i = 0; i < this.getElements().size(); i++) {
+            res = res + indente(this.getElements().get(i).toString(), "  ") + "\n";
         }
         return res + "}";
     
@@ -149,16 +151,33 @@ public class Treillis extends Figure {
             if (f.getTreillis() != null) {
                 throw new Error("figure déja dans un autre treillis");
             }
-            this.elements.add(f);
+            this.getElements().add(f);
             f.setTreillis(this);
+            if ((f instanceof Noeud)== true ){
+                this.getNoeuds().add((Noeud) f);}
+            else if ((f instanceof Barre)== true ){
+               this.barres.add((Barre) f);
+            }else{
+                this.getTreillise().add((Treillis)f);
+            }
+            
         }
     }
     public void remove(Figure f) {                          // supprime une figure (barre, noeud, treillis)
         if (f.getTreillis() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
-        this.elements.remove(f);
+        this.getElements().remove(f);
         f.setTreillis(null);
+         if ((f instanceof Noeud)== true ){
+                this.getNoeuds().remove((Noeud) f);}
+         else if ((f instanceof Barre)== true ){
+               this.barres.remove((Barre) f);}
+         else  {
+             this.getTreillise().remove((Treillis)f);
+            }
+        
+        
     }
 
     public void removeAll(List<Figure> lf) {
@@ -168,12 +187,12 @@ public class Treillis extends Figure {
     }
 
     public void clear() {
-        List<Figure> toRemove = new ArrayList<>(this.elements);
+        List<Figure> toRemove = new ArrayList<>(this.getElements());
         this.removeAll(toRemove);
     }
 
     public int size() {
-        return this.elements.size();
+        return this.getElements().size();
     }
     
     
@@ -209,11 +228,11 @@ public class Treillis extends Figure {
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
             int id = num.creeID(this);
-            for (Figure f : this.elements) {
+            for (Figure f : this.getElements()) {
                 f.save(w, num);
             }
             w.append("Treillis;" + id);
-            for (Figure f : this.elements) {
+            for (Figure f : this.getElements()) {
                 w.append(";" + num.getID(f));
             }
             w.append("\n");
@@ -224,7 +243,7 @@ public class Treillis extends Figure {
      * @return the élements
      */
     public List<Figure> getÉlements() {
-        return elements;
+        return getElements();
     }
 
     /**
@@ -275,12 +294,12 @@ public static Treillis treillisTest() {
     }
     @Override
     public double maxX() {
-              if (this.elements.isEmpty()) {
+              if (this.getElements().isEmpty()) {
             return 0;
         } else {
-            double max = this.elements.get(0).maxX();
-            for (int i = 1; i < this.elements.size(); i++) {
-                double cur = this.elements.get(i).maxX();
+            double max = this.getElements().get(0).maxX();
+            for (int i = 1; i < this.getElements().size(); i++) {
+                double cur = this.getElements().get(i).maxX();
                 if (cur > max) {
                     max = cur;
                 }
@@ -291,12 +310,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double minX() {
-         if (this.elements.isEmpty()) {
+         if (this.getElements().isEmpty()) {
             return 0;
         } else {
-            double min = this.elements.get(0).minX();
-            for (int i = 1; i < this.elements.size(); i++) {
-                double cur = this.elements.get(i).minX();
+            double min = this.getElements().get(0).minX();
+            for (int i = 1; i < this.getElements().size(); i++) {
+                double cur = this.getElements().get(i).minX();
                 if (cur < min) {
                     min = cur;
                 }
@@ -307,12 +326,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double maxY() {
-       if (this.elements.isEmpty()) {
+       if (this.getElements().isEmpty()) {
             return 0;
         } else {
-            double max = this.elements.get(0).maxY();
-            for (int i = 1; i < this.elements.size(); i++) {
-                double cur = this.elements.get(i).maxY();
+            double max = this.getElements().get(0).maxY();
+            for (int i = 1; i < this.getElements().size(); i++) {
+                double cur = this.getElements().get(i).maxY();
                 if (cur > max) {
                     max = cur;
                 }
@@ -323,12 +342,12 @@ public static Treillis treillisTest() {
 
     @Override
     public double minY() {
-         if (this.elements.isEmpty()) {
+         if (this.getElements().isEmpty()) {
             return 0;
         } else {
-            double min = this.elements.get(0).minY();
-            for (int i = 1; i < this.elements.size(); i++) {
-                double cur = this.elements.get(i).minY();
+            double min = this.getElements().get(0).minY();
+            for (int i = 1; i < this.getElements().size(); i++) {
+                double cur = this.getElements().get(i).minY();
                 if (cur < min) {
                     min = cur;
                 }
@@ -401,8 +420,10 @@ public void menuTexte() {
                     System.out.println("problème de lecture : " + ex.getLocalizedMessage());;
                 }
 
-            }
+            }System.out.println("lol");
+        System.out.println(noeuds);
         }
+       
     }
 
     /**
@@ -412,12 +433,12 @@ public void menuTexte() {
      */
     @Override
     public double distanceNoeud(Noeud p) {
-              if (this.elements.isEmpty()) {
+              if (this.getElements().isEmpty()) {
             return new NoeudSimple(0, 0).distanceNoeud(p);
         } else {
-            double dist = this.elements.get(0).distanceNoeud(p);
-            for (int i = 1; i < this.elements.size(); i++) {
-                double cur = this.elements.get(i).distanceNoeud(p);
+            double dist = this.getElements().get(0).distanceNoeud(p);
+            for (int i = 1; i < this.getElements().size(); i++) {
+                double cur = this.getElements().get(i).distanceNoeud(p);
                 if (cur < dist) {
                     dist = cur;
                 }
@@ -430,8 +451,8 @@ public void menuTexte() {
        List<Noeud> lp = new ArrayList<>();
         System.out.println("liste des points disponibles : ");
         int nbr = 0;
-        for (int i = 0; i < this.elements.size(); i++) {
-            Figure f = this.elements.get(i);
+        for (int i = 0; i < this.getElements().size(); i++) {
+            Figure f = this.getElements().get(i);
             if (f instanceof Noeud) {
                 nbr++;
                 lp.add((Noeud) f);
@@ -461,13 +482,13 @@ public void menuTexte() {
         int rep = -1;
         while (rep != 0) {
             System.out.println("liste des figures disponibles : ");
-            for (int i = 0; i < this.elements.size(); i++) {
-                System.out.println((i + 1) + ") " + this.elements.get(i));
+            for (int i = 0; i < this.getElements().size(); i++) {
+                System.out.println((i + 1) + ") " + this.getElements().get(i));
             }
             System.out.println("votre choix (0 pour finir) : ");
             rep = Lire.i();
-            if (rep > 0 && rep <= this.elements.size()) {
-                Figure f = this.elements.get(rep - 1);
+            if (rep > 0 && rep <= this.getElements().size()) {
+                Figure f = this.getElements().get(rep - 1);
                 if (res.contains(f)) {
                     System.out.println("déja selectionnée !!");
                 } else {
@@ -487,7 +508,7 @@ public void menuTexte() {
             if (f.getTreillis()!= this) {
                 throw new Error(f + " n'appartient pas au groupe " + this);
             }
-            this.elements.remove(f);
+            this.getElements().remove(f);
             f.setTreillis(null);
         }
         Treillis sg = new Treillis();
@@ -512,9 +533,9 @@ public void menuTexte() {
        
     public List<Figure> NoeudsTreillis(){
        List<Figure> noeudstreillis = new ArrayList<>() ;
-       for(int i=0 ; i<this.elements.size() ; i++){
-           if (this.elements.get(i) instanceof Noeud){
-               noeudstreillis.add(this.elements.get(i)) ;
+       for(int i=0 ; i<this.getElements().size() ; i++){
+           if (this.getElements().get(i) instanceof Noeud){
+               noeudstreillis.add(this.getElements().get(i)) ;
            }
        }
       return noeudstreillis ; 
@@ -533,6 +554,55 @@ public void menuTexte() {
         //ora.poserNoeudSimple(barre, 1);
         ora.poserAppuiGlissant(barre, 1);
         System.out.println(ora);
+    }
+
+    /**
+     * @return the elements
+     */
+    public List<Figure> getElements() {
+        return elements;
+    }
+
+    /**
+     * @return the noeuds
+     */
+    public List<Noeud> getNoeuds() {
+        return noeuds;
+    }
+
+    /**
+     * @param noeuds the noeuds to set
+     */
+    public void setNoeuds(List<Noeud> noeuds) {
+        this.noeuds = noeuds;
+    }
+
+    /**
+     * @return the barres
+     */
+    public List<Barre> getBarres() {
+        return barres;
+    }
+
+    /**
+     * @param barres the barres to set
+     */
+    public void setBarres(List<Barre> barres) {
+        this.barres = barres;
+    }
+
+    /**
+     * @return the treillise
+     */
+    public List<Treillis> getTreillise() {
+        return treillise;
+    }
+
+    /**
+     * @param treillise the treillise to set
+     */
+    public void setTreillise(List<Treillis> treillise) {
+        this.treillise = treillise;
     }
     
     }
