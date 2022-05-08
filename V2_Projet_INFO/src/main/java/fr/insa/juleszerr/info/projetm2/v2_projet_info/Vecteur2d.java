@@ -15,11 +15,15 @@ import static java.lang.Math.sqrt;
 public class Vecteur2d {
    private double vx ;
    private double  vy ;
+   
+   
+   
    public Vecteur2d (double vx ,  double  vy){
        this.vx =vx ;
        this.vy = vy ;
        
    }
+   
    
    public double length(){                                                  //renvoie la norme d'un vecteur 
        return sqrt(Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) ;
@@ -43,6 +47,11 @@ public class Vecteur2d {
            return angle ;
            
        }    
+   }
+   
+   public Vecteur2d vecteurOppose(){
+       Vecteur2d vecteuropp = new Vecteur2d(-vx, -vy) ;
+       return vecteuropp ;
    }
    
    

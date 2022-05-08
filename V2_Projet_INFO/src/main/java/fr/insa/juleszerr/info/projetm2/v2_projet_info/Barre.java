@@ -26,8 +26,7 @@ public  class Barre extends Figure  {
     private Noeud noeud2 ;
     
 private double prix ;
-private double traction ;
-private double compre;
+private double effort ;
 private int id ;
 
     Barre(Point p1, Point p2) {
@@ -77,21 +76,18 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.id = 0;
-        this.traction= 0;
-        this.compre = 0;
+        this.effort= 0;
         this.id=0;
         this.prix = 0;
         
         noeud2.addnoeud2(this);
         noeud1.addnoeud1(this);
     }
-    public Barre (Noeud noeud1,Noeud noeud2,double traction,double compre,double prix){
+    public Barre (Noeud noeud1,Noeud noeud2,double effort,double prix){
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.id = 0;
-        this.traction = traction;
-        this.compre = compre;
-        
+        this.effort = effort;
         this.prix = prix;
         
         noeud2.addnoeud2(this);
@@ -106,7 +102,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     @Override
  public String toString() {
-        return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] id  :"+ id +" traction :"+traction +" compression :"+compre+" prix"+prix  ;   
+        return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] id  :"+ id +" effort :"+getEffort()+" prix"+prix  ;   
  }
     
   public static  Barre créeBarre() {
@@ -156,33 +152,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.prix = prix;
     }
 
-    /**
-     * @return the traction
-     */
-    public double getTraction() {
-        return traction;
-    }
-
-    /**
-     * @param traction the traction to set
-     */
-    public void setTraction(double traction) {
-        this.traction = traction;
-    }
-
-    /**
-     * @return the compre
-     */
-    public double getCompre() {
-        return compre;
-    }
-
-    /**
-     * @param compre the compre to set
-     */
-    public void setCompre(double compre) {
-        this.compre = compre;
-    }
+    
 
     /**
      * @return the id
@@ -262,6 +232,21 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         }
     }
 
+    /**
+     * @return the effort
+     */
+    public double getEffort() {
+        return effort;
+    }
+
+    /**
+     * @param effort the effort to set
+     */
+    public void setEffort(double effort) {
+        this.effort = effort;
+    }
+
+    
     
     
 }

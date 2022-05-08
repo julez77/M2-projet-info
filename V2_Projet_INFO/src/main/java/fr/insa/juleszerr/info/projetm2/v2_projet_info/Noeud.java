@@ -6,14 +6,8 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 import fr.insa.juleszerr.info.projetm2.Lire;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 /**
  *
  * @author IEUser
@@ -26,10 +20,11 @@ public abstract class Noeud extends Figure{
         
     }
     public double px ;
-  double  py ;
+    double  py ;
     private List<Barre> barredebut ;
    private List<Barre> barrefin ;
     private  int id ;
+    private List<Vecteur2d> forcesnoeud ;
     
    
 
@@ -115,6 +110,8 @@ public List<Barre> getBarredebut() {
     public List<Barre> getBarrefin() {
         return barrefin;
     }
+    
+    
 public void addnoeud1(Barre b) {
         if (b.getNoeud1() != this) {
             if (b.getNoeud1() != null) {
@@ -124,7 +121,7 @@ public void addnoeud1(Barre b) {
             b.setNoeud1(this);
         }
     }
-public void addnoeud2(Barre b) {
+public void addnoeud2(Barre b) {     
         if (b.getNoeud2() != this) {
             if (b.getNoeud2() != null) {
                 throw new Error("figure déja dans un autre groupe");
@@ -133,7 +130,7 @@ public void addnoeud2(Barre b) {
             b.setNoeud2(this);
         }
     }
-public List<Barre> barreincidentes(){             //renvoie la liste des barres incidentes au noeud
+public List<Barre> barresincidentes(){             //renvoie la liste des barres incidentes au noeud
      List<Barre> liste = new ArrayList<>(); 
      
      for(int  i = 0;  i < this.barredebut.size(); i++){
@@ -169,9 +166,28 @@ public List<Barre> barreincidentes(){             //renvoie la liste des barres 
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);
     }
-   
+    
+    
+    public void addForce (Vecteur2d force){ //permet d'appliquer une nouvelle force sur le noeud
+        this.getForcesnoeud().add(force) ;
+    }
 
+    /**
+     * @return the forcesnoeud
+     */
+    public List<Vecteur2d> getForcesnoeud() {
+        return forcesnoeud;
+    }
 
+    /**
+     * @param forcesnoeud the forcesnoeud to set
+     */
+    public void setForcesnoeud(List<Vecteur2d> forcesnoeud) {
+        this.forcesnoeud = forcesnoeud;
+    }
+    
+    
+    
     }
 
 

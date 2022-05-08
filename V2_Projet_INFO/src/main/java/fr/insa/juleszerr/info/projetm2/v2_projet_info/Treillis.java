@@ -11,8 +11,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -511,7 +509,16 @@ public void menuTexte() {
             throw new Error(ex);
         }
     }
-    
+       
+    public List<Figure> NoeudsTreillis(){
+       List<Figure> noeudstreillis = new ArrayList<>() ;
+       for(int i=0 ; i<this.elements.size() ; i++){
+           if (this.elements.get(i) instanceof Noeud){
+               noeudstreillis.add(this.elements.get(i)) ;
+           }
+       }
+      return noeudstreillis ; 
+    }
     
     public static void main(String[] args) {
        

@@ -91,6 +91,8 @@ public class AppuiGlissant extends NoeudAppui{
         return Math.sqrt(dx*dx+dy*dy);
 
     }
+    
+    
 
     /**
      * @return the poseSur
