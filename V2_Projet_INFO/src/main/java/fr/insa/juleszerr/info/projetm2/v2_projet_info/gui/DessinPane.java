@@ -5,7 +5,7 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import javafx.scene.layout.Pane;
-import static javafx.scene.paint.Color.BLUE;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -16,6 +16,10 @@ public class DessinPane extends Pane{
     
     public DessinPane(MainPanel main) {
         super();
+        Rectangle clip = new Rectangle();
+        clip.heightProperty().bind(this.heightProperty());
+        clip.widthProperty().bind(this.widthProperty());
+        this.setClip(clip);
         this.main = main;
         this.redrawAll();
     }

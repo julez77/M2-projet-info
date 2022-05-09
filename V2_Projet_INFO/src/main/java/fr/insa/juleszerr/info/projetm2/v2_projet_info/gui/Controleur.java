@@ -4,13 +4,23 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import javafx.event.ActionEvent;
+
 /**
  *
  * @author IEUser
  */
 public class Controleur {
     
-    
+    public void clicDansDessin(ActionEvent t) {
+        if (this.etat == Etat.NOEUDSIMPLE) {
+
+        }
+    }
+
+    public enum Etat { SELECT , NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, BARREN1, BARREN2}
+
+    private Etat etat;
     
     
 }
