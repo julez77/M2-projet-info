@@ -24,6 +24,10 @@ public Matrice(int NbrLigne, int NbrColonne, double[][]coeff){
     
 }
 
+//public String toString(){
+    
+//}
+
 
 
     

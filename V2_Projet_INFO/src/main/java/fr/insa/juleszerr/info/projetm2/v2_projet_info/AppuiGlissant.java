@@ -26,9 +26,6 @@ public class AppuiGlissant extends NoeudAppui{
       
   }  
  
-  // oraoraoraoraora
-  // mudamudamudamudamuda
-  
   
     @Override
  public String toString(){
