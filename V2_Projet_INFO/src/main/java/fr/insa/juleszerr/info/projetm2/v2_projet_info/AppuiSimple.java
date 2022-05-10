@@ -17,12 +17,20 @@ import javafx.scene.shape.Ellipse;
  * @author IEUser
  */
 public class AppuiSimple extends NoeudAppui {
+   
+    private Terrain terrain ;
+    
+    
+    
+    
     public AppuiSimple(double px, double py){
         super(px,py);
    
+    }
+    
 
    
-                }
+                
     @Override
    public String toString(){
       return  "("+this.getPx()+","+this.getPy()+")appuisimple id" +this.getId();
@@ -80,6 +88,20 @@ public class AppuiSimple extends NoeudAppui {
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);
 
+    }
+
+    /**
+     * @return the terrain
+     */
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    /**
+     * @param terrain the terrain to set
+     */
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
     }
     
     

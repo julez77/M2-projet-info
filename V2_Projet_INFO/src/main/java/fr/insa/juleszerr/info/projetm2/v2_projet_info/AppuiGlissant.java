@@ -17,7 +17,21 @@ import javafx.scene.shape.Ellipse;
  * @author IEUser
  */
 public class AppuiGlissant extends NoeudAppui{
-    
+
+    /**
+     * @return the terrain
+     */
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
+    /**
+     * @param terrain the terrain to set
+     */
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+    private Terrain terrain ;
     private Barre poseSur ;
     
      public AppuiGlissant(double px, double py){
