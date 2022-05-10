@@ -4,6 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
+import static java.lang.Math.sqrt;
+
 
 
 /**
@@ -16,22 +18,9 @@ public class Test {
      */
     public static void main(String[] args) {
        
-
-        NoeudSimple noeud1 = new NoeudSimple(1,1) ;
-        NoeudSimple noeud2 = new NoeudSimple(4,3) ;
-        Barre barre = new Barre(noeud1, noeud2) ;
-        Treillis ora = new Treillis() ;
-        ora.add(noeud1);
-        ora.add(noeud2);
-        ora.add(barre);
-        System.out.println(ora);
-        //ora.poserNoeudSimple(barre, 1);
-        ora.poserAppuiGlissant(barre, 1);
-        System.out.println(ora);
-        
-        NoeudSimple noeudterrain1 = new NoeudSimple(2,1) ;
-        NoeudSimple noeudterrain2 = new NoeudSimple(1,2) ;
-        NoeudSimple noeudterrain3 = new NoeudSimple(2,3) ;
+        NoeudSimple noeudterrain1 = new NoeudSimple(0,0) ;
+        NoeudSimple noeudterrain2 = new NoeudSimple(3,0) ;
+        NoeudSimple noeudterrain3 = new NoeudSimple(0,3) ;
         Barre barreterrain1 = new Barre(noeudterrain1, noeudterrain2);
         Barre barreterrain2 = new Barre(noeudterrain2, noeudterrain3);
         Barre barreterrain3 = new Barre(noeudterrain1, noeudterrain3);
@@ -44,9 +33,9 @@ public class Test {
         terrain1.add(barreterrain3) ;
        
         
-        NoeudSimple noeudterrain4 = new NoeudSimple(2,5) ;
-        NoeudSimple noeudterrain5 = new NoeudSimple(1,6) ;
-        NoeudSimple noeudterrain6 = new NoeudSimple(2,7) ;
+        NoeudSimple noeudterrain4 = new NoeudSimple(7,0) ;
+        NoeudSimple noeudterrain5 = new NoeudSimple(10,0) ;
+        NoeudSimple noeudterrain6 = new NoeudSimple(10,3) ;
         Barre barreterrain4 = new Barre(noeudterrain4, noeudterrain5);
         Barre barreterrain5 = new Barre(noeudterrain5, noeudterrain6);
         Barre barreterrain6 = new Barre(noeudterrain4, noeudterrain6);
@@ -59,50 +48,73 @@ public class Test {
         terrain2.add(barreterrain6) ;
         
        
-        terrain1.poserAppuiGlissant(barreterrain3, 1);
+        terrain1.poserAppuiSimple(barreterrain2, 2*sqrt(2));
        
-        terrain2.poserAppuiSimple(barreterrain6, 1);
+        terrain2.poserAppuiGlissant(barreterrain6, 2*sqrt(2));
         
         System.out.println(terrain1);
         System.out.println(terrain2);
         
-        AppuiGlissant appuiglissant = ((AppuiGlissant) terrain1.getNoeuds().get(3)) ;
-        //System.out.println(appuiglissant) ;
+        AppuiGlissant appuiglissant = ((AppuiGlissant) terrain2.getNoeuds().get(3)) ;
         
-        //System.out.println(appuiglissant.getPoseSur().vecteurBarre().vecteurNormal()) ;
+        AppuiSimple appuisimple = ((AppuiSimple) terrain1.getNoeuds().get(3)) ;
         
-        AppuiSimple appuisimple = ((AppuiSimple) terrain2.getNoeuds().get(3)) ;
+        NoeudSimple noeud1 = new NoeudSimple(5,2) ;
+        NoeudSimple noeud2 = new NoeudSimple(3,4) ;
+        NoeudSimple noeud3 = new NoeudSimple(7,4) ;
+        NoeudSimple noeud4 = new NoeudSimple(5,6) ;
         
-        NoeudSimple noeud = new NoeudSimple(4,4) ;
+        Barre barre1 = new Barre(appuisimple, noeud1);
+        Barre barre2 = new Barre(noeud1, appuiglissant);
+        Barre barre3 = new Barre(appuisimple, noeud2);
+        Barre barre4 = new Barre(noeud2, noeud1);
+        Barre barre5 = new Barre(noeud3, noeud1);
+        Barre barre6 = new Barre(appuiglissant, noeud3);
+        Barre barre7 = new Barre(noeud2, noeud3);
+        Barre barre8 = new Barre(noeud2, noeud4);
+        Barre barre9 = new Barre(noeud3, noeud4);
         
-        Barre barre1 = new Barre(appuiglissant, noeud);
-        Barre barre2 = new Barre(appuiglissant, appuisimple);
-        Barre barre3 = new Barre(appuisimple, noeud);
+        Vecteur2d force1 = new Vecteur2d(0, -500) ;
+        Vecteur2d force2 = new Vecteur2d(0, -1000) ;
+        
+        noeud2.setForce(force1);
+        noeud4.setForce(force2);
         
         Treillis muda = new Treillis() ;
         muda.add(appuisimple);
+        muda.add(noeud1);
         muda.add(appuiglissant);
-        muda.add(noeud);
+        muda.add(noeud2);
+        muda.add(noeud3);
+        muda.add(noeud4);
+        
         muda.add(barre1);
         muda.add(barre2);
         muda.add(barre3);
+        muda.add(barre4);
+        muda.add(barre5);
+        muda.add(barre6);
+        muda.add(barre7);
+        muda.add(barre8);
+        muda.add(barre9);
         
-        System.out.println(muda);
+       System.out.println(noeud1.angleBarreNoeud(barre1));
+       System.out.println(noeud2.angleBarreNoeud(barre4));
+       System.out.println(appuiglissant.getPoseSur().vecteurBarre().vecteurNormal());
+       System.out.println(noeud3.angleBarreNoeud(barre5)); 
+       System.out.println(muda);
         
-        Vecteur2d force = new Vecteur2d(0, -1000);
-        noeud.setForce(force);
-        System.out.println(noeud.getForce());
-        System.out.println(appuisimple.getForce());
-        System.out.println(appuiglissant.getForce());
         
-       
         System.out.println(muda.Systeme());
         System.out.println(muda.Resolution());
         double[] solutions = new double[muda.NbInconnues()] ;
         solutions = muda.Resolution() ;
         
+        System.out.println() ;
+        System.out.println() ;
+        
         for (int j=0 ; j<muda.NbInconnues() ; j++){
-            System.out.print(solutions[j]+"  ");
+          System.out.print(solutions[j]+"  ");
         }
         
     }

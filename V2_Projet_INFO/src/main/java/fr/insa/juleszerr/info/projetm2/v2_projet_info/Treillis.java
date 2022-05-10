@@ -575,7 +575,7 @@ public void menuTexte() {
         double angle ;
         double angle2 ;
         
-        for (i=0 ; i<this.getBarres().size() ; i++){
+        for (i=0 ; i<this.getNoeuds().size() ; i++){
             Z=2*i ;
             Noeud noeud = this.getNoeuds().get(i) ;
             

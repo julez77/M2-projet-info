@@ -126,11 +126,11 @@ public void RemonteeGauss(){
     for(int i=NbrLigne-1 ; i>=1 ; i=i-1){
         for(int j=i-1 ; j>=0 ; j=j-1){
             if (this.Inversible()==false){
-                    throw new Error("La matrice n'est pas inversible");
+                   throw new Error("La matrice n'est pas inversible");
                 }
-            else{
+           else{
                 transvection(i, j) ;
-            }
+           }
             }
         }
     }
@@ -164,6 +164,14 @@ public void transvection(int lignePivot, int ligneTrans){
 public double[] resolution(){
     this.DescenteGauss();
     this.RemonteeGauss();
+    
+    for(int i=0 ; i<NbrLigne ;i++){
+        System.out.println() ;
+        for(int j=0 ; j<NbrColonne; j++){
+            System.out.print("  "+this.getCoeff(i, j));
+        }
+    } 
+    
     double[]TabSol = new double[NbrLigne] ;
     for(int i=0 ; i<NbrLigne ; i++){
         double a = this.coeff[i][i] ;
@@ -174,14 +182,7 @@ public double[] resolution(){
         }
     }
     
-    for(int i=0 ; i<NbrLigne ;i++){
-        System.out.println() ;
-        for(int j=0 ; j<NbrColonne; j++){
-            System.out.print("  "+this.getCoeff(i, j));
-        }
-    } 
-    
-    
+   
    return TabSol ; 
        
 }

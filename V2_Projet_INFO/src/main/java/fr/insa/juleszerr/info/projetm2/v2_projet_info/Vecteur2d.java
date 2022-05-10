@@ -39,7 +39,7 @@ public class Vecteur2d {
    
    public double angleHorizontale (){              //renvoie l'angle entre le vecteur et l'horizontale
        
-      double angle = acos(abs(this.getVx())/this.length()) ;
+      double angle = acos(this.getVx()/this.length()) ;
        
        if (vy<0){
            return -angle ;
@@ -52,14 +52,15 @@ public class Vecteur2d {
    
    public Vecteur2d vecteurNormal(){
        Vecteur2d vecteurnormal ;
-       if(this.vx >= 0 && this.vy >= 0 ){
-           vecteurnormal = new Vecteur2d(this.vy, -this.vx) ;
-           return vecteurnormal ;
+       if((vy/vx)<=0){
+           vecteurnormal = new Vecteur2d(abs(vy), abs(vx)) ;
+            
        }
        else{
-           vecteurnormal = new Vecteur2d(-this.vy, this.vx) ;
-           return vecteurnormal ;
+           vecteurnormal = new Vecteur2d(-abs(vy), abs(vx)) ;
+           
        }
+       return vecteurnormal ;
    }
    
    public Vecteur2d vecteurOppose(){
