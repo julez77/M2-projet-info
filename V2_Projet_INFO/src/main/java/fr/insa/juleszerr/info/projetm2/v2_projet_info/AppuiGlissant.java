@@ -7,9 +7,9 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 import static fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple.RAYON_IN_DRAW;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.List;
 import javafx.scene.Group;
 import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.PURPLE;
 import javafx.scene.shape.Ellipse;
 
 /**
@@ -68,8 +68,8 @@ public class AppuiGlissant extends NoeudAppui{
     public  Group dessine() {
         Ellipse res = new Ellipse(this.px, this.py, RAYON_IN_DRAW, RAYON_IN_DRAW);
         //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
-        res.setStroke(BLUE);
-        res.setFill(BLUE);
+        res.setStroke(PURPLE);
+        res.setFill(PURPLE);
         Group g = new Group(res);  
         
         

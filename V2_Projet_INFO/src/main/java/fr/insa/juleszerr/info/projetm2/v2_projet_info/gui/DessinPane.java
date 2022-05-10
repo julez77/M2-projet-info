@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -12,19 +13,37 @@ import javafx.scene.shape.Rectangle;
  * @author IEUser
  */
 public class DessinPane extends Pane{
-    private MainPanel main;
+    private MainPane main;
+    private Rectangle clip;
     
-    public DessinPane(MainPanel main) {
+    public DessinPane(MainPane main) {
         super();
-        Rectangle clip = new Rectangle();
+        this.main=main;
+        this.clip = new Rectangle();
         clip.heightProperty().bind(this.heightProperty());
+        clip.heightProperty().addListener((cl)->{
+            System.out.println("w="+ this.main.getWidth()+" ; h = "+ this.main.getHeight());
+            this.redrawAll();
+        });
         clip.widthProperty().bind(this.widthProperty());
+        
         this.setClip(clip);
-        this.main = main;
+        this.clip.setOnMouseClicked((t) -> {
+            Controleur control = this.main.getControleur();
+            System.out.println("px1 = "+ t.getX() +"; py1 = "+ t.getY());
+            control.clicDansDessin(t);
+        });
+        this.setOnMouseClicked((t)->{
+          System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
+          this.main.getControleur().clicDansDessin(t);
+          this.redrawAll();
+        });
+
         this.redrawAll();
     }
     
     public  void redrawAll() {
-        this.getChildren().addAll(this.main.getModel().dessine());       
+        
+        this.getChildren().addAll(this.main.getTreillis().dessine());       
     }
 }

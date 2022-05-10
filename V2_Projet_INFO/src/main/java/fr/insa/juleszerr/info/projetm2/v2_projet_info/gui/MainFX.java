@@ -20,7 +20,7 @@ public class MainFX extends Application  {
       Treillis test;
         test = Treillis.treillisTest();
             System.out.println("taille " + test.getElements().size());
-        MainPanel main = new MainPanel(test);
+        MainPane main = new MainPane(test);
         Scene s = new Scene(main);
         primaryStage.setScene(s);
         primaryStage.show();
