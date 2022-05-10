@@ -31,21 +31,48 @@ public class MainText {
         }
     
     
-    public static void main(String[] args) {
-        Noeud n1, n2, n3;
-        n1= new NoeudSimple(2,3);
-        n2 = new NoeudSimple (5,7);
-        n3 = new NoeudSimple(1,3);
-      
-       Treillis G = new Treillis();
-       //G.ajouterNoeud(n3);
-      //G.ajouterNoeud(n2);
-      // G.add(new Barre(n1,n2));
-       
-      G.menuTexte();
-       
-       
+    public static void main(String[] args){
+    
+    System.out.println("nb lignes");
+        int n = Lire.i() ;
+        int p = n + 1 ;
+        
+        double[][]T = new double[n][p] ;
+        
+        for(int i=0 ; i<n ; i++){
+            for(int j=0; j<p ; j++){
+                System.out.println("Entrer le coefficient "+ (i+1)+", "+(j+1));
+                T[i][j]=Lire.d(); 
+            }
+        }
+        
+        Matrice M = new Matrice(n, p, T) ;
        
         
+        for(int i=0 ; i<n ;i++){
+        System.out.println() ;
+        for(int j=0 ; j<p; j++){
+            System.out.print("  "+M.getCoeff(i, j));
+        }
+    } 
+       
+        double[] TabSol = new double[n] ;
+      
+        TabSol=M.resolution();
+        System.out.println();
+    
+        for(int i=0 ; i<n ; i++){
+        System.out.print("  "+TabSol[i]);
     }
-}
+        
+        double R = M.getCoeff(0, 2) ;
+        System.out.println() ;
+        System.out.println(R);
+        
+        
+       
+    }
+ }
+    
+
+    
