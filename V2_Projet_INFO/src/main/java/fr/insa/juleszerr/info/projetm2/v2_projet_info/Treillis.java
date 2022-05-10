@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
@@ -18,9 +20,13 @@ import javafx.scene.Group;
  */
 public class Treillis extends Figure {
     private List<Figure> elements ;
+
     private List<Noeud> noeuds ;
     private List<Barre> barres;
     private List<Treillis> treillise ;
+    
+    
+  
     public Treillis(){
         this.elements = new ArrayList() ;
         this.barres = new ArrayList() ;
@@ -147,12 +153,21 @@ public class Treillis extends Figure {
         
     
     public void add(Figure f) {
-        if (f.getTreillis() != this) {
-            if (f.getTreillis() != null) {
-                throw new Error("figure déja dans un autre treillis");
-            }
-            this.getElements().add(f);
+
+        //if (f.getTreillis() != this) {
+            //if (f.getTreillis() != null) {
+               // throw new Error("figure déja dans un autre treillis");
+            //}
+            //this.getElements().add(f);
+
+       // if (f.getTreillis() != this) {
+            //if (f.getTreillis() != null) {
+               // throw new Error("figure déja dans un autre treillis");
+           // }
+            this.elements.add(f);
+
             f.setTreillis(this);
+
             if ((f instanceof Noeud)== true ){
                 this.getNoeuds().add((Noeud) f);}
             else if ((f instanceof Barre)== true ){
@@ -161,7 +176,10 @@ public class Treillis extends Figure {
                 this.getTreillise().add((Treillis)f);
             }
             
-        }
+        //}
+
+        //}
+
     }
     public void remove(Figure f) {                          // supprime une figure (barre, noeud, treillis)
         if (f.getTreillis() != this) {
@@ -531,35 +549,119 @@ public void menuTexte() {
         }
     }
        
-    public List<Figure> NoeudsTreillis(){
-       List<Figure> noeudstreillis = new ArrayList<>() ;
-       for(int i=0 ; i<this.getElements().size() ; i++){
-           if (this.getElements().get(i) instanceof Noeud){
-               noeudstreillis.add(this.getElements().get(i)) ;
-           }
-       }
-      return noeudstreillis ; 
+
+    public int NbInconnues(){
+        int N=this.getBarres().size() ;
+        for (int i=0 ; i<this.getNoeuds().size() ; i++){
+            Noeud noeud = this.getNoeuds().get(i) ;
+            if (noeud instanceof AppuiGlissant){
+                N=N+1 ;
+            }
+            
+            if (noeud instanceof AppuiSimple){
+                N=N+2 ;
+            }
+            
+        }
+        return N ;
     }
     
-    public static void main(String[] args) {
-       
-        NoeudSimple noeud1 = new NoeudSimple(1,1) ;
-        NoeudSimple noeud2 = new NoeudSimple(4,3) ;
-        Barre barre = new Barre(noeud1, noeud2) ;
-        Treillis ora = new Treillis() ;
-        ora.add(noeud1);
-        ora.add(noeud2);
-        ora.add(barre);
-        System.out.println(ora);
-        //ora.poserNoeudSimple(barre, 1);
-        ora.poserAppuiGlissant(barre, 1);
-        System.out.println(ora);
+    public double[][] Systeme(){
+        int N = this.NbInconnues() ;
+        double [][] S = new double[N][N+1];
+        int i ; int j; 
+        int X=this.getBarres().size() - 1 ; //représente l'avancement du remplissage des colonnes de la matrice
+        int Z=0 ;        // représente l'avancement du remplissage des lignes de la matrice
+        double angle ;
+        double angle2 ;
+        
+        for (i=0 ; i<this.getNoeuds().size() ; i++){
+            Z=2*i ;
+            Noeud noeud = this.getNoeuds().get(i) ;
+            
+            for (j=0 ; j<this.getBarres().size() ; j++){        
+                Barre barre = this.getBarres().get(j) ;
+                
+                if(noeud.barreincidente(barre)==true){
+                    angle = noeud.angleBarreNoeud(barre) ;
+                    S[Z][j]=cos(angle) ;
+                    S[Z+1][j]=sin(angle) ;
+                } 
+                        
+            }
+            
+            for(int t=j+1 ; t<X+1 ; t++){
+                S[Z][t]=0 ;
+                S[Z+1][t]=0 ;
+            }
+            
+            if (noeud instanceof AppuiSimple){
+                S[Z][X+1]=1 ;
+                S[Z+1][X+1]=0 ;
+                S[Z+1][X+2]=1 ;
+                X=X+2 ;
+            }
+            
+            if (noeud instanceof AppuiGlissant){
+                Barre barresupport = ((AppuiGlissant) noeud).getPoseSur();
+                angle2 = barresupport.vecteurBarre().vecteurNormal().angleHorizontale() ;
+                S[Z][X+1]=cos(angle2);
+                S[Z+1][X+1]=sin(angle2);
+                X=X+1 ;
+            }
+            
+            Vecteur2d force = noeud.getForce() ;
+            
+            if(force.getVx()==0 && force.getVy()==0){
+             S[Z][N]=0 ;
+             S[Z+1][N]=0 ;
+            }
+            
+            else{
+                
+              double angleforce = force.angleHorizontale() ;
+              double norme = force.length() ;
+              S[Z][N]= - (cos(angleforce))*norme ;
+              S[Z+1][N]= - (sin(angleforce))*norme ;
+            }
+          
+        }
+        
+        for (int g=0 ; g<N ; g++){
+            for (int h=0 ; h<N+1 ; h++){
+                System.out.print(S[g][h]+"  ");
+                
+            }
+            System.out.println();
+        }
+        
+      return S ;  
     }
+    
+    public double[] Resolution(){
+        
+        int N = this.NbInconnues() ;
+        Matrice resol = new Matrice(N, N+1, this.Systeme()) ;
+        
+        for (int g=0 ; g<N ; g++){
+            for (int h=0 ; h<N+1 ; h++){
+                System.out.print(resol.getCoeff(g, h));
+                
+            }
+            
+            System.out.println();
+        }
+        
+        return resol.resolution() ;
+    }
+    
+    
+    
 
     /**
      * @return the elements
      */
-    public List<Figure> getElements() {
+    public List<Figure> getElements(){
         return elements;
     }
 
@@ -605,9 +707,6 @@ public void menuTexte() {
         this.treillise = treillise;
     }
     
-    }
-    
-    
-    
-    
+}
+
 

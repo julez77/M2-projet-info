@@ -22,9 +22,9 @@ public abstract class Noeud extends Figure{
     public double px ;
     double  py ;
     private List<Barre> barredebut ;
-   private List<Barre> barrefin ;
+    private List<Barre> barrefin ;
     private  int id ;
-    private List<Vecteur2d> forcesnoeud ;
+    private Vecteur2d force ;
     
    
 
@@ -92,7 +92,8 @@ public abstract class Noeud extends Figure{
  }         
 public Noeud (double px , double py){
     this.px = px;
-    this.py = py;    
+    this.py = py; 
+    this.force = new Vecteur2d(0,0) ;
     this.barredebut = new ArrayList<>(); //la liste des barres dont le noeud est le point de départ
     this.barrefin  = new ArrayList<>(); //la liste des barres dont le noeud est le point d'arrivée
     this.id=0;
@@ -112,24 +113,26 @@ public List<Barre> getBarredebut() {
     }
     
     
-public void addnoeud1(Barre b) {
-        if (b.getNoeud1() != this) {
-            if (b.getNoeud1() != null) {
-                throw new Error("figure déja dans un autre groupe");
-            }
-            this.barredebut.add(b);
-            b.setNoeud1(this);
-        }
-    }
-public void addnoeud2(Barre b) {     
-        if (b.getNoeud2() != this) {
-            if (b.getNoeud2() != null) {
-                throw new Error("figure déja dans un autre groupe");
-            }
-            this.barrefin.add(b);
-            b.setNoeud2(this);
-        }
-    }
+//public void addnoeud1(Barre b) {
+        //if (b.getNoeud1() != this) {
+           // if (b.getNoeud1() != null) {
+              //  throw new Error("figure déja dans un autre groupe");
+           // }
+           // this.barredebut.add(b);
+           // b.setNoeud1(this);
+       // }
+   // }
+
+//public void addnoeud2(Barre b) {     
+        //if (b.getNoeud2() != this) {
+            //if (b.getNoeud2() != null) {
+               // throw new Error("figure déja dans un autre groupe");
+            //}
+            //.barrefin.add(b);
+            //b.setNoeud2(this);
+        //}
+    //}
+
 public List<Barre> barresincidentes(){             //renvoie la liste des barres incidentes au noeud
      List<Barre> liste = new ArrayList<>(); 
      
@@ -144,6 +147,16 @@ public List<Barre> barresincidentes(){             //renvoie la liste des barres
  return liste ;  
 
  }
+
+public boolean barreincidente(Barre b){           //vérifie si une barre est incidente au noeud
+    boolean barreincidente=false ;
+    for(int i=0 ; i<this.barresincidentes().size() ; i++){
+        if (b==this.barresincidentes().get(i)){
+            barreincidente=true ;
+    }
+}
+    return barreincidente ;
+}
 
    
     /**
@@ -167,25 +180,29 @@ public List<Barre> barresincidentes(){             //renvoie la liste des barres
         return Math.sqrt(dx*dx+dy*dy);
     }
     
-    
-    public void addForce (Vecteur2d force){ //permet d'appliquer une nouvelle force sur le noeud
-        this.getForcesnoeud().add(force) ;
+    public double angleBarreNoeud(Barre b){
+        if (this==b.getNoeud2()){
+            return b.vecteurBarre().vecteurOppose().angleHorizontale() ;
+        
+        }else{
+            return b.vecteurBarre().angleHorizontale() ;
+        }
+        
     }
 
     /**
-     * @return the forcesnoeud
+     * @return the force
      */
-    public List<Vecteur2d> getForcesnoeud() {
-        return forcesnoeud;
+    public Vecteur2d getForce() {
+        return force;
     }
 
     /**
-     * @param forcesnoeud the forcesnoeud to set
+     * @param force the force to set
      */
-    public void setForcesnoeud(List<Vecteur2d> forcesnoeud) {
-        this.forcesnoeud = forcesnoeud;
+    public void setForce(Vecteur2d force) {
+        this.force = force;
     }
-    
     
     
     }

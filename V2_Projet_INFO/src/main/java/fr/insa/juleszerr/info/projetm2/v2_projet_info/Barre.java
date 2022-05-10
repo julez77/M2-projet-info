@@ -53,7 +53,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     public void setNoeud1(Noeud noeud1) {
         this.noeud1 = noeud1;
-        noeud1.addnoeud1(this);
+        noeud1.getBarredebut().add(this);
     }
 
     /**
@@ -69,7 +69,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     public void setNoeud2(Noeud noeud2) {
         this.noeud2 = noeud2;
-        noeud2.addnoeud2(this);
+        noeud2.getBarrefin().add(this);
     }
     
     public Barre ( Noeud noeud1 , Noeud noeud2 ){
@@ -80,8 +80,8 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.id=0;
         this.prix = 0;
         
-        noeud2.addnoeud2(this);
-        noeud1.addnoeud1(this);
+        noeud2.getBarrefin().add(this);
+        noeud1.getBarredebut().add(this);
     }
     public Barre (Noeud noeud1,Noeud noeud2,double effort,double prix){
         this.noeud1 = noeud1;
@@ -90,8 +90,8 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.effort = effort;
         this.prix = prix;
         
-        noeud2.addnoeud2(this);
-        noeud1.addnoeud1(this);
+        noeud2.getBarrefin().add(this);
+        noeud1.getBarredebut().add(this);
         
         
     }
@@ -134,7 +134,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     
     public double longueurBarre(){
       
-        return sqrt(Math.pow(noeud1.getPx() + noeud2.getPx(), 2) + Math.pow(noeud1.getPy() + noeud2.getPy(), 2)) ;
+        return sqrt(Math.pow(noeud2.getPx() - noeud1.getPx(), 2) + Math.pow(noeud2.getPy() - noeud1.getPy(), 2)) ;
     }
     
     

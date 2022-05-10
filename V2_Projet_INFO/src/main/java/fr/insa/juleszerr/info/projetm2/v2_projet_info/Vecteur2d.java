@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -25,9 +26,9 @@ public class Vecteur2d {
    }
    
    
-   public double length(){                                                  //renvoie la norme d'un vecteur 
+   public double length(){
        return sqrt(Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) ;
-              
+           
    }
    
    //public static double angleVecteurs (Vecteur2d v1, Vecteur2d v2){                //renvoie l'angle entre deux vecteurs mais c'est inutile
@@ -38,7 +39,7 @@ public class Vecteur2d {
    
    public double angleHorizontale (){              //renvoie l'angle entre le vecteur et l'horizontale
        
-      double angle = acos(abs(this.getVx())/this.length()) ;
+      double angle = acos(this.getVx()/this.length()) ;
        
        if (vy<0){
            return -angle ;
@@ -47,6 +48,19 @@ public class Vecteur2d {
            return angle ;
            
        }    
+   }
+   
+   public Vecteur2d vecteurNormal(){
+       Vecteur2d vecteurnormal ;
+       if((vy/vx)<=0){
+           vecteurnormal = new Vecteur2d(abs(vy), abs(vx)) ;
+            
+       }
+       else{
+           vecteurnormal = new Vecteur2d(-abs(vy), abs(vx)) ;
+           
+       }
+       return vecteurnormal ;
    }
    
    public Vecteur2d vecteurOppose(){
@@ -82,17 +96,21 @@ public class Vecteur2d {
     public void setVy(double vy) {
         this.vy = vy;
     }
+    
+  @Override  
  public String toString() {
    return "(" + vx + "," + vy +")" ;
      
      
  }   
     
- //public static void main(String[] args){
-     //Vecteur2d v1 = new Vecteur2d (0, 1);
-     //Vecteur2d v2 = new Vecteur2d (1, -1);
-     //System.out.println( angleVecteurs(v1, v2));
- //}   
+ public static void main(String[] args) {
+     Vecteur2d vecteur = new Vecteur2d(5,7) ;
+     Vecteur2d vecteur2 = new Vecteur2d(5,-7) ;
+     System.out.println(vecteur.vecteurNormal()) ;
+     System.out.println(vecteur2.vecteurNormal()) ;
+             
+ }
     
     
     
