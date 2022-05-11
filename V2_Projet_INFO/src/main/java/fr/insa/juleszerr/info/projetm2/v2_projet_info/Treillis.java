@@ -505,6 +505,29 @@ public void menuTexte() {
         }
     }
 
+    public Figure plusProche(Noeud p, double distMax) {
+        if (this.elements.isEmpty()) {
+            return null;
+        } else {
+            Figure fmin = this.elements.get(0);
+            double min = fmin.distanceNoeud(p);
+            for (int i = 1; i < this.elements.size(); i++) {
+                Figure fcur = this.elements.get(i);
+                double cur = fcur.distanceNoeud(p);
+                if (cur < min) {
+                    min = cur;
+                    fmin = fcur;
+                }
+            }
+            if (min <= distMax) {
+                return fmin;
+            } else {
+                return null;
+            }
+        }
+    }
+    
+    
     private Noeud choisiNoeud() {
        List<Noeud> lp = new ArrayList<>();
         System.out.println("liste des points disponibles : ");

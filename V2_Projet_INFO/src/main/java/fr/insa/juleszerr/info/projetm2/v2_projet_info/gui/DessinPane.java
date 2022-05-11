@@ -4,7 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import javafx.scene.canvas.Canvas;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -15,9 +15,11 @@ import javafx.scene.shape.Rectangle;
 public class DessinPane extends Pane{
     private MainPane main;
     private Rectangle clip;
+  
     
     public DessinPane(MainPane main) {
         super();
+      
         this.main=main;
         this.clip = new Rectangle();
         clip.heightProperty().bind(this.heightProperty());
@@ -28,7 +30,7 @@ public class DessinPane extends Pane{
         clip.widthProperty().bind(this.widthProperty());
         
         this.setClip(clip);
-
+        
         this.setOnMouseClicked((t)->{
           System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
           this.main.getControleur().clicDansDessin(t);

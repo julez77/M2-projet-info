@@ -7,8 +7,11 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -22,6 +25,8 @@ public class Controleur {
     
     private double[] pos1 = new double[2];
     private double[] pos2 = new double[2];
+    
+    private List<Figure> selection;
 
    
     public enum Etat {DEBUT, SELECT , NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
@@ -31,6 +36,7 @@ public class Controleur {
     
     public Controleur(MainPane vue){
         this.vue = vue;
+        this.selection = new ArrayList<>();
     }
     
     public void changeEtat(Etat nouvelEtat){
@@ -68,22 +74,29 @@ public class Controleur {
             System.out.println("px = "+ px +"; py = "+ py);
            
             this.vue.redrawAll();
-        }if (this.etat == Etat.APPUISIMPLE) {
+        }else if (this.etat == Etat.APPUISIMPLE) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiSimple(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
-        }if (this.etat == Etat.APPUIGLISSANT) {
+        }else if (this.etat == Etat.APPUIGLISSANT) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiGlissant(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
-        }if (this.etat == Etat.BARRE_N2) {
-             System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
+        }else if (this.etat == Etat.BARRE_N1) {
+            this.pos1[0]=t.getX();
+            this.pos1[1]=t.getY();
+            this.changeEtat(Etat.BARRE_N2); 
+             
+            
+                     
+        }else if (this.etat == Etat.BARRE_N2) {
+            System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
             
             double px = t.getX();
             double py = t.getY();
@@ -97,18 +110,13 @@ public class Controleur {
             treillis.add(b);
             this.vue.redrawAll();
             this.changeEtat(Etat.BARRE_N1);
-            
-                     
-        }if (this.etat == Etat.BARRE_N1) {
-             this.pos1[0]=t.getX();
-            this.pos1[1]=t.getY();
-            this.changeEtat(Etat.BARRE_N2); 
+             
          
-        }if (this.etat == Etat.TERRAIN_N1) {
+        }else if (this.etat == Etat.TERRAIN_N1) {
             
-        }if (this.etat == Etat.TERRAIN_N2) {
+        }else if (this.etat == Etat.TERRAIN_N2) {
             
-        }if (this.etat == Etat.TERRAIN_N3) {
+        }else if (this.etat == Etat.TERRAIN_N3) {
             
         }
     }
