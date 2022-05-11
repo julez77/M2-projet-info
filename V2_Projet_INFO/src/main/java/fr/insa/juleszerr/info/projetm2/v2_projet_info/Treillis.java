@@ -172,6 +172,8 @@ public class Treillis extends Figure {
                 this.getNoeuds().add((Noeud) f);}
             else if ((f instanceof Barre)== true ){
                this.barres.add((Barre) f);
+               
+                          
             }else{
                 this.getTreillise().add((Treillis)f);
             }
@@ -281,24 +283,25 @@ public class Treillis extends Figure {
     }  
 public static Treillis treillisTest() {
         NoeudSimple p1 = new  NoeudSimple(10, 10);
-         NoeudSimple p2 = new  NoeudSimple(100, 10);
-         NoeudSimple p3 = new  NoeudSimple(100, 100);
-         NoeudSimple p4 = new  NoeudSimple(10, 100);
-         NoeudSimple p5 = new  NoeudSimple(50, 50);
-         NoeudSimple p6 = new  NoeudSimple(500, 500);
+        NoeudSimple p2 = new  NoeudSimple(100, 10);
+        NoeudSimple p3 = new  NoeudSimple(100, 100);
+        NoeudSimple p4 = new  NoeudSimple(10, 100);
+        NoeudSimple p5 = new  NoeudSimple(50, 50);
+        NoeudSimple p6 = new  NoeudSimple(400, 500);
+        NoeudSimple p7 = new  NoeudSimple(50, 100);
+        NoeudSimple p8 = new  NoeudSimple(650, 350);
+        NoeudSimple p9 = new  NoeudSimple(500, 500);
         Barre s1 = new Barre(p1, p2);
         Barre s2 = new Barre(p2, p3);
         Barre s3 = new Barre(p3, p1);
         Barre s4 = new Barre(p1, p4);
-        Treillis triangle = new Treillis();
-        triangle.add(s1);
-        triangle.add(s2);
-        triangle.add(s3);
+        Terrain3 triangle = new Terrain3(p7, p8, p9);
+
         Treillis res = new Treillis();
         res.add(p5);
         res.add(p6);
         res.add(s4);
-        res.add(triangle);
+        res.add(triangle);/*
         for (int i = 0; i < 10; i++) {
             res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
                    ));
@@ -307,7 +310,7 @@ public static Treillis treillisTest() {
             res.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
                     new NoeudSimple(Math.random() * 500, Math.random() * 500)
                     ));
-        }
+        }*/
         return res;
     }
     @Override

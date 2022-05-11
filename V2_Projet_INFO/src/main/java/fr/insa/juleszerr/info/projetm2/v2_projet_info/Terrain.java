@@ -16,17 +16,21 @@ import javafx.scene.Group;
  * @author IEUser
  */
 public class Terrain extends Treillis{
+
 private List<NoeudAppui> Appuis ;
     private List<Barre> barres;
     private List<Figure> elements ;
    
             
-            public Terrain(){
+        public Terrain(){
         this.Appuis = new ArrayList();
         this.barres = new ArrayList();
         this.elements = new ArrayList() ;
     }
+
+        
     
+        
     @Override
     public String toString() {
         String res = "Terrain {\n";
@@ -66,42 +70,7 @@ private List<NoeudAppui> Appuis ;
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
+      
     @Override
     public Group dessine() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

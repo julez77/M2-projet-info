@@ -6,9 +6,8 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.List;
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.BLUE;
 import javafx.scene.shape.Ellipse;
 
@@ -74,6 +73,16 @@ public class NoeudSimple extends Noeud {
          Group g = new Group( res);       
         return g;              
     }
+        
+        public  Group dessine(Color color) {
+        Ellipse res = new Ellipse(this.px, this.py, RAYON_IN_DRAW, RAYON_IN_DRAW);
+        //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
+        res.setStroke(color);
+        res.setFill(color);
+         Group g = new Group( res);       
+        return g;              
+    }
+        
     @Override
     public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
         if(! numn.objExist(this)) {

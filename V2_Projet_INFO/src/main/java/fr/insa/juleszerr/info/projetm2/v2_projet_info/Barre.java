@@ -215,9 +215,10 @@ public Vecteur2d vecteurBarre(){                                         //renvo
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
         res.setStroke(RED);
         res.setFill(RED);
+        
         Group g = new Group( res);
-        System.out.println("");
-       return g;
+        g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+        return g;
         
     }
     
