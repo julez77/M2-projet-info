@@ -13,6 +13,7 @@ import javafx.scene.Group;
  * @author corin
  */
 public class terrain3 extends Figure{
+    //j'avais mis en attribut 3 noeud et 3 barre plus constructeur qui creer le terrain a partir de trois noeuds en parametre et ensuite les barre
 private NoeudAppui[] noeuds;       
 private Barre[] barres ;       
 public terrain3(){
@@ -81,50 +82,8 @@ public void addbarre(Barre b)throws Exception{
       t.relieappui();
       // AppuiSimple n4 = new AppuiSimple(1,3); 
      //  t.addappui(n4);
-   } 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   }
+
     @Override
     public double maxX() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -159,25 +118,20 @@ public void addbarre(Barre b)throws Exception{
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-   
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

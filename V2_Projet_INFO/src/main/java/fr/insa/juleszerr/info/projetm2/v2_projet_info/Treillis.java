@@ -295,13 +295,13 @@ public static Treillis treillisTest() {
         Barre s2 = new Barre(p2, p3);
         Barre s3 = new Barre(p3, p1);
         Barre s4 = new Barre(p1, p4);
-        Terrain3 triangle = new Terrain3(p7, p8, p9);
+        //terrain3 triangle = new terrain3(p7, p8, p9);
 
         Treillis res = new Treillis();
         res.add(p5);
         res.add(p6);
         res.add(s4);
-        res.add(triangle);/*
+        //res.add(triangle);
         for (int i = 0; i < 10; i++) {
             res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
                    ));
@@ -310,7 +310,7 @@ public static Treillis treillisTest() {
             res.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
                     new NoeudSimple(Math.random() * 500, Math.random() * 500)
                     ));
-        }*/
+        }
         return res;
     }
     @Override
