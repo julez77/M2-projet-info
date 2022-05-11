@@ -233,6 +233,20 @@ public Vecteur2d vecteurBarre(){                                         //renvo
        return g;
         
     }
+    
+        @Override
+    public Group dessineSelection() {
+        Line res1 = new Line();
+         Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(NoeudSimple.COULEUR_SELECTION);
+        res.setFill(NoeudSimple.COULEUR_SELECTION);
+        Group g = new Group( res);
+        System.out.println("");
+       return g;
+    }
+
+    
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -259,7 +273,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.effort = effort;
     }
 
-    
+
     
     
 }

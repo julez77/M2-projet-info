@@ -317,7 +317,16 @@ public class Treillis extends Figure {
             g.getChildren().add(this.getÉlements().get(i).dessine());
         }
         return g;
-    }  
+    } 
+        @Override
+    public Group dessineSelection() {
+                
+        Group g = new Group();
+        for(int i = 0 ; i < this.getÉlements().size() ; i ++) {
+            g.getChildren().add(this.getÉlements().get(i).dessineSelection());
+        }
+        return g;
+    }
 public static Treillis treillisTest() {
         NoeudSimple p1 = new  NoeudSimple(10, 10);
         NoeudSimple p2 = new  NoeudSimple(100, 10);
@@ -332,13 +341,13 @@ public static Treillis treillisTest() {
         Barre s2 = new Barre(p2, p3);
         Barre s3 = new Barre(p3, p1);
         Barre s4 = new Barre(p1, p4);
-        //terrain3 triangle = new terrain3(p7, p8, p9);
+        terrain3 triangle = new terrain3(p7, p8, p9);
 
         Treillis res = new Treillis();
         res.add(p5);
         res.add(p6);
         res.add(s4);
-        //res.add(triangle);
+       // res.add(triangle);
         for (int i = 0; i < 10; i++) {
             res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
                    ));
@@ -783,6 +792,8 @@ public void menuTexte() {
     public void setTerrain3(List<terrain3> terrain3) {
         this.terrain3 = terrain3;
     }
+
+
     
 }
 

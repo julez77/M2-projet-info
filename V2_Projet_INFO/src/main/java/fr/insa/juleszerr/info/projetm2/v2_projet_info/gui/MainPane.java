@@ -29,7 +29,7 @@ public class MainPane extends BorderPane {
     public MainPane(Treillis treillis){
        this.treillis = treillis;
        this.controleur = new Controleur(this); 
-       this.outilsRight = new OutilsRight();
+       this.outilsRight = new OutilsRight(this, this.controleur);
        this.outilsTop = new OutilsTop(this, this.controleur);
        this.dessin = new DessinPane(this);
        

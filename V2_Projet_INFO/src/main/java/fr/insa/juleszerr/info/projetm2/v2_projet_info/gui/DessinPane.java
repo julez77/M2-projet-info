@@ -4,7 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -42,6 +43,12 @@ public class DessinPane extends Pane{
     
     public  void redrawAll() {
         
-        this.getChildren().addAll(this.main.getTreillis().dessine());       
+        this.getChildren().addAll(this.main.getTreillis().dessine());  
+        List<Figure> select = this.main.getControleur().getSelection();
+        if(! select.isEmpty()){
+            for (Figure f : select){
+                f.dessineSelection();
+            }
+        }
     }
 }

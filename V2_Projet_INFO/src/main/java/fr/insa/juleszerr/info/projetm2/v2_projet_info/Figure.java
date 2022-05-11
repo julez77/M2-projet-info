@@ -154,6 +154,8 @@ public abstract class Figure {
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
+
+    public abstract Group dessineSelection();
    
    
    

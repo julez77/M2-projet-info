@@ -86,6 +86,16 @@ public class AppuiGlissant extends NoeudAppui{
         
         return g;              
     }
+    
+     @Override
+    public Group dessineSelection() {
+        Ellipse res = new Ellipse(this.px, this.py, RAYON_IN_DRAW, RAYON_IN_DRAW);
+        //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
+        res.setStroke(NoeudSimple.COULEUR_SELECTION);
+        res.setFill(NoeudSimple.COULEUR_SELECTION);
+        Group g = new Group(res);
+        return g;
+    }
  
      @Override
     public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
@@ -118,5 +128,7 @@ public class AppuiGlissant extends NoeudAppui{
     public void setPoseSur(Barre poseSur) {
         this.poseSur = poseSur;
     }
+
+   
  
 }

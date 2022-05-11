@@ -13,9 +13,26 @@ import javafx.scene.Group;
  * @author corin
  */
 public class terrain3 extends Figure{
-    //j'avais mis en attribut 3 noeud et 3 barre plus constructeur qui creer le terrain a partir de trois noeuds en parametre et ensuite les barre
-private NoeudAppui[] noeuds;       
-private Barre[] barres ;       
+    private NoeudSimple noeud1;
+    private Barre barre1;
+    private NoeudSimple noeud2;
+    private Barre barre2;
+    private NoeudSimple noeud3;
+    private Barre barre3;
+    
+    private NoeudAppui[] noeuds;       
+    private Barre[] barres ; 
+
+public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
+    this.noeud1 = n1;
+    this.noeud2 = n2;
+    this.noeud3 = n3;
+    this.barre1 = new Barre(getNoeud1(), getNoeud2());
+    this.barre2 = new Barre(getNoeud2(), getNoeud2());
+    this.barre3 = new Barre(getNoeud1(), getNoeud3());
+    
+}
+
 public terrain3(){
    this.noeuds = new NoeudAppui[4] ;
    this.barres = new Barre[4] ;
@@ -145,6 +162,53 @@ public void addbarre(Barre b)throws Exception{
      */
     public void setBarres(Barre[] barres) {
         this.barres = barres;
+    }
+
+    /**
+     * @return the noeud1
+     */
+    public NoeudSimple getNoeud1() {
+        return noeud1;
+    }
+
+    /**
+     * @return the barre1
+     */
+    public Barre getBarre1() {
+        return barre1;
+    }
+
+    /**
+     * @return the noeud2
+     */
+    public NoeudSimple getNoeud2() {
+        return noeud2;
+    }
+
+    /**
+     * @return the barre2
+     */
+    public Barre getBarre2() {
+        return barre2;
+    }
+
+    /**
+     * @return the noeud3
+     */
+    public NoeudSimple getNoeud3() {
+        return noeud3;
+    }
+
+    /**
+     * @return the barre3
+     */
+    public Barre getBarre3() {
+        return barre3;
+    }
+
+    @Override
+    public Group dessineSelection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
     

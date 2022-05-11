@@ -8,6 +8,7 @@ import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 import java.util.ArrayList;
@@ -41,23 +42,40 @@ public class Controleur {
     
     public void changeEtat(Etat nouvelEtat){
         System.out.println("changerEtat()");
-        if (nouvelEtat == Etat.NOEUDSIMPLE){
+        if (nouvelEtat == Etat.SELECT){
+            this.getSelection().clear();
+            this.vue.redrawAll();
+        }
+        else if (nouvelEtat == Etat.NOEUDSIMPLE){
+            this.getSelection().clear();            
             this.vue.getOutilsRight().getbGrouper().setDisable(true);
+            this.vue.redrawAll();
             //this.vue.getOutilsRight().getbCouleur
-        }if (nouvelEtat == Etat.APPUIGLISSANT){
+        }else if (nouvelEtat == Etat.APPUIGLISSANT){
+            this.getSelection().clear();            
+            this.vue.getOutilsRight().getbGrouper().setDisable(true);
+            this.vue.redrawAll();
             
-        }if (nouvelEtat == Etat.APPUISIMPLE){
+        }else if (nouvelEtat == Etat.APPUISIMPLE){
+            this.getSelection().clear();            
+            this.vue.getOutilsRight().getbGrouper().setDisable(true);
+            this.vue.redrawAll();
             
-        }if (nouvelEtat == Etat.BARRE_N1){
-            System.out.println("nouvel etat barre n1");
-        }if (nouvelEtat == Etat.BARRE_N2){
-            System.out.println("nouvel etat barre n2");
+        }else if (nouvelEtat == Etat.BARRE_N1){
+            this.getSelection().clear();            
+            this.vue.getOutilsRight().getbGrouper().setDisable(true);
+            this.vue.redrawAll();
 
-        }if (nouvelEtat == Etat.TERRAIN_N1){
+        }else if (nouvelEtat == Etat.BARRE_N2){
+
+        }else if (nouvelEtat == Etat.TERRAIN_N1){
+            this.getSelection().clear();            
+            this.vue.getOutilsRight().getbGrouper().setDisable(true);
+            this.vue.redrawAll();
             
-        }if (nouvelEtat == Etat.TERRAIN_N2){
+        }else if (nouvelEtat == Etat.TERRAIN_N2){
             
-        }if (nouvelEtat == Etat.TERRAIN_N3){
+        }else if (nouvelEtat == Etat.TERRAIN_N3){
             
         }
         this.etat = nouvelEtat;
@@ -66,7 +84,26 @@ public class Controleur {
     
     public void clicDansDessin(MouseEvent t) {
 
-        if (this.etat == Etat.NOEUDSIMPLE) {
+        if (this.etat == Etat.SELECT) {
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
+            if (proche != null){
+                if(t.isShiftDown()){
+                    this.getSelection().add(proche);                                 
+                }else if (t.isControlDown()){
+                    if(this.getSelection().contains(proche)){
+                        this.getSelection().remove(proche);
+                    }else{
+                        this.getSelection().add(proche);                               
+                    }
+                }else{
+                    this.activeBoutonsSuivantSelection();
+                    this.getSelection().add(proche);
+                }
+                this.getSelection().clear();
+                this.vue.redrawAll();                
+            }
+        }else if(this.etat == Etat.NOEUDSIMPLE) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
@@ -141,5 +178,23 @@ public class Controleur {
     void boutonTerrain(ActionEvent t) {
         this.changeEtat(Etat.TERRAIN_N1);
     }
-    
+     private void activeBoutonsSuivantSelection() {
+        this.vue.getOutilsRight().getbGrouper().setDisable(true);
+        this.vue.getOutilsRight().getbSuppr().setDisable(true);
+        if (this.etat == Etat.SELECT) {
+            if (this.getSelection().size() > 0) {
+                this.vue.getOutilsRight().getbSuppr().setDisable(false);
+                if (this.getSelection().size() > 1) {
+                    this.vue.getOutilsRight().getbGrouper().setDisable(false);
+                }
+            }
+        }
+    }
+
+    /**
+     * @return the selection
+     */
+    public List<Figure> getSelection() {
+        return selection;
+    }
 }
