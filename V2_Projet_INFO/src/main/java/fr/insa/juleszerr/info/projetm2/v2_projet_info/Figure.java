@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 public abstract class Figure {
     private Treillis treillis ;
     private Terrain terrain ;
-    
+    private Color couleur ;
     public Figure (){
         this.treillis = null;
         this.terrain = null ;
@@ -139,6 +139,20 @@ public abstract class Figure {
      */
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
+    }
+
+    /**
+     * @return the couleur
+     */
+    public Color getCouleur() {
+        return couleur;
+    }
+
+    /**
+     * @param couleur the couleur to set
+     */
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
     }
    
    

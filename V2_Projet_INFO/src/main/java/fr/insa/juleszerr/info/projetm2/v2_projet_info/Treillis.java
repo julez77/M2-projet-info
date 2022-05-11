@@ -12,6 +12,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import javafx.scene.Group;
 
 /**
@@ -24,7 +25,7 @@ public class Treillis extends Figure {
     private List<Noeud> noeuds ;
     private List<Barre> barres;
     private List<Treillis> treillise ;
-    
+    private List<terrain3> terrain3;
     
   
     public Treillis(){
@@ -32,6 +33,7 @@ public class Treillis extends Figure {
         this.barres = new ArrayList() ;
         this.noeuds = new ArrayList() ;
         this.treillise = new ArrayList();
+        this.terrain3 = new ArrayList();
     }
     
     
@@ -174,15 +176,47 @@ public class Treillis extends Figure {
                this.barres.add((Barre) f);
                
                           
-            }else{
-                this.getTreillise().add((Treillis)f);
+            }else if ((f instanceof Treillis)== true ){
+                this.addTreillis(this);
+
+            } else{
+                this.addterrain3((terrain3)f);
             }
-            
-        //}
-
-        //}
-
     }
+    public void addTreillis(Treillis T){
+        this.elements.addAll(T.getElements());
+        this.barres.addAll(T.getBarres());
+        this.noeuds.addAll(T.getNoeuds());
+        this.treillise.addAll(T.getTreillise());
+        this.terrain3.addAll(T.getTerrain3());
+        this.elements.add(T);
+        this.treillise.add(T);
+    }
+    
+    
+    
+    
+          public void addterrain3(terrain3 t){
+             this.elements.add(t);
+              this.getTerrain3().add(t);
+              this.elements.add(t.getNoeuds()[1]);
+              this.elements.add(t.getNoeuds()[2]);
+              this.elements.add(t.getNoeuds()[0]);
+              this.elements.add(t.getBarres()[0]);
+              this.elements.add(t.getBarres()[1]);
+              this.elements.add(t.getBarres()[2]);
+              this.noeuds.add(t.getNoeuds()[1]);
+              this.noeuds.add(t.getNoeuds()[2]);
+              this.noeuds.add(t.getNoeuds()[0]);
+              this.barres.add(t.getBarres()[0]);
+              this.barres.add(t.getBarres()[1]);
+              this.barres.add(t.getBarres()[2]);
+          }
+        //}
+
+        //}
+
+    
     public void remove(Figure f) {                          // supprime une figure (barre, noeud, treillis)
         if (f.getTreillis() != this) {
             throw new Error("la figure n'est pas dans le groupe");
@@ -193,9 +227,12 @@ public class Treillis extends Figure {
                 this.getNoeuds().remove((Noeud) f);}
          else if ((f instanceof Barre)== true ){
                this.barres.remove((Barre) f);}
-         else  {
+         else  if ((f instanceof Treillis)== true ) {
              this.getTreillise().remove((Treillis)f);
-            }
+             
+            } else{
+             
+         }
         
         
     }
@@ -708,6 +745,20 @@ public void menuTexte() {
      */
     public void setTreillise(List<Treillis> treillise) {
         this.treillise = treillise;
+    }
+
+    /**
+     * @return the terrain3
+     */
+    public List<terrain3> getTerrain3() {
+        return terrain3;
+    }
+
+    /**
+     * @param terrain3 the terrain3 to set
+     */
+    public void setTerrain3(List<terrain3> terrain3) {
+        this.terrain3 = terrain3;
     }
     
 }

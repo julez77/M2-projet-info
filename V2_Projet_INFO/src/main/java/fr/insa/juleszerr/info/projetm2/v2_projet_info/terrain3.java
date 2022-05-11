@@ -28,22 +28,22 @@ public terrain3(){
 
 public void addbarre(Barre b)throws Exception{
   int  i=0;
-  while ((this.barres[i]!=null)&&(i<=2)){
+  while ((this.getBarres()[i]!=null)&&(i<=2)){
       i=i+1;
   }
     if(i<3){
-  this.barres[i]=b; } else{throw new Exception("il y a deja 3 barres dans  le terrain");
+        this.getBarres()[i]=b; } else{throw new Exception("il y a deja 3 barres dans  le terrain");
   }
        
 }
            
  public void addappui(NoeudAppui b) throws Exception{
   int  i=0;
-  while ((this.noeuds[i]!=null)&&(i<=2)){
+  while ((this.getNoeuds()[i]!=null)&&(i<=2)){
       i=i+1;
   }
   if(i<3){
-      this.noeuds[i]=b;  
+      this.getNoeuds()[i]=b;  
   }else{
       throw new Exception("il y a deja 3 appui dans  le terrain");
   }
@@ -54,16 +54,16 @@ public void addbarre(Barre b)throws Exception{
      int i;
      boolean p = true;
     for (i=0 ; i<= 2;i++) {
-       if(this.noeuds[i]==null){
+       if(  this.getNoeuds()[i]==null){
            p=false;
        } 
     }    
    if(p ==false){
        throw new Exception("pas assez d'appui dans le terrain");
    } else{
-       Barre b12 = new Barre(this.noeuds[1],this.noeuds[2]);
-       Barre b10 = new Barre(this.noeuds[1],this.noeuds[0]);
-       Barre b02 = new Barre(this.noeuds[0],this.noeuds[2]);
+       Barre b12 = new Barre(this.getNoeuds()[1],this.getNoeuds()[2]);
+       Barre b10 = new Barre(this.getNoeuds()[1],this.getNoeuds()[0]);
+       Barre b02 = new Barre(this.getNoeuds()[0],this.getNoeuds()[2]);
        this.addbarre(b02);
        this.addbarre(b10);
        this.addbarre(b12);
@@ -117,6 +117,34 @@ public void addbarre(Barre b)throws Exception{
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * @return the noeuds
+     */
+    public NoeudAppui[] getNoeuds() {
+        return noeuds;
+    }
+
+    /**
+     * @param noeuds the noeuds to set
+     */
+    public void setNoeuds(NoeudAppui[] noeuds) {
+        this.noeuds = noeuds;
+    }
+
+    /**
+     * @return the barres
+     */
+    public Barre[] getBarres() {
+        return barres;
+    }
+
+    /**
+     * @param barres the barres to set
+     */
+    public void setBarres(Barre[] barres) {
+        this.barres = barres;
     }
 }
     
