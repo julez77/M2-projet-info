@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.gui.Controleur.Etat;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -35,12 +36,12 @@ public class MainPane extends BorderPane {
        this.setBottom(this.outilsRight);
        this.setTop(this.outilsTop);
        this.setCenter(this.dessin);
-       this.controleur.changeEtat(Controleur.Etat.NOEUDSIMPLE);
+       this.controleur.changeEtat(Etat.NOEUDSIMPLE);
        
     }
     
     public void redrawAll(){
-        this.getDessin().redrawAll();
+        this.dessin.redrawAll();
     }
     
      public Treillis getTreillis() {

@@ -33,27 +33,28 @@ public class Controleur {
         this.vue = vue;
     }
     
-    public void changeEtat(Etat nouveiEtat){
+    public void changeEtat(Etat nouvelEtat){
         System.out.println("changerEtat()");
-        if (nouveiEtat == Etat.NOEUDSIMPLE){
+        if (nouvelEtat == Etat.NOEUDSIMPLE){
             this.vue.getOutilsRight().getbGrouper().setDisable(true);
             //this.vue.getOutilsRight().getbCouleur
-        }if (nouveiEtat == Etat.APPUIGLISSANT){
+        }if (nouvelEtat == Etat.APPUIGLISSANT){
             
-        }if (nouveiEtat == Etat.APPUISIMPLE){
+        }if (nouvelEtat == Etat.APPUISIMPLE){
             
-        }if (nouveiEtat == Etat.BARRE_N1){
+        }if (nouvelEtat == Etat.BARRE_N1){
+            System.out.println("nouvel etat barre n1");
+        }if (nouvelEtat == Etat.BARRE_N2){
+            System.out.println("nouvel etat barre n2");
+
+        }if (nouvelEtat == Etat.TERRAIN_N1){
             
-        }if (nouveiEtat == Etat.BARRE_N2){
+        }if (nouvelEtat == Etat.TERRAIN_N2){
             
-        }if (nouveiEtat == Etat.TERRAIN_N1){
-            
-        }if (nouveiEtat == Etat.TERRAIN_N2){
-            
-        }if (nouveiEtat == Etat.TERRAIN_N3){
+        }if (nouvelEtat == Etat.TERRAIN_N3){
             
         }
-        this.etat = nouveiEtat;
+        this.etat = nouvelEtat;
         
     }
     
@@ -65,6 +66,7 @@ public class Controleur {
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new NoeudSimple(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
+           
             this.vue.redrawAll();
         }if (this.etat == Etat.APPUISIMPLE) {
             double px = t.getX();
@@ -80,17 +82,28 @@ public class Controleur {
             treillis.add(new AppuiGlissant(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
-        }if (this.etat == Etat.BARRE_N1) {
-            this.pos1[0]=t.getX();
-            this.pos1[1]=t.getY();
-            this.changeEtat(Etat.BARRE_N2);           
         }if (this.etat == Etat.BARRE_N2) {
+             System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
+            
             double px = t.getX();
             double py = t.getY();
-            this.vue.getTreillis().add(
-            new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1])));
+            Treillis treillis =this.vue.getTreillis();
+            System.out.println("coordonnees du noeud etat barre n1: px ="+ pos1[0]+" , py = "+pos1[1]);
+            System.out.println("coordonnees du noeud etat barre n2: px ="+ px+" , py = "+py);            
+            Barre b2 = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1]));
+            this.vue.getTreillis().add(b2);
+            System.out.println("Ajout d'une barre au treillis");
+            Barre b =new Barre(new NoeudSimple(0, 0), new NoeudSimple(100, 100));
+            treillis.add(b);
             this.vue.redrawAll();
             this.changeEtat(Etat.BARRE_N1);
+            
+                     
+        }if (this.etat == Etat.BARRE_N1) {
+             this.pos1[0]=t.getX();
+            this.pos1[1]=t.getY();
+            this.changeEtat(Etat.BARRE_N2); 
+         
         }if (this.etat == Etat.TERRAIN_N1) {
             
         }if (this.etat == Etat.TERRAIN_N2) {

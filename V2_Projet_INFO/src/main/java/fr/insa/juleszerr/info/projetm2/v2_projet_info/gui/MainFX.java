@@ -4,8 +4,22 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 ;import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,8 +32,9 @@ public class MainFX extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception{
       Treillis test;
-        test = Treillis.treillisTest();
+        test =  new Treillis();
             System.out.println("taille " + test.getElements().size());
+        
         MainPane main = new MainPane(test);
         Scene s = new Scene(main);
         primaryStage.setScene(s);

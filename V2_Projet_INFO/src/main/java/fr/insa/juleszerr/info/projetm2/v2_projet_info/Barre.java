@@ -6,13 +6,12 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import java.awt.Point;
 import static java.lang.Math.sqrt;
-import java.util.List;
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 import java.io.IOException;
 import java.io.Writer;
+import javafx.scene.paint.Color;
 /**
  *
  * @author IEUser
@@ -210,13 +209,26 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     }
     
     @Override
-    public Group dessine() {
+        public Group dessine() {
+        Line res1 = new Line();
          Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
         res.setStroke(RED);
         res.setFill(RED);
         Group g = new Group( res);
+        System.out.println("");
+       return g;
         
+    }
+    
+    public Group dessine(Color color) {
+        Line res1 = new Line();
+         Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(color);
+        res.setFill(color);
+        Group g = new Group( res);
+        System.out.println("");
        return g;
         
     }

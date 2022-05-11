@@ -28,11 +28,7 @@ public class DessinPane extends Pane{
         clip.widthProperty().bind(this.widthProperty());
         
         this.setClip(clip);
-        this.clip.setOnMouseClicked((t) -> {
-            Controleur control = this.main.getControleur();
-            System.out.println("px1 = "+ t.getX() +"; py1 = "+ t.getY());
-            control.clicDansDessin(t);
-        });
+
         this.setOnMouseClicked((t)->{
           System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
           this.main.getControleur().clicDansDessin(t);
