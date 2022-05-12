@@ -7,6 +7,7 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -20,10 +21,12 @@ public class terrain3 extends Figure{
     private NoeudSimple noeud3;
     private Barre barre3;
     private Treillis treillis ;
+    private Color color;
     private Noeud[] noeuds;       
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
+    this.color= Color.CRIMSON;
    this.noeuds = new Noeud[4] ;
    this.barres = new Barre[4] ;
    this.noeud1 = n1;
@@ -33,9 +36,9 @@ public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
     this.noeuds[1]= n2;
      this.noeuds[2]=n3;       
     this.treillis = null ;
-    this.barre1 = new Barre(getNoeud1(), getNoeud2());
-    this.barre2 = new Barre(getNoeud2(), getNoeud3());
-    this.barre3 = new Barre(getNoeud1(), getNoeud3());
+    this.barre1 = new Barre(getNoeud1(), getNoeud2(), this.getColor());
+    this.barre2 = new Barre(getNoeud2(), getNoeud3(),this.getColor());
+    this.barre3 = new Barre(getNoeud1(), getNoeud3(),this.getColor());
     this.barres[0] = barre1;
     this.barres[1]= barre2;
     this.barres[2]= barre3 ;
@@ -300,6 +303,20 @@ public void poserAppuiGlissant(Barre b, double distance){
      */
     public void setTreillis(Treillis treillis) {
         this.treillis = treillis;
+    }
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
     }
      
     

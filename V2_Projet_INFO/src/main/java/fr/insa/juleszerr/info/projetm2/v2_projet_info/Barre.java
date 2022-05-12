@@ -23,6 +23,7 @@ public  class Barre extends Figure  {
     }
     private Noeud noeud1 ;
     private Noeud noeud2 ;
+    private Color color;
     
 private double prix ;
 private double effort ;
@@ -72,6 +73,19 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     }
     
     public Barre ( Noeud noeud1 , Noeud noeud2 ){
+        this.color = Color.BLUEVIOLET;
+        this.noeud1 = noeud1;
+        this.noeud2 = noeud2;
+        this.id = 0;
+        this.effort= 0;
+        this.id=0;
+        this.prix = 0;
+        
+        noeud2.getBarrefin().add(this);
+        noeud1.getBarredebut().add(this);
+    }
+     public Barre ( Noeud noeud1 , Noeud noeud2, Color color ){
+        this.color = color;
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.id = 0;
@@ -213,26 +227,15 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         Line res1 = new Line();
          Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
-        res.setStroke(RED);
-        res.setFill(RED);
+        res.setStroke(this.getColor());
+        res.setFill(this.getColor());
         
         Group g = new Group( res);
         g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
         return g;
         
     }
-    
-    public Group dessine(Color color) {
-        Line res1 = new Line();
-         Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
-                this.getNoeud2().getPx(), this.getNoeud2().getPy());
-        res.setStroke(color);
-        res.setFill(color);
-        Group g = new Group( res);
-        System.out.println("");
-       return g;
-        
-    }
+
     
         @Override
     public Group dessineSelection() {
@@ -242,7 +245,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         res.setStroke(NoeudSimple.COULEUR_SELECTION);
         res.setFill(NoeudSimple.COULEUR_SELECTION);
         Group g = new Group( res);
-        System.out.println("");
+        System.out.println("dess s");
        return g;
     }
 
@@ -271,6 +274,20 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     public void setEffort(double effort) {
         this.effort = effort;
+    }
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
     }
 
 

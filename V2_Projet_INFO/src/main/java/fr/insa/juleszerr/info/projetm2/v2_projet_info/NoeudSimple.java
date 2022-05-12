@@ -16,7 +16,7 @@ import javafx.scene.shape.Ellipse;
  * @author IEUser
  */
 public class NoeudSimple extends Noeud {
-    public static Color COULEUR_SELECTION; 
+    public static Color COULEUR_SELECTION =Color.DEEPPINK; 
     public static  double  RAYON_IN_DRAW = 3;
      public NoeudSimple (double px , double py ){
         super(px,py);  

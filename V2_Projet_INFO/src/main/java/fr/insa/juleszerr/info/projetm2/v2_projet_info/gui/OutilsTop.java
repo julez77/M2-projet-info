@@ -9,9 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 /**
@@ -22,8 +22,10 @@ public class OutilsTop extends HBox {
     private RadioButton bNoeudSimple;
     private RadioButton bAppuiSimple;
     private RadioButton bAppuiGlissant;
-    private RadioButton bBarre;
     private RadioButton bTerrain;
+    
+    private RadioButton bBarreDepuisNoeud;
+    private RadioButton bBarreLibre;
     
     private DessinPane dessin;
     private MainPane main;
@@ -35,15 +37,24 @@ public OutilsTop(MainPane main, Controleur controleur) {
     this.controleur = controleur;
         
         this.toolBar = new ToolBar();
+        this.bBarreDepuisNoeud = new RadioButton("A partir de noeud");
+        this.bBarreLibre =new RadioButton("Libre");
+       
         
         this.bNoeudSimple = new RadioButton("Noeud Simple");
         this.bAppuiSimple = new RadioButton("Appui Simple");
-        this.bBarre = new RadioButton("Barre");
         this.bAppuiGlissant = new RadioButton("Appui Glissant");
         this.bTerrain =new RadioButton("Terrain");
         
-        Label label = new Label("Créer :");
-        toolBar.getItems().addAll(label, bNoeudSimple, bAppuiSimple, bBarre,bAppuiGlissant, bTerrain);
+        Separator s1 = new Separator(Orientation.VERTICAL);
+        Separator s2 = new Separator(Orientation.VERTICAL);
+        Separator s3 = new Separator(Orientation.VERTICAL);
+        
+        Label lCrerr = new Label("Nouveau:");
+        Label lNouvelleBarre = new Label("Nouvelle Barre :");
+        
+        toolBar.getItems().addAll(lCrerr, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
+                bTerrain,s1,lNouvelleBarre,bBarreDepuisNoeud,bBarreLibre);
         toolBar.setOrientation(Orientation.HORIZONTAL);
         toolBar.setStyle("-fx-background-color: #8dbdf0; ");
         
@@ -57,15 +68,22 @@ public OutilsTop(MainPane main, Controleur controleur) {
         
         ToggleGroup gBoutons = new ToggleGroup();
         
-        this.bBarre.setToggleGroup(gBoutons);
+        
         this.bNoeudSimple.setToggleGroup(gBoutons);
         this.bAppuiSimple.setToggleGroup(gBoutons);
         this.bAppuiGlissant.setToggleGroup(gBoutons);
         this.bTerrain.setToggleGroup(gBoutons);
+        this.bBarreDepuisNoeud.setToggleGroup(gBoutons);
+        this.bBarreLibre.setToggleGroup(gBoutons);
         
-        this.bBarre.setOnAction((ActionEvent t) -> {
+        this.bBarreLibre.setOnAction((ActionEvent t) -> {
               System.out.println("Barre select");
-            this.controleur.boutonBarre(t);
+            this.controleur.boutonBarreLibre(t);
+        });
+        
+        this.bBarreDepuisNoeud.setOnAction((ActionEvent t) -> {
+              System.out.println("Barre select");
+            this.controleur.boutonBarreDepuisNoeud(t);
         });
          
         this.bAppuiSimple.setOnAction((ActionEvent t) -> {
@@ -93,13 +111,13 @@ public OutilsTop(MainPane main, Controleur controleur) {
              
         });
         
-        
+
         
         
         
         
         this.getChildren().addAll(this.bAppuiSimple,this.bAppuiGlissant,this.bNoeudSimple,
-                this.bTerrain,this.bBarre, this.toolBar);
+                this.bTerrain, this.toolBar, this.bBarreDepuisNoeud,this.bBarreLibre);
         //FxUtils.setSimpleBorder(this, Color.CYAN, 2);
         
     }
@@ -125,12 +143,7 @@ public OutilsTop(MainPane main, Controleur controleur) {
         return bAppuiGlissant;
     }
 
-    /**
-     * @return the bBarre
-     */
-    public RadioButton getbBarre() {
-        return bBarre;
-    }
+
 
     /**
      * @return the bTerrain

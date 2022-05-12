@@ -30,9 +30,11 @@ public class Controleur {
     
     private List<Figure> selection;
 
+    
+
    
     public enum Etat {DEBUT, SELECT , NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
-    BARRE_N1, BARRE_N2,
+    BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD,
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3}
 
     
@@ -44,34 +46,30 @@ public class Controleur {
     public void changeEtat(Etat nouvelEtat){
         System.out.println("changerEtat()");
         if (nouvelEtat == Etat.SELECT){
+            System.out.println("etat selection");
             this.getSelection().clear();
             this.vue.redrawAll();
         }
         else if (nouvelEtat == Etat.NOEUDSIMPLE){
             this.getSelection().clear();            
-            this.vue.getOutilsRight().getbGrouper().setDisable(true);
             this.vue.redrawAll();
             //this.vue.getOutilsRight().getbCouleur
         }else if (nouvelEtat == Etat.APPUIGLISSANT){
             this.getSelection().clear();            
-            this.vue.getOutilsRight().getbGrouper().setDisable(true);
             this.vue.redrawAll();
             
         }else if (nouvelEtat == Etat.APPUISIMPLE){
             this.getSelection().clear();            
-            this.vue.getOutilsRight().getbGrouper().setDisable(true);
             this.vue.redrawAll();
             
-        }else if (nouvelEtat == Etat.BARRE_N1){
+        }else if (nouvelEtat == Etat.BARRE_N1_LIBRE){
             this.getSelection().clear();            
-            this.vue.getOutilsRight().getbGrouper().setDisable(true);
             this.vue.redrawAll();
 
-        }else if (nouvelEtat == Etat.BARRE_N2){
+        }else if (nouvelEtat == Etat.BARRE_N2_LIBRE){
 
         }else if (nouvelEtat == Etat.TERRAIN_N1){
             this.getSelection().clear();            
-            this.vue.getOutilsRight().getbGrouper().setDisable(true);
             this.vue.redrawAll();
             
         }else if (nouvelEtat == Etat.TERRAIN_N2){
@@ -79,32 +77,34 @@ public class Controleur {
         }else if (nouvelEtat == Etat.TERRAIN_N3){
             
         }
-        this.etat = nouvelEtat;
+        this.setEtat(nouvelEtat);
         
     }
     
     public void clicDansDessin(MouseEvent t) {
 
-        if (this.etat == Etat.SELECT) {
+        if (this.getEtat() == Etat.SELECT) {
+            System.out.println("etat selection");
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
-            if (proche != null){
-                if(t.isShiftDown()){
-                    this.getSelection().add(proche);                                 
-                }else if (t.isControlDown()){
-                    if(this.getSelection().contains(proche)){
-                        this.getSelection().remove(proche);
-                    }else{
-                        this.getSelection().add(proche);                               
+            if (proche != null) {
+                if (t.isShiftDown()) {
+                    this.selection.add(proche);
+                } else if (t.isControlDown()) {
+                    if (this.selection.contains(proche)) {
+                        this.selection.remove(proche);
+                    } else {
+                        this.selection.add(proche);
                     }
-                }else{
-                    this.activeBoutonsSuivantSelection();
-                    this.getSelection().add(proche);
+                } else {
+                    this.selection.clear();
+                    this.selection.add(proche);
                 }
-                this.getSelection().clear();
-                this.vue.redrawAll();                
+                this.activeBoutonsSuivantSelection();
+                System.out.println("selection"+this.selection.toString());
+                this.vue.redrawAll();
             }
-        }else if(this.etat == Etat.NOEUDSIMPLE) {
+        }else if(this.getEtat() == Etat.NOEUDSIMPLE) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
@@ -112,28 +112,28 @@ public class Controleur {
             System.out.println("px = "+ px +"; py = "+ py);
            
             this.vue.redrawAll();
-        }else if (this.etat == Etat.APPUISIMPLE) {
+        }else if (this.getEtat() == Etat.APPUISIMPLE) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiSimple(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
-        }else if (this.etat == Etat.APPUIGLISSANT) {
+        }else if (this.getEtat() == Etat.APPUIGLISSANT) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiGlissant(px , py));
             System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
-        }else if (this.etat == Etat.BARRE_N1) {
+        }else if (this.getEtat() == Etat.BARRE_N1_LIBRE) {
             this.pos1[0]=t.getX();
             this.pos1[1]=t.getY();
-            this.changeEtat(Etat.BARRE_N2); 
+            this.changeEtat(Etat.BARRE_N2_LIBRE); 
              
             
                      
-        }else if (this.etat == Etat.BARRE_N2) {
+        }else if (this.getEtat() == Etat.BARRE_N2_LIBRE) {
             System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
             
             double px = t.getX();
@@ -146,18 +146,18 @@ public class Controleur {
             System.out.println("Ajout d'une barre au treillis");
             treillis.add(b);
             this.vue.redrawAll();
-            this.changeEtat(Etat.BARRE_N1);
+            this.changeEtat(Etat.BARRE_N1_LIBRE);
              
          
-        }else if (this.etat == Etat.TERRAIN_N1) {
+        }else if (this.getEtat() == Etat.TERRAIN_N1) {
             this.pos1[0]=t.getX();
             this.pos1[1]=t.getY();
             this.changeEtat(Etat.TERRAIN_N2); 
-        }else if (this.etat == Etat.TERRAIN_N2) {
+        }else if (this.getEtat() == Etat.TERRAIN_N2) {
             this.pos2[0]=t.getX();
             this.pos2[1]=t.getY();
             this.changeEtat(Etat.TERRAIN_N3); 
-        }else if (this.etat == Etat.TERRAIN_N3) {
+        }else if (this.getEtat() == Etat.TERRAIN_N3) {
            double px = t.getX();
            double py = t.getY();
            Treillis treillis =this.vue.getTreillis(); 
@@ -171,9 +171,6 @@ public class Controleur {
     }
 
    
-     void boutonBarre(ActionEvent t) {
-        this.changeEtat(Etat.BARRE_N1);
-    }
 
     void boutonAppuiSimple(ActionEvent t) {
         this.changeEtat(Etat.APPUISIMPLE);
@@ -190,14 +187,26 @@ public class Controleur {
     void boutonTerrain(ActionEvent t) {
         this.changeEtat(Etat.TERRAIN_N1);
     }
+    
+        void boutonSelect(ActionEvent t) {
+        this.changeEtat(Etat.SELECT);
+        }
+        
+    void boutonBarreLibre(ActionEvent t) {
+        this.changeEtat(Etat.BARRE_N1_LIBRE);
+    }
+
+    void boutonBarreDepuisNoeud(ActionEvent t) {
+        this.changeEtat(Etat.BARRE_N1_NOEUD);
+    }
      private void activeBoutonsSuivantSelection() {
-        this.vue.getOutilsRight().getbGrouper().setDisable(true);
+        
         this.vue.getOutilsRight().getbSuppr().setDisable(true);
-        if (this.etat == Etat.SELECT) {
+        if (this.getEtat() == Etat.SELECT) {
             if (this.getSelection().size() > 0) {
                 this.vue.getOutilsRight().getbSuppr().setDisable(false);
                 if (this.getSelection().size() > 1) {
-                    this.vue.getOutilsRight().getbGrouper().setDisable(false);
+                    //this.vue.getOutilsRight().getbGrouper().setDisable(false);
                 }
             }
         }
@@ -208,5 +217,19 @@ public class Controleur {
      */
     public List<Figure> getSelection() {
         return selection;
+    }
+
+    /**
+     * @return the etat
+     */
+    public Etat getEtat() {
+        return etat;
+    }
+
+    /**
+     * @param etat the etat to set
+     */
+    public void setEtat(Etat etat) {
+        this.etat = etat;
     }
 }

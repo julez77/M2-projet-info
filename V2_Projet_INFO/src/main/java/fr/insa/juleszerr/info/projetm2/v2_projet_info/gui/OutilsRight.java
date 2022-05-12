@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleGroup;
@@ -20,7 +21,6 @@ public class OutilsRight extends HBox {
     private Button zoomOut;
     private Button bSelect;
     private Button bSuppr;
-    private Button bGrouper;
     private Button bAffiche;
     private DessinPane dessin;
     private MainPane main;
@@ -34,9 +34,16 @@ public class OutilsRight extends HBox {
         this.zoomIn = new Button("Zoom *2");
         this.zoomOut = new Button("Zoom /2");
         this.bAffiche = new Button("Affiche");
-        this.bGrouper = new Button("Gouper");
         this.bSelect = new Button("Selection");
         this.bSuppr = new Button("Supprimer");
+        
+        this.bSelect.setOnAction((ActionEvent t) -> {
+            System.out.println("Select select");
+            this.controleur.boutonSelect(t); 
+             
+        });
+        
+        
        /* 
         ToggleGroup gBouton = new ToggleGroup();
         this.couleur = new ColorPicker(Color.BLACK);
@@ -45,7 +52,7 @@ public class OutilsRight extends HBox {
         this.bSuppr = new Button("Supprimer");
         */
         
-        this.getChildren().addAll(this.couleur, this.bAffiche,this.bGrouper,
+        this.getChildren().addAll(this.couleur, this.bAffiche,
                 this.bSelect,this.bSuppr);
       
        
@@ -86,12 +93,7 @@ public class OutilsRight extends HBox {
         return bSuppr;
     }
 
-    /**
-     * @return the bGrouper
-     */
-    public Button getbGrouper() {
-        return bGrouper;
-    }
+    
 
     /**
      * @return the bAffiche

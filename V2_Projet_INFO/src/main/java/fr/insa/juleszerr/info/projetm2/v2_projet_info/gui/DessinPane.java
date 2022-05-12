@@ -5,6 +5,7 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.gui.Controleur.Etat;
 import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -46,9 +47,32 @@ public class DessinPane extends Pane{
         this.getChildren().addAll(this.main.getTreillis().dessine());  
         List<Figure> select = this.main.getControleur().getSelection();
         if(! select.isEmpty()){
-            for (Figure f : select){
-                f.dessineSelection();
+        if (this.main.getControleur().getEtat() == Etat.SELECT) {
+            System.out.println("dessineSelectioin");
+                 for (Figure f : select){
+                this.getChildren().addAll(f.dessineSelection());
             }
+            
+        }else if(this.main.getControleur().getEtat() == Etat.NOEUDSIMPLE) {
+            
+        }else if (this.main.getControleur().getEtat() == Etat.APPUISIMPLE) {
+                   
+        }else if (this.main.getControleur().getEtat() == Etat.APPUIGLISSANT) {
+                    
+        }else if (this.main.getControleur().getEtat() == Etat.BARRE_N1_LIBRE) {
+            
+                     
+        }else if (this.main.getControleur().getEtat() == Etat.BARRE_N2_LIBRE) {
+           
+         
+        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N1) {
+            
+        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N2) {
+            
+        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N3) {
+}
+            
+           
         }
     }
 }
