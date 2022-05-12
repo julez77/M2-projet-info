@@ -19,7 +19,7 @@ public class terrain3 extends Figure{
     private Barre barre2;
     private NoeudSimple noeud3;
     private Barre barre3;
-    
+    private Treillis treillis ;
     private Noeud[] noeuds;       
     private Barre[] barres ; 
 
@@ -32,7 +32,7 @@ public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
     this.noeuds[0]=n1;
     this.noeuds[1]= n2;
      this.noeuds[2]=n3;       
-    
+    this.treillis = null ;
     this.barre1 = new Barre(getNoeud1(), getNoeud2());
     this.barre2 = new Barre(getNoeud2(), getNoeud2());
     this.barre3 = new Barre(getNoeud1(), getNoeud3());
@@ -258,6 +258,65 @@ public Barre barreplusproche(Noeud p, double Distmax){
     public Group dessineSelection() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    
+    
+    
+    
+   public void poserAppuiSimple(Barre b, double distance){
+        
+       
+       
+        double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
+        double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
+        double D = b.longueurBarre() ;
+        AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
+        this.treillis.add(noeud);
+       
+    }
+public void poserAppuiGlissant(Barre b, double distance){
+        
+        double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
+        double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
+        double D = b.longueurBarre() ;
+        AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
+        this.treillis.add(noeud) ;
+        
+        noeud.setPoseSur(b) ;
+    }
+    /**
+     * @return the treillis
+     */
+    public Treillis getTreillis() {
+        return treillis;
+    }
+
+    /**
+     * @param treillis the treillis to set
+     */
+    public void setTreillis(Treillis treillis) {
+        this.treillis = treillis;
+    }
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
     
     
