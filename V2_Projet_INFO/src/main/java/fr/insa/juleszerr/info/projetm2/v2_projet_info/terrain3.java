@@ -137,7 +137,11 @@ public void addbarre(Barre b)throws Exception{
 
     @Override
     public Group dessine() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         Group g = new Group();
+       
+        g.getChildren().addAll(this.getBarre1().dessine(),this.getBarre2().dessine(),this.getBarre3().dessine());
+        g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine(),this.getNoeud3().dessine());      
+        return g;
     }
 
     @Override
