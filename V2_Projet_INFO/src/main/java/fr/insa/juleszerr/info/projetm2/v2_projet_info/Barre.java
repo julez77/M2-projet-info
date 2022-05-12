@@ -262,6 +262,40 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         }
     }
 
+    public Barre barrepara(Barre b , double decalage){
+        // pour le  noeud1
+    double    L = Math.sqrt((b.noeud1.px-b.noeud2.getPx())*((b.noeud1.px-b.noeud2.getPx())+(b.noeud1.py-b.noeud2.getPy()))*(b.noeud1.py-b.noeud2.getPy()));
+        double n1px = b.noeud1.px + decalage *((b.noeud1.py-b.noeud2.getPy())/L);
+        double n2px =b.noeud2.px + decalage *((b.noeud1.py-b.noeud2.getPy())/L);
+        double n1py =b.noeud1.py + decalage * ((b.noeud1.px-b.noeud2.getPx()) /L);
+        double n2py = b.noeud2.py + decalage * ((b.noeud1.px-b.noeud2.getPx())/L);
+        if (b.noeud1.getClass()==NoeudSimple.class){
+           NoeudSimple n1 = new NoeudSimple(n1px,n1py);
+            NoeudSimple n2 =       new NoeudSimple(n2px,n2py);
+            Barre B = new Barre(n1,n2);
+        return B ;
+    
+        } else if (b.noeud1.getClass()==AppuiSimple.class){
+            AppuiSimple n1 =new AppuiSimple(n1px,n1py);
+            AppuiSimple n2 =new AppuiSimple(n2px,n2py);
+            Barre B = new Barre(n1,n2);
+        return B ;
+    
+        } else{
+            AppuiGlissant n1 =new AppuiGlissant(n1px,n1py);
+            AppuiGlissant n2 =new AppuiGlissant(n2px,n2py);
+            Barre B = new Barre(n1,n2);
+        return B ;
+    }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     /**
      * @return the effort
      */
