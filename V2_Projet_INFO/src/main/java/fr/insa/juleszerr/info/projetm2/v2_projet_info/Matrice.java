@@ -6,6 +6,9 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 
 import fr.insa.juleszerr.info.projetm2.Lire;
+import static java.lang.Math.abs;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 /**
  *
  * @author IEUser
@@ -15,6 +18,7 @@ public class Matrice {
     private int NbrLigne ;
     private double[][] coeff ;
     
+
 public Matrice(int NbrLigne, int NbrColonne, double[][]coeff){
     this.NbrColonne = NbrColonne ;
     this.NbrLigne = NbrLigne ;
@@ -23,6 +27,23 @@ public Matrice(int NbrLigne, int NbrColonne, double[][]coeff){
         
     
 }
+
+@Override 
+public String toString(){
+   String res = "Matrice : \n" ;
+   
+   for (int i =0 ; i<this.NbrLigne ; i++){
+       res = res + "\n" ;
+      
+       for (int j=0 ; j<this.NbrColonne ; j++){
+        res = res + this.getCoeff(i, j)+ "   " ;
+    }
+   
+   }
+   return res ;
+}
+
+
 
 //public String toString(){
     
@@ -69,8 +90,6 @@ public boolean Inversible(){
 }
 
 
-
-
 //méthode qui permute deux lignes de la matrice
 
 public void permutation(int lignePivot, int lignePermut){
@@ -103,6 +122,7 @@ public int recherchePivot(int lignePivot){
 
 //méthode qui effectue la descente de Gauss
 public void DescenteGauss(){
+    
     for(int i=0 ; i<NbrLigne ; i++) {
         
         if(this.coeff[i][i]==0){
@@ -112,10 +132,14 @@ public void DescenteGauss(){
         
         for(int j=i+1 ; j<NbrLigne ; j++){
                 if (this.Inversible()==false){
-                    throw new Error("La matrice n'est pas inversible");
-                }
-                else {
+                   throw new Error("La matrice n'est pas inversible");
+               }
+               else {
                 transvection(i, j);
+               
+                this.Equilibrage();
+                
+                System.out.println(this);
             
                 }
         }
@@ -124,13 +148,22 @@ public void DescenteGauss(){
 
 public void RemonteeGauss(){
     for(int i=NbrLigne-1 ; i>=1 ; i=i-1){
+        
         for(int j=i-1 ; j>=0 ; j=j-1){
-            if (this.Inversible()==false){
-                   throw new Error("La matrice n'est pas inversible");
+           if (this.Inversible()==false){
+                  throw new Error("La matrice n'est pas inversible");
                 }
-           else{
+          else{
                 transvection(i, j) ;
+                
            }
+           
+          this.Equilibrage();
+          
+          
+          System.out.println(this);
+          
+          System.out.println();
             }
         }
     }
@@ -165,31 +198,90 @@ public double[] resolution(){
     this.DescenteGauss();
     this.RemonteeGauss();
     
-    for(int i=0 ; i<NbrLigne ;i++){
-        System.out.println() ;
-        for(int j=0 ; j<NbrColonne; j++){
-            System.out.print("  "+this.getCoeff(i, j));
-        }
-    } 
-    
     double[]TabSol = new double[NbrLigne] ;
+        
     for(int i=0 ; i<NbrLigne ; i++){
+        
         double a = this.coeff[i][i] ;
+        
         for(int j=i ; j<NbrColonne ; j++){
+            
             double b = this.coeff[i][j] ;
             this.setCoeff(i, j, b/a);
             TabSol[i]= this.getCoeff(i, j);
         }
     }
     
+    System.out.println(this);
+    
+    for(int t=0 ; t<NbrLigne ; t++){
+        TabSol[t]= Matrice.ArrondirDouble(TabSol[t]);
+    }
    
-   return TabSol ; 
+    return TabSol ; 
        
 }
 
-  
+public static double ArrondirDouble(double db1){
+
+    BigDecimal bd = new BigDecimal(db1).setScale(3, RoundingMode.HALF_UP);
+    double db2 = bd.doubleValue() ;
+    return db2 ;
+}
+
+
+
+public void ArrondirMatrice(){
+    for (int i=0 ; i<NbrLigne ; i++){
+        for (int j=0 ; j<NbrColonne ; j++){
+            this.coeff[i][j] = Matrice.ArrondirDouble(this.coeff[i][j]);
+        }
+    }
+}
+
+public Matrice MultiplierMatrice(int facteur){
+    
+    for (int i=0 ; i<NbrLigne ; i++){
+        for (int j=0 ; j<NbrColonne ; j++){
+            this.coeff[i][j] = facteur*(this.coeff[i][j]);
+        }
+    }
+    return this ;
+}
+
+public boolean MultiplierLigne1(int ligne){
+    boolean multiplier = false ;
+    int j=0 ;
+    while ((multiplier == false) && (j<NbrLigne)){
+        if ((abs(this.coeff[ligne][j]))>10){
+            multiplier = true ;
+        }
+        
+        j=j+1 ;
+        
+    }
+    
+    return multiplier ;
+}
+
+public void MultiplierLigne2(int ligne){
+    for (int j=0 ; j<NbrColonne ; j++){
+        double t=0.1*(this.coeff[ligne][j]);
+        this.setCoeff(ligne, j, t);
+    }
+}
+
+public void Equilibrage(){
+    for(int i=0 ; i<NbrLigne ; i++){
+        if ((this.MultiplierLigne1(i))==true){
+            this.MultiplierLigne2(i);
+        }
+    }
+}
+
 
 public static void main(String[] args){
+    
     
     System.out.println("nb lignes");
         int n = Lire.i() ;
@@ -205,34 +297,16 @@ public static void main(String[] args){
         }
         
         Matrice M = new Matrice(n, p, T) ;
-       
+        Matrice P = new Matrice(n, p, T) ;
         
-        for(int i=0 ; i<n ;i++){
-        System.out.println() ;
-        for(int j=0 ; j<p; j++){
-            System.out.print("  "+M.getCoeff(i, j));
-        }
-    } 
+        System.out.println(M);
         
-        if (M.Inversible()==true){
-            System.out.println("Jotaro") ;
-        }
-       
-        double[] TabSol = new double[n] ;
-      
-        TabSol=M.resolution();
-        System.out.println();
-    
-        for(int i=0 ; i<n ; i++){
-        System.out.print("  "+TabSol[i]);
-    }
+        M.Equilibrage();
         
-        double R = M.getCoeff(0, 2) ;
-        System.out.println() ;
-        System.out.println(R);
+        System.out.println(M);
         
         
-       
+        
     }
 
 

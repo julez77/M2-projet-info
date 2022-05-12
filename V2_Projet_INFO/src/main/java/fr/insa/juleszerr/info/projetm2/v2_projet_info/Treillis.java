@@ -27,7 +27,7 @@ public class Treillis extends Figure {
     private List<Treillis> treillise ;
     private List<terrain3> terrain3;
     private List<Figure> elemterrain3;
-  
+  private List<NoeudAppui> bonuster3 ;
     public Treillis(){
         this.elements = new ArrayList() ;
         this.barres = new ArrayList() ;
@@ -35,6 +35,7 @@ public class Treillis extends Figure {
         this.treillise = new ArrayList();
         this.terrain3 = new ArrayList();
         this.elemterrain3 =new ArrayList(); 
+        this.bonuster3 = new ArrayList();
     }
     
     
@@ -218,6 +219,7 @@ public class Treillis extends Figure {
               this.elemterrain3.add(t.getBarres()[0]);
                             this.elemterrain3.add(t.getBarres()[1]);
                             this.elemterrain3.add(t.getBarres()[2]);
+                            t.setTreillis(this);
           }
         //}
 
@@ -721,18 +723,16 @@ public void menuTexte() {
     public double[] Resolution(){
         
         int N = this.NbInconnues() ;
+        
         Matrice resol = new Matrice(N, N+1, this.Systeme()) ;
         
-        for (int g=0 ; g<N ; g++){
-            for (int h=0 ; h<N+1 ; h++){
-                System.out.print(resol.getCoeff(g, h));
-                
-            }
-            
-            System.out.println();
-        }
+        System.out.println(resol);
         
-        return resol.resolution() ;
+        resol.ArrondirMatrice();
+        
+        System.out.println(resol);
+        
+        return resol.MultiplierMatrice(10).resolution() ;
     }
     
     

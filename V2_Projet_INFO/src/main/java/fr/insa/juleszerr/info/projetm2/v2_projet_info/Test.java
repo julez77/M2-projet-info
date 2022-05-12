@@ -105,17 +105,19 @@ public class Test {
        System.out.println(muda);
         
         
-        System.out.println(muda.Systeme());
-        System.out.println(muda.Resolution());
-        double[] solutions = new double[muda.NbInconnues()] ;
-        solutions = muda.Resolution() ;
+       System.out.println(muda.Resolution());
+ 
+       double[] solutions = new double[muda.NbInconnues()] ;
+       solutions = muda.Resolution() ;
         
-        System.out.println() ;
-        System.out.println() ;
+       System.out.println() ;
+       System.out.println() ;
         
-        for (int j=0 ; j<muda.NbInconnues() ; j++){
-          System.out.print(solutions[j]+"  ");
-        }
+       for (int j=0 ; j<muda.NbInconnues() ; j++){
+            
+           System.out.print(solutions[j]+"  ");
+       
+       }
         
     }
     
