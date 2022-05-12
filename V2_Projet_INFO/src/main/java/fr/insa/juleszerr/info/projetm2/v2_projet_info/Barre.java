@@ -24,7 +24,7 @@ public  class Barre extends Figure  {
     private Noeud noeud1 ;
     private Noeud noeud2 ;
     private Color color;
-    
+    private Treillis treillis ;
 private double prix ;
 private double effort ;
 private int id ;
@@ -288,6 +288,20 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    /**
+     * @return the treillis
+     */
+    public Treillis getTreillis() {
+        return treillis;
+    }
+
+    /**
+     * @param treillis the treillis to set
+     */
+    public void setTreillis(Treillis treillis) {
+        this.treillis = treillis;
     }
 
 

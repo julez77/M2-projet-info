@@ -124,8 +124,8 @@ public class Treillis extends Figure {
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
         double D = b.longueurBarre() ;
         AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
-        add(noeud) ;
-       
+        this.elements.add(noeud) ;
+    this.noeuds.add(noeud);
     }
     
     public void poserAppuiGlissant(Barre b, double distance){
@@ -135,7 +135,8 @@ public class Treillis extends Figure {
         double D = b.longueurBarre() ;
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         add(noeud) ;
-        
+        this.elements.add(noeud);
+        this.noeuds.add(noeud);
         noeud.setPoseSur(b) ;
     }
     
@@ -148,9 +149,12 @@ public class Treillis extends Figure {
         
         Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
-        
-        add(newBarre1) ;
-        add(newBarre2) ;
+        this.barres.add(newBarre1);
+        this.barres.add(newBarre2);
+        this.noeuds.add(noeud);
+        this.elements.add(noeud);
+        this.elements.add(newBarre1) ;
+       this.elements.add(newBarre2) ;
         remove(b) ;
         
    }
@@ -175,11 +179,11 @@ public class Treillis extends Figure {
             if ((f instanceof Noeud)== true ){
                 this.getNoeuds().add((Noeud) f);}
             else if ((f instanceof Barre)== true ){
-               this.barres.add((Barre) f);
+               this.addbarres((Barre) f);
                
                           
             }else if ((f instanceof Treillis)== true ){
-                this.addTreillis(this);
+                this.addTreillis((Treillis) f);
 
             } else{
                 this.addterrain3((terrain3)f);
@@ -194,7 +198,14 @@ public class Treillis extends Figure {
         this.elements.add(T);
         this.treillise.add(T);
     }
-    
+    public void addbarres(Barre b){
+        this.barres.add(b);
+        this.elements.add(b);
+        this.noeuds.add(b.getNoeud1());
+        this.noeuds.add(b.getNoeud2());
+        this.elements.add(b.getNoeud1());
+        this.elements.add(b.getNoeud2());
+    }
     
     
     
@@ -235,17 +246,57 @@ public class Treillis extends Figure {
          if ((f instanceof Noeud)== true ){
                 this.getNoeuds().remove((Noeud) f);}
          else if ((f instanceof Barre)== true ){
-               this.barres.remove((Barre) f);}
+               this.removebarres((Barre) f);
+                       ;}
          else  if ((f instanceof Treillis)== true ) {
              this.getTreillise().remove((Treillis)f);
              
             } else{
+             this.removeterrain3((fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3) f);
+         }  
              
-         }
-        
         
     }
-
+public void removeterrain3(terrain3 t){
+             this.elements.remove(t);
+              this.getTerrain3().remove(t);
+              this.elements.remove(t.getNoeuds()[1]);
+              this.elements.remove(t.getNoeuds()[2]);
+              this.elements.remove(t.getNoeuds()[0]);
+              this.elements.remove(t.getBarres()[0]);
+              this.elements.remove(t.getBarres()[1]);
+              this.elements.remove(t.getBarres()[2]);
+              this.noeuds.remove(t.getNoeuds()[1]);
+              this.noeuds.remove(t.getNoeuds()[2]);
+              this.noeuds.remove(t.getNoeuds()[0]);
+              this.barres.remove(t.getBarres()[0]);
+              this.barres.remove(t.getBarres()[1]);
+              this.barres.remove(t.getBarres()[2]);
+              this.elemterrain3.remove(t.getNoeuds()[1]);
+              this.elemterrain3.remove(t.getNoeuds()[2]);
+              this.elemterrain3.remove(t.getNoeuds()[0]);
+              this.elemterrain3.remove(t.getBarres()[0]);
+                            this.elemterrain3.remove(t.getBarres()[1]);
+                            this.elemterrain3.remove(t.getBarres()[2]);
+                            t.setTreillis(null);
+          }
+    
+    public void removebarres(Barre b){
+        this.barres.remove(b);
+        this.elements.remove(b);
+        this.noeuds.remove(b.getNoeud1());
+        this.noeuds.remove(b.getNoeud2());
+        this.elements.remove(b.getNoeud1());
+        this.elements.remove(b.getNoeud2());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     public void removeAll(List<Figure> lf) {
         for (Figure f : lf) {
             this.remove(f);
