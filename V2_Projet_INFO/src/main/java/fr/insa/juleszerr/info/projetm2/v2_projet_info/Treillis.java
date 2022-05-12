@@ -34,6 +34,7 @@ public class Treillis extends Figure {
         this.noeuds = new ArrayList() ;
         this.treillise = new ArrayList();
         this.terrain3 = new ArrayList();
+        this.elemterrain3 =new ArrayList(); 
     }
     
     
