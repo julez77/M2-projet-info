@@ -597,6 +597,28 @@ public void menuTexte() {
         }
     }
     
+        public Noeud NoeudPlusProche(Noeud p, double distMax) {
+        if (this.noeuds.isEmpty()) {
+            return null;
+        } else {
+            Noeud fmin = this.noeuds.get(0);
+            double min = fmin.distanceNoeud(p);
+            for (int i = 1; i < this.noeuds.size(); i++) {
+                Noeud fcur = this.noeuds.get(i);
+                double cur = fcur.distanceNoeud(p);
+                if (cur < min) {
+                    min = cur;
+                    fmin = fcur;
+                }
+            }
+            if (min <= distMax) {
+                return fmin;
+            } else {
+                return null;
+            }
+        }
+    }
+    
     
     private Noeud choisiNoeud() {
        List<Noeud> lp = new ArrayList<>();
