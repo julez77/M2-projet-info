@@ -48,7 +48,7 @@ public class DessinPane extends Pane{
         List<Figure> select = this.main.getControleur().getSelection();
         if(! select.isEmpty()){
         if (this.main.getControleur().getEtat() == Etat.SELECT) {
-            System.out.println("dessineSelectioin");
+
                  for (Figure f : select){
                 this.getChildren().addAll(f.dessineSelection());
             }

@@ -12,10 +12,17 @@ import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  *
@@ -30,6 +37,7 @@ public class Controleur {
     
     private List<Figure> selection;
 
+   
     
 
    
@@ -46,7 +54,6 @@ public class Controleur {
     public void changeEtat(Etat nouvelEtat){
         System.out.println("changerEtat()");
         if (nouvelEtat == Etat.SELECT){
-            System.out.println("etat selection");
             this.getSelection().clear();
             this.vue.redrawAll();
         }
@@ -84,7 +91,6 @@ public class Controleur {
     public void clicDansDessin(MouseEvent t) {
 
         if (this.getEtat() == Etat.SELECT) {
-            System.out.println("etat selection");
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
             if (proche != null) {
@@ -109,7 +115,6 @@ public class Controleur {
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new NoeudSimple(px , py));
-            System.out.println("px = "+ px +"; py = "+ py);
            
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.APPUISIMPLE) {
@@ -117,22 +122,19 @@ public class Controleur {
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiSimple(px , py));
-            System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
         }else if (this.getEtat() == Etat.APPUIGLISSANT) {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             treillis.add(new AppuiGlissant(px , py));
-            System.out.println("px = "+ px +"; py = "+ py);
             this.vue.redrawAll();            
         }else if (this.getEtat() == Etat.BARRE_N1_LIBRE) {
             this.pos1[0]=t.getX();
             this.pos1[1]=t.getY();
             this.changeEtat(Etat.BARRE_N2_LIBRE);                   
         }else if (this.getEtat() == Etat.BARRE_N2_LIBRE) {
-            System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
-            
+           
             double px = t.getX();
             double py = t.getY();
             Treillis treillis =this.vue.getTreillis();                       
@@ -161,7 +163,6 @@ public class Controleur {
             Treillis treillis =this.vue.getTreillis();                    
             Barre b = new Barre(new NoeudSimple(proche.getPx(), proche.getPy()), new NoeudSimple(pos1[0], pos1[1]));
             this.vue.getTreillis().add(b);
-            System.out.println("Ajout d'une barre au treillis");
             treillis.add(b);
             this.pos1 = new double[2]; 
             this.vue.redrawAll();
@@ -214,6 +215,71 @@ public class Controleur {
     void boutonBarreLibre(ActionEvent t) {
         this.changeEtat(Etat.BARRE_N1_LIBRE);
     }
+    
+     void menuNouveau(ActionEvent t) {
+        Stage nouveau = new Stage();
+        nouveau.setTitle("Nouveau");
+        Scene sc = new Scene(new MainPane(nouveau), 800, 600);
+        nouveau.setScene(sc);
+        nouveau.show(); 
+     }
+    private void realSave(File f) {
+        try {
+            this.vue.getTreillis().sauvegarde(f);
+            this.vue.setCurFile(f);
+            this.vue.getInStage().setTitle(f.getName());
+        } catch (IOException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème durant la sauvegarde");
+            alert.setContentText(ex.getLocalizedMessage());
+
+            alert.showAndWait();
+        } finally {
+            this.changeEtat(Etat.SELECT);
+        }
+    }
+     
+     
+    void menuSave(ActionEvent t) {
+        if (this.vue.getCurFile() == null) {
+            this.menuSaveAs(t);
+        } else {
+            this.realSave(this.vue.getCurFile());
+        }    }
+
+    void menuSaveAs(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showSaveDialog(this.vue.getInStage());
+        if (f != null) {
+            this.realSave(f);
+        }    }
+
+    void menuOpen(ActionEvent t) {
+        FileChooser chooser = new FileChooser();
+        File f = chooser.showOpenDialog(this.vue.getInStage());
+        if (f != null) {
+            try {
+                Figure lue = Figure.lecture(f);
+                Treillis glu = (Treillis) lue;
+                Stage nouveau = new Stage();
+                nouveau.setTitle(f.getName());
+                Scene sc = new Scene(new MainPane(nouveau, f, glu), 800, 600);
+                nouveau.setScene(sc);
+                nouveau.show();
+            } catch (Exception ex) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Problème durant la sauvegarde");
+                alert.setContentText(ex.getLocalizedMessage());
+
+                alert.showAndWait();
+            } finally {
+                this.changeEtat(Etat.SELECT);
+            }
+        }    }
+
+    
 
     void boutonBarreDepuisNoeud(ActionEvent t) {
         this.changeEtat(Etat.BARRE_N1_NOEUD);

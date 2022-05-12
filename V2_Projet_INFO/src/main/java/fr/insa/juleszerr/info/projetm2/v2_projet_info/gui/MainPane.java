@@ -5,38 +5,55 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.gui.Controleur.Etat;
+import java.io.File;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author IEUser
  */
 public class MainPane extends BorderPane {
-
-
     
     private Controleur controleur; 
-    private Treillis treillis; // =Private Groupe model; dans l'exemple du cours
+    private Treillis treillis; 
+    
     private OutilsRight outilsRight;
     private OutilsTop outilsTop;
     private DessinPane dessin;
+    
+    private MainMenu menu;
+    private Stage inStage;
+    private File curFile;
     
     public MainPane (){
         this.treillis = new Treillis();
     }
     
+    public MainPane(Stage inStage) {
+    this(inStage, new Treillis());
+    }
     
-    public MainPane(Treillis treillis){
-       this.treillis = treillis;
-       this.controleur = new Controleur(this); 
-       this.outilsRight = new OutilsRight(this, this.controleur);
-       this.outilsTop = new OutilsTop(this, this.controleur);
-       this.dessin = new DessinPane(this);
+    public MainPane(Stage inStage, Treillis treillis) {
+        this(inStage, null, treillis);
+    }
+    
+    public MainPane(Stage inStage, File fromFile, Treillis treillis){
+        this.inStage = inStage;
+        this.curFile = fromFile;
+        this.treillis = treillis;
+        this.controleur = new Controleur(this); 
+        this.outilsRight = new OutilsRight(this, this.controleur);
+        this.outilsTop = new OutilsTop(this, this.controleur);
+        this.dessin = new DessinPane(this);
        
-       this.setBottom(this.outilsRight);
-       this.setTop(this.outilsTop);
-       this.setCenter(this.dessin);
-       this.controleur.changeEtat(Etat.NOEUDSIMPLE);
+        this.setLeft(this.outilsRight);
+        this.setBottom(this.outilsTop);
+        this.setCenter(this.dessin);
+        this.menu = new MainMenu(this);
+        this.setTop(this.menu);
+                
+        this.controleur.changeEtat(Etat.NOEUDSIMPLE);
        
     }
     
@@ -74,6 +91,27 @@ public class MainPane extends BorderPane {
      */
     public DessinPane getDessin() {
         return dessin;
+    }
+
+    /**
+     * @return the inStage
+     */
+    public Stage getInStage() {
+        return inStage;
+    }
+
+    /**
+     * @return the curFile
+     */
+    public File getCurFile() {
+        return curFile;
+    }
+
+    /**
+     * @param curFile the curFile to set
+     */
+    public void setCurFile(File curFile) {
+        this.curFile = curFile;
     }
      
     

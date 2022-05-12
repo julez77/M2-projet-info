@@ -7,16 +7,14 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
  *
  * @author IEUser
  */
-public class OutilsRight extends HBox {
-    private ColorPicker couleur;
+public class OutilsRight extends VBox {
     private Button zoomIn;
     private Button zoomOut;
     private Button bSelect;
@@ -30,7 +28,6 @@ public class OutilsRight extends HBox {
         this.main = main;
         this.controleur= contoleur;
                
-        this.couleur = new ColorPicker(Color.BLACK);
         this.zoomIn = new Button("Zoom *2");
         this.zoomOut = new Button("Zoom /2");
         this.bAffiche = new Button("Affiche");
@@ -52,18 +49,13 @@ public class OutilsRight extends HBox {
         this.bSuppr = new Button("Supprimer");
         */
         
-        this.getChildren().addAll(this.couleur, this.bAffiche,
+        this.getChildren().addAll( this.bAffiche,
                 this.bSelect,this.bSuppr);
       
        
     }
 
-    /**
-     * @return the couleur
-     */
-    public ColorPicker getCouleur() {
-        return couleur;
-    }
+
 
     /**
      * @return the zoomIn
