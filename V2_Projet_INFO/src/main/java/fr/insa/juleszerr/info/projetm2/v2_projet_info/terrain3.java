@@ -132,7 +132,15 @@ public void addbarre(Barre b)throws Exception{
 
     @Override
     public double distanceNoeud(Noeud p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double dist = this.barres[0].distanceNoeud(p);
+        if (dist < this.barres[1].distanceNoeud(p)){
+            dist = this.barres[1].distanceNoeud(p);
+        }
+        else if  (dist < this.barres[2].distanceNoeud(p)){
+            dist = this.barres[2].distanceNoeud(p);
+        }
+        return dist;
+        
     }
 
     @Override
@@ -214,7 +222,38 @@ public void addbarre(Barre b)throws Exception{
     public Barre getBarre3() {
         return barre3;
     }
+public Barre barreplusproche(Noeud p, double Distmax){
+   boolean check ;
+   check= false; 
+   for(int i= 0 ; i <= 2; i++){
+    if (this.barres[i]!= null){
+        check = true ;
+    }}
+    if ( check == false){
+        return null ;
+    } else{
+      Barre b  = this.barres[0];
+        double min = b.distanceNoeud(p);
+        
+        for ( int i = 1; i<=2 ; i++) {
+                Barre b2  = this.barres[i];
+                double cur = b2.distanceNoeud(p);
+                if (cur < min) {
+                    min = cur;
+                    b = b2;
+                }
+            }
+        
+        if (min <= Distmax) {
+                return b;
+            } else {
+                return null;
+            }
+        
+    }
+}   
 
+        
     @Override
     public Group dessineSelection() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
