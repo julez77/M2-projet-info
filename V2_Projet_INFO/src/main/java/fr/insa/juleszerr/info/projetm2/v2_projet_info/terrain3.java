@@ -20,7 +20,7 @@ public class terrain3 extends Figure{
     private NoeudSimple noeud3;
     private Barre barre3;
     
-    private NoeudAppui[] noeuds;       
+    private Noeud[] noeuds;       
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
@@ -34,7 +34,7 @@ public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
 }
 
 public terrain3(){
-   this.noeuds = new NoeudAppui[4] ;
+   this.noeuds = new Noeud[4] ;
    this.barres = new Barre[4] ;
    for (int  i = 0 ; i<=2;i++){
        this.noeuds[i]= null;
@@ -139,14 +139,14 @@ public void addbarre(Barre b)throws Exception{
     /**
      * @return the noeuds
      */
-    public NoeudAppui[] getNoeuds() {
+    public Noeud[] getNoeuds() {
         return noeuds;
     }
 
     /**
      * @param noeuds the noeuds to set
      */
-    public void setNoeuds(NoeudAppui[] noeuds) {
+    public void setNoeuds(Noeud[] noeuds) {
         this.noeuds = noeuds;
     }
 
