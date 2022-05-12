@@ -355,6 +355,7 @@ public static Treillis treillisTest() {
         res.add(p6);
         res.add(s4);
        res.add(triangle);
+       /*
         for (int i = 0; i < 10; i++) {
             res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
                    ));
@@ -363,7 +364,7 @@ public static Treillis treillisTest() {
             res.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
                     new NoeudSimple(Math.random() * 500, Math.random() * 500)
                     ));
-        }
+        }*/
         return res;
     }
     @Override

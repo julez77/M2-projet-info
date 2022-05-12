@@ -32,7 +32,7 @@ public class MainFX extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception{
       Treillis test;
-        test =  Treillis.treillisTest();
+        test = new Treillis();
             System.out.println("taille " + test.getElements().size());
         
         MainPane main = new MainPane(test);

@@ -11,6 +11,7 @@ import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -140,21 +141,32 @@ public class Controleur {
             Treillis treillis =this.vue.getTreillis();
             System.out.println("coordonnees du noeud etat barre n1: px ="+ pos1[0]+" , py = "+pos1[1]);
             System.out.println("coordonnees du noeud etat barre n2: px ="+ px+" , py = "+py);            
-            Barre b2 = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1]));
-            this.vue.getTreillis().add(b2);
+            Barre b = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1]));
+            this.vue.getTreillis().add(b);
             System.out.println("Ajout d'une barre au treillis");
-            Barre b =new Barre(new NoeudSimple(0, 0), new NoeudSimple(100, 100));
             treillis.add(b);
             this.vue.redrawAll();
             this.changeEtat(Etat.BARRE_N1);
              
          
         }else if (this.etat == Etat.TERRAIN_N1) {
-            
+            this.pos1[0]=t.getX();
+            this.pos1[1]=t.getY();
+            this.changeEtat(Etat.TERRAIN_N2); 
         }else if (this.etat == Etat.TERRAIN_N2) {
-            
+            this.pos2[0]=t.getX();
+            this.pos2[1]=t.getY();
+            this.changeEtat(Etat.TERRAIN_N3); 
         }else if (this.etat == Etat.TERRAIN_N3) {
-            
+           double px = t.getX();
+           double py = t.getY();
+           Treillis treillis =this.vue.getTreillis(); 
+           terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
+                          new NoeudSimple(pos2[0], pos2[1]),
+                          new NoeudSimple(px, py) );
+           treillis.add(ter);
+           this.vue.redrawAll();
+           this.changeEtat(Etat.TERRAIN_N1);
         }
     }
 
