@@ -24,12 +24,21 @@ public class terrain3 extends Figure{
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
-    this.noeud1 = n1;
+   this.noeuds = new Noeud[4] ;
+   this.barres = new Barre[4] ;
+   this.noeud1 = n1;
     this.noeud2 = n2;
     this.noeud3 = n3;
+    this.noeuds[0]=n1;
+    this.noeuds[1]= n2;
+     this.noeuds[2]=n3;       
+    
     this.barre1 = new Barre(getNoeud1(), getNoeud2());
     this.barre2 = new Barre(getNoeud2(), getNoeud2());
     this.barre3 = new Barre(getNoeud1(), getNoeud3());
+    this.barres[0] = barre1;
+    this.barres[1]= barre2;
+    this.barres[2]= barre3 ;
     
 }
 
@@ -54,7 +63,7 @@ public void addbarre(Barre b)throws Exception{
        
 }
            
- public void addappui(NoeudAppui b) throws Exception{
+ public void addappui(Noeud b) throws Exception{
   int  i=0;
   while ((this.getNoeuds()[i]!=null)&&(i<=2)){
       i=i+1;

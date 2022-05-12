@@ -26,7 +26,7 @@ public class Treillis extends Figure {
     private List<Barre> barres;
     private List<Treillis> treillise ;
     private List<terrain3> terrain3;
-    
+    private List<Figure> elemterrain3;
   
     public Treillis(){
         this.elements = new ArrayList() ;
@@ -211,6 +211,12 @@ public class Treillis extends Figure {
               this.barres.add(t.getBarres()[0]);
               this.barres.add(t.getBarres()[1]);
               this.barres.add(t.getBarres()[2]);
+              this.elemterrain3.add(t.getNoeuds()[1]);
+              this.elemterrain3.add(t.getNoeuds()[2]);
+              this.elemterrain3.add(t.getNoeuds()[0]);
+              this.elemterrain3.add(t.getBarres()[0]);
+                            this.elemterrain3.add(t.getBarres()[1]);
+                            this.elemterrain3.add(t.getBarres()[2]);
           }
         //}
 
@@ -791,6 +797,20 @@ public void menuTexte() {
      */
     public void setTerrain3(List<terrain3> terrain3) {
         this.terrain3 = terrain3;
+    }
+
+    /**
+     * @return the elemterrain3
+     */
+    public List<Figure> getElemterrain3() {
+        return elemterrain3;
+    }
+
+    /**
+     * @param elemterrain3 the elemterrain3 to set
+     */
+    public void setElemterrain3(List<Figure> elemterrain3) {
+        this.elemterrain3 = elemterrain3;
     }
 
 
