@@ -720,18 +720,16 @@ public void menuTexte() {
     public double[] Resolution(){
         
         int N = this.NbInconnues() ;
+        
         Matrice resol = new Matrice(N, N+1, this.Systeme()) ;
         
-        for (int g=0 ; g<N ; g++){
-            for (int h=0 ; h<N+1 ; h++){
-                System.out.print(resol.getCoeff(g, h));
-                
-            }
-            
-            System.out.println();
-        }
+        System.out.println(resol);
         
-        return resol.resolution() ;
+        resol.ArrondirMatrice();
+        
+        System.out.println(resol);
+        
+        return resol.MultiplierMatrice(10).resolution() ;
     }
     
     
