@@ -270,7 +270,7 @@ public class Treillis extends Figure {
         if (f.getTreillis() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
-        this.getElements().remove(f);
+        this.elements.remove(f);
         f.setTreillis(null);
          if ((f instanceof Noeud)== true ){
                 this.getNoeuds().remove((Noeud) f);}
