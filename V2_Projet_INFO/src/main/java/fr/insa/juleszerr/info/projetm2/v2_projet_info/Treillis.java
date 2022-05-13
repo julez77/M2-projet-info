@@ -582,6 +582,7 @@ public void menuTexte() {
 
             }System.out.println("lol");
         System.out.println(noeuds);
+        System.out.println(barres);
         }
        
     }
