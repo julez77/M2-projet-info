@@ -44,7 +44,8 @@ public class Controleur {
     
 
    
-    public enum Etat {DEBUT, SELECT , NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
+    public enum Etat {DEBUT, SELECT , SUPPR, 
+    NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
     BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, BARRE_PARA,
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3}
 
@@ -139,6 +140,7 @@ public class Controleur {
             
             Treillis treillis = this.vue.getTreillis();
             treillis.poserAppuiGlissant(b, b.longueurBarre()/2);   //TO DO: récupérer l'endroit exacte ou poser l'appui         
+            this.vue.redrawAll();
         }else if (this.getEtat() == Etat.BARRE_N1_LIBRE) {
             this.pos1[0]=t.getX();
             this.pos1[1]=t.getY();
@@ -155,7 +157,7 @@ public class Controleur {
             this.changeEtat(Etat.BARRE_N1_LIBRE);
         }else if (this.getEtat() == Etat.BARRE_N1_NOEUD) {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
-            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
+            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, Double.MAX_VALUE);
             if(proche != null){
                 this.nPosClic =proche;
                 //this.pos1[1]=proche.getPy();
@@ -207,6 +209,13 @@ public class Controleur {
             Barre bPara = b.barrepara(b,nclic);
             treillis.add(bPara);
             this.vue.redrawAll();
+        }else if(this.getEtat()==Etat.SUPPR){
+            Treillis treillis =this.vue.getTreillis(); 
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
+            treillis.remove(proche);
+            System.out.println("Figure supprimée");
+            this.vue.redrawAll();
         }
     }
 
@@ -238,6 +247,17 @@ public class Controleur {
     
     void boutonBarrePara(ActionEvent t) {
         this.changeEtat(Etat.BARRE_PARA);
+    }
+    
+    void boutonSuppr(ActionEvent t) {
+        this.changeEtat(Etat.SUPPR);
+       /* if (this.etat == Etat.SELECT && this.selection.size() > 0) {
+            // normalement le bouton est disabled dans le cas contraire
+            this.vue.getTreillis().removeAll(this.selection);
+            this.selection.clear();
+            this.activeBoutonsSuivantSelection();
+            this.vue.redrawAll();
+        }*/
     }
     
     

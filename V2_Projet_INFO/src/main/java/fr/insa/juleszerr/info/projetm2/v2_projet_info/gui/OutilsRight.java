@@ -4,11 +4,14 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -35,8 +38,20 @@ public class OutilsRight extends VBox {
         this.bSuppr = new Button("Supprimer");
         
         this.bSelect.setOnAction((ActionEvent t) -> {
-            System.out.println("Select select");
             this.controleur.boutonSelect(t); 
+             
+        });
+        
+        this.bSuppr.setOnAction((ActionEvent t) -> {
+            NoeudSimple n1 = new NoeudSimple(200,200);
+            NoeudSimple n2 = new NoeudSimple(300,300);
+            Barre b = new Barre(n1, n2);
+            Treillis treillis = this.main.getTreillis();
+            treillis.add(b);
+            this.main.redrawAll();
+            treillis.remove(b);
+            this.main.redrawAll();
+            //this.controleur.boutonSuppr(t); 
              
         });
         
