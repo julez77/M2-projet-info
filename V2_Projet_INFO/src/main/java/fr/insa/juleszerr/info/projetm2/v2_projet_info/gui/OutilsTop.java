@@ -26,6 +26,7 @@ public class OutilsTop extends HBox {
     
     private RadioButton bBarreDepuisNoeud;
     private RadioButton bBarreLibre;
+    private RadioButton bBarrePara;
     
     private DessinPane dessin;
     private MainPane main;
@@ -39,7 +40,7 @@ public OutilsTop(MainPane main, Controleur controleur) {
         this.toolBar = new ToolBar();
         this.bBarreDepuisNoeud = new RadioButton("A partir de noeud");
         this.bBarreLibre =new RadioButton("Libre");
-       
+        this.bBarrePara = new RadioButton ("Parallèle à une autre Barre");
         
         this.bNoeudSimple = new RadioButton("Noeud Simple");
         this.bAppuiSimple = new RadioButton("Appui Simple");
@@ -54,7 +55,7 @@ public OutilsTop(MainPane main, Controleur controleur) {
         Label lNouvelleBarre = new Label("Nouvelle Barre :");
         
         toolBar.getItems().addAll(lCrerr, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
-                bTerrain,s1,lNouvelleBarre,bBarreDepuisNoeud,bBarreLibre);
+                bTerrain,s1,lNouvelleBarre,bBarreDepuisNoeud,bBarreLibre, bBarrePara);
         toolBar.setOrientation(Orientation.HORIZONTAL);
         toolBar.setStyle("-fx-background-color: #8dbdf0; ");
         
@@ -75,10 +76,16 @@ public OutilsTop(MainPane main, Controleur controleur) {
         this.bTerrain.setToggleGroup(gBoutons);
         this.bBarreDepuisNoeud.setToggleGroup(gBoutons);
         this.bBarreLibre.setToggleGroup(gBoutons);
+        this.bBarrePara.setToggleGroup(gBoutons);
         
         this.bBarreLibre.setOnAction((ActionEvent t) -> {
               System.out.println("Barre select");
             this.controleur.boutonBarreLibre(t);
+        });
+        
+        this.bBarrePara.setOnAction((ActionEvent t) -> {
+              System.out.println("Barre select");
+            this.controleur.boutonBarrePara(t);
         });
         
         this.bBarreDepuisNoeud.setOnAction((ActionEvent t) -> {

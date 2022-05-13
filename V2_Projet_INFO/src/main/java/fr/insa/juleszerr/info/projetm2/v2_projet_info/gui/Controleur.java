@@ -32,17 +32,20 @@ public class Controleur {
     private MainPane vue;
     private Etat etat;
     
+    private Noeud nPosClic ;
     private double[] pos1 = new double[2];
     private double[] pos2 = new double[2];
     
     private List<Figure> selection;
+
+    
 
    
     
 
    
     public enum Etat {DEBUT, SELECT , NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
-    BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD,
+    BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, BARRE_PARA,
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3}
 
     
@@ -83,6 +86,8 @@ public class Controleur {
             
         }else if (nouvelEtat == Etat.TERRAIN_N3){
             
+        }else if (nouvelEtat == Etat.BARRE_PARA){
+            
         }
         this.setEtat(nouvelEtat);
         
@@ -118,17 +123,22 @@ public class Controleur {
            
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.APPUISIMPLE) {
+            Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+            Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
             double px = t.getX();
             double py = t.getY();
+            
             Treillis treillis = this.vue.getTreillis();
-            treillis.add(new AppuiSimple(px , py));
+            treillis.poserAppuiSimple(b, b.longueurBarre()/2);
             this.vue.redrawAll();            
         }else if (this.getEtat() == Etat.APPUIGLISSANT) {
+            Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+            Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
             double px = t.getX();
             double py = t.getY();
+            
             Treillis treillis = this.vue.getTreillis();
-            treillis.add(new AppuiGlissant(px , py));
-            this.vue.redrawAll();            
+            treillis.poserAppuiGlissant(b, b.longueurBarre()/2);   //TO DO: récupérer l'endroit exacte ou poser l'appui         
         }else if (this.getEtat() == Etat.BARRE_N1_LIBRE) {
             this.pos1[0]=t.getX();
             this.pos1[1]=t.getY();
@@ -147,8 +157,8 @@ public class Controleur {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
             if(proche != null){
-                this.pos1[0]=proche.getPx();
-                this.pos1[1]=proche.getPy();
+                this.nPosClic =proche;
+                //this.pos1[1]=proche.getPy();
                 this.changeEtat(Etat.BARRE_N2_NOEUD);
         }
             else{
@@ -161,7 +171,7 @@ public class Controleur {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, Double.MAX_VALUE);
             Treillis treillis =this.vue.getTreillis();                    
-            Barre b = new Barre(new NoeudSimple(proche.getPx(), proche.getPy()), new NoeudSimple(pos1[0], pos1[1]));
+            Barre b = new Barre(proche, this.getnPosClic());
             this.vue.getTreillis().add(b);
             treillis.add(b);
             this.pos1 = new double[2]; 
@@ -187,6 +197,16 @@ public class Controleur {
            treillis.add(ter);
            this.vue.redrawAll();
            this.changeEtat(Etat.TERRAIN_N1);
+        }else if (this.getEtat() == Etat.BARRE_PARA){
+            Treillis treillis =this.vue.getTreillis(); 
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
+            
+            Barre b =this.vue.getTreillis().barrePlusProche(nclic, Double.MAX_VALUE);
+            double dist = b.distanceNoeud(nclic);
+            Barre bPara = b.barrepara(b,dist);
+            treillis.add(bPara);
+            this.vue.redrawAll();
         }
     }
 
@@ -208,13 +228,18 @@ public class Controleur {
         this.changeEtat(Etat.TERRAIN_N1);
     }
     
-        void boutonSelect(ActionEvent t) {
+    void boutonSelect(ActionEvent t) {
         this.changeEtat(Etat.SELECT);
-        }
+    }
         
     void boutonBarreLibre(ActionEvent t) {
         this.changeEtat(Etat.BARRE_N1_LIBRE);
     }
+    
+    void boutonBarrePara(ActionEvent t) {
+        this.changeEtat(Etat.BARRE_PARA);
+    }
+    
     
      void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
@@ -316,5 +341,19 @@ public class Controleur {
      */
     public void setEtat(Etat etat) {
         this.etat = etat;
+    }
+
+    /**
+     * @return the nPosClic
+     */
+    public Noeud getnPosClic() {
+        return nPosClic;
+    }
+
+    /**
+     * @param nPosClic the nPosClic to set
+     */
+    public void setnPosClic(Noeud nPosClic) {
+        this.nPosClic = nPosClic;
     }
 }

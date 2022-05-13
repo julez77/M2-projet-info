@@ -618,6 +618,28 @@ public void menuTexte() {
             }
         }
     }
+        
+       public Barre barrePlusProche(Noeud p, double distMax) {
+        if (this.barres.isEmpty()) {
+            return null;
+        } else {
+            Barre bmin = this.barres.get(0);
+            double min = bmin.distanceNoeud(p);
+            for (int i = 1; i < this.barres.size(); i++) {
+                Barre bcur = this.barres.get(i);
+                double cur = bcur.distanceNoeud(p);
+                if (cur < min) {
+                    min = cur;
+                    bmin = bcur;
+                }
+            }
+            if (min <= distMax) {
+                return bmin;
+            } else {
+                return null;
+            }
+        }
+    }
     
     
     private Noeud choisiNoeud() {
