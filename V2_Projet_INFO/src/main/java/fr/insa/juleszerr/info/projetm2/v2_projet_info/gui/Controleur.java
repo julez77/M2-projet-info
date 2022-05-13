@@ -204,7 +204,7 @@ public class Controleur {
             
             Barre b =this.vue.getTreillis().barrePlusProche(nclic, Double.MAX_VALUE);
             double dist = b.distanceNoeud(nclic);
-            Barre bPara = b.barrepara(b,dist);
+            Barre bPara = b.barrepara(b,nclic);
             treillis.add(bPara);
             this.vue.redrawAll();
         }

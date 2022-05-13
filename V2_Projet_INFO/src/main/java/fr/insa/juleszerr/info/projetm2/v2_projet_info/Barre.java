@@ -262,13 +262,13 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         }
     }
 
-    public Barre barrepara(Barre b , double decalage){
+    public Barre barrepara(Barre b , Noeud n){
         // pour le  noeud1
     double    L = Math.sqrt((b.noeud1.px-b.noeud2.getPx())*((b.noeud1.px-b.noeud2.getPx())+(b.noeud1.py-b.noeud2.getPy()))*(b.noeud1.py-b.noeud2.getPy()));
-        double n1px = b.noeud1.px + decalage *((b.noeud1.py-b.noeud2.getPy())/L);
-        double n2px =b.noeud2.px + decalage *((b.noeud1.py-b.noeud2.getPy())/L);
-        double n1py =b.noeud1.py + decalage * ((b.noeud1.px-b.noeud2.getPx()) /L);
-        double n2py = b.noeud2.py + decalage * ((b.noeud1.px-b.noeud2.getPx())/L);
+        double n1px = b.noeud1.px + b.distanceNoeud(n) *((b.noeud1.py-b.noeud2.getPy())/L);
+        double n2px =b.noeud2.px + b.distanceNoeud(n) *((b.noeud1.py-b.noeud2.getPy())/L);
+        double n1py =b.noeud1.py + b.distanceNoeud(n) * ((b.noeud1.px-b.noeud2.getPx()) /L);
+        double n2py = b.noeud2.py + b.distanceNoeud(n) * ((b.noeud1.px-b.noeud2.getPx())/L);
         if (b.noeud1.getClass()==NoeudSimple.class){
            NoeudSimple n1 = new NoeudSimple(n1px,n1py);
             NoeudSimple n2 =       new NoeudSimple(n2px,n2py);
