@@ -104,6 +104,13 @@ public abstract class Figure {
                         nt.add(fig);
                     }
                     derniere = nt;
+                }else  if(bouts[0].equals("terrain3")){
+                    int id = Integer.parseInt(bouts[1]);
+                   terrain3 nt = new terrain3();
+                   num.associe(id, nt);
+                   
+                   
+                   
                 }
             }
 

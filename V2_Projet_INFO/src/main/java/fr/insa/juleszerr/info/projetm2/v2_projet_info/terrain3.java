@@ -157,7 +157,30 @@ public void addbarre(Barre b)throws Exception{
 
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!num.objExist(this)) {
+            int id = num.creeID(this);
+            Figure f ;
+            for(int i = 0 ; i <= 2 ; i++){
+                 f= this.noeuds[i];
+                 f.save(w, num);
+                f= this.barres[i];
+                f.save(w, num);
+            }
+             w.append("terrain3;" + id);
+           for(int i =0 ; i<=2 ; i++){
+               w.append(";" + num.getID(this.noeuds[i]));
+                w.append(";" + num.getID(this.barres[i]));
+                
+           } for(int i =0 ; i<=2 ; i++){
+              w.append(";" + num.getID(this.barres[i]));  
+               
+           }
+           
+           w.append("\n");  
+        }
+            
+            
+            
     }
 
     /**

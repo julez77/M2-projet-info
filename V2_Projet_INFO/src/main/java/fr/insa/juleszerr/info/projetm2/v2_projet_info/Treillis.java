@@ -172,12 +172,15 @@ public class Treillis extends Figure {
             //if (f.getTreillis() != null) {
                // throw new Error("figure déja dans un autre treillis");
            // }
-            this.elements.add(f);
+            if(this.elements.contains(f)==false){
+            this.elements.add(f);}
 
             f.setTreillis(this);
 
             if ((f instanceof Noeud)== true ){
+               if(this.noeuds.contains(f)==false){
                 this.getNoeuds().add((Noeud) f);}
+            }
             else if ((f instanceof Barre)== true ){
                this.addbarres((Barre) f);
                
@@ -199,37 +202,65 @@ public class Treillis extends Figure {
         this.treillise.add(T);
     }
     public void addbarres(Barre b){
-        this.barres.add(b);
-        this.elements.add(b);
-        this.noeuds.add(b.getNoeud1());
-        this.noeuds.add(b.getNoeud2());
-        this.elements.add(b.getNoeud1());
-        this.elements.add(b.getNoeud2());
+      if(this.barres.contains(b)==false){
+        this.barres.add(b);}
+      if(this.barres.contains(b)==false){
+        this.elements.add(b);}
+        if(this.noeuds.contains(b.getNoeud1())==false){
+        this.noeuds.add(b.getNoeud1());}
+        if(this.noeuds.contains(b.getNoeud2())==false){
+      
+            this.noeuds.add(b.getNoeud2());}
+         if(this.elements.contains(b.getNoeud1())==false){
+        this.elements.add(b.getNoeud1());}
+         if(this.elements.contains(b.getNoeud2())==false){
+        this.elements.add(b.getNoeud2());}
     }
     
     
     
           public void addterrain3(terrain3 t){
-             this.elements.add(t);
+             if(this.elements.contains(t)==false){
+              this.elements.add(t);}
+             
               this.getTerrain3().add(t);
-              this.elements.add(t.getNoeuds()[1]);
-              this.elements.add(t.getNoeuds()[2]);
-              this.elements.add(t.getNoeuds()[0]);
-              this.elements.add(t.getBarres()[0]);
-              this.elements.add(t.getBarres()[1]);
-              this.elements.add(t.getBarres()[2]);
-              this.noeuds.add(t.getNoeuds()[1]);
-              this.noeuds.add(t.getNoeuds()[2]);
-              this.noeuds.add(t.getNoeuds()[0]);
-              this.barres.add(t.getBarres()[0]);
-              this.barres.add(t.getBarres()[1]);
-              this.barres.add(t.getBarres()[2]);
-              this.elemterrain3.add(t.getNoeuds()[1]);
-              this.elemterrain3.add(t.getNoeuds()[2]);
-              this.elemterrain3.add(t.getNoeuds()[0]);
-              this.elemterrain3.add(t.getBarres()[0]);
-                            this.elemterrain3.add(t.getBarres()[1]);
-                            this.elemterrain3.add(t.getBarres()[2]);
+               if(this.elements.contains(t.getNoeuds()[1])==false){
+              this.elements.add(t.getNoeuds()[1]);}
+               if(this.elements.contains(t.getNoeuds()[2])==false){
+              this.elements.add(t.getNoeuds()[2]);}
+               if(this.elements.contains(t.getNoeuds()[0])==false){
+              this.elements.add(t.getNoeuds()[0]);}
+               if(this.elements.contains(t.getBarres()[0])==false){
+              this.elements.add(t.getBarres()[0]);}
+               if(this.elements.contains(t.getBarres()[1])==false){
+              this.elements.add(t.getBarres()[1]);}
+               if(this.elements.contains(t.getBarres()[2])==false){
+              this.elements.add(t.getBarres()[2]);}
+                if(this.noeuds.contains(t.getNoeuds()[1])==false){
+              this.noeuds.add(t.getNoeuds()[1]);}
+              if(this.noeuds.contains(t.getNoeuds()[2])==false){
+              this.noeuds.add(t.getNoeuds()[2]);}
+              if(this.noeuds.contains(t.getNoeuds()[0])==false){
+              this.noeuds.add(t.getNoeuds()[0]);}
+              if(this.barres.contains(t.getBarres()[0])==false){
+              this.barres.add(t.getBarres()[0]);}
+              if(this.barres.contains(t.getBarres()[1])==false){
+              this.barres.add(t.getBarres()[1]);}
+              if(this.barres.contains(t.getBarres()[2])==false){
+              this.barres.add(t.getBarres()[2]);}
+              if(this.elemterrain3.contains(t.getNoeuds()[1])==false){
+              this.elemterrain3.add(t.getNoeuds()[1]);}
+              if(this.elemterrain3.contains(t.getNoeuds()[2])==false){
+              this.elemterrain3.add(t.getNoeuds()[2]);}
+              if(this.elemterrain3.contains(t.getNoeuds()[0])==false){
+              this.elemterrain3.add(t.getNoeuds()[0]);}
+              if(this.elemterrain3.contains(t.getBarres()[0])==false){
+              this.elemterrain3.add(t.getBarres()[0]);}
+              if(this.elemterrain3.contains(t.getBarres()[1])==false){
+                            this.elemterrain3.add(t.getBarres()[1]);}
+                            if(this.elemterrain3.contains(t.getBarres()[2])==false){
+                            this.elemterrain3.add(t.getBarres()[2]);}
+                            
                             t.setTreillis(this);
           }
         //}
@@ -542,6 +573,7 @@ public void menuTexte() {
                 File fout = new File(path);
                 try {
                     this.sauvegarde(fout);
+                    System.out.println("omegalul");
                 } catch (FileNotFoundException ex) {
                     System.out.println("fichier non trouvé : " + fout.getAbsolutePath());;
                 } catch (IOException ex) {
