@@ -125,7 +125,7 @@ public class Treillis extends Figure {
         double D = b.longueurBarre() ;
         AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         this.elements.add(noeud) ;
-    this.noeuds.add(noeud);
+        this.getNoeuds().add(noeud);
     }
     
     public void poserAppuiGlissant(Barre b, double distance){
@@ -136,7 +136,7 @@ public class Treillis extends Figure {
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         add(noeud) ;
         this.elements.add(noeud);
-        this.noeuds.add(noeud);
+        this.getNoeuds().add(noeud);
         noeud.setPoseSur(b) ;
     }
     
@@ -151,7 +151,7 @@ public class Treillis extends Figure {
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
         this.barres.add(newBarre1);
         this.barres.add(newBarre2);
-        this.noeuds.add(noeud);
+        this.getNoeuds().add(noeud);
         this.elements.add(noeud);
         this.elements.add(newBarre1) ;
        this.elements.add(newBarre2) ;
@@ -178,7 +178,7 @@ public class Treillis extends Figure {
             f.setTreillis(this);
 
             if ((f instanceof Noeud)== true ){
-               if(this.noeuds.contains(f)==false){
+               if(this.getNoeuds().contains(f)==false){
                 this.getNoeuds().add((Noeud) f);}
             }
             else if ((f instanceof Barre)== true ){
@@ -195,7 +195,7 @@ public class Treillis extends Figure {
     public void addTreillis(Treillis T){
         this.elements.addAll(T.getElements());
         this.barres.addAll(T.getBarres());
-        this.noeuds.addAll(T.getNoeuds());
+        this.getNoeuds().addAll(T.getNoeuds());
         this.treillise.addAll(T.getTreillise());
         this.terrain3.addAll(T.getTerrain3());
         this.elements.add(T);
@@ -204,13 +204,12 @@ public class Treillis extends Figure {
     public void addbarres(Barre b){
       if(this.barres.contains(b)==false){
         this.barres.add(b);}
-      if(this.barres.contains(b)==false){
-        this.elements.add(b);}
-        if(this.noeuds.contains(b.getNoeud1())==false){
-        this.noeuds.add(b.getNoeud1());}
-        if(this.noeuds.contains(b.getNoeud2())==false){
       
-            this.noeuds.add(b.getNoeud2());}
+        if(this.getNoeuds().contains(b.getNoeud1())==false){
+        this.getNoeuds().add(b.getNoeud1());}
+        if(this.getNoeuds().contains(b.getNoeud2())==false){
+      
+            this.getNoeuds().add(b.getNoeud2());}
          if(this.elements.contains(b.getNoeud1())==false){
         this.elements.add(b.getNoeud1());}
          if(this.elements.contains(b.getNoeud2())==false){
@@ -220,8 +219,7 @@ public class Treillis extends Figure {
     
     
           public void addterrain3(terrain3 t){
-             if(this.elements.contains(t)==false){
-              this.elements.add(t);}
+            
              
               this.getTerrain3().add(t);
                if(this.elements.contains(t.getNoeuds()[1])==false){
@@ -236,12 +234,12 @@ public class Treillis extends Figure {
               this.elements.add(t.getBarres()[1]);}
                if(this.elements.contains(t.getBarres()[2])==false){
               this.elements.add(t.getBarres()[2]);}
-                if(this.noeuds.contains(t.getNoeuds()[1])==false){
-              this.noeuds.add(t.getNoeuds()[1]);}
-              if(this.noeuds.contains(t.getNoeuds()[2])==false){
-              this.noeuds.add(t.getNoeuds()[2]);}
-              if(this.noeuds.contains(t.getNoeuds()[0])==false){
-              this.noeuds.add(t.getNoeuds()[0]);}
+                if(this.getNoeuds().contains(t.getNoeuds()[1])==false){
+              this.getNoeuds().add(t.getNoeuds()[1]);}
+              if(this.getNoeuds().contains(t.getNoeuds()[2])==false){
+              this.getNoeuds().add(t.getNoeuds()[2]);}
+              if(this.getNoeuds().contains(t.getNoeuds()[0])==false){
+              this.getNoeuds().add(t.getNoeuds()[0]);}
               if(this.barres.contains(t.getBarres()[0])==false){
               this.barres.add(t.getBarres()[0]);}
               if(this.barres.contains(t.getBarres()[1])==false){
@@ -297,9 +295,9 @@ public void removeterrain3(terrain3 t){
               this.elements.remove(t.getBarres()[0]);
               this.elements.remove(t.getBarres()[1]);
               this.elements.remove(t.getBarres()[2]);
-              this.noeuds.remove(t.getNoeuds()[1]);
-              this.noeuds.remove(t.getNoeuds()[2]);
-              this.noeuds.remove(t.getNoeuds()[0]);
+              this.getNoeuds().remove(t.getNoeuds()[1]);
+              this.getNoeuds().remove(t.getNoeuds()[2]);
+              this.getNoeuds().remove(t.getNoeuds()[0]);
               this.barres.remove(t.getBarres()[0]);
               this.barres.remove(t.getBarres()[1]);
               this.barres.remove(t.getBarres()[2]);
@@ -313,12 +311,11 @@ public void removeterrain3(terrain3 t){
           }
     
     public void removebarres(Barre b){
-        this.barres.remove(b);
-        this.elements.remove(b);
-        this.noeuds.remove(b.getNoeud1());
-        this.noeuds.remove(b.getNoeud2());
-        this.elements.remove(b.getNoeud1());
-        this.elements.remove(b.getNoeud2());
+         if(this.barres.contains(b)==true){
+        this.barres.remove(b);}
+      if(this.barres.contains(b)==true){
+        this.elements.remove(b);}
+        
     }
     
     
@@ -581,7 +578,7 @@ public void menuTexte() {
                 }
 
             }System.out.println("lol");
-        System.out.println(noeuds);
+        System.out.println(getNoeuds());
         System.out.println(barres);
         }
        
@@ -631,13 +628,13 @@ public void menuTexte() {
     }
     
         public Noeud NoeudPlusProche(Noeud p, double distMax) {
-        if (this.noeuds.isEmpty()) {
+        if (this.getNoeuds().isEmpty()) {
             return null;
         } else {
-            Noeud fmin = this.noeuds.get(0);
+            Noeud fmin = this.getNoeuds().get(0);
             double min = fmin.distanceNoeud(p);
-            for (int i = 1; i < this.noeuds.size(); i++) {
-                Noeud fcur = this.noeuds.get(i);
+            for (int i = 1; i < this.getNoeuds().size(); i++) {
+                Noeud fcur = this.getNoeuds().get(i);
                 double cur = fcur.distanceNoeud(p);
                 if (cur < min) {
                     min = cur;

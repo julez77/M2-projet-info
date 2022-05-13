@@ -24,11 +24,13 @@ tr.add(n2);
 System.out.println(tr);
 tr.add(b1);
 System.out.println(tr);
-
-
-
-
-
+tr.remove(n1);
+System.out.println(tr);
+System.out.println(tr.getNoeuds());
+System.out.println("lol");
+tr.remove(b1);
+System.out.println(tr);
+System.out.println(tr.getBarres());
 
 
 
