@@ -33,8 +33,13 @@ public class AppuiSimple extends NoeudAppui {
                 
     @Override
    public String toString(){
-      return  "("+this.getPx()+","+this.getPy()+")appuisimple id" +this.getId();
+      return  "["+this.getPx()+","+this.getPy()+"] force : "+this.getForce().toString();
   } 
+   
+   @Override
+   public String toString2(){
+       return "["+this.getPx()+","+this.getPy()+"]" ;
+   }
 
  @Override
     public double maxX() {

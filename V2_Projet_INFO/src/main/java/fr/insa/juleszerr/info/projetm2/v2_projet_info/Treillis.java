@@ -54,69 +54,7 @@ public class Treillis extends Figure {
     
     }     
             
- //    public int maxIdNoeud(){
-        
-        
- //        if (this.noeudsTreillis.isEmpty()) {
- //       return 0;
- //   }
- //        else{
- //            int max=0 ;
-        
-  //       for(int j=0 ; j<noeudsTreillis.size(); j++){
-   //          Noeud noeud = noeudsTreillis.get(j) ;
-        //     int id = noeud.getId() ;
-     //        if(id>max){
-   //              max=id;
-       //      }
-     //        
-     //    }
-     //                
-     //      return max ;         
-    //         }
-  //   }
-    
-  //   public int maxIdBarre(){
-   //      int max=0 ;
- //        
-   //      if (this.barresTreillis.isEmpty()) {
-     //   return 0;
-  //  }
-        
-    //     for(int j=0 ; j<barresTreillis.size() ; j++){
-   //          Barre barre = barresTreillis.get(j) ;
-       //      int id = barre.getId();
-    //         if(id>max){
-       //          max=id ;
-    //         }
-     //    }
-    //     return max ;
-   //  }
-                
- ////   public void ajouteNoeud(Noeud noeud){
-   ///     boolean noeudexiste = false ;
-  //     if (this.noeudsTreillis.isEmpty()){
-  //           noeudexiste = false ;
-    //    }
-        
-     //    else{
-      //       
-     //   for(int i=0 ; i<noeudsTreillis.size() ; i++){
-    //         if(noeud==noeudsTreillis.get(i)){
-      //           noeudexiste = true ;
-                
-    //         }
- //       }
-    //     }
-   //          if(noeudexiste==false){
-          //       noeud.setId((this.maxIdNoeud() + 1));
-     //            noeudsTreillis.add(noeud) ;
-     //        }
-        
-    
-//     }
-    
-    
+ 
     // à faire : afficher un message d'erreur si la distance saisie est plus élevée que la longueur de la barre 
     public void poserAppuiSimple(Barre b, double distance){
         
@@ -125,7 +63,7 @@ public class Treillis extends Figure {
         double D = b.longueurBarre() ;
         AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         this.elements.add(noeud) ;
-        this.getNoeuds().add(noeud);
+    this.noeuds.add(noeud);
     }
     
     public void poserAppuiGlissant(Barre b, double distance){
@@ -136,7 +74,7 @@ public class Treillis extends Figure {
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         add(noeud) ;
         this.elements.add(noeud);
-        this.getNoeuds().add(noeud);
+        this.noeuds.add(noeud);
         noeud.setPoseSur(b) ;
     }
     
@@ -151,16 +89,36 @@ public class Treillis extends Figure {
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
         this.barres.add(newBarre1);
         this.barres.add(newBarre2);
-        this.getNoeuds().add(noeud);
+        this.noeuds.add(noeud);
         this.elements.add(noeud);
         this.elements.add(newBarre1) ;
        this.elements.add(newBarre2) ;
         remove(b) ;
         
    }
+   
+   public void ProjeterNoeud(Noeud noeud, Barre b){
+       Barre barre = new Barre(b.getNoeud1(), noeud);
+       Vecteur2d v1 = b.vecteurBarre();
+       Vecteur2d v2 = barre.vecteurBarre();
+       double angle = Vecteur2d.angleVecteurs(v1, v2);
+       double d = noeud.distanceNoeud(b.getNoeud1());
+       double distanceSurBarre = d*cos(angle);
+       
+       if ((noeud instanceof NoeudSimple)==true ){
+           this.poserNoeudSimple(b, distanceSurBarre);
+       }
+       
+        if ((noeud instanceof AppuiGlissant)==true){
+            this.poserAppuiGlissant(b, distanceSurBarre);
+        }
         
+        if((noeud instanceof AppuiSimple)==true){
+            this.poserAppuiSimple(b, distanceSurBarre);
+        }
+   } 
     
-    public void add(Figure f) {
+   public void add(Figure f) {
 
         //if (f.getTreillis() != this) {
             //if (f.getTreillis() != null) {
@@ -178,7 +136,7 @@ public class Treillis extends Figure {
             f.setTreillis(this);
 
             if ((f instanceof Noeud)== true ){
-               if(this.getNoeuds().contains(f)==false){
+               if(this.noeuds.contains(f)==false){
                 this.getNoeuds().add((Noeud) f);}
             }
             else if ((f instanceof Barre)== true ){
@@ -195,21 +153,22 @@ public class Treillis extends Figure {
     public void addTreillis(Treillis T){
         this.elements.addAll(T.getElements());
         this.barres.addAll(T.getBarres());
-        this.getNoeuds().addAll(T.getNoeuds());
+        this.noeuds.addAll(T.getNoeuds());
         this.treillise.addAll(T.getTreillise());
         this.terrain3.addAll(T.getTerrain3());
-        
+        this.elements.add(T);
         this.treillise.add(T);
     }
     public void addbarres(Barre b){
       if(this.barres.contains(b)==false){
         this.barres.add(b);}
+      if(this.barres.contains(b)==false){
+        this.elements.add(b);}
+        if(this.noeuds.contains(b.getNoeud1())==false){
+        this.noeuds.add(b.getNoeud1());}
+        if(this.noeuds.contains(b.getNoeud2())==false){
       
-        if(this.getNoeuds().contains(b.getNoeud1())==false){
-        this.getNoeuds().add(b.getNoeud1());}
-        if(this.getNoeuds().contains(b.getNoeud2())==false){
-      
-            this.getNoeuds().add(b.getNoeud2());}
+            this.noeuds.add(b.getNoeud2());}
          if(this.elements.contains(b.getNoeud1())==false){
         this.elements.add(b.getNoeud1());}
          if(this.elements.contains(b.getNoeud2())==false){
@@ -219,7 +178,8 @@ public class Treillis extends Figure {
     
     
           public void addterrain3(terrain3 t){
-            
+             if(this.elements.contains(t)==false){
+              this.elements.add(t);}
              
               this.getTerrain3().add(t);
                if(this.elements.contains(t.getNoeuds()[1])==false){
@@ -234,12 +194,12 @@ public class Treillis extends Figure {
               this.elements.add(t.getBarres()[1]);}
                if(this.elements.contains(t.getBarres()[2])==false){
               this.elements.add(t.getBarres()[2]);}
-                if(this.getNoeuds().contains(t.getNoeuds()[1])==false){
-              this.getNoeuds().add(t.getNoeuds()[1]);}
-              if(this.getNoeuds().contains(t.getNoeuds()[2])==false){
-              this.getNoeuds().add(t.getNoeuds()[2]);}
-              if(this.getNoeuds().contains(t.getNoeuds()[0])==false){
-              this.getNoeuds().add(t.getNoeuds()[0]);}
+                if(this.noeuds.contains(t.getNoeuds()[1])==false){
+              this.noeuds.add(t.getNoeuds()[1]);}
+              if(this.noeuds.contains(t.getNoeuds()[2])==false){
+              this.noeuds.add(t.getNoeuds()[2]);}
+              if(this.noeuds.contains(t.getNoeuds()[0])==false){
+              this.noeuds.add(t.getNoeuds()[0]);}
               if(this.barres.contains(t.getBarres()[0])==false){
               this.barres.add(t.getBarres()[0]);}
               if(this.barres.contains(t.getBarres()[1])==false){
@@ -270,7 +230,7 @@ public class Treillis extends Figure {
         if (f.getTreillis() != this) {
             throw new Error("la figure n'est pas dans le groupe");
         }
-        this.elements.remove(f);
+        this.getElements().remove(f);
         f.setTreillis(null);
          if ((f instanceof Noeud)== true ){
                 this.getNoeuds().remove((Noeud) f);}
@@ -295,9 +255,9 @@ public void removeterrain3(terrain3 t){
               this.elements.remove(t.getBarres()[0]);
               this.elements.remove(t.getBarres()[1]);
               this.elements.remove(t.getBarres()[2]);
-              this.getNoeuds().remove(t.getNoeuds()[1]);
-              this.getNoeuds().remove(t.getNoeuds()[2]);
-              this.getNoeuds().remove(t.getNoeuds()[0]);
+              this.noeuds.remove(t.getNoeuds()[1]);
+              this.noeuds.remove(t.getNoeuds()[2]);
+              this.noeuds.remove(t.getNoeuds()[0]);
               this.barres.remove(t.getBarres()[0]);
               this.barres.remove(t.getBarres()[1]);
               this.barres.remove(t.getBarres()[2]);
@@ -311,11 +271,12 @@ public void removeterrain3(terrain3 t){
           }
     
     public void removebarres(Barre b){
-         if(this.barres.contains(b)==true){
-        this.barres.remove(b);}
-      if(this.elements.contains(b)==true){
-        this.elements.remove(b);}
-        
+        this.barres.remove(b);
+        this.elements.remove(b);
+        this.noeuds.remove(b.getNoeud1());
+        this.noeuds.remove(b.getNoeud2());
+        this.elements.remove(b.getNoeud1());
+        this.elements.remove(b.getNoeud2());
     }
     
     
@@ -578,7 +539,7 @@ public void menuTexte() {
                 }
 
             }System.out.println("lol");
-        System.out.println(getNoeuds());
+        System.out.println(noeuds);
         System.out.println(barres);
         }
        
@@ -628,13 +589,13 @@ public void menuTexte() {
     }
     
         public Noeud NoeudPlusProche(Noeud p, double distMax) {
-        if (this.getNoeuds().isEmpty()) {
+        if (this.noeuds.isEmpty()) {
             return null;
         } else {
-            Noeud fmin = this.getNoeuds().get(0);
+            Noeud fmin = this.noeuds.get(0);
             double min = fmin.distanceNoeud(p);
-            for (int i = 1; i < this.getNoeuds().size(); i++) {
-                Noeud fcur = this.getNoeuds().get(i);
+            for (int i = 1; i < this.noeuds.size(); i++) {
+                Noeud fcur = this.noeuds.get(i);
                 double cur = fcur.distanceNoeud(p);
                 if (cur < min) {
                     min = cur;
@@ -781,6 +742,7 @@ public void menuTexte() {
         int Z=0 ;        // représente l'avancement du remplissage des lignes de la matrice
         double angle ;
         double angle2 ;
+        AppuiGlissant noeud2 ;
         
         for (i=0 ; i<this.getNoeuds().size() ; i++){
             Z=2*i ;
@@ -810,8 +772,8 @@ public void menuTexte() {
             }
             
             if (noeud instanceof AppuiGlissant){
-                Barre barresupport = ((AppuiGlissant) noeud).getPoseSur();
-                angle2 = barresupport.vecteurBarre().vecteurNormal().angleHorizontale() ;
+                noeud2 = ((AppuiGlissant) noeud);
+                angle2 = noeud2.angleForce();
                 S[Z][X+1]=cos(angle2);
                 S[Z+1][X+1]=sin(angle2);
                 X=X+1 ;
@@ -861,8 +823,42 @@ public void menuTexte() {
     }
     
     
+    public void Exploitation(){
+        
+        int N = this.NbInconnues();
+        int X = this.getBarres().size()-1;
+        double[] solutions = new double[N];
+        solutions = this.Resolution() ;
+        
+        for(int i=0 ; i<X+1 ; i++){
+            
+            this.getBarres().get(i).setEffort(solutions[i]);
+            
+        }
+        
+        for (int j=0 ; j<this.getNoeuds().size() ; j++){
+            Noeud noeud = this.getNoeuds().get(j) ;
+            
+            if ((noeud instanceof AppuiSimple)==true){
+                double vx = solutions[X+1] ;
+                double vy = solutions[X+2] ;
+                Vecteur2d forceAppuiSimple = new Vecteur2d(vx, vy);
+                noeud.setForce(forceAppuiSimple);
+                
+                X=X+2 ;
+            }
+            
+            if ((noeud instanceof AppuiGlissant)==true){
+                double normeForceAppuiGlissant = solutions[X+1] ;
+                AppuiGlissant noeudAppuiGlissant = ((AppuiGlissant) noeud);
+                double angle = noeudAppuiGlissant.angleForce();
+                
+                noeud.setForce(Vecteur2d.ForceAngleNorme(angle, normeForceAppuiGlissant));
+            }
+        
+    }
     
-
+    }
     /**
      * @return the elements
      */

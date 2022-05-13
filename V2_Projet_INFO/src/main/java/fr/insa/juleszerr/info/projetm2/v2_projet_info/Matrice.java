@@ -139,7 +139,6 @@ public void DescenteGauss(){
                
                 this.Equilibrage();
                 
-                System.out.println(this);
             
                 }
         }
@@ -159,10 +158,7 @@ public void RemonteeGauss(){
            }
            
           this.Equilibrage();
-          
-          
-          System.out.println(this);
-          
+
           System.out.println();
             }
         }
@@ -215,7 +211,7 @@ public double[] resolution(){
     System.out.println(this);
     
     for(int t=0 ; t<NbrLigne ; t++){
-        TabSol[t]= Matrice.ArrondirDouble(TabSol[t]);
+       TabSol[t]= Matrice.ArrondirDouble(TabSol[t]);
     }
    
     return TabSol ; 

@@ -17,7 +17,7 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       //pessi
+       
         NoeudSimple noeudterrain1 = new NoeudSimple(0,0) ;
         NoeudSimple noeudterrain2 = new NoeudSimple(3,0) ;
         NoeudSimple noeudterrain3 = new NoeudSimple(0,3) ;
@@ -118,6 +118,9 @@ public class Test {
            System.out.print(solutions[j]+"  ");
        
        }
+       
+       muda.Exploitation();
+       System.out.println(muda);
         
     }
     

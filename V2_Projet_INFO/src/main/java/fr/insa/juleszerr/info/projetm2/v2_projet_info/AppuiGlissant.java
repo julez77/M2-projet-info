@@ -43,8 +43,13 @@ public class AppuiGlissant extends NoeudAppui{
   
     @Override
  public String toString(){
-      return  "["+this.getPx()+","+this.getPy()+"] appuiglissant id "+this.getId()+ "posé sur barre "+ this.getPoseSur();
-  }   
+      return  "["+this.getPx()+","+this.getPy()+"] appuiglissant posé sur barre "+ this.getPoseSur()+" force : "+this.getForce().toString();
+  }
+ 
+ @Override
+ public String toString2(){
+     return "["+this.getPx()+","+this.getPy()+"] appuiglissant" ;
+ }
  
   @Override
     public double maxX() {
@@ -111,6 +116,13 @@ public class AppuiGlissant extends NoeudAppui{
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);
 
+    }
+    
+    public double angleForce(){
+        Barre barresupport = this.getPoseSur();
+        double angle = barresupport.vecteurBarre().vecteurNormal().angleHorizontale() ;
+        
+        return angle ;
     }
     
     

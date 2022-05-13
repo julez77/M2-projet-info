@@ -7,6 +7,8 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.acos;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 
 /**
@@ -25,17 +27,27 @@ public class Vecteur2d {
        
    }
    
+   public static Vecteur2d ForceAngleNorme(double angle , double norme){
+       double vx = norme*cos(angle);
+       double vy = norme*sin(angle);
+       Vecteur2d force = new Vecteur2d(vx, vy);
+       
+       return force ;
+       
+   }
+   
+      
    
    public double length(){
        return sqrt(Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) ;
            
    }
    
-   //public static double angleVecteurs (Vecteur2d v1, Vecteur2d v2){                //renvoie l'angle entre deux vecteurs mais c'est inutile
-       //double produitScalaire = v1.getVx() * v2.getVx() + v1.getVy() * v2.getVy() ;
-       //return acos(produitScalaire/(v1.length()* v2.length())) ;
+   public static double angleVecteurs (Vecteur2d v1, Vecteur2d v2){                //renvoie l'angle entre deux vecteurs mais c'est inutile
+       double produitScalaire = v1.getVx() * v2.getVx() + v1.getVy() * v2.getVy() ;
+       return acos(produitScalaire/(v1.length()* v2.length())) ;
        
-   //}
+   }
    
    public double angleHorizontale (){              //renvoie l'angle entre le vecteur et l'horizontale
        
@@ -105,10 +117,9 @@ public class Vecteur2d {
  }   
     
  public static void main(String[] args) {
-     Vecteur2d vecteur = new Vecteur2d(5,7) ;
-     Vecteur2d vecteur2 = new Vecteur2d(5,-7) ;
-     System.out.println(vecteur.vecteurNormal()) ;
-     System.out.println(vecteur2.vecteurNormal()) ;
+     Vecteur2d vecteur1 = new Vecteur2d(2,2) ;
+     Vecteur2d vecteur2 = new Vecteur2d(2,0) ;
+     System.out.println(Vecteur2d.angleVecteurs(vecteur2, vecteur1));
              
  }
     
