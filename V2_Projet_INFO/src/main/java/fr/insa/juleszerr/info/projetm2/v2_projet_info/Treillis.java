@@ -198,7 +198,7 @@ public class Treillis extends Figure {
         this.getNoeuds().addAll(T.getNoeuds());
         this.treillise.addAll(T.getTreillise());
         this.terrain3.addAll(T.getTerrain3());
-        this.elements.add(T);
+        
         this.treillise.add(T);
     }
     public void addbarres(Barre b){
@@ -313,7 +313,7 @@ public void removeterrain3(terrain3 t){
     public void removebarres(Barre b){
          if(this.barres.contains(b)==true){
         this.barres.remove(b);}
-      if(this.barres.contains(b)==true){
+      if(this.elements.contains(b)==true){
         this.elements.remove(b);}
         
     }
