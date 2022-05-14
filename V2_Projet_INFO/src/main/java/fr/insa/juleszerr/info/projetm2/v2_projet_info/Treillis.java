@@ -187,7 +187,7 @@ public class Treillis extends Figure {
     
     
     
-          public void addterrain3(terrain3 t){
+    public void addterrain3(terrain3 t){
                
                if(this.elements.contains(t)==false){
                     this.elements.add(t);
@@ -213,9 +213,9 @@ public class Treillis extends Figure {
                    
                    }
                    
-                   t.setTreillis(this);
-                   
                }
+               
+               t.setTreillis(this);
             
           }
         //}
@@ -246,25 +246,15 @@ public class Treillis extends Figure {
 public void removeterrain3(terrain3 t){
               this.elements.remove(t);
               this.getTerrain3().remove(t);
-              this.elements.remove(t.getNoeuds()[1]);
-              this.elements.remove(t.getNoeuds()[2]);
-              this.elements.remove(t.getNoeuds()[0]);
-              this.elements.remove(t.getBarres()[0]);
-              this.elements.remove(t.getBarres()[1]);
-              this.elements.remove(t.getBarres()[2]);
-              this.noeuds.remove(t.getNoeuds()[1]);
-              this.noeuds.remove(t.getNoeuds()[2]);
-              this.noeuds.remove(t.getNoeuds()[0]);
-              this.barres.remove(t.getBarres()[0]);
-              this.barres.remove(t.getBarres()[1]);
-              this.barres.remove(t.getBarres()[2]);
-              this.elemterrain3.remove(t.getNoeuds()[1]);
-              this.elemterrain3.remove(t.getNoeuds()[2]);
-              this.elemterrain3.remove(t.getNoeuds()[0]);
-              this.elemterrain3.remove(t.getBarres()[0]);
-                            this.elemterrain3.remove(t.getBarres()[1]);
-                            this.elemterrain3.remove(t.getBarres()[2]);
-                            t.setTreillis(null);
+              
+              for (int i=0 ; i<3 ; i++){
+                  this.elements.remove(t.getNoeuds()[i]);
+                  this.elements.remove(t.getBarres()[i]);
+                  this.elemterrain3.remove(t.getNoeuds()[i]);
+                  this.elemterrain3.remove(t.getBarres()[i]);
+              }
+             
+              t.setTreillis(null);
           }
     
     public void removebarres(Barre b){
