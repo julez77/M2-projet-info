@@ -64,8 +64,7 @@ public class Treillis extends Figure {
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
         double D = b.longueurBarre() ;
         AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
-        this.elements.add(noeud) ;
-    this.noeuds.add(noeud);
+        add(noeud);
     }
     
     public void poserAppuiGlissant(Barre b, double distance){
@@ -75,8 +74,7 @@ public class Treillis extends Figure {
         double D = b.longueurBarre() ;
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         add(noeud) ;
-        this.elements.add(noeud);
-        this.noeuds.add(noeud);
+        add(noeud) ;
         noeud.setPoseSur(b) ;
     }
     
@@ -89,12 +87,8 @@ public class Treillis extends Figure {
         
         Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
-        this.barres.add(newBarre1);
-        this.barres.add(newBarre2);
-        this.noeuds.add(noeud);
-        this.elements.add(noeud);
-        this.elements.add(newBarre1) ;
-        this.elements.add(newBarre2) ;
+        add(newBarre1);
+        add(newBarre2);
         remove(b) ;
         
    }
@@ -152,6 +146,7 @@ public class Treillis extends Figure {
                 this.addTreillis((Treillis) f);
 
             } 
+            
             else{
                 this.addterrain3((terrain3)f);
             }
