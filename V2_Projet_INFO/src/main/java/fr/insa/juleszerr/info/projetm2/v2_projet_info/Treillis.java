@@ -68,7 +68,8 @@ public class Treillis extends Figure {
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
         double D = b.longueurBarre() ;
         AppuiSimple noeud = new AppuiSimple(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
-        add(noeud);
+        this.elements.add(noeud) ;
+    this.noeuds.add(noeud);
     }
     
     public void poserAppuiGlissant(Barre b, double distance){
@@ -78,7 +79,8 @@ public class Treillis extends Figure {
         double D = b.longueurBarre() ;
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
         add(noeud) ;
-        add(noeud) ;
+        this.elements.add(noeud);
+        this.noeuds.add(noeud);
         noeud.setPoseSur(b) ;
     }
     
@@ -91,8 +93,12 @@ public class Treillis extends Figure {
         
         Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
-        add(newBarre1);
-        add(newBarre2);
+        this.barres.add(newBarre1);
+        this.barres.add(newBarre2);
+        this.noeuds.add(noeud);
+        this.elements.add(noeud);
+        this.elements.add(newBarre1) ;
+       this.elements.add(newBarre2) ;
         remove(b) ;
         
    }
@@ -182,24 +188,12 @@ public class Treillis extends Figure {
     
     
     public void addbarres(Barre b){
-        
-        if(this.barres.contains(b)==false){
-            this.barres.add(b);}
-        
-        if(this.barres.contains(b)==false){
-            this.elements.add(b);}
-      
-        if(this.noeuds.contains(b.getNoeud1())==false){
-            this.noeuds.add(b.getNoeud1());}
-        
-        if(this.noeuds.contains(b.getNoeud2())==false){
-            this.noeuds.add(b.getNoeud2());}
-        
-        if(this.elements.contains(b.getNoeud1())==false){
-            this.elements.add(b.getNoeud1());}
-         
-        if(this.elements.contains(b.getNoeud2())==false){
-            this.elements.add(b.getNoeud2());}
+        this.barres.add(b);
+        this.elements.add(b);
+        this.noeuds.add(b.getNoeud1());
+        this.noeuds.add(b.getNoeud2());
+        this.elements.add(b.getNoeud1());
+        this.elements.add(b.getNoeud2());
     }
     
     
@@ -258,9 +252,7 @@ public class Treillis extends Figure {
         else  if ((f instanceof Treillis)== true ) {
              this.getTreillise().remove((Treillis)f);
              
-            
-        } 
-        else{
+            } else{
              this.removeterrain3((fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3) f);
          }  
              

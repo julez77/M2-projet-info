@@ -133,8 +133,9 @@ public class Controleur {
             treillis.poserAppuiSimple(b, b.longueurBarre()/2);
             this.vue.redrawAll();            
         }else if (this.getEtat() == Etat.APPUIGLISSANT) {
+            System.out.println(this.vue.getTreillis().getBarres());
             Noeud nclic = new NoeudSimple(t.getX(), t.getY());
-            Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
+            Barre b = this.vue.getTreillis().barrePlusProche(nclic, Double.MAX_VALUE);
             double px = t.getX();
             double py = t.getY();
             
@@ -223,13 +224,13 @@ public class Controleur {
                 terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
                 new NoeudSimple(pos2[0], pos1[1]),
                 new NoeudSimple(pos2[0], py) );
-           treillis.add(ter);
+           treillis.addterrain3(ter);
                           
            }else{
            terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
                           new NoeudSimple(pos2[0], pos2[1]),
                           new NoeudSimple(px, py) );
-           treillis.add(ter);
+           treillis.addterrain3(ter);
            }
            this.vue.redrawAll();
            this.changeEtat(Etat.TERRAIN_N1);

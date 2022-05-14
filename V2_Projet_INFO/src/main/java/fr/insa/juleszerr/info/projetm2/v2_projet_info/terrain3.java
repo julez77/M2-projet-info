@@ -35,13 +35,13 @@ public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
     this.noeuds[0]=n1;
     this.noeuds[1]= n2;
      this.noeuds[2]=n3;       
-    this.treillis = null ;
     this.barre1 = new Barre(getNoeud1(), getNoeud2(), this.getColor());
     this.barre2 = new Barre(getNoeud2(), getNoeud3(),this.getColor());
     this.barre3 = new Barre(getNoeud1(), getNoeud3(),this.getColor());
     this.barres[0] = barre1;
     this.barres[1]= barre2;
     this.barres[2]= barre3 ;
+    
     
 }
 
