@@ -8,8 +8,9 @@ import static fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple.RAYON_I
 import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.Group;
-import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.PINK;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 
 /**
@@ -72,11 +73,12 @@ public class AppuiSimple extends NoeudAppui {
 */
     @Override
         public  Group dessine() {
+            Circle poly = new Circle(this.px, this.py, 10);
         Ellipse res = new Ellipse(this.px, this.py, RAYON_IN_DRAW, RAYON_IN_DRAW);
         //Segment s = new Segment(new Point(0, 0), new Point(5, 5));
-        res.setStroke(GREEN);
-        res.setFill(GREEN);
-        Group g = new Group( res);       
+        poly.setStroke(GREEN);
+        poly.setFill(PINK);
+        Group g = new Group( poly);       
         return g;              
     }
              @Override

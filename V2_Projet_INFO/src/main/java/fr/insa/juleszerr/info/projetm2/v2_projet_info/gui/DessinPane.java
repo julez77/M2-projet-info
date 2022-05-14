@@ -43,7 +43,7 @@ public class DessinPane extends Pane{
     }
     
     public  void redrawAll() {
-        
+        this.getChildren().clear();
         this.getChildren().addAll(this.main.getTreillis().dessine());  
         List<Figure> select = this.main.getControleur().getSelection();
         if(! select.isEmpty()){

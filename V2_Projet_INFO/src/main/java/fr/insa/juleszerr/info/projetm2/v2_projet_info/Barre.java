@@ -229,7 +229,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
         res.setStroke(this.getColor());
         res.setFill(this.getColor());
-        
+        res.setStrokeWidth(5);
         Group g = new Group( res);
         g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
         return g;
@@ -262,6 +262,16 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         }
     }
 
+    public Noeud noeudPlusProche(Noeud n){
+        double dis1 = this.getNoeud1().distanceNoeud(n);
+        double dis2 = this.getNoeud2().distanceNoeud(n);
+        if(dis1>dis2){
+            return this.getNoeud2();
+        }else{
+            return this.getNoeud1();
+        }
+    }
+    
     public Barre barrepara(Barre b , Noeud n){
         // pour le  noeud1
     double    L = Math.sqrt((b.noeud1.px-b.noeud2.getPx())*((b.noeud1.px-b.noeud2.getPx())+(b.noeud1.py-b.noeud2.getPy()))*(b.noeud1.py-b.noeud2.getPy()));
@@ -337,6 +347,8 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     public void setTreillis(Treillis treillis) {
         this.treillis = treillis;
     }
+
+
 
 
     

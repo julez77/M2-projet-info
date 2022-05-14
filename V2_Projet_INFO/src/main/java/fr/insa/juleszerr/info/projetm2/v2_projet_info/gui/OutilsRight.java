@@ -43,18 +43,8 @@ public class OutilsRight extends VBox {
         });
         
         this.bSuppr.setOnAction((ActionEvent t) -> {
-            NoeudSimple n1 = new NoeudSimple(200,200);
-            NoeudSimple n2 = new NoeudSimple(300,300);
-            NoeudSimple n3 = new NoeudSimple(400,300);
-            Barre b = new Barre(n1, n2);
-            Treillis treillis = this.main.getTreillis();
-            treillis.add(b);
-            treillis.add(n3);
-            this.main.redrawAll();
             
-            treillis.remove(b);
-            this.main.redrawAll();
-            //this.controleur.boutonSuppr(t); 
+            this.controleur.boutonSuppr(t); 
              
         });
         
