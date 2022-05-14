@@ -213,6 +213,14 @@ public class Treillis extends Figure {
                    
                    }
                    
+                   if(this.noeuds.contains(t.getNoeuds()[i])==false){
+                       this.noeuds.add(t.getNoeuds()[i]);
+                   }
+                   
+                   if(this.barres.contains(t.getBarres()[i])==false){
+                       this.barres.add(t.getBarres()[i]);
+                   }
+                   
                }
                
                t.setTreillis(this);
@@ -252,6 +260,8 @@ public void removeterrain3(terrain3 t){
                   this.elements.remove(t.getBarres()[i]);
                   this.elemterrain3.remove(t.getNoeuds()[i]);
                   this.elemterrain3.remove(t.getBarres()[i]);
+                  this.noeuds.remove(t.getNoeuds()[i]);
+                  this.barres.remove(t.getBarres()[i]);
               }
              
               t.setTreillis(null);
