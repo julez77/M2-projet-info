@@ -105,10 +105,10 @@ public class Test {
        System.out.println(muda);
         
         
-       System.out.println(muda.Resolution());
+       System.out.println(muda.Solutions());
  
        double[] solutions = new double[muda.NbInconnues()] ;
-       solutions = muda.Resolution() ;
+       solutions = muda.Solutions() ;
         
        System.out.println() ;
        System.out.println() ;
@@ -119,7 +119,7 @@ public class Test {
        
        }
        
-       muda.Exploitation();
+       muda.Resolution();
        System.out.println(muda);
         
     }
