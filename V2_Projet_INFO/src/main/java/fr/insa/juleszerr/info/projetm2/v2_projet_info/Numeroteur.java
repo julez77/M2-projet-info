@@ -28,9 +28,11 @@ public class Numeroteur<TO> {
     }
     
     public int creeID(TO obj) {
+        
         if(this.objetVersId.containsKey(obj)) {
             throw new Error("objet " + obj + " déjà dans le numéroteur");
         }
+        
         this.idVersObjet.put(this.prochainID, obj);
         this.objetVersId.put(obj, this.prochainID);
         this.prochainID ++;
@@ -44,7 +46,8 @@ public class Numeroteur<TO> {
     public int getID(TO obj) {
         if (this.objExist(obj)) {
             return this.objetVersId.get(obj);
-        } else {
+        } 
+        else {
             throw new Error("Objet" + obj + " inconnu dans numéroteur");
         }
     }
@@ -52,7 +55,8 @@ public class Numeroteur<TO> {
     public int getOuCreeID(TO obj) {
         if (this.objExist(obj)) {
             return this.objetVersId.get(obj);
-        } else {
+        } 
+        else {
             return this.creeID(obj);
         }
     }

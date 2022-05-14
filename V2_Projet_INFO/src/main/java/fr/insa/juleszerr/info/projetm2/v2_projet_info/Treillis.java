@@ -132,8 +132,9 @@ public class Treillis extends Figure {
             f.setTreillis(this);
 
             if ((f instanceof Noeud)== true ){
-               if(this.noeuds.contains(f)==false){
-                this.getNoeuds().add((Noeud) f);}
+               
+                if(this.noeuds.contains(f)==false){
+                    this.getNoeuds().add((Noeud) f);}
             }
             
             else if ((f instanceof Barre)== true ){
@@ -189,46 +190,33 @@ public class Treillis extends Figure {
           public void addterrain3(terrain3 t){
                
                if(this.elements.contains(t)==false){
-                    this.elements.add(t);}
-                    this.getTerrain3().add(t);
-              
-               if(this.elements.contains(t.getNoeuds()[1])==false){
-                    this.elements.add(t.getNoeuds()[1]);}
+                    this.elements.add(t);
+               }
+                    
+               this.getTerrain3().add(t);
                
-               if(this.elements.contains(t.getNoeuds()[2])==false){
-                    this.elements.add(t.getNoeuds()[2]);}
-               
-               if(this.elements.contains(t.getNoeuds()[0])==false){
-                    this.elements.add(t.getNoeuds()[0]);}
-               
-               if(this.elements.contains(t.getBarres()[0])==false){
-                    this.elements.add(t.getBarres()[0]);}
-               
-               if(this.elements.contains(t.getBarres()[1])==false){
-                    this.elements.add(t.getBarres()[1]);}
-               
-               if(this.elements.contains(t.getBarres()[2])==false){
-                    this.elements.add(t.getBarres()[2]);}
-               
-               if(this.elemterrain3.contains(t.getNoeuds()[1])==false){
-                    this.elemterrain3.add(t.getNoeuds()[1]);}
-              
-               if(this.elemterrain3.contains(t.getNoeuds()[2])==false){
-                    this.elemterrain3.add(t.getNoeuds()[2]);}
-              
-               if(this.elemterrain3.contains(t.getNoeuds()[0])==false){
-                    this.elemterrain3.add(t.getNoeuds()[0]);}
-              
-               if(this.elemterrain3.contains(t.getBarres()[0])==false){
-                    this.elemterrain3.add(t.getBarres()[0]);}
-              
-               if(this.elemterrain3.contains(t.getBarres()[1])==false){
-                    this.elemterrain3.add(t.getBarres()[1]);}
-              
-               if(this.elemterrain3.contains(t.getBarres()[2])==false){
-                    this.elemterrain3.add(t.getBarres()[2]);}
-                            
-                            t.setTreillis(this);
+               for(int i=0 ; i<3 ; i++){
+                   if(this.elements.contains(t.getNoeuds()[i])==false){
+                    this.elements.add(t.getNoeuds()[i]);
+                   }
+                   
+                   if(this.elements.contains(t.getBarres()[i])==false){
+                    this.elements.add(t.getBarres()[i]);
+                   }
+                   
+                   if(this.elemterrain3.contains(t.getNoeuds()[i])==false){
+                    this.elemterrain3.add(t.getNoeuds()[i]);
+                   }
+                   
+                   if(this.elemterrain3.contains(t.getBarres()[i])==false){
+                    this.elemterrain3.add(t.getBarres()[i]);
+                   
+                   }
+                   
+                   t.setTreillis(this);
+                   
+               }
+            
           }
         //}
 
