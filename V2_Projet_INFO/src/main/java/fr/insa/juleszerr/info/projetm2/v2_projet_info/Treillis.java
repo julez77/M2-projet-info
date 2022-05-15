@@ -197,7 +197,7 @@ public class Treillis extends Figure {
        
         this.barres.add(b);
         
-        if(this.elements.contains(b.getNoeud1())==false){
+        if(this.noeuds.contains(b.getNoeud1())==false){
         this.noeuds.add(b.getNoeud1());
         b.getNoeud1().setTreillis(this);
         }
@@ -209,6 +209,13 @@ public class Treillis extends Figure {
         this.elements.add(b.getNoeud1());}
           if(this.elements.contains(b.getNoeud2())==false){
         this.elements.add(b.getNoeud2());}
+          if((this.noeuds2.contains(b.getNoeud1())==false)&&(this.elemterrain3.contains(b.getNoeud1())==false)){
+                    this.getNoeuds2().add(b.getNoeud1());}
+          if((this.noeuds2.contains(b.getNoeud2())==false)&&(this.elemterrain3.contains(b.getNoeud2())==false)){
+                    this.getNoeuds2().add(b.getNoeud2());}
+          
+          
+          
     }
     
     
