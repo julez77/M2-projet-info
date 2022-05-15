@@ -7,6 +7,7 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 
 /**
  *
@@ -18,6 +19,7 @@ public class MainMenu extends MenuBar{
     public MainMenu (MainPane main){
         this.main = main;
         Menu file = new Menu("Fichier");
+        
         MenuItem nouveau = new MenuItem("Nouveau");
         nouveau.setOnAction((t) -> {
             this.main.getControleur().menuNouveau(t);
@@ -35,13 +37,27 @@ public class MainMenu extends MenuBar{
             this.main.getControleur().menuOpen(t);
         });        
         file.getItems().addAll(nouveau,save,saveAs,load);
-       /* Menu help = new Menu("Aide");
+        
+        Menu help = new Menu("Aide");
+        MenuItem racourci = new MenuItem("Racourci clavier");
+        racourci.setOnAction((t) -> {
+            this.main.getControleur().menuRacourci(t);
+        });
+        
         MenuItem apropos = new MenuItem("A propos");
         apropos.setOnAction((t) -> {
             this.main.getControleur().menuApropos(t);
-        });        
-        help.getItems().addAll(apropos);*/
+        });
         
-        this.getMenus().addAll(file);
+        help.getItems().addAll(racourci, apropos);
+        
+        Menu outils = new Menu("Outils");
+        RadioMenuItem afficheBarOutils = new RadioMenuItem("Afficher la bar d'outils");
+        afficheBarOutils.setOnAction((t) -> {
+            this.main.getControleur().menuAfficherBarOutils(t);
+        });         
+        outils.getItems().addAll(afficheBarOutils);
+        
+        this.getMenus().addAll(file, help, outils);
     }
 }
