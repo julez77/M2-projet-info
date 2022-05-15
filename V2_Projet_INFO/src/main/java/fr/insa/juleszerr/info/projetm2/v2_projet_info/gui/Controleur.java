@@ -120,7 +120,8 @@ public class Controleur {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
-            treillis.add(new NoeudSimple(px , py));
+            NoeudSimple pessi =new NoeudSimple(px , py); 
+            treillis.add(pessi);
            
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.APPUISIMPLE) {

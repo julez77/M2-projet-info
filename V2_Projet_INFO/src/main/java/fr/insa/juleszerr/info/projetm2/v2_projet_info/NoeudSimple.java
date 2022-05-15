@@ -31,7 +31,7 @@ public class NoeudSimple extends Noeud {
      */
     @Override
     public String toString(){
-      return  "("+this.getPx()+","+this.getPy()+")";
+      return  "["+this.getPx()+","+this.getPy()+"]";
   }
 
     
