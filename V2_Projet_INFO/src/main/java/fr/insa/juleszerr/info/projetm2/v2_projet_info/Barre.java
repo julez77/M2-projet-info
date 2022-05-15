@@ -115,7 +115,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
      */
     @Override
  public String toString() {
-        return "barre :[" + this.noeud1.toString2()+ "," + this.noeud2.toString2() + "] effort :"+getEffort()+" prix"+prix  ;   
+        return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] effort :"+getEffort()+" prix"+prix  ;   
  }
     
   public static  Barre créeBarre() {

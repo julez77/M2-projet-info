@@ -62,7 +62,7 @@ public abstract class Noeud extends Figure{
   }
   
   public String toString2(){
-      return "("+px+","+py+")" ;
+      return "["+px+","+py+"]" ;
   }
  public static  Noeud entrenoeud(){
    double  type ;
