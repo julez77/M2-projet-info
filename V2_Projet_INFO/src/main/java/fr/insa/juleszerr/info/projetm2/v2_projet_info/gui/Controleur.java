@@ -260,17 +260,10 @@ public class Controleur {
             Vecteur2d force2 = new Vecteur2d(0, -1000) ;
         
             proche.setForce(force1);
-double[] solutions = new double[treillis.NbInconnues()] ;
-       solutions = treillis.Solutions() ;
-        
-       System.out.println() ;
-       System.out.println() ;
-        
-       for (int j=0 ; j<treillis.NbInconnues() ; j++){
-            
-           System.out.print(solutions[j]+"  ");
+            treillis.Resolution();
+
        
-       }
+       
         }
     }
 
