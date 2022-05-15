@@ -79,12 +79,10 @@ public class Treillis extends Figure {
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
         double D = b.longueurBarre() ;
         AppuiGlissant noeud = new AppuiGlissant(b.getNoeud1().getPx()+(distance*T)/D  ,  b.getNoeud1().getPy() + (distance*C)/D) ;
-        add(noeud) ;
-        //this.elements.add(noeud);
-      //  this.noeuds.add(noeud);
-        noeud.setPoseSur(b) ;
-      //  noeud.setTreillis(this);
-      this.add(noeud);
+        add(noeud) ; 
+        noeud.setPoseSur(b) ; 
+        //noeud.setTreillis(this);
+        this.add(noeud);
     }
     
    public void poserNoeudSimple(Barre b, double distance){
@@ -96,12 +94,8 @@ public class Treillis extends Figure {
         
         Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
-        this.barres.add(newBarre1);
-        this.barres.add(newBarre2);
-        this.noeuds.add(noeud);
-        this.elements.add(noeud);
-        this.elements.add(newBarre1) ;
-       this.elements.add(newBarre2) ;
+        add(newBarre1);
+        add(newBarre2);
         this.remove(b);
         
    }
@@ -325,36 +319,7 @@ public void removeterrain3(terrain3 t){
     public int size() {
         return this.getElements().size();
     }
-    
-    
-    
-  ///  public void ajouteBarre(Barre barre){
-     //   boolean barreexiste = false ;
-     //   if(this.barresTreillis.isEmpty()){
-        //    barreexiste = false ;
-  ///      }
-  //      else{
-        
- //      for(int i=0; i<barresTreillis.size() ; i++){
-        //    if(barre==barresTreillis.get(i)){
-             //   barreexiste = true ;
-                
-     //       }
-   ///    }
-    ///    }
-        ///    if(barreexiste == false){
-           // ajouteNoeud(barre.getNoeud1());
-        //    ajouteNoeud(barre.getNoeud2());
-            
-           //     barre.setId((this.maxIdBarre() + 1));
-            ///    barresTreillis.add(barre) ;
-      //      }
-        
-    
-    //}
-
-
-    
+  
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -383,6 +348,7 @@ public void removeterrain3(terrain3 t){
     public void setElements(List<Figure> élements) {
         this.elements = élements;
     }
+    
     @Override
     public Group dessine() {
         
@@ -392,7 +358,8 @@ public void removeterrain3(terrain3 t){
         }
         return g;
     } 
-        @Override
+    
+    @Override
     public Group dessineSelection() {
                 
         Group g = new Group();
@@ -401,7 +368,8 @@ public void removeterrain3(terrain3 t){
         }
         return g;
     }
-public static Treillis treillisTest() {
+    
+    public static Treillis treillisTest() {
         NoeudSimple p1 = new  NoeudSimple(10, 10);
         NoeudSimple p2 = new  NoeudSimple(100, 10);
         NoeudSimple p3 = new  NoeudSimple(100, 100);

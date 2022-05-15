@@ -34,12 +34,12 @@ public class AppuiSimple extends NoeudAppui {
                 
     @Override
    public String toString(){
-      return  "["+this.getPx()+","+this.getPy()+"] force : "+this.getForce().toString();
+      return  "["+this.getPx()+","+this.getPy()+"] appui simple force : "+this.getForce().toString();
   } 
    
    @Override
    public String toString2(){
-       return "["+this.getPx()+","+this.getPy()+"]" ;
+       return "["+this.getPx()+","+this.getPy()+"] appui simple" ;
    }
 
  @Override
