@@ -502,7 +502,7 @@ public void menuTexte() {
                 Noeud np = Noeud.entrenoeud();
                 this.add(np);
             } else if (rep == 3) {
-                Barre ns = Barre.créeBarre();
+                Barre ns = Barre.creeBarre();
                 this.add(ns);
                 this.add(ns.getNoeud1());
                 this.add(ns.getNoeud2());

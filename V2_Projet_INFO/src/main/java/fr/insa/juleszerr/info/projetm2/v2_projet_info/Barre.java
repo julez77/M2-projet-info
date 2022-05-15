@@ -118,7 +118,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] effort :"+getEffort()+" prix"+prix  ;   
  }
     
-  public static  Barre créeBarre() {
+  public static  Barre creeBarre() {
         System.out.println(" noeud n1 : ");
         Noeud noeud1 = Noeud.entrenoeud();
         System.out.println("noeud  n2: ");
