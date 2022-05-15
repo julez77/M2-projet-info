@@ -22,7 +22,7 @@ public class OutilsRight extends VBox {
     private Button zoomOut;
     private Button bSelect;
     private Button bSuppr;
-    private Button bAffiche;
+    private Button bResoudre;
     private DessinPane dessin;
     private MainPane main;
     private Controleur controleur; 
@@ -33,7 +33,7 @@ public class OutilsRight extends VBox {
                
         this.zoomIn = new Button("Zoom *2");
         this.zoomOut = new Button("Zoom /2");
-        this.bAffiche = new Button("Affiche");
+        this.bResoudre = new Button("Resoudre");
         this.bSelect = new Button("Selection");
         this.bSuppr = new Button("Supprimer");
         
@@ -48,6 +48,12 @@ public class OutilsRight extends VBox {
              
         });
         
+        this.bResoudre.setOnAction((ActionEvent t) -> {
+            
+            this.controleur.boutonResoudre(t); 
+             
+        });
+        
         
        /* 
         ToggleGroup gBouton = new ToggleGroup();
@@ -57,7 +63,7 @@ public class OutilsRight extends VBox {
         this.bSuppr = new Button("Supprimer");
         */
         
-        this.getChildren().addAll( this.bAffiche,
+        this.getChildren().addAll( this.bResoudre,
                 this.bSelect,this.bSuppr);
       
        
@@ -99,7 +105,7 @@ public class OutilsRight extends VBox {
      * @return the bAffiche
      */
     public Button getbAffiche() {
-        return bAffiche;
+        return bResoudre;
     }
     
     

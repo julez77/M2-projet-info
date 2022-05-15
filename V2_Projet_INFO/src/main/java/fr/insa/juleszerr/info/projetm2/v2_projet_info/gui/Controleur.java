@@ -11,6 +11,7 @@ import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Vecteur2d;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3;
 import java.io.File;
 import java.io.IOException;
@@ -39,12 +40,11 @@ public class Controleur {
     private List<Figure> selection;
 
     
-
    
     
 
    
-    public enum Etat {DEBUT, SELECT , SUPPR, 
+    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE,
     NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
     BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, BARRE_PARA,
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3}
@@ -252,6 +252,25 @@ public class Controleur {
             treillis.remove(proche);
             System.out.println("Figure supprimée");
             this.vue.redrawAll();
+        }else if(this.etat == Etat.RESOUDRE){
+            Treillis treillis =this.vue.getTreillis(); 
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
+            Vecteur2d force1 = new Vecteur2d(0, -500) ;
+            Vecteur2d force2 = new Vecteur2d(0, -1000) ;
+        
+            proche.setForce(force1);
+double[] solutions = new double[treillis.NbInconnues()] ;
+       solutions = treillis.Solutions() ;
+        
+       System.out.println() ;
+       System.out.println() ;
+        
+       for (int j=0 ; j<treillis.NbInconnues() ; j++){
+            
+           System.out.print(solutions[j]+"  ");
+       
+       }
         }
     }
 
@@ -287,13 +306,17 @@ public class Controleur {
     
     void boutonSuppr(ActionEvent t) {
         this.changeEtat(Etat.SUPPR);
-       /* if (this.etat == Etat.SELECT && this.selection.size() > 0) {
+       if (this.etat == Etat.SELECT && this.selection.size() > 0) {
             // normalement le bouton est disabled dans le cas contraire
             this.vue.getTreillis().removeAll(this.selection);
             this.selection.clear();
             this.activeBoutonsSuivantSelection();
             this.vue.redrawAll();
-        }*/
+        }
+    }
+    
+    void boutonResoudre(ActionEvent t) {
+        this.changeEtat(Etat.RESOUDRE);
     }
     
     
