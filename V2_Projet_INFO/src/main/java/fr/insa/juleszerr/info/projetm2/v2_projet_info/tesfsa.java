@@ -29,9 +29,9 @@ tr.add(ter);
 //b1=Barre.creeBarre();
 ///tr.add(b1);
 System.out.println("le treillis");
-System.out.println(tr.getElements());
+System.out.println(tr.getNoeuds().size());
 System.out.println("noeuds2");
-System.out.println(tr.getNoeuds2());
+System.out.println(tr.getNoeuds2().size());
 //System.out.println(tr.getBarres());
 
 

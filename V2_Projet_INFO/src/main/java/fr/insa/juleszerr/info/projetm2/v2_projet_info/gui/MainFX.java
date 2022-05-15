@@ -37,6 +37,7 @@ public class MainFX extends Application  {
         
         MainPane main = new MainPane(primaryStage,test);
         Scene s = new Scene(main,800,600);
+        //primaryStage.setFullScreen(true);
         primaryStage.setScene(s);
         primaryStage.show();
     }
