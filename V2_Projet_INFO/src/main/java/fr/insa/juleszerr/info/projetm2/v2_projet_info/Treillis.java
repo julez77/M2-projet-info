@@ -248,6 +248,16 @@ public class Treillis extends Figure {
                    if(this.elements.contains(t.getBarres()[i])==false){
                         this.elements.add(t.getBarres()[i]);
                         t.getBarres()[i].setTreillis(this);
+                   if(this.barres.contains(t.getBarres()[i])==false){
+                        this.barres.add(t.getBarres()[i]);
+                   }
+                        if(this.noeuds.contains(t.getNoeuds()[i])==false){
+                        this.noeuds.add(t.getNoeuds()[i]);
+                        
+                   } 
+                   
+                   
+                   
                    }
                            
                    
