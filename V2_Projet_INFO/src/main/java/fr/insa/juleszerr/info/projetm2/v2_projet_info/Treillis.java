@@ -236,18 +236,17 @@ public class Treillis extends Figure {
                    if(this.elemterrain3.contains(t.getBarres()[i])==false){
                     this.elemterrain3.add(t.getBarres()[i]); }
                    
-                   this.add(t.getBarres()[i]);
-                   t.getBarres()[i].setTreillis(this);
+                  
                    
                    
                    
                    if(this.elements.contains(t.getNoeuds()[i])==false){
-                        this.add(t.getNoeuds()[i]);
+                        this.elements.add(t.getNoeuds()[i]);
                         t.getNoeuds()[i].setTreillis(this);
                    }
                    
                    if(this.elements.contains(t.getBarres()[i])==false){
-                        this.add(t.getBarres()[i]);
+                        this.elements.add(t.getBarres()[i]);
                         t.getBarres()[i].setTreillis(this);
                    }
                            

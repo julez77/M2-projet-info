@@ -227,6 +227,7 @@ public class Controleur {
             }
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);
+       
         }else if (this.getEtat() == Etat.BARRE_PARA){
             Treillis treillis =this.vue.getTreillis(); 
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
