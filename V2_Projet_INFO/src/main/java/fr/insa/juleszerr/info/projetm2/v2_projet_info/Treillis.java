@@ -274,7 +274,10 @@ public class Treillis extends Figure {
          
         if ((f instanceof Noeud)== true ){
                 this.getNoeuds().remove((Noeud) f);}
-         
+         if(this.noeuds2.contains((Noeud)f)==true){
+             this.noeuds2.remove((Noeud) f);
+             
+         }
         else if ((f instanceof Barre)== true ){
                this.removebarres((Barre) f);
                        ;}
@@ -309,6 +312,9 @@ public void removeterrain3(terrain3 t){
     public void removebarres(Barre b){
         this.barres.remove(b);
         this.elements.remove(b);
+        if(this.barres2.contains(b)==true){
+            this.barres2.remove(b);
+        }
         b.setTreillis(null);
     }
     

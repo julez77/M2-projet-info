@@ -17,18 +17,20 @@ public class tesfsa {
       NoeudSimple n1 = new NoeudSimple(4 ,2);
       NoeudSimple n2 = new NoeudSimple(7 ,3);  
        NoeudSimple n3 = new NoeudSimple(5 ,7);
+        NoeudSimple n4 = new NoeudSimple(8 ,1);
 Barre  b1 ;
 Treillis tr = new Treillis();
 tr.add(n1);
-tr.add(n2);
+terrain3 ter =new terrain3(n2,n3,n4);
+tr.add(ter);
+//System.out.println(tr.getElements());
+//System.out.println("lol");
+//System.out.println(tr.getNoeuds2());
+//b1=Barre.creeBarre();
+///tr.add(b1);
+System.out.println("le treillis");
 System.out.println(tr.getElements());
-System.out.println("lol");
-System.out.println(tr.getNoeuds2());
-b1=Barre.creeBarre();
-tr.add(b1);
-System.out.println("lol");
-System.out.println(tr.getElements());
-System.out.println("lol");
+System.out.println("noeuds2");
 System.out.println(tr.getNoeuds2());
 //System.out.println(tr.getBarres());
 
