@@ -22,19 +22,19 @@ public class terrain3 extends Figure{
     private Barre barre3;
     private Treillis treillis ;
     private Color color;
-    private Noeud[] noeuds;       
+    private NoeudSimple[] noeuds;       
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
     this.color= Color.CRIMSON;
-   this.noeuds = new Noeud[4] ;
-   this.barres = new Barre[4] ;
-   this.noeud1 = n1;
+    this.noeuds = new NoeudSimple[4] ;
+    this.barres = new Barre[4] ;
+    this.noeud1 = n1;
     this.noeud2 = n2;
     this.noeud3 = n3;
     this.noeuds[0]=n1;
     this.noeuds[1]= n2;
-     this.noeuds[2]=n3;       
+    this.noeuds[2]=n3;       
     this.barre1 = new Barre(getNoeud1(), getNoeud2(), this.getColor());
     this.barre2 = new Barre(getNoeud2(), getNoeud3(),this.getColor());
     this.barre3 = new Barre(getNoeud1(), getNoeud3(),this.getColor());
@@ -46,13 +46,15 @@ public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
 }
 
 public terrain3(){
-   this.noeuds = new Noeud[4] ;
+   this.noeuds = new NoeudSimple[4] ;
    this.barres = new Barre[4] ;
    for (int  i = 0 ; i<=2;i++){
        this.noeuds[i]= null;
        this.barres[i]=null;
    }
-   
+   this.barre1 = null;
+    this.barre2 = null;
+    this.barre3 = null;
 }
 
 public void addbarre(Barre b)throws Exception{
@@ -66,7 +68,7 @@ public void addbarre(Barre b)throws Exception{
        
 }
            
- public void addappui(Noeud b) throws Exception{
+ public void addNoeud(NoeudSimple b) throws Exception{
   int  i=0;
   while ((this.getNoeuds()[i]!=null)&&(i<=2)){
       i=i+1;
@@ -90,12 +92,15 @@ public void addbarre(Barre b)throws Exception{
    if(p ==false){
        throw new Exception("pas assez d'appui dans le terrain");
    } else{
-       Barre b12 = new Barre(this.getNoeuds()[1],this.getNoeuds()[2]);
-       Barre b10 = new Barre(this.getNoeuds()[1],this.getNoeuds()[0]);
-       Barre b02 = new Barre(this.getNoeuds()[0],this.getNoeuds()[2]);
-       this.addbarre(b02);
-       this.addbarre(b10);
-       this.addbarre(b12);
+       this.barre1 = new Barre(this.getNoeuds()[1],this.getNoeuds()[2]);
+       this.barre2 = new Barre(this.getNoeuds()[1],this.getNoeuds()[0]);
+       this.barre3 = new Barre(this.getNoeuds()[0],this.getNoeuds()[2]);
+       this.barres[0] = barre1;
+    this.barres[1]= barre2;
+    this.barres[2]= barre3 ;
+       this.noeud1=(NoeudSimple) this.getNoeuds()[0];
+        this.noeud2=(NoeudSimple) this.getNoeuds()[1];
+                this.noeud3=(NoeudSimple) this.getNoeuds()[2];
    }
  }   
     
@@ -104,13 +109,13 @@ public void addbarre(Barre b)throws Exception{
        AppuiSimple n1 = new AppuiSimple(1,2);
       AppuiSimple n2 = new AppuiSimple(1,6); 
        AppuiSimple n3 = new AppuiSimple(9,2);
-       t.addappui(n3);
+       /*t.addappui(n3);
        t.addappui(n2);
       
       t.addappui(n1);
       t.relieappui();
       // AppuiSimple n4 = new AppuiSimple(1,3); 
-     //  t.addappui(n4);
+     //  t.addappui(n4);*/
    }
 
     @Override
@@ -193,7 +198,7 @@ public void addbarre(Barre b)throws Exception{
     /**
      * @param noeuds the noeuds to set
      */
-    public void setNoeuds(Noeud[] noeuds) {
+    public void setNoeuds(NoeudSimple[] noeuds) {
         this.noeuds = noeuds;
     }
 

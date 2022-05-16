@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -24,7 +25,7 @@ public class MainMenu extends MenuBar{
         nouveau.setOnAction((t) -> {
             this.main.getControleur().menuNouveau(t);
         });
-        MenuItem save = new MenuItem("Sauvegarder");
+        Button save = new Button("Sauvegarder");
         save.setOnAction((t) -> {
             this.main.getControleur().menuSave(t);
         });
@@ -36,7 +37,7 @@ public class MainMenu extends MenuBar{
         load.setOnAction((t) -> {
             this.main.getControleur().menuOpen(t);
         });        
-        file.getItems().addAll(nouveau,save,saveAs,load);
+        file.getItems().addAll(nouveau,saveAs,load);
         
         Menu help = new Menu("Aide");
         MenuItem racourci = new MenuItem("Racourci clavier");

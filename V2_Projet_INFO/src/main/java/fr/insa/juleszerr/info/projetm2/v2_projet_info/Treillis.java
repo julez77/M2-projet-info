@@ -174,6 +174,7 @@ public class Treillis extends Figure {
             
             else if ((f instanceof terrain3)== true ){
               f.setTreillis(this);
+              
                 this.addterrain3((terrain3)f);
             }
     }
@@ -282,20 +283,20 @@ public class Treillis extends Figure {
         f.setTreillis(null);
          
         if ((f instanceof Noeud)== true ){
-                this.getNoeuds().remove((Noeud) f);}
-         if(this.noeuds2.contains((Noeud)f)==true){
-             this.noeuds2.remove((Noeud) f);
+            this.getNoeuds().remove((Noeud) f);}
+            if(this.noeuds2.contains((Noeud)f)==true){
+                this.noeuds2.remove((Noeud) f);
              
-         }
+        }
         else if ((f instanceof Barre)== true ){
-               this.removebarres((Barre) f);
-                       ;}
+            this.removebarres((Barre) f);
+        }
          
         else  if ((f instanceof Treillis)== true ) {
-             this.getTreillise().remove((Treillis)f);
+            this.getTreillise().remove((Treillis)f);
              
             } else{
-             this.removeterrain3((fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3) f);
+            this.removeterrain3((fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3) f);
          }  
              
         

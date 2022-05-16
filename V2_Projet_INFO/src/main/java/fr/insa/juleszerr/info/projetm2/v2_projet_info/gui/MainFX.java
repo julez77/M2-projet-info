@@ -36,10 +36,11 @@ public class MainFX extends Application  {
             System.out.println("taille " + test.getElements().size());
         
         MainPane main = new MainPane(primaryStage,test);
-        Scene s = new Scene(main,800,600);
-        //primaryStage.setFullScreen(true);
+        Scene s = new Scene(main,1000,600);
+        primaryStage.resizableProperty();
         primaryStage.setScene(s);
         primaryStage.show();
+        
     }
 
     public static void main(String[] args) {

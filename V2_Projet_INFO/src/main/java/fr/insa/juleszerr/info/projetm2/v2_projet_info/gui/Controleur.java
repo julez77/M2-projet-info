@@ -4,8 +4,6 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
-import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
@@ -96,7 +94,7 @@ public class Controleur {
         
     }
     
-    public void clicDansDessin(MouseEvent t) {
+    public void clicDansDessin(MouseEvent t) throws Exception {
 
         if (this.getEtat() == Etat.SELECT) {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
@@ -161,7 +159,7 @@ public class Controleur {
                 Barre b = this.vue.getTreillis().barrePlusProche(nclic, 50);
                 double taille = b.longueurBarre();
                 Barre nb = new Barre(b.getNoeud1(), new NoeudSimple(b.noeudPlusProche(nclic).getPx()+taille,
-                        b.getNoeud1().getPy()));
+                b.getNoeud1().getPy()));
                 treillis.add(nb);
             }else{
                 Barre b = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1]));                      
@@ -218,12 +216,18 @@ public class Controleur {
                 terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
                 new NoeudSimple(pos2[0], pos1[1]),
                 new NoeudSimple(pos2[0], py) );
-            treillis.addterrain3(ter);                          
+                treillis.add(ter);                          
             }else{
-                terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
-                new NoeudSimple(pos2[0], pos2[1]),
-                new NoeudSimple(px, py) );
-                treillis.addterrain3(ter);
+                terrain3 ter = new terrain3();
+                NoeudSimple n1 =  new NoeudSimple(pos1[0],pos1[1]);
+                NoeudSimple n2 =new NoeudSimple(pos2[0], pos2[1]);
+                NoeudSimple n3 = new NoeudSimple(px, py);
+                ter.addNoeud(n1);
+                ter.addNoeud(n2);
+                ter.addNoeud(n3);
+                ter.relieappui();
+                
+                treillis.add(ter);
             }
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);
@@ -385,7 +389,7 @@ public class Controleur {
     }
     
     void menuApropos(ActionEvent t) {
-        Alert alert = new Alert(AlertType.NONE);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("A propos");
         alert.setHeaderText(null);
         alert.setContentText("A compléter");
