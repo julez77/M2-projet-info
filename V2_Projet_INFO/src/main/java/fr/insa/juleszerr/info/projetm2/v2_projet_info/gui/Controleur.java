@@ -39,15 +39,19 @@ public class Controleur {
 
     
 
+    
+    
+
    
    
     
 
    
-    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE,
+    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, TEST,
     NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
-    BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, BARRE_PARA,
-    TERRAIN_N1, TERRAIN_N2, TERRAIN_N3}
+    BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, 
+    TERRAIN_N1, TERRAIN_N2, TERRAIN_N3,
+    APPLIQUER_FORCE}
 
     
     public Controleur(MainPane vue){
@@ -87,9 +91,13 @@ public class Controleur {
             
         }else if (nouvelEtat == Etat.TERRAIN_N3){
             
-        }else if (nouvelEtat == Etat.BARRE_PARA){
-            
-        }
+        }else if (nouvelEtat == Etat.APPLIQUER_FORCE){
+            this.getSelection().clear();            
+            this.vue.redrawAll();
+        }else if(nouvelEtat == Etat.RESOUDRE){
+            this.getSelection().clear();            
+            this.vue.redrawAll();
+    }
         this.setEtat(nouvelEtat);
         
     }
@@ -112,7 +120,6 @@ public class Controleur {
                     this.selection.clear();
                     this.selection.add(proche);
                 }
-                this.activeBoutonsSuivantSelection();
                 System.out.println("selection"+this.selection.toString());
                 this.vue.redrawAll();
             }
@@ -121,9 +128,7 @@ public class Controleur {
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             NoeudSimple pessi =new NoeudSimple(px , py); 
-            treillis.add(pessi);
-            System.out.println("nb de noeud dans le treillis"+ treillis.getNoeuds().size());
-            System.out.println("nb de noeud pris en compte"+ treillis.getNoeuds2().size());
+            treillis.add(pessi);            
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.APPUISIMPLE) {
             Noeud nclic = new NoeudSimple(t.getX(), t.getY());
@@ -174,13 +179,9 @@ public class Controleur {
                 this.nPosClic =proche;
                 //this.pos1[1]=proche.getPy();
                 this.changeEtat(Etat.BARRE_N2_NOEUD);
-        }
-            else{
+        }else{
                 this.changeEtat(Etat.NOEUDSIMPLE);
-            }
-             
-            
-                     
+            }                     
         }else if (this.getEtat() == Etat.BARRE_N2_NOEUD) {    
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, Double.MAX_VALUE);
@@ -227,29 +228,39 @@ public class Controleur {
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);
        
-        }else if (this.getEtat() == Etat.BARRE_PARA){
-            Treillis treillis =this.vue.getTreillis(); 
-            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
-            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);            
-            Barre b =this.vue.getTreillis().barrePlusProche(nclic, Double.MAX_VALUE);
-            double dist = b.distanceNoeud(nclic);
-            Barre bPara = b.barrepara(b,nclic);
-            treillis.add(bPara);
-            this.vue.redrawAll();
-        }else if(this.getEtat()==Etat.SUPPR){
-            Treillis treillis =this.vue.getTreillis(); 
-            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
-            Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
-            treillis.remove(proche);
-            System.out.println("Figure supprimée");
-            this.vue.redrawAll();
-        }else if(this.etat == Etat.RESOUDRE){
+        }else if (this.getEtat() == Etat.APPLIQUER_FORCE){
             Treillis treillis =this.vue.getTreillis(); 
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
             Vecteur2d force1 = new Vecteur2d(0, -500) ;
             Vecteur2d force2 = new Vecteur2d(0, -1000) ;        
-            //proche.setForce(force1);
+            proche.setForce(force1);
+            this.vue.redrawAll();
+        }else if(this.getEtat()==Etat.SUPPR){
+            Treillis treillis =this.vue.getTreillis(); 
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Figure proche = this.vue.getTreillis().plusProche(nclic, 50);
+            if(proche==null) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Aucune figure sur le dessin \n "+"ou cliquez plus près d'une figure ");
+                alert.showAndWait(); 
+                this.changeEtat(Etat.SUPPR);
+        }else {
+            treillis.remove(proche);
+            System.out.println("Figure supprimée");
+            this.vue.redrawAll();
+            this.changeEtat(Etat.SUPPR);
+        }
+            
+        }else if(this.etat == Etat.TEST){
+            System.out.println("Resoudre etat");
+            Treillis treillis =this.vue.getTreillis(); 
+            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
+            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
+            Vecteur2d force1 = new Vecteur2d(0, -500) ;
+            Vecteur2d force2 = new Vecteur2d(0, -1000) ;        
+            proche.setForce(force1);
             treillis.Resolution();      
        
         }
@@ -281,27 +292,53 @@ public class Controleur {
         this.changeEtat(Etat.BARRE_N1_LIBRE);
     }
     
-    void boutonBarrePara(ActionEvent t) {
-        this.changeEtat(Etat.BARRE_PARA);
+    void boutonForce(ActionEvent t) {
+        this.changeEtat(Etat.APPLIQUER_FORCE);
     }
     
     void boutonSuppr(ActionEvent t) {
-        this.changeEtat(Etat.SUPPR);
         if (this.etat == Etat.SELECT && this.selection.size() > 0) {
             // normalement le bouton est disabled dans le cas contraire
             this.vue.getTreillis().removeAll(this.selection);
             this.selection.clear();
-            this.activeBoutonsSuivantSelection();
+            
             this.vue.redrawAll();
+            this.changeEtat(Etat.SUPPR);
+        }else{
+            this.changeEtat(Etat.SUPPR);
         }
     }
     
     void boutonResoudre(ActionEvent t) {
-        this.changeEtat(Etat.RESOUDRE);
+        try {
+            Treillis treillis =this.vue.getTreillis(); 
+            this.changeEtat(Etat.APPLIQUER_FORCE);
+            treillis.Resolution();
+        } catch (Error ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Le treillis n'est pas isostatique");
+            alert.setContentText(ex.getLocalizedMessage());
+
+            alert.showAndWait();
+        } finally {
+            this.changeEtat(Etat.RESOUDRE);
+            this.vue.redrawAll();
+            
+        }       
+        
+    }
+    void boutonTest(ActionEvent t) {
+        Treillis treillis = this.vue.getTreillis();            
+            System.out.println("Noeuds dans le treillis"+ treillis.getNoeuds().size());
+            System.out.println("Noeuds pris en compte dans la resolution"+ treillis.getNoeuds2().size());
+            System.out.println("Barres dans le treillis"+ treillis.getBarres().size());
+            System.out.println("Barres prise en compte dans la resolution"+ treillis.getBarres2().size());
+       
     }
     
     
-     void menuNouveau(ActionEvent t) {
+    void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
         nouveau.setTitle("Nouveau");
         Scene sc = new Scene(new MainPane(nouveau), 800, 600);
@@ -367,6 +404,7 @@ public class Controleur {
     void menuRacourci(ActionEvent t) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Racourci clavier");
+        
         alert.setHeaderText(null);
         alert.setContentText("Création de barres:\n"
                 + "     Par defaut: création de barre libre \n"
@@ -401,7 +439,7 @@ public class Controleur {
     void boutonBarreDepuisNoeud(ActionEvent t) {
         this.changeEtat(Etat.BARRE_N1_NOEUD);
     }
-     private void activeBoutonsSuivantSelection() {
+     /*private void activeBoutonsSuivantSelection() {
         
         this.vue.getOutilsRight().getbSuppr().setDisable(true);
         if (this.getEtat() == Etat.SELECT) {
@@ -412,7 +450,7 @@ public class Controleur {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * @return the selection

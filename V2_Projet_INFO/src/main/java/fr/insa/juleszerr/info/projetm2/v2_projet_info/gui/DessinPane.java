@@ -4,7 +4,10 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import static fr.insa.juleszerr.info.projetm2.Lire.f;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.gui.Controleur.Etat;
 import java.util.List;
 import javafx.scene.layout.Pane;
@@ -38,6 +41,8 @@ public class DessinPane extends Pane{
           this.main.getControleur().clicDansDessin(t);
           this.redrawAll();
         });
+        
+        
 
         this.redrawAll();
     }
@@ -46,33 +51,28 @@ public class DessinPane extends Pane{
         this.getChildren().clear();
         this.getChildren().addAll(this.main.getTreillis().dessine());  
         List<Figure> select = this.main.getControleur().getSelection();
+        List<Barre> barreContientForce = this.main.getTreillis().getBarres2();
+        List<Noeud> noeudsContraint = this.main.getTreillis().getNoeuds2();
+        
         if(! select.isEmpty()){
-        if (this.main.getControleur().getEtat() == Etat.SELECT) {
+            if (this.main.getControleur().getEtat() == Etat.SELECT) {
 
                  for (Figure f : select){
                 this.getChildren().addAll(f.dessineSelection());
             }
-            
-        }else if(this.main.getControleur().getEtat() == Etat.NOEUDSIMPLE) {
-            
-        }else if (this.main.getControleur().getEtat() == Etat.APPUISIMPLE) {
-                   
-        }else if (this.main.getControleur().getEtat() == Etat.APPUIGLISSANT) {
-                    
-        }else if (this.main.getControleur().getEtat() == Etat.BARRE_N1_LIBRE) {
-            
-                     
-        }else if (this.main.getControleur().getEtat() == Etat.BARRE_N2_LIBRE) {
-           
-         
-        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N1) {
-            
-        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N2) {
-            
-        }else if (this.main.getControleur().getEtat() == Etat.TERRAIN_N3) {
-}
+            }   
+        }else if(this.main.getControleur().getEtat() == Etat.RESOUDRE) {
+            for(Barre b : barreContientForce){
+                this.getChildren().addAll(b.dessineForce());
+            }
+            for(Noeud n : noeudsContraint){
+                this.getChildren().addAll(n.dessine());
+            }
+        
             
            
         }
     }
+
+   
 }

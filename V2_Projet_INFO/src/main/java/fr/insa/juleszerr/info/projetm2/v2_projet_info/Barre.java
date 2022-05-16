@@ -11,6 +11,7 @@ import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 import java.io.IOException;
 import java.io.Writer;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 /**
  *
@@ -73,7 +74,7 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     }
     
     public Barre ( Noeud noeud1 , Noeud noeud2 ){
-        this.color = Color.BLUEVIOLET;
+        this.color = Color.GREY;
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.id = 0;
@@ -244,11 +245,33 @@ public Vecteur2d vecteurBarre(){                                         //renvo
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
         res.setStroke(NoeudSimple.COULEUR_SELECTION);
         res.setFill(NoeudSimple.COULEUR_SELECTION);
+        res.setStrokeWidth(5);
         Group g = new Group( res);
         System.out.println("dess s");
        return g;
     }
 
+    public Group dessineForce() {
+        Line bar = new Line();
+        if(this.getEffort()>=0){
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(RED);
+        res.setFill(RED);
+        res.setStrokeWidth(5);
+        Group g = new Group( res);
+        return g;
+        }else{
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(Color.GREENYELLOW);
+        res.setFill(Color.GREENYELLOW);
+        res.setStrokeWidth(5);
+        Group g = new Group( res);
+        return g;
+        }
+        
+    }
     
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
@@ -347,6 +370,8 @@ public Vecteur2d vecteurBarre(){                                         //renvo
     public void setTreillis(Treillis treillis) {
         this.treillis = treillis;
     }
+
+    
 
 
 

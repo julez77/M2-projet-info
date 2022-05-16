@@ -6,8 +6,10 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.gui.Controleur.Etat;
 import java.io.File;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -20,14 +22,14 @@ public class MainPane extends BorderPane {
     private Treillis treillis; 
     
     private OutilsTop outilsRight;
-    private OutilsBot outilsTop;
+    private OutilsLeft outilsTop;
     private DessinPane dessin;
     
     private MainMenu menu;
     private Stage inStage;
     private File curFile;
     
-    private HBox top;
+    private VBox top;
     public MainPane (){
         this.treillis = new Treillis();
     }
@@ -41,31 +43,29 @@ public class MainPane extends BorderPane {
     }
     
     public MainPane(Stage inStage, File fromFile, Treillis treillis){
-        this.top = new HBox();
+        this.top = new VBox();
         this.inStage = inStage;
         this.curFile = fromFile;
         this.treillis = treillis;
         this.controleur = new Controleur(this); 
         this.outilsRight = new OutilsTop(this, this.controleur);
-        this.outilsTop = new OutilsBot(this, this.controleur);
+        this.outilsTop = new OutilsLeft(this, this.controleur);
         this.dessin = new DessinPane(this);
-       
+        Label titre = new Label("Titre ");                
+        titre.setStyle("-fx-font-weight: bold;");
         this.menu = new MainMenu(this);
         top.getChildren().addAll(this.menu,this.outilsRight);
-        //this.outilsRight.getChildren().addAll(this.menu, this.outilsTop.getToolBar());
-        this.setBottom(this.outilsTop);
-        this.setCenter(this.dessin);
-        
-        this.setTop(this.top);
-                
-        this.controleur.changeEtat(Etat.NOEUDSIMPLE);
-       
+        this.setLeft(this.outilsTop);
+        this.setCenter(this.dessin);        
+        this.setTop(this.top);                
+        this.controleur.changeEtat(Etat.NOEUDSIMPLE);       
     }
     
     public void redrawAll(){
         this.dessin.redrawAll();
     }
     
+   
      public Treillis getTreillis() {
         return treillis;
     }
@@ -87,7 +87,7 @@ public class MainPane extends BorderPane {
     /**
      * @return the outilsTop
      */
-    public OutilsBot getOutilsTop() {
+    public OutilsLeft getOutilsTop() {
         return outilsTop;
     }
 
@@ -118,6 +118,8 @@ public class MainPane extends BorderPane {
     public void setCurFile(File curFile) {
         this.curFile = curFile;
     }
+
+    
      
     
 }

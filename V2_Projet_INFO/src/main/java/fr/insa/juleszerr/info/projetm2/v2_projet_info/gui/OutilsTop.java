@@ -20,6 +20,7 @@ public class OutilsTop extends HBox {
     private Button bSelect;
     private Button bSuppr;
     private Button bResoudre;
+    private Button bTest;
     
     private ToolBar toolBar;
     
@@ -28,6 +29,7 @@ public class OutilsTop extends HBox {
     private Controleur controleur; 
     
     public OutilsTop(MainPane main, Controleur contoleur ) {
+        this.setStyle("-fx-background-color: #8dbdf0; ");
         this.main = main;
         this.controleur= contoleur;
         
@@ -36,8 +38,10 @@ public class OutilsTop extends HBox {
         this.bResoudre = new Button("Resoudre");
         this.bSelect = new Button("Selection");
         this.bSuppr = new Button("Supprimer");
+        this.bTest = new Button("Affiche elmt du treillis");
         
-        toolBar.getItems().addAll(bSelect,bSuppr,bResoudre);
+        
+        toolBar.getItems().addAll(bSelect,bSuppr,bResoudre, bTest);
         toolBar.setOrientation(Orientation.HORIZONTAL);
         toolBar.setStyle("-fx-background-color: #8dbdf0; ");
         this.bSelect.setOnAction((ActionEvent t) -> {
@@ -54,6 +58,12 @@ public class OutilsTop extends HBox {
         this.bResoudre.setOnAction((ActionEvent t) -> {
             
             this.controleur.boutonResoudre(t); 
+             
+        });
+        
+        this.bTest.setOnAction((ActionEvent t) -> {
+            
+            this.controleur.boutonTest(t); 
              
         });
         

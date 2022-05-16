@@ -7,18 +7,21 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 /**
  *
  * @author IEUser
  */
-public class OutilsBot extends HBox {
+public class OutilsLeft extends HBox {
     private RadioButton bNoeudSimple;
     private RadioButton bAppuiSimple;
     private RadioButton bAppuiGlissant;
@@ -26,48 +29,51 @@ public class OutilsBot extends HBox {
     
     private RadioButton bBarreDepuisNoeud;
     private RadioButton bBarreLibre;
-    private RadioButton bBarrePara;
+    private RadioButton bForce;
+    
     
     private DessinPane dessin;
     private MainPane main;
     private Controleur controleur; 
     private ToolBar toolBar ;
     
-public OutilsBot(MainPane main, Controleur controleur) {
+public OutilsLeft(MainPane main, Controleur controleur) {
     this.main= main;
     this.controleur = controleur;
+    this.setStyle("-fx-background-color: #8dbdf0; ");
+    
+    this.toolBar = new ToolBar();
+    
+    Label lNouvelleBarre = new Label("Nouvelle barre:");
+    this.bBarreDepuisNoeud = new RadioButton("A partir de noeud");
+    this.bBarreLibre = new RadioButton("Libre");
+    //this.bBarrePara = new RadioButton ("Parallèle à une autre Barre");
+    
+    Label lNouveauNoeud = new Label("Nouveau noeud:");    
+    this.bNoeudSimple = new RadioButton("Noeud Simple");
+    this.bAppuiSimple = new RadioButton("Appui Simple");
+    this.bAppuiGlissant = new RadioButton("Appui Glissant");
+    
+    Label lNouveauTerrain = new Label("Nouveau terrain:");
+    this.bTerrain =new RadioButton("Terrain");
+    
+    Label lNouvelleForce = new Label("Nouvelle Force:");
+    this.bForce = new RadioButton("Sur un noeud");
         
-        this.toolBar = new ToolBar();
-        this.bBarreDepuisNoeud = new RadioButton("A partir de noeud");
-        this.bBarreLibre =new RadioButton("Libre");
-        this.bBarrePara = new RadioButton ("Parallèle à une autre Barre");
+    Separator s1 = new Separator(Orientation.VERTICAL);
+    Separator s2 = new Separator(Orientation.VERTICAL);
+    Separator s3 = new Separator(Orientation.VERTICAL);
+       
+    
+    
+       
+        toolBar.getItems().addAll(lNouveauNoeud, bNoeudSimple, bAppuiSimple,bAppuiGlissant,s1,
+    lNouveauTerrain, bTerrain,s2,
+    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud,s3, lNouvelleForce,bForce);
+    toolBar.setOrientation(Orientation.VERTICAL);
+    toolBar.setStyle("-fx-background-color: #8dbdf0; ");     
         
-        this.bNoeudSimple = new RadioButton("Noeud Simple");
-        this.bAppuiSimple = new RadioButton("Appui Simple");
-        this.bAppuiGlissant = new RadioButton("Appui Glissant");
-        this.bTerrain =new RadioButton("Terrain");
-        
-        Separator s1 = new Separator(Orientation.VERTICAL);
-        Separator s2 = new Separator(Orientation.VERTICAL);
-        Separator s3 = new Separator(Orientation.VERTICAL);
-        
-        Label lCrerr = new Label("Nouveau:");
-        Label lNouvelleBarre = new Label("Nouvelle Barre :");
-        
-        toolBar.getItems().addAll(lCrerr, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
-        bTerrain,s1,lNouvelleBarre,bBarreDepuisNoeud,bBarreLibre, bBarrePara);
-        toolBar.setOrientation(Orientation.HORIZONTAL);
-        toolBar.setStyle("-fx-background-color: #8dbdf0; ");
-        
-      
-        /*this.main.setOnMouseClicked((MouseEvent t2) -> {
-                System.out.println("px = "+ t2.getX()+"; py ="+t2.getY());
-            Controleur control = this.main.getControleur();
-            control.clicDansDessin(t2);
-        });*/
-        //=> setOn... dans DessinPane
-        
-        ToggleGroup gBoutons = new ToggleGroup();
+        ToggleGroup gBoutons = new ToggleGroup(); 
         
         
         this.bNoeudSimple.setToggleGroup(gBoutons);
@@ -76,16 +82,16 @@ public OutilsBot(MainPane main, Controleur controleur) {
         this.bTerrain.setToggleGroup(gBoutons);
         this.bBarreDepuisNoeud.setToggleGroup(gBoutons);
         this.bBarreLibre.setToggleGroup(gBoutons);
-        this.bBarrePara.setToggleGroup(gBoutons);
+        this.bForce.setToggleGroup(gBoutons);
         
         this.bBarreLibre.setOnAction((ActionEvent t) -> {
               System.out.println("Barre select");
             this.controleur.boutonBarreLibre(t);
         });
         
-        this.bBarrePara.setOnAction((ActionEvent t) -> {
+        this.bForce.setOnAction((ActionEvent t) -> {
               System.out.println("Barre select");
-            this.controleur.boutonBarrePara(t);
+            this.controleur.boutonForce(t);
         });
         
         this.bBarreDepuisNoeud.setOnAction((ActionEvent t) -> {
@@ -113,9 +119,7 @@ public OutilsBot(MainPane main, Controleur controleur) {
         });
         this.bTerrain.setOnAction((ActionEvent t) -> {
             System.out.println("Terrain select");
-            this.controleur.boutonTerrain(t);
-  
-             
+            this.controleur.boutonTerrain(t);            
         });
         
 
