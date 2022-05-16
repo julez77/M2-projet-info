@@ -284,10 +284,10 @@ public class Treillis extends Figure {
          
         if ((f instanceof Noeud)== true ){
             this.getNoeuds().remove((Noeud) f);}
-            if(this.noeuds2.contains((Noeud)f)==true){
-                this.noeuds2.remove((Noeud) f);
+           // if(this.noeuds2.contains((Noeud)f)==true){
+             //   this.noeuds2.remove((Noeud) f);
              
-        }
+       // }
         else if ((f instanceof Barre)== true ){
             this.removebarres((Barre) f);
         }
