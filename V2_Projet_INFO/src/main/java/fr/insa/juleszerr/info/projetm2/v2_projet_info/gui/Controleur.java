@@ -94,7 +94,7 @@ public class Controleur {
         
     }
     
-    public void clicDansDessin(MouseEvent t) throws Exception {
+    public void clicDansDessin(MouseEvent t)  {
 
         if (this.getEtat() == Etat.SELECT) {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
@@ -218,6 +218,7 @@ public class Controleur {
                 new NoeudSimple(pos2[0], py) );
                 treillis.add(ter);                          
             }else{
+                /*
                 terrain3 ter = new terrain3();
                 NoeudSimple n1 =  new NoeudSimple(pos1[0],pos1[1]);
                 NoeudSimple n2 =new NoeudSimple(pos2[0], pos2[1]);
@@ -227,7 +228,7 @@ public class Controleur {
                 ter.addNoeud(n3);
                 ter.relieappui();
                 
-                treillis.add(ter);
+                treillis.add(ter);*/
             }
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);
