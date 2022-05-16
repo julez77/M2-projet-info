@@ -216,19 +216,13 @@ public class Controleur {
                 terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
                 new NoeudSimple(pos2[0], pos1[1]),
                 new NoeudSimple(pos2[0], py) );
-                treillis.add(ter);                          
+                treillis.addterrain3(ter);                          
             }else{
-                /*
-                terrain3 ter = new terrain3();
-                NoeudSimple n1 =  new NoeudSimple(pos1[0],pos1[1]);
-                NoeudSimple n2 =new NoeudSimple(pos2[0], pos2[1]);
-                NoeudSimple n3 = new NoeudSimple(px, py);
-                ter.addNoeud(n1);
-                ter.addNoeud(n2);
-                ter.addNoeud(n3);
-                ter.relieappui();
-                
-                treillis.add(ter);*/
+                 terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
+                 new NoeudSimple(pos2[0], pos2[1]),
+                 new NoeudSimple(px, py));
+                               
+                treillis.addterrain3(ter);
             }
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);

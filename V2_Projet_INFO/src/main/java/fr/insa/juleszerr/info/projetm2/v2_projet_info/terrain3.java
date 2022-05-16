@@ -176,10 +176,7 @@ public void addbarre(Barre b)throws Exception{
                w.append(";" + num.getID(this.noeuds[i]));
                 w.append(";" + num.getID(this.barres[i]));
                 
-           } for(int i =0 ; i<=2 ; i++){
-              w.append(";" + num.getID(this.barres[i]));  
-               
-           }
+           } 
            
            w.append("\n");  
         }
