@@ -235,9 +235,9 @@ public class Treillis extends Figure {
     
     
     public void addbarres(Barre b){
-       
+      if (this.barres.contains(b)==false){
         this.barres.add(b);
-        
+   }
         if(this.noeuds.contains(b.getNoeud1())==false){
         this.noeuds.add(b.getNoeud1());
         b.getNoeud1().setTreillis(this);
