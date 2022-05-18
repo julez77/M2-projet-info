@@ -150,10 +150,6 @@ public class Treillis extends Figure {
                 if(this.noeuds.contains(f)==false){
                     this.getNoeuds().add((Noeud) f);
                     
-                    if((this.noeuds2.contains(f)==false)&&(this.elemterrain3.contains(f)==false)){
-                    this.getNoeuds2().add((Noeud) f);
-                }
-                    
                 }
                 
             }
@@ -161,9 +157,7 @@ public class Treillis extends Figure {
             else if ((f instanceof Barre)== true ){
                this.addbarres((Barre) f);
                f.setTreillis(this);
-               if((this.barres2.contains(f)==false)&&(this.elemterrain3.contains(f)==false)){
-                   this.getBarres2().add((Barre) f);
-                          
+               
             }
             
             else if ((f instanceof Treillis)== true ){
@@ -177,7 +171,7 @@ public class Treillis extends Figure {
               
                 this.addterrain3((terrain3)f);
             }
-    }
+    
             
    }
    
@@ -193,8 +187,18 @@ public class Treillis extends Figure {
                
            }
        }
+       
+       for(int j=0 ; j<noeud3.size();j++){
+           Noeud noeud2 = noeud3.get(j) ;
+           if(this.noeuds.contains(noeud2)==false){
+               noeud3.remove(noeud2);
+           }
+       }
+       
        return noeud3 ;
    }
+   
+   
    
    public List<Barre> barres3(){
        List<Barre> barre3 = new ArrayList();
@@ -206,6 +210,13 @@ public class Treillis extends Figure {
                }
            }
        }
+       for(int j=0 ; j<barre3.size();j++){
+           Barre barre2 = barre3.get(j) ;
+           if(this.barres.contains(barre2)==false){
+               barre3.remove(barre2);
+           }
+       }
+       
        return barre3 ;
    }
 
@@ -239,10 +250,7 @@ public class Treillis extends Figure {
         this.elements.add(b.getNoeud1());}
           if(this.elements.contains(b.getNoeud2())==false){
         this.elements.add(b.getNoeud2());}
-          if((this.noeuds2.contains(b.getNoeud1())==false)&&(this.elemterrain3.contains(b.getNoeud1())==false)){
-                    this.getNoeuds2().add(b.getNoeud1());}
-          if((this.noeuds2.contains(b.getNoeud2())==false)&&(this.elemterrain3.contains(b.getNoeud2())==false)){
-                    this.getNoeuds2().add(b.getNoeud2());}
+          
           
           
           
@@ -313,18 +321,20 @@ public class Treillis extends Figure {
          
         if ((f instanceof Noeud)== true ){
             this.getNoeuds().remove((Noeud) f);
-            if(this.noeuds2.contains((Noeud)f)==true){
-               this.noeuds2.remove((Noeud) f);
-             
-        }}
+            
+        }
         else if ((f instanceof Barre)== true ){
-            this.removebarres((Barre) f);
+            while(this.getBarres().contains(f)==true){
+               this.getBarres().remove((Barre) f);
+               
+            }
         }
          
         else  if ((f instanceof Treillis)== true ) {
             this.getTreillise().remove((Treillis)f);
              
-            } else{
+            } 
+        else{
             this.removeterrain3((fr.insa.juleszerr.info.projetm2.v2_projet_info.terrain3) f);
          }  
              
@@ -348,14 +358,12 @@ public void removeterrain3(terrain3 t){
               t.setTreillis(null);
           }
     
-    public void removebarres(Barre b){
-        this.barres.remove(b);
-        this.elements.remove(b);
-        if(this.barres2.contains(b)==true){
-            this.barres2.remove(b);
-        }
-        b.setTreillis(null);
-    }
+    //public void removebarres(Barre b){
+       // this.barres.remove(b);
+        //this.elements.remove(b);
+        
+       // b.setTreillis(null);
+   // }
     
     
     

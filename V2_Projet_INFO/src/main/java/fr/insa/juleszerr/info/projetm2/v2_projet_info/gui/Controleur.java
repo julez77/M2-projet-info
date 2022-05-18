@@ -331,9 +331,9 @@ public class Controleur {
     void boutonTest(ActionEvent t) {
         Treillis treillis = this.vue.getTreillis();            
             System.out.println("Noeuds dans le treillis"+ treillis.getNoeuds().size());
-            System.out.println("Noeuds pris en compte dans la resolution"+ treillis.getNoeuds2().size());
+            System.out.println("Noeuds pris en compte dans la resolution"+ treillis.noeuds3().size());
             System.out.println("Barres dans le treillis"+ treillis.getBarres().size());
-            System.out.println("Barres prise en compte dans la resolution"+ treillis.getBarres2().size());
+            System.out.println("Barres prise en compte dans la resolution"+ treillis.barres3().size());
        
     }
     
