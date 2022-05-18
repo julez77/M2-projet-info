@@ -50,8 +50,15 @@ public abstract class Figure {
             this.save(bout, num);
         }
     }
-   
-   public static Figure lecture(File fin) throws IOException {
+    public static void testLecture() throws Exception {
+        try {
+            Figure lue = Figure.lecture(new File("sauv.txt"));
+            System.out.println("fig lue : " + lue);
+        } catch (IOException ex) {
+            throw new Error(ex);
+        }
+    }
+   public static Figure lecture(File fin) throws IOException, Exception {
         Numeroteur<Figure> num = new Numeroteur<Figure>();
         Figure derniere = null;
         try (BufferedReader bin = new BufferedReader(new FileReader(fin))) {
@@ -66,7 +73,7 @@ public abstract class Figure {
                     Noeud np = new NoeudSimple(px,py);
                     num.associe(id, np);
                     derniere = np;
-                    
+                    System.out.println("noeudsimple");
                 } else if (bouts[0].equals("AppuiSimple")) {
                     int id = Integer.parseInt(bouts[1]);
                     double px = Double.parseDouble(bouts[2]);
@@ -75,6 +82,7 @@ public abstract class Figure {
                     Noeud np = new AppuiSimple(px,py);
                     num.associe(id, np);
                     derniere = np;
+                    System.out.println("appuisimple");
                 }else if (bouts[0].equals("AppuiGlissant")) {
                     int id = Integer.parseInt(bouts[1]);
                     double px = Double.parseDouble(bouts[2]);
@@ -83,31 +91,57 @@ public abstract class Figure {
                     Noeud np = new AppuiGlissant(px,py);
                     num.associe(id, np);
                     derniere = np;
+                    System.out.println("appuiglissantl");
                 }
-                else if (bouts[0].equals("Segment")) {
+                else if (bouts[0].equals("Barre")) {
                     int id = Integer.parseInt(bouts[1]);
                     int idP1 = Integer.parseInt(bouts[2]);
                     int idP2 = Integer.parseInt(bouts[3]);
                     
                     Noeud n1 = (Noeud) num.getObj(idP1);
+                    System.out.println("lolp1");
                     Noeud n2 = (Noeud) num.getObj(idP2);
+                     System.out.println("lolp2");
                     Barre nb = new Barre(n1, n2);
                     num.associe(id, nb);
                     derniere = nb;
+                    System.out.println("Barre");
+                
+                                }else  if(bouts[0].equals("terrain3")){
+                    int id = Integer.parseInt(bouts[1]);
+                   terrain3 nt = new terrain3();
+                   num.associe(id, nt);
+                 System.out.println("treerin3");
+                 for (int i = 2; i < bouts.length; i++) {
+                        int idSous = Integer.parseInt(bouts[i]);
+                        Figure fig = num.getObj(idSous);
+                         System.out.println("lolyter");
+                       if( fig instanceof Barre == true){
+                           nt.addbarre((Barre) fig);
+                       }
+                         if( fig instanceof Noeud == true){
+                           nt.addNoeud((NoeudSimple) fig);
+                       }
+                         
+                        System.out.println("addedterrin3");
+                    }
+                    derniere = nt;
+                
+                
                 } else if (bouts[0].equals("Treillis")) {
                     int id = Integer.parseInt(bouts[1]);
                     Treillis nt = new Treillis();
                     num.associe(id, nt);
+                    System.out.println("treillis");
                     for (int i = 2; i < bouts.length; i++) {
                         int idSous = Integer.parseInt(bouts[i]);
                         Figure fig = num.getObj(idSous);
+                         System.out.println("lol");
                         nt.add(fig);
+                        System.out.println("added");
                     }
                     derniere = nt;
-                }else  if(bouts[0].equals("terrain3")){
-                    int id = Integer.parseInt(bouts[1]);
-                   terrain3 nt = new terrain3();
-                   num.associe(id, nt);
+                
                    
                    
                    

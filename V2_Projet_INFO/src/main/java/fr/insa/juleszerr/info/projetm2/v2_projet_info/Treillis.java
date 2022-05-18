@@ -768,7 +768,7 @@ public void menuTexte() {
     public static String indente(String toIndente, String prefix) {
         return prefix + toIndente.replaceAll("\n", "\n" + prefix);
     }
-       public static void TLecture() {
+       public static void TLecture() throws Exception {
         try {
             Figure lue = Figure.lecture(new File("sauv.txt"));
             System.out.println("fig lue : " + lue);
