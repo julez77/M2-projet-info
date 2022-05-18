@@ -36,9 +36,9 @@ public  class Barre extends Figure  {
 
 
 public Vecteur2d vecteurBarre(){                                         //renvoie le vecteur associé à une barre (direction du vecteur : point de départ vers point d'arrivée)
-    double px = this.getNoeud2().getPx() - this.getNoeud1().getPx() ;
-    double py =  this.getNoeud2().getPy() - this.getNoeud1().getPy() ;
-    Vecteur2d vecteur = new Vecteur2d (px, py) ;
+    double vx = this.getNoeud2().getPx() - this.getNoeud1().getPx() ;
+    double vy =  this.getNoeud2().getPy() - this.getNoeud1().getPy() ;
+    Vecteur2d vecteur = new Vecteur2d (vx, vy) ;
     return vecteur ;
 }
 

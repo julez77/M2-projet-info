@@ -53,7 +53,7 @@ public class Vecteur2d {
        
       double angle = acos(this.getVx()/this.length()) ;
        
-       if (vy<0){
+       if (vy>0){
            return -angle ;
            
        }else{
@@ -65,11 +65,11 @@ public class Vecteur2d {
    public Vecteur2d vecteurNormal(){
        Vecteur2d vecteurnormal ;
        if((vy/vx)<=0){
-           vecteurnormal = new Vecteur2d(abs(vy), abs(vx)) ;
+           vecteurnormal = new Vecteur2d(-abs(vy), -abs(vx)) ;
             
        }
        else{
-           vecteurnormal = new Vecteur2d(-abs(vy), abs(vx)) ;
+           vecteurnormal = new Vecteur2d(abs(vy), -abs(vx)) ;
            
        }
        return vecteurnormal ;

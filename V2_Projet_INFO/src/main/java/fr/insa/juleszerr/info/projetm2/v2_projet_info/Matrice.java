@@ -136,11 +136,11 @@ public void DescenteGauss(){
                }
                else {
                 transvection(i, j);
-               
+                System.out.println(this);
                 this.Equilibrage();
                 
             
-                }
+               }
         }
 }  
 }
@@ -149,16 +149,16 @@ public void RemonteeGauss(){
     for(int i=NbrLigne-1 ; i>=1 ; i=i-1){
         
         for(int j=i-1 ; j>=0 ; j=j-1){
-           if (this.Inversible()==false){
+          if (this.Inversible()==false){
                   throw new Error("La matrice n'est pas inversible");
-                }
+               }
           else{
                 transvection(i, j) ;
                 
-           }
+          }
            
           this.Equilibrage();
-
+          System.out.println(this);
           System.out.println();
             }
         }
@@ -220,7 +220,7 @@ public double[] resolution(){
 
 public static double ArrondirDouble(double db1){
 
-    BigDecimal bd = new BigDecimal(db1).setScale(3, RoundingMode.HALF_UP);
+    BigDecimal bd = new BigDecimal(db1).setScale(1, RoundingMode.HALF_UP);
     double db2 = bd.doubleValue() ;
     return db2 ;
 }
@@ -260,17 +260,39 @@ public boolean MultiplierLigne1(int ligne){
     return multiplier ;
 }
 
-public void MultiplierLigne2(int ligne){
+public boolean MultiplierLigne2(int ligne){
+    boolean multiplier = false ;
+    int j=0 ;
+    while ((multiplier == false) && (j<NbrLigne)){
+        if ((abs(this.coeff[ligne][j]))>0 && (abs(this.coeff[ligne][j]))<1){
+            multiplier = true ;
+        }
+        
+        j=j+1 ;
+    }
+    
+    return multiplier ;
+}
+
+public void Multiplier(int ligne, double facteur){
     for (int j=0 ; j<NbrColonne ; j++){
-        double t=0.1*(this.coeff[ligne][j]);
+        double t=facteur*(this.coeff[ligne][j]);
         this.setCoeff(ligne, j, t);
     }
 }
 
 public void Equilibrage(){
     for(int i=0 ; i<NbrLigne ; i++){
-        if ((this.MultiplierLigne1(i))==true){
-            this.MultiplierLigne2(i);
+        
+        if ((this.MultiplierLigne2(i))==true){
+            this.Multiplier(i, 100);
+            
+          }
+        
+        while ((this.MultiplierLigne1(i))==true){
+          
+          this.Multiplier(i, 0.5);
+          
         }
     }
 }
@@ -293,6 +315,7 @@ public static void main(String[] args){
         }
         
         Matrice M = new Matrice(n, p, T) ;
+       
         Matrice P = new Matrice(n, p, T) ;
         
         System.out.println(M);

@@ -181,6 +181,35 @@ public class Treillis extends Figure {
             
    }
    
+   public List<Noeud> noeuds3(){
+       List<Noeud> noeud3 = new ArrayList();
+       for (int i=0 ; i<this.noeuds.size() ; i++){
+           Noeud noeud = this.noeuds.get(i);
+           if(this.elemterrain3.contains(noeud)==false){
+               if(noeud3.contains(noeud)==false){
+                    noeud3.add(noeud);
+               }
+             
+               
+           }
+       }
+       return noeud3 ;
+   }
+   
+   public List<Barre> barres3(){
+       List<Barre> barre3 = new ArrayList();
+       for (int i=0 ; i<this.barres.size() ; i++){
+           Barre barre = this.barres.get(i);
+           if(this.elemterrain3.contains(barre)==false){
+               if(barre3.contains(barre)==false){
+                    barre3.add(barre);
+               }
+           }
+       }
+       return barre3 ;
+   }
+
+   
    
    
     public void addTreillis(Treillis T){
@@ -742,14 +771,14 @@ public void menuTexte() {
        
 
     public int NbInconnues(){
-        int N=this.getBarres2().size() ;
-        for (int i=0 ; i<this.getNoeuds2().size() ; i++){
-            Noeud noeud = this.getNoeuds2().get(i) ;
-            if (noeud instanceof AppuiGlissant){
+        int N=this.barres3().size() ;
+        for (int i=0 ; i<this.noeuds3().size() ; i++){
+            Noeud noeud = this.noeuds3().get(i) ;
+            if ((noeud instanceof AppuiGlissant)==true){
                 N=N+1 ;
             }
             
-            if (noeud instanceof AppuiSimple){
+            if ((noeud instanceof AppuiSimple)==true){
                 N=N+2 ;
             }
             
@@ -761,18 +790,18 @@ public void menuTexte() {
         int N = this.NbInconnues() ;
         double [][] S = new double[N][N+1];
         int i ; int j; 
-        int X=this.getBarres2().size() - 1 ; //représente l'avancement du remplissage des colonnes de la matrice
+        int X=this.barres3().size() - 1 ; //représente l'avancement du remplissage des colonnes de la matrice
         int Z=0 ;        // représente l'avancement du remplissage des lignes de la matrice
         double angle ;
         double angle2 ;
         AppuiGlissant noeud2 ;
         
-        for (i=0 ; i<this.getNoeuds2().size() ; i++){
+        for (i=0 ; i<this.noeuds3().size() ; i++){
             Z=2*i ;
-            Noeud noeud = this.getNoeuds2().get(i) ;
+            Noeud noeud = this.noeuds3().get(i) ;
             
-            for (j=0 ; j<this.getBarres2().size() ; j++){        
-                Barre barre = this.getBarres2().get(j) ;
+            for (j=0 ; j<this.barres3().size() ; j++){        
+                Barre barre = this.barres3().get(j) ;
                 
                 if(noeud.barreincidente(barre)==true){
                     angle = noeud.angleBarreNoeud(barre) ;
@@ -849,18 +878,18 @@ public void menuTexte() {
     public void Resolution(){
         
         int N = this.NbInconnues();
-        int X = this.getBarres2().size()-1;
+        int X = this.barres3().size()-1;
         double[] solutions = new double[N];
         solutions = this.Solutions() ;
         
         for(int i=0 ; i<X+1 ; i++){
             
-            this.getBarres2().get(i).setEffort(solutions[i]);
+            this.barres3().get(i).setEffort(solutions[i]);
             
         }
         
-        for (int j=0 ; j<this.getNoeuds2().size() ; j++){
-            Noeud noeud = this.getNoeuds2().get(j) ;
+        for (int j=0 ; j<this.noeuds3().size() ; j++){
+            Noeud noeud = this.noeuds3().get(j) ;
             
             if ((noeud instanceof AppuiSimple)==true){
                 double vx = solutions[X+1] ;
