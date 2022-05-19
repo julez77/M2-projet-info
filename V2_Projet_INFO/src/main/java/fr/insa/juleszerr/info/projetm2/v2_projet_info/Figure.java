@@ -70,7 +70,7 @@ public abstract class Figure {
                     double px = Double.parseDouble(bouts[2]);
                     double py = Double.parseDouble(bouts[3]);
                     
-                    Noeud np = new NoeudSimple(px,py);
+                    NoeudSimple np = new NoeudSimple(px,py);
                     num.associe(id, np);
                     derniere = np;
                     System.out.println("noeudsimple");
@@ -79,7 +79,7 @@ public abstract class Figure {
                     double px = Double.parseDouble(bouts[2]);
                     double py = Double.parseDouble(bouts[3]);
                     
-                    Noeud np = new AppuiSimple(px,py);
+                    AppuiSimple np = new AppuiSimple(px,py);
                     num.associe(id, np);
                     derniere = np;
                     System.out.println("appuisimple");
@@ -87,9 +87,11 @@ public abstract class Figure {
                     int id = Integer.parseInt(bouts[1]);
                     double px = Double.parseDouble(bouts[2]);
                     double py = Double.parseDouble(bouts[3]);
+                    int posesur = Integer.parseInt(bouts[4]);
                     
-                    Noeud np = new AppuiGlissant(px,py);
+                    AppuiGlissant np = new AppuiGlissant(px,py);
                     num.associe(id, np);
+                    np.setPoseSur((Barre) num.getObj(posesur));
                     derniere = np;
                     System.out.println("appuiglissantl");
                 }

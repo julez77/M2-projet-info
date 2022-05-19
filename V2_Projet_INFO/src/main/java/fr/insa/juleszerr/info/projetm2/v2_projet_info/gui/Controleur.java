@@ -128,12 +128,16 @@ public class Controleur {
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
             if(t.isControlDown()){
+                if(t.isShiftDown()){
+                    Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+                    Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
+                    treillis.poserNoeudSimple(b,b.longueurBarre()/2);
+                }else{
                 Noeud nclic = new NoeudSimple(t.getX(), t.getY());
                 Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
-                treillis.ProjeterNoeud(nclic, b);
-            }else{
-            
-            NoeudSimple n =new NoeudSimple(px , py); 
+                treillis.ProjeterNoeud(nclic, b);                
+                }                  
+            }else{NoeudSimple n =new NoeudSimple(px , py); 
             treillis.add(n);
             }           
             this.vue.redrawAll();

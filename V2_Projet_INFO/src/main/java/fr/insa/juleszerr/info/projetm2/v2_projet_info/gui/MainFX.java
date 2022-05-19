@@ -34,6 +34,7 @@ public class MainFX extends Application  {
         InputStream is = this.getClass().getResourceAsStream("icones/pont.png");
         primaryStage.getIcons().add( new Image(is,32,32,false,true));
         main.setStyle("-fx-background-color: #fdfbf3; ");
+        main.setStyle("-fx-background-image: url('https://www.caravelis.com/xml/oi/TFO250438051420/TFO250438051420-17a/medias/jpg/tauriac-de-naucelle---viaduc-du-via_w2000.jpg'"); 
         primaryStage.setScene(s);
         primaryStage.show();
         this.main.getControleur().boutonAide(new ActionEvent());
