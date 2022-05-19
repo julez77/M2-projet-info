@@ -285,7 +285,7 @@ public void Equilibrage(){
     for(int i=0 ; i<NbrLigne ; i++){
         
         if ((this.MultiplierLigne2(i))==true){
-            this.Multiplier(i, 100000);
+            this.Multiplier(i, 10000000);
             
           }
         

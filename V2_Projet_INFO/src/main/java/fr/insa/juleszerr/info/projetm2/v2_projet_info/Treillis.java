@@ -768,6 +768,17 @@ public void menuTexte() {
         }
     }
        
+       
+    public int RoadToIsostatique(){
+        int NbEquations = 2*(this.noeuds3().size());
+        int NbInconnues = this.NbInconnues();
+        
+        return NbEquations - NbInconnues ;
+        
+    }   
+    
+    
+       
 
     public int NbInconnues(){
         int N=this.barres3().size() ;
