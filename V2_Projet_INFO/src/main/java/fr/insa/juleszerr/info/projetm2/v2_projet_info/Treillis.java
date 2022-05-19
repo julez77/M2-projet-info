@@ -97,12 +97,8 @@ public class Treillis extends Figure {
         
         Barre newBarre1 = new Barre(b.getNoeud1(), noeud) ;
         Barre newBarre2 = new Barre(noeud, b.getNoeud2()) ;
-        this.barres.add(newBarre1);
-        this.barres.add(newBarre2);
-        this.noeuds.add(noeud);
-        this.elements.add(noeud);
-        this.elements.add(newBarre1) ;
-        this.elements.add(newBarre2) ;
+      this.add(newBarre1);
+      this.add(newBarre2);
         this.remove(b);
         
    }
