@@ -27,7 +27,7 @@ public class BoutonIcon extends Button {
         } else {
             Image img = new Image(is, sizeX, sizeY, false, true);
             this.setGraphic(new ImageView(img));
-            this.setStyle("-fx-background-color: #fccf97; ");
+            //this.setStyle("-fx-background-color: #fdfbf3; ");
 
         }
 

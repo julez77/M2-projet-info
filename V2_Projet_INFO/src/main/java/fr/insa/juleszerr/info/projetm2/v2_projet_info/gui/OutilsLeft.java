@@ -8,7 +8,6 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToolBar;
@@ -21,14 +20,14 @@ import javafx.scene.layout.HBox;
  */
 public class OutilsLeft extends HBox {
     private ToggleButton bNoeudSimple;
-    private RadioButton bAppuiSimple;
-    private RadioButton bAppuiGlissant;
-    private RadioButton bTerrainLibre;
-    private RadioButton bTerrainHori;
+    private ToggleButton bAppuiSimple;
+    private ToggleButton bAppuiGlissant;
+    private ToggleButton bTerrainLibre;
+    private ToggleButton bTerrainHori;
     
-    private RadioButton bBarreDepuisNoeud;
-    private RadioButton bBarreLibre;
-    private RadioButton bForce;
+    private ToggleButton bBarreDepuisNoeud;
+    private ToggleButton bBarreLibre;
+    private ToggleButton bForce;
     
     
     private DessinPane dessin;
@@ -44,21 +43,22 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     this.toolBar = new ToolBar();
     
     Label lNouvelleBarre = new Label("Nouvelle barre:");
-    this.bBarreDepuisNoeud = new RadioButton("A partir de noeud");
-    this.bBarreLibre = new RadioButton("Libre");
+    this.bBarreDepuisNoeud = new ToggleButton("A partir de noeud");
+    this.bBarreLibre = new ToggleButton("Libre");
     //this.bBarrePara = new RadioButton ("Parallèle à une autre Barre");
     
     Label lNouveauNoeud = new Label("Nouveau noeud:");    
     this.bNoeudSimple = new ToggleButton("Noeud Simple");
-    this.bAppuiSimple = new RadioButton("Appui Simple");
-    this.bAppuiGlissant = new RadioButton("Appui Glissant");
+    this.bAppuiSimple = new ToggleButton("Appui Simple");
+    this.bAppuiGlissant = new ToggleButton("Appui Glissant");
     
     Label lNouveauTerrain = new Label("Nouveau terrain:");
-    this.bTerrainLibre =new RadioButton("Terrain libre");
-    this.bTerrainHori = new RadioButton("Terrain plan");
+    this.bTerrainLibre =new ToggleButton("Terrain libre");
+    this.bTerrainHori = new ToggleButton("Terrain plan");
     
     Label lNouvelleForce = new Label("Nouvelle Force:");
-    this.bForce = new RadioButton("Sur un noeud");
+    //FxUtils.setSimpleBorder(lNouvelleForce, Color.CYAN, 2);
+    this.bForce = new ToggleButton("Sur un noeud");
         
     Separator s1 = new Separator(Orientation.VERTICAL);
     Separator s2 = new Separator(Orientation.VERTICAL);
@@ -67,9 +67,9 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     
     
        
-    toolBar.getItems().addAll(lNouveauNoeud, bNoeudSimple, bAppuiSimple,bAppuiGlissant,s1,
-    lNouveauTerrain, bTerrainLibre,bTerrainHori,s2,
-    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud,s3, lNouvelleForce,bForce);
+    toolBar.getItems().addAll(lNouveauNoeud, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
+    lNouveauTerrain, bTerrainLibre,bTerrainHori,
+    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud, lNouvelleForce,bForce);
     toolBar.setOrientation(Orientation.VERTICAL);
     toolBar.setStyle("-fx-background-color: #8dbdf0; ");     
         /*
@@ -107,8 +107,15 @@ public OutilsLeft(MainPane main, Controleur controleur) {
         });
         
         //bNoeudSimple.set(KeyCombination.keyCombination("Ctrl+N"));
-        bNoeudSimple.setMinWidth(115);
-        bNoeudSimple.setStyle("-fx-background-color: #fccf97; ");
+        bNoeudSimple.setMinWidth(110);
+        bAppuiGlissant.setMinWidth(110);
+        bAppuiSimple.setMinWidth(110);
+        bBarreDepuisNoeud.setMinWidth(110);
+        bBarreLibre.setMinWidth(110);
+        bForce.setMinWidth(110);
+        bTerrainHori.setMinWidth(110);
+        bTerrainLibre.setMinWidth(110);
+        //bNoeudSimple.setStyle("-fx-background-color: #fccf97; ");
         this.bNoeudSimple.setOnAction((ActionEvent t)-> {
             System.out.println("Noeud Simple select");
             this.controleur.boutonNoeudSimple(t);
@@ -152,14 +159,14 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     /**
      * @return the bAppuiSimple
      */
-    public RadioButton getbAppuiSimple() {
+    public ToggleButton getbAppuiSimple() {
         return bAppuiSimple;
     }
 
     /**
      * @return the bAppuiGlissant
      */
-    public RadioButton getbAppuiGlissant() {
+    public ToggleButton getbAppuiGlissant() {
         return bAppuiGlissant;
     }
 
@@ -168,7 +175,7 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     /**
      * @return the bTerrain
      */
-    public RadioButton getbTerrain() {
+    public ToggleButton getbTerrain() {
         return getbTerrainLibre();
     }
 
@@ -196,35 +203,35 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     /**
      * @return the bTerrainLibre
      */
-    public RadioButton getbTerrainLibre() {
+    public ToggleButton getbTerrainLibre() {
         return bTerrainLibre;
     }
 
     /**
      * @return the bTerrainHori
      */
-    public RadioButton getbTerrainHori() {
+    public ToggleButton getbTerrainHori() {
         return bTerrainHori;
     }
 
     /**
      * @return the bBarreDepuisNoeud
      */
-    public RadioButton getbBarreDepuisNoeud() {
+    public ToggleButton getbBarreDepuisNoeud() {
         return bBarreDepuisNoeud;
     }
 
     /**
      * @return the bBarreLibre
      */
-    public RadioButton getbBarreLibre() {
+    public ToggleButton getbBarreLibre() {
         return bBarreLibre;
     }
 
     /**
      * @return the bForce
      */
-    public RadioButton getbForce() {
+    public ToggleButton getbForce() {
         return bForce;
     }
 

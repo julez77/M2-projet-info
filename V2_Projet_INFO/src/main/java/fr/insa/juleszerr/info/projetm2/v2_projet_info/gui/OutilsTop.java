@@ -95,7 +95,7 @@ public class OutilsTop extends HBox {
         });
         
          this.bAide = new BoutonIcon("icones/bAide.png", 32, 32); 
-         this.bAide.setDisable(true);
+         
         this.bAide.setOnAction((t) -> {
             this.controleur.boutonAide(t);
         });

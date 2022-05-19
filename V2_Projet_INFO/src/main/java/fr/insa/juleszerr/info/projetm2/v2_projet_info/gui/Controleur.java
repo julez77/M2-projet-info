@@ -4,6 +4,9 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import com.sun.javafx.scene.CameraHelper;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
@@ -16,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.geometry.Point3D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -123,25 +127,40 @@ public class Controleur {
             double px = t.getX();
             double py = t.getY();
             Treillis treillis = this.vue.getTreillis();
-            NoeudSimple pessi =new NoeudSimple(px , py); 
-            treillis.add(pessi);            
+            if(t.isControlDown()){
+                Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+                Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
+                treillis.ProjeterNoeud(nclic, b);
+            }else{
+            
+            NoeudSimple n =new NoeudSimple(px , py); 
+            treillis.add(n);
+            }           
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.APPUISIMPLE) {
-            Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+            Noeud nclic = new AppuiSimple(t.getX(), t.getY());
             Barre b = this.vue.getTreillis().barrePlusProche(nclic, 20);
             double px = t.getX();
             double py = t.getY();            
             Treillis treillis = this.vue.getTreillis();
+            if(t.isControlDown()){                
+                treillis.ProjeterNoeud(nclic, b);
+            }else{
             treillis.poserAppuiSimple(b, b.longueurBarre()/2);
+            }
             this.vue.redrawAll();            
         }else if (this.getEtat() == Etat.APPUIGLISSANT) {
             System.out.println(this.vue.getTreillis().getBarres());
-            Noeud nclic = new NoeudSimple(t.getX(), t.getY());
+            Noeud nclic = new AppuiGlissant(t.getX(), t.getY());
             Barre b = this.vue.getTreillis().barrePlusProche(nclic, Double.MAX_VALUE);
             double px = t.getX();
             double py = t.getY();            
             Treillis treillis = this.vue.getTreillis();
-            treillis.poserAppuiGlissant(b, b.longueurBarre()/2);   //TO DO: récupérer l'endroit exacte ou poser l'appui         
+            if(t.isControlDown()){                
+                treillis.ProjeterNoeud(nclic, b);
+            }else{
+            treillis.poserAppuiGlissant(b, b.longueurBarre()/2);   //TO DO: récupérer l'endroit exacte ou poser l'appui
+            }
             this.vue.redrawAll();
         }else if (this.getEtat() == Etat.BARRE_N1_LIBRE) {
             this.pos1[0]=t.getX();
@@ -337,13 +356,14 @@ public class Controleur {
     
     void boutonResoudre(ActionEvent t) {
         try {
+            
             Treillis treillis =this.vue.getTreillis(); 
             this.changeEtat(Etat.APPLIQUER_FORCE);
             treillis.Resolution();
         } catch (Error ex) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur");
-            alert.setHeaderText("Le treillis n'est pas isostatique");
+            alert.setHeaderText("Le treillis n'est pas soluble");
             alert.setContentText(ex.getLocalizedMessage());
 
             alert.showAndWait();
@@ -377,7 +397,8 @@ public class Controleur {
     void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
         nouveau.setTitle("Nouveau");
-        Scene sc = new Scene(new MainPane(nouveau), 800, 600);
+        Scene sc = new Scene(new MainPane(nouveau), 1500,850);
+        vue.setStyle("-fx-background-color: #fdfbf3; ");
         nouveau.setScene(sc);
         nouveau.show(); 
      }
@@ -422,7 +443,8 @@ public class Controleur {
                 Treillis glu = (Treillis) lue;
                 Stage nouveau = new Stage();
                 nouveau.setTitle(f.getName());
-                Scene sc = new Scene(new MainPane(nouveau, f, glu), 800, 600);
+                Scene sc = new Scene(new MainPane(nouveau, f, glu), 1500,850);
+                vue.setStyle("-fx-background-color: #fdfbf3; ");
                 nouveau.setScene(sc);
                 nouveau.show();
             } catch (Exception ex) {

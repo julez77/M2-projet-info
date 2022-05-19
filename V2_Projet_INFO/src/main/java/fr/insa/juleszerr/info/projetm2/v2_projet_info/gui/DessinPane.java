@@ -51,8 +51,8 @@ public class DessinPane extends Pane{
         this.getChildren().clear();
         this.getChildren().addAll(this.main.getTreillis().dessine());  
         List<Figure> select = this.main.getControleur().getSelection();
-        List<Barre> barreContientForce = this.main.getTreillis().getBarres2();
-        List<Noeud> noeudsContraint = this.main.getTreillis().getNoeuds2();
+        List<Barre> barreContientForce = this.main.getTreillis().barres3();
+        List<Noeud> noeudsContraint = this.main.getTreillis().noeuds3();
         
         if(! select.isEmpty()){
             if (this.main.getControleur().getEtat() == Etat.SELECT) {
