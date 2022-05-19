@@ -106,7 +106,7 @@ public class AppuiGlissant extends NoeudAppui{
     public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
         if(! numn.objExist(this)) {
             int id = numn.creeID(this);
-            w.append("AppuiGlissant;"+id+";"+this.px+";"+this.py+
+            w.append("AppuiGlissant;"+id+";"+this.px+";"+this.py+";"+numn.getID(this.poseSur)+
                       "\n");
         }
     }
