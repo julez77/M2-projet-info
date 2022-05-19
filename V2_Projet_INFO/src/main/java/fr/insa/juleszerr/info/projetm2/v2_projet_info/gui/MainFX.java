@@ -5,6 +5,7 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
+import java.io.InputStream;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -30,7 +31,8 @@ public class MainFX extends Application  {
         Scene s = new Scene(main,1500,900);
         primaryStage.resizableProperty();
         primaryStage.setTitle("super  projet d'info");
-        primaryStage.getIcons().add( new Image("https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/800px-Paris_Saint-Germain_Logo.svg.png"));
+        InputStream is = this.getClass().getResourceAsStream("icones/pont.png");
+        primaryStage.getIcons().add( new Image(is,32,32,false,true));
         main.setStyle("-fx-background-color: #fdfbf3; ");
         primaryStage.setScene(s);
         primaryStage.show();
