@@ -79,8 +79,11 @@ public void addbarre(Barre b)throws Exception{
       this.getNoeuds()[i]=b;  
   }else{
       throw new Exception("il y a deja 3 appui dans  le terrain");
+    
   }
-  
+  this.noeud1= this.getNoeuds()[0];
+      this.noeud2= this.getNoeuds()[1];
+      this.noeud3= this.getNoeuds()[2];
        
 }   
  public void relieappui() throws Exception{
@@ -190,7 +193,7 @@ public void addbarre(Barre b)throws Exception{
     /**
      * @return the noeuds
      */
-    public Noeud[] getNoeuds() {
+    public NoeudSimple[] getNoeuds() {
         return noeuds;
     }
 
