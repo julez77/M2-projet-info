@@ -26,7 +26,7 @@ public class terrain3 extends Figure{
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
-    this.color= Color.CRIMSON;
+    this.color= Color.INDIANRED;
     this.noeuds = new NoeudSimple[4] ;
     this.barres = new Barre[4] ;
     this.noeud1 = n1;
@@ -153,7 +153,7 @@ public void addbarre(Barre b)throws Exception{
 
     @Override
     public Group dessine() {
-         Group g = new Group();
+        Group g = new Group();
        
         g.getChildren().addAll(this.getBarre1().dessine(),this.getBarre2().dessine(),this.getBarre3().dessine());
         g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine(),this.getNoeud3().dessine());      

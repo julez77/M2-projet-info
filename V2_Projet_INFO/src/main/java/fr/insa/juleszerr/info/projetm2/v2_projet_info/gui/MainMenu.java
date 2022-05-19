@@ -9,6 +9,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.input.KeyCombination;
 
 /**
  *
@@ -22,22 +23,26 @@ public class MainMenu extends MenuBar{
         Menu file = new Menu("Fichier");
         
         MenuItem nouveau = new MenuItem("Nouveau");
+        nouveau.setAccelerator(KeyCombination.keyCombination("Ctrl+N"));
         nouveau.setOnAction((t) -> {
             this.main.getControleur().menuNouveau(t);
         });
-        Button save = new Button("Sauvegarder");
+        MenuItem save = new MenuItem("Sauvegarder");
+        save.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
         save.setOnAction((t) -> {
             this.main.getControleur().menuSave(t);
         });
         MenuItem saveAs = new MenuItem("Sauvegarder sous...");
+        saveAs.setAccelerator(KeyCombination.keyCombination("Ctrl+A"));
         saveAs.setOnAction((t) -> {
             this.main.getControleur().menuSaveAs(t);
         });
         MenuItem load = new MenuItem("Ouvrir");
+        load.setAccelerator(KeyCombination.keyCombination("Ctrl+O"));
         load.setOnAction((t) -> {
             this.main.getControleur().menuOpen(t);
         });        
-        file.getItems().addAll(nouveau,saveAs,load);
+        file.getItems().addAll(nouveau,save,saveAs,load);
         
         Menu help = new Menu("Aide");
         MenuItem racourci = new MenuItem("Racourci clavier");
@@ -59,6 +64,6 @@ public class MainMenu extends MenuBar{
         });         
         outils.getItems().addAll(afficheBarOutils);
         
-        this.getMenus().addAll(file, help, outils);
+        this.getMenus().addAll(file, outils, help);
     }
 }

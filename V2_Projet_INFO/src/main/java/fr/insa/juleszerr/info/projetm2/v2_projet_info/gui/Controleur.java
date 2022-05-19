@@ -35,22 +35,18 @@ public class Controleur {
     private double[] pos1 = new double[2];
     private double[] pos2 = new double[2];
     
+    private double pyTerrainHori;
+    private boolean premierTerrain = true;
+    
     private List<Figure> selection;
 
     
-
-    
-    
-
-   
-   
-    
-
-   
+     
+        
     public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, TEST,
     NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
     BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, 
-    TERRAIN_N1, TERRAIN_N2, TERRAIN_N3,
+    TERRAIN_N1, TERRAIN_N2, TERRAIN_N3, TERRAIN_HORI_N1,TERRAIN_HORI_N2,TERRAIN_HORI_N3,
     APPLIQUER_FORCE}
 
     
@@ -228,6 +224,32 @@ public class Controleur {
             this.vue.redrawAll();
             this.changeEtat(Etat.TERRAIN_N1);
        
+        }else if (this.getEtat() == Etat.TERRAIN_HORI_N1) {
+            if(this.premierTerrain == true){
+                System.out.println("Terrain hor");
+                this.pos1[0]=t.getX();
+                this.pos1[1]=t.getY(); 
+                premierTerrain = false;
+            }else{
+                this.pos1[0]=t.getX();
+            }
+            
+            this.changeEtat(Etat.TERRAIN_HORI_N2); 
+        }else if (this.getEtat() == Etat.TERRAIN_HORI_N2) {
+            this.pos2[0]=t.getX();
+            this.pos2[1]=t.getY();
+            this.changeEtat(Etat.TERRAIN_HORI_N3); 
+        }else if (this.getEtat() == Etat.TERRAIN_HORI_N3) {
+            double px = t.getX();
+            double py = t.getY();
+            Treillis treillis =this.vue.getTreillis(); 
+            terrain3 ter = new terrain3(new NoeudSimple(pos1[0],pos1[1]),
+                 new NoeudSimple(pos2[0], pos1[1]),
+                 new NoeudSimple(px, py));                               
+            treillis.addterrain3(ter);            
+            this.vue.redrawAll();
+            this.changeEtat(Etat.TERRAIN_HORI_N1);
+       
         }else if (this.getEtat() == Etat.APPLIQUER_FORCE){
             Treillis treillis =this.vue.getTreillis(); 
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
@@ -280,8 +302,12 @@ public class Controleur {
         this.changeEtat(Etat.APPUIGLISSANT);
     }
 
-    void boutonTerrain(ActionEvent t) {
+    void boutonTerrainLibre(ActionEvent t) {
         this.changeEtat(Etat.TERRAIN_N1);
+    }
+    
+    void boutonTerrainHori(ActionEvent t) {
+        this.changeEtat(Etat.TERRAIN_HORI_N1);
     }
     
     void boutonSelect(ActionEvent t) {
@@ -337,6 +363,16 @@ public class Controleur {
        
     }
     
+    void boutonAide(ActionEvent t) {
+       Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Fonctionnement");
+        alert.setHeaderText(null);
+        alert.setContentText("A compléter avec le fonctionnnement");
+
+        //alert.showAndWait();
+        alert.setWidth(500);
+        alert.showAndWait(); 
+    }
     
     void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
