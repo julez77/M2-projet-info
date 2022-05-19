@@ -32,7 +32,7 @@ public class AppuiGlissant extends NoeudAppui{
         this.terrain = terrain;
     }
     private Terrain terrain ;
-    private Barre poseSur ;
+    private Barre poseSur ;  //barre sur laquelle est posé l'appui glissant
     
      public AppuiGlissant(double px, double py){
       
@@ -118,7 +118,7 @@ public class AppuiGlissant extends NoeudAppui{
 
     }
     
-    public double angleForce(){
+    public double angleForce(){          //renvoie l'angle formé avec l'horizontale par le vecteur "réaction normale du support" associé à l'appui 
         Barre barresupport = this.getPoseSur();
         double angle = barresupport.vecteurBarre().vecteurNormal().angleHorizontale() ;
         

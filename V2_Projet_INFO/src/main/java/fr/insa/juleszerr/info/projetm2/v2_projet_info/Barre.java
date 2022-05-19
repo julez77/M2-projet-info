@@ -29,13 +29,14 @@ public  class Barre extends Figure  {
     private double prix ;
     private double effort ;
     private int id ;
+    private int materiau ; //0 pour bois, 1 pour acier, 
 
     Barre(Point p1, Point p2) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 
-public Vecteur2d vecteurBarre(){                                         //renvoie le vecteur associé à une barre (direction du vecteur : point de départ vers point d'arrivée)
+public Vecteur2d vecteurBarre(){                          //renvoie le vecteur associé à une barre (sens du vecteur : point de départ vers point d'arrivée)
     double vx = this.getNoeud2().getPx() - this.getNoeud1().getPx() ;
     double vy =  this.getNoeud2().getPy() - this.getNoeud1().getPy() ;
     Vecteur2d vecteur = new Vecteur2d (vx, vy) ;
@@ -78,13 +79,14 @@ public Vecteur2d vecteurBarre(){                                         //renvo
         this.noeud1 = noeud1;
         this.noeud2 = noeud2;
         this.id = 0;
-        this.effort= 0;
-        this.id=0;
+        this.effort = 0;
         this.prix = 0;
+        
         
         noeud2.getBarrefin().add(this);
         noeud1.getBarredebut().add(this);
     }
+    
      public Barre ( Noeud noeud1 , Noeud noeud2, Color color ){
         this.color = color;
         this.noeud1 = noeud1;
@@ -130,20 +132,11 @@ public Vecteur2d vecteurBarre(){                                         //renvo
 
     public Noeud noeudOppose(Noeud  N){
     if (N==noeud2){
- return noeud1  ; }
+    return noeud1  ; }
         if (N == noeud1){
             return noeud2 ; }
         else{ return N;}
      
-}
-    public double angle(){
-    double  magv1 = sqrt(Math.pow(noeud1.getPx() ,2)+  Math.pow(noeud2.getPy() ,2));
-    double magv2 = sqrt(Math.pow(noeud2.getPx(),2) + Math.pow(noeud1.getPy(),2));
-
-      double dot  = noeud1.getPx()*noeud2.getPx() +noeud2.getPy()*noeud1.getPy() ;
-        
-    double temp = (dot/(magv1*magv2));
-    return Math.acos(temp);
     }
     
     public double longueurBarre(){
