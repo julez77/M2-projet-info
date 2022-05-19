@@ -76,18 +76,7 @@ System.out.println(tr.getBarres());
                     if (fLue instanceof Treillis) {
                         Treillis gLu = (Treillis) fLue;
                         gLu.menuTexte();
-                        System.out.println("elements");
-                        System.out.println(gLu.getElements());
-                        System.out.println("barres");
-                        System.out.println(gLu.getBarres());
-                        System.out.println("barres2");
-                        System.out.println(gLu.getBarres2());
-                        System.out.println("noeuds");
-                        System.out.println(gLu.getNoeuds());
-                        System.out.println("noeuds2");
-                        System.out.println(gLu.getNoeuds2());
-                        System.out.println("elemterrian3");
-                        System.out.println(gLu.getElemterrain3());
+                       
                     } else {
                         System.out.println("la figure dans le fichier " + fin.getAbsolutePath() + " n'est pas un groupe");
                     }

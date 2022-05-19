@@ -30,7 +30,7 @@ public class MainFX extends Application  {
         Scene s = new Scene(main,1500,900);
         primaryStage.resizableProperty();
         primaryStage.setTitle("super  projet d'info");
-        primaryStage.getIcons().add( new Image("https://seeklogo.com/images/A/aperture-science-logo-57F8044379-seeklogo.com.png"));
+        primaryStage.getIcons().add( new Image("https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/800px-Paris_Saint-Germain_Logo.svg.png"));
         main.setStyle("-fx-background-color: #fdfbf3; ");
         primaryStage.setScene(s);
         primaryStage.show();

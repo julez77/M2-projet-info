@@ -65,7 +65,9 @@ public void addbarre(Barre b)throws Exception{
     if(i<3){
         this.getBarres()[i]=b; } else{throw new Exception("il y a deja 3 barres dans  le terrain");
   }
-       
+   this.barre1 =this.getBarres()[0];
+   this.barre2 =this.getBarres()[1];
+   this.barre3 =this.getBarres()[2];
 }
            
  public void addNoeud(NoeudSimple b) throws Exception{

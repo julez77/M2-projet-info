@@ -130,16 +130,7 @@ public class Treillis extends Figure {
     
    public void add(Figure f) {
 
-        //if (f.getTreillis() != this) {
-            //if (f.getTreillis() != null) {
-               // throw new Error("figure déja dans un autre treillis");
-            //}
-            //this.getElements().add(f);
-
-       // if (f.getTreillis() != this) {
-            //if (f.getTreillis() != null) {
-               // throw new Error("figure déja dans un autre treillis");
-           // }
+        
             if(this.elements.contains(f)==false){
             this.elements.add(f);}
 
