@@ -26,7 +26,7 @@ public class Numeroteur<TO> {
         this.idVersObjet = new TreeMap<>();
         this.objetVersId = new HashMap<>();
     }
-    
+    //associe un id a  un objet
     public int creeID(TO obj) {
         
         if(this.objetVersId.containsKey(obj)) {
@@ -38,7 +38,7 @@ public class Numeroteur<TO> {
         this.prochainID ++;
         return this.prochainID - 1;
     }
-    
+    //renvoie si un objet existe  ou non
     public boolean objExist(TO obj) {
         return this.objetVersId.containsKey(obj);
     }
@@ -51,7 +51,7 @@ public class Numeroteur<TO> {
             throw new Error("Objet" + obj + " inconnu dans numéroteur");
         }
     }
-
+//si l'objet a  un id  on le recup sinon on le crée et  on le recup
     public int getOuCreeID(TO obj) {
         if (this.objExist(obj)) {
             return this.objetVersId.get(obj);
@@ -71,7 +71,7 @@ public class Numeroteur<TO> {
     public boolean idExist(int id) {
         return this.idVersObjet.containsKey(id);
     }
-    
+    //nom explicite
     public void associe(int id,TO obj) {
         if (this.idExist(id)) {
             throw new Error("identificateur existant");

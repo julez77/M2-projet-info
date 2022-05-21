@@ -88,7 +88,7 @@ public class AppuiGlissant extends NoeudAppui{
         Group g = new Group(res);
         return g;
     }
- 
+ //sauvegarde l'appui
      @Override
     public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
         if(! numn.objExist(this)) {
@@ -97,6 +97,7 @@ public class AppuiGlissant extends NoeudAppui{
                       "\n");
         }
     }
+    //nom explicite
  @Override
     public double distanceNoeud(Noeud p) {
         double dx = this.px - p.px;

@@ -64,6 +64,7 @@ public abstract class Noeud extends Figure{
   public String toString2(){
       return "["+px+","+py+"]" ;
   }
+  // permet de textuellement crée  un noeud
  public static  Noeud entrenoeud(){
    double  type ;
    System.out.println("entrer le type de  noeud: ");
@@ -101,6 +102,7 @@ public Noeud (double px , double py){
     /**
      * @return the barredebut
      */
+
 public List<Barre> getBarredebut() {
     return barredebut;
 }
@@ -158,7 +160,7 @@ public boolean barreincidente(Barre b){           //vérifie si une barre est in
         double dy = this.py - p.py;
         return Math.sqrt(dx*dx+dy*dy);
     }
-    
+    //nom explicite
     public double angleBarreNoeud(Barre b){
         if (this==b.getNoeud2()){
             return b.vecteurBarre().vecteurOppose().angleHorizontale() ;

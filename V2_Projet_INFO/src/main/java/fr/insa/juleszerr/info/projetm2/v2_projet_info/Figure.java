@@ -42,7 +42,7 @@ public abstract class Figure {
     
     public abstract void save(Writer w, Numeroteur<Figure> num) throws IOException;
     
-    
+    //sauvegarde les figures créees dans  un fichier
    public void sauvegarde(File fout) throws IOException {
         Numeroteur<Figure> num = new Numeroteur<Figure>();
         try (BufferedWriter bout = new BufferedWriter(new FileWriter(fout))) {
@@ -57,6 +57,7 @@ public abstract class Figure {
             throw new Error(ex);
         }
     }
+    //lis un fichier et crée les figures corrspondnates a celle dans  le fichier
    public static Figure lecture(File fin) throws IOException, Exception {
         Numeroteur<Figure> num = new Numeroteur<Figure>();
         Figure derniere = null;

@@ -120,7 +120,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
  public String toString() {
         return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] effort :"+getEffort()+" prix"+prix  ;   
  }
-    
+    //nom explicite
   public static  Barre creeBarre() {
         System.out.println(" noeud n1 : ");
         Noeud noeud1 = Noeud.entrenoeud();
@@ -129,7 +129,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         return new Barre(noeud1, noeud2);   
     
   }
-
+//renvoie l'autre noeud de la barre ,lorsqu'on entre l'un
     public Noeud noeudOppose(Noeud  N){
     if (N==noeud2){
     return noeud1  ; }
@@ -138,7 +138,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         else{ return N;}
      
     }
-    
+    //nom explicite
     public double longueurBarre(){
       
         return sqrt(Math.pow(noeud2.getPx() - noeud1.getPx(), 2) + Math.pow(noeud2.getPy() - noeud1.getPy(), 2)) ;
@@ -194,7 +194,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
     public double minY() {
         return Math.min(this.noeud1.minY(), this.noeud2.minY());
     }
-
+//nom explicite
   @Override
     public double distanceNoeud(Noeud p) {
         double x1 = this.noeud1.getPx();
@@ -265,7 +265,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         }
         
     }
-    
+    //sauvegarde la barre
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -277,7 +277,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
                     ";  \n");
         }
     }
-
+//nom explicite
     public Noeud noeudPlusProche(Noeud n){
         double dis1 = this.getNoeud1().distanceNoeud(n);
         double dis2 = this.getNoeud2().distanceNoeud(n);
@@ -287,7 +287,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
             return this.getNoeud1();
         }
     }
-    
+    //crée  une barre parallele a une autre ,(pas au point)
     public Barre barrepara(Barre b , Noeud n){
         // pour le  noeud1
     double    L = Math.sqrt((b.noeud1.px-b.noeud2.getPx())*((b.noeud1.px-b.noeud2.getPx())+(b.noeud1.py-b.noeud2.getPy()))*(b.noeud1.py-b.noeud2.getPy()));

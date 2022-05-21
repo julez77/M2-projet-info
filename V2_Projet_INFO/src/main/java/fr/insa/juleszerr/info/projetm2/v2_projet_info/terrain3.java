@@ -56,7 +56,7 @@ public terrain3(){
     this.barre2 = null;
     this.barre3 = null;
 }
-
+//ajoute  une barre au terrain
 public void addbarre(Barre b)throws Exception{
   int  i=0;
   while ((this.getBarres()[i]!=null)&&(i<=2)){
@@ -69,7 +69,7 @@ public void addbarre(Barre b)throws Exception{
    this.barre2 =this.getBarres()[1];
    this.barre3 =this.getBarres()[2];
 }
-           
+       //ajoute  un noeud au terrain    
  public void addNoeud(NoeudSimple b) throws Exception{
   int  i=0;
   while ((this.getNoeuds()[i]!=null)&&(i<=2)){
@@ -86,6 +86,7 @@ public void addbarre(Barre b)throws Exception{
       this.noeud3= this.getNoeuds()[2];
        
 }   
+ // a partir de 3 noeud crée les barres les reliant et les ajoute au terrain
  public void relieappui() throws Exception{
      int i;
      boolean p = true;
@@ -142,7 +143,7 @@ public void addbarre(Barre b)throws Exception{
     public double minY() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+//renvoie la distance du terrain a un noeud
     @Override
     public double distanceNoeud(Noeud p) {
         double dist = this.barres[0].distanceNoeud(p);
@@ -164,7 +165,7 @@ public void addbarre(Barre b)throws Exception{
         g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine(),this.getNoeud3().dessine());      
         return g;
     }
-
+//sauvegarde le terrain
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -259,6 +260,7 @@ public void addbarre(Barre b)throws Exception{
     public Barre getBarre3() {
         return barre3;
     }
+    //nom explicite
 public Barre barreplusproche(Noeud p, double Distmax){
    boolean check ;
    check= false; 
@@ -299,7 +301,7 @@ public Barre barreplusproche(Noeud p, double Distmax){
     
     
     
-    
+    // les 3 methodes permettent de  poser  un appui, un noeud sur une barre de terrain
    public void poserAppuiSimple(Barre b, double distance){
         
        

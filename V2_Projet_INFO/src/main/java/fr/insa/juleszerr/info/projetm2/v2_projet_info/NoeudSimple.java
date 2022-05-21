@@ -55,8 +55,8 @@ public class NoeudSimple extends Noeud {
     public double minY() {
         return this.py;
     }
-
-@Override
+// determine la distance entre 2 noeuds
+@Override 
     public double distanceNoeud(Noeud p) {
         double dx = this.px - p.px;
         double dy = this.py - p.py;
@@ -92,7 +92,7 @@ public class NoeudSimple extends Noeud {
          Group g = new Group( res);       
         return g;              
     }
-        
+        // sauvegarde le noeud
     @Override
     public void save(Writer w, Numeroteur<Figure> numn) throws IOException {
         if(! numn.objExist(this)) {

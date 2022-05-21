@@ -200,7 +200,7 @@ public class Treillis extends Figure {
        
        return barre3 ;
    }
-
+//ajoute une barre au sous listes du treillis
     public void addbarres(Barre b){
       if (this.barres.contains(b)==false){
         this.barres.add(b);
@@ -224,7 +224,7 @@ public class Treillis extends Figure {
     }
     
     
-    
+    //ajoute un terrain au treillis
     public void addterrain3(terrain3 t){
                
                if(this.elements.contains(t)==false){
@@ -304,7 +304,7 @@ public class Treillis extends Figure {
          }  
              
         
-    }
+    }//enleve un terrain
 public void removeterrain3(terrain3 t){
               this.elements.remove(t);
               this.getTerrain3().remove(t);
@@ -323,32 +323,26 @@ public void removeterrain3(terrain3 t){
               t.setTreillis(null);
           }
     
-    //public void removebarres(Barre b){
-       // this.barres.remove(b);
-        //this.elements.remove(b);
-        
-       // b.setTreillis(null);
-   // }
+ 
     
     
     
     
     
     
-    
-    
+    // vide  une  liste
     public void removeAll(List<Figure> lf) {
        for (Figure f : lf) {
            this.remove(f);
       }
    }
-
+//vide la liste des élements
     public void clear() {
         List<Figure> toRemove = new ArrayList<>(this.getElements());
         this.removeAll(toRemove);
     }
 
-    
+  //sauvegarde de treillis  
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -468,6 +462,7 @@ public void removeterrain3(terrain3 t){
      * @param p
      * @return
      */
+    //renvoie la distance a un noeud
     @Override
     public double distanceNoeud(Noeud p) {
               if (this.getElements().isEmpty()) {
@@ -483,7 +478,7 @@ public void removeterrain3(terrain3 t){
             return dist;
         }
     }
-
+//renvoie la figure la plus proche
     public Figure plusProche(Noeud p, double distMax) {
         if (this.elements.isEmpty()) {
             return null;
@@ -505,7 +500,7 @@ public void removeterrain3(terrain3 t){
             }
         }
     }
-    
+    // nom explicite
         public Noeud NoeudPlusProche(Noeud p, double distMax) {
         if (this.noeuds.isEmpty()) {
             return null;
@@ -527,7 +522,7 @@ public void removeterrain3(terrain3 t){
             }
         }
     }
-        
+      //nom explicite  
        public Barre barrePlusProche(Noeud p, double distMax) {
         if (this.barres.isEmpty()) {
             return null;
@@ -565,7 +560,7 @@ public void removeterrain3(terrain3 t){
             throw new Error(ex);
         }
     }
-    
+    //test si le treillis est isostatique
        public boolean Isostatique(){
            boolean isostatique ;
            int NbEquations = 2*(this.noeuds3().size());
