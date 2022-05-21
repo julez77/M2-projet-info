@@ -246,22 +246,32 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
 
     public Group dessineForce() {
         Line bar = new Line();
-        if(this.getEffort()>=0){
-            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+        if(this.getEffort()>0){
+            bar = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
-        res.setStroke(RED);
-        res.setFill(RED);
-        res.setStrokeWidth(5);
-        Group g = new Group( res);
-        return g;
+            bar.setStroke(RED);
+            bar.setFill(RED);
+            bar.setStrokeWidth(5);
+            Group g = new Group( bar);
+            return g;
+        }else if (this.getEffort()<0) {
+            bar = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            bar.setStroke(Color.GREENYELLOW);
+            bar.setFill(Color.GREENYELLOW);
+            bar.setStrokeWidth(5);
+            Group g = new Group( bar);
+            return g;
         }else{
-            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+            
+            bar = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
-        res.setStroke(Color.GREENYELLOW);
-        res.setFill(Color.GREENYELLOW);
-        res.setStrokeWidth(5);
-        Group g = new Group( res);
-        return g;
+            bar.setStroke(this.getColor());
+            bar.setFill(this.getColor());
+            bar.setStrokeWidth(5);
+            Group g = new Group( bar);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
         }
         
     }

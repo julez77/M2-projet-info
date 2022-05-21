@@ -4,7 +4,6 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
-import com.sun.javafx.scene.CameraHelper;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
@@ -19,10 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.geometry.Point3D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Dialog;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -41,13 +40,18 @@ public class Controleur {
     
     private double pyTerrainHori;
     private boolean premierTerrain = true;
+    private boolean isostatique = false;
     
     private List<Figure> selection;
 
     
+
+    
+
+    
      
         
-    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, TEST,
+    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, NAN,
     NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
     BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, 
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3, TERRAIN_HORI_N1,TERRAIN_HORI_N2,TERRAIN_HORI_N3,
@@ -60,7 +64,13 @@ public class Controleur {
     }
     
     public void changeEtat(Etat nouvelEtat){
-        System.out.println("changerEtat()");
+        Treillis treillis = this.vue.getTreillis();
+        this.isostatique = treillis.Isostatique();
+        if (treillis.noeuds3().size()==0 ||  isostatique == false){
+            this.vue.getOutilsRight().getbResol().setDisable(true);
+        } else {
+            this.vue.getOutilsRight().getbResol().setDisable(false);
+        }
         if (nouvelEtat == Etat.SELECT){
             this.getSelection().clear();
             this.vue.redrawAll();
@@ -298,17 +308,8 @@ public class Controleur {
             this.changeEtat(Etat.SUPPR);
         }
             
-        }else if(this.etat == Etat.TEST){
-            System.out.println("Resoudre etat");
-            Treillis treillis =this.vue.getTreillis(); 
-            NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
-            Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
-            Vecteur2d force1 = new Vecteur2d(0, -500) ;
-            Vecteur2d force2 = new Vecteur2d(0, -1000) ;        
-            proche.setForce(force1);
-            treillis.Resolution();      
        
-        }
+    }
     }
 
    
@@ -387,15 +388,57 @@ public class Controleur {
        
     }
     
+    void boutonTestIsostaticite() {
+        Treillis treillis = this.vue.getTreillis();
+        Dialog alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Teste isostaticité");
+        alert.setHeaderText(null);
+        int barresIso = treillis.RoadToIsostatique();
+        
+        this.isostatique = treillis.Isostatique();
+        System.out.println(isostatique);
+        alert.setContentText("barres iso"+barresIso);
+        if(barresIso<0){
+                alert.setContentText("Le treillis n'est pas isostatique, "
+                          + "veuilliez retirer "+ -barresIso +" barres."); 
+                this.changeEtat(Etat.SUPPR);
+        }else if (barresIso > 0) {
+            alert.setContentText("Le treillis n'est pas isostatique, "
+                            + "veuilliez rajouter "+ barresIso +" barres.");
+            this.changeEtat(Etat.BARRE_N1_NOEUD);
+        }else{                    
+            alert.setContentText("Le treillis est bien isostatique!"); 
+            this.changeEtat(Etat.NAN);
+        }
+        
+        //alert.showAndWait();
+        alert.setWidth(500);
+        alert.showAndWait();
+        
+    }
+    
+    
     void boutonAide(ActionEvent t) {
        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Fonctionnement");
         alert.setHeaderText(null);
         alert.setContentText("A compléter avec le fonctionnnement");
 
-        //alert.showAndWait();
+        alert.setResizable(true);
         alert.setWidth(500);
         alert.showAndWait(); 
+    }
+    
+    
+    void boutonDefTreillis(ActionEvent actionEvent) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Fonctionnement");
+        alert.setHeaderText(null);
+        alert.setContentText("A compléter avec le fonctionnnement");
+
+        //alert.showAndWait();
+        alert.setWidth(500);
+        alert.showAndWait();
     }
     
     void menuNouveau(ActionEvent t) {

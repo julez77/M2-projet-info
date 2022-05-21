@@ -28,10 +28,7 @@ public class DessinPane extends Pane{
         this.main=main;
         this.clip = new Rectangle();
         clip.heightProperty().bind(this.heightProperty());
-        clip.heightProperty().addListener((cl)->{
-            System.out.println("w="+ this.main.getWidth()+" ; h = "+ this.main.getHeight());
-            this.redrawAll();
-        });
+        
         clip.widthProperty().bind(this.widthProperty());
         
         this.setClip(clip);

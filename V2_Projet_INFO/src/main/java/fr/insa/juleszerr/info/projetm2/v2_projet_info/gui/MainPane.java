@@ -74,7 +74,7 @@ public class MainPane extends BorderPane {
         this.setLeft(this.outilsLeft);
         this.setCenter(this.dessin); 
         this.setTop(this.top);
-        this.controleur.changeEtat(Etat.TERRAIN_N1);       
+        this.controleur.changeEtat(Etat.NAN);       
     }
     
     public void redrawAll(){

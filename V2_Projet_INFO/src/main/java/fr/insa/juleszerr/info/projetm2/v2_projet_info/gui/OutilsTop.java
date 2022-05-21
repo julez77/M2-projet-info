@@ -86,10 +86,11 @@ public class OutilsTop extends HBox {
         
         this.bTestIso = new BoutonIcon("icones/bTestIsos.png", 32, 32);
         this.bTestIso.setOnAction((t) -> {
-            this.controleur.boutonTest(t);
+            this.controleur.boutonTestIsostaticite();
         });
         
-        this.bResol = new BoutonIcon("icones/bResol.png", 32, 32);   
+        this.bResol = new BoutonIcon("icones/bResol.png", 32, 32); 
+        this.bResol.setDisable(true);
         this.bResol.setOnAction((t) -> {
             this.controleur.boutonResoudre(t);
         });

@@ -12,6 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
 /**
@@ -30,15 +35,19 @@ public class MainFX extends Application  {
         this.main = new MainPane(primaryStage,test);
         Scene s = new Scene(main,1500,900);
         primaryStage.resizableProperty();
+        
         primaryStage.setTitle("super  projet d'info");
         InputStream is = this.getClass().getResourceAsStream("icones/pont.png");
         primaryStage.getIcons().add( new Image(is,32,32,false,true));
+        //Image image = new Image(this.getClass().getResourceAsStream("icones/OurseModel.png"));
+        //Background bg = new Background(new BackgroundImage(image, BackgroundRepeat.SPACE, BackgroundRepeat.SPACE, BackgroundPosition.CENTER, BackgroundSize.DEFAULT));
+        //main.setBackground(bg);
         main.setStyle("-fx-background-color: #fdfbf3; ");
-        main.setStyle("-fx-background-image: url('https://www.caravelis.com/xml/oi/TFO250438051420/TFO250438051420-17a/medias/jpg/tauriac-de-naucelle---viaduc-du-via_w2000.jpg'"); 
         primaryStage.setScene(s);
         primaryStage.show();
         this.main.getControleur().boutonAide(new ActionEvent());
-        
+        //this.main.getControleur().boutonDefTreillis(new ActionEvent());
+
         
         
     }
