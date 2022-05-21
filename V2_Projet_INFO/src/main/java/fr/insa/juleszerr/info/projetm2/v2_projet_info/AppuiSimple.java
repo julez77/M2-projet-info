@@ -19,11 +19,6 @@ import javafx.scene.shape.Ellipse;
  */
 public class AppuiSimple extends NoeudAppui {
    
-    private Terrain terrain ;
-    
-    
-    
-    
     public AppuiSimple(double px, double py){
         super(px,py);
    
@@ -108,23 +103,5 @@ public class AppuiSimple extends NoeudAppui {
 
     }
 
-    /**
-     * @return the terrain
-     */
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    /**
-     * @param terrain the terrain to set
-     */
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
-    }
-    
-    
-    
-    
-    
     
 }

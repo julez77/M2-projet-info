@@ -289,41 +289,6 @@ public void Equilibrage(){       //contrôle les coefficients de la matrice, en 
     }
 }
 
-
-public static void main(String[] args){
-    
-    
-    System.out.println("nb lignes");
-        int n = Lire.i() ;
-        int p = n + 1 ;
-        
-        double[][]T = new double[n][p] ;
-        
-        for(int i=0 ; i<n ; i++){
-            for(int j=0; j<p ; j++){
-                System.out.println("Entrer le coefficient "+ (i+1)+", "+(j+1));
-                T[i][j]=Lire.d(); 
-            }
-        }
-        
-        Matrice M = new Matrice(n, p, T) ;
-       
-        Matrice P = new Matrice(n, p, T) ;
-        
-        System.out.println(M);
-        
-        M.Equilibrage();
-        
-        System.out.println(M);
-        
-        
-        
-    }
-
-
-
-
-
 public double getCoeff(int i, int j) {
     return coeff[i][j] ;
 }
@@ -360,4 +325,35 @@ public void setCoeff(int i, int j, double x){
     public void setNbrLigne(int NbrLigne) {
         this.NbrLigne = NbrLigne;
     } 
+    
+    
+    public static void main(String[] args){
+    
+    
+    System.out.println("nb lignes");
+        int n = Lire.i() ;
+        int p = n + 1 ;
+        
+        double[][]T = new double[n][p] ;
+        
+        for(int i=0 ; i<n ; i++){
+            for(int j=0; j<p ; j++){
+                System.out.println("Entrer le coefficient "+ (i+1)+", "+(j+1));
+                T[i][j]=Lire.d(); 
+            }
+        }
+        
+        Matrice M = new Matrice(n, p, T) ;
+       
+        Matrice P = new Matrice(n, p, T) ;
+        
+        System.out.println(M);
+        
+        M.Equilibrage();
+        
+        System.out.println(M);
+        
+        
+        
+    }
 }

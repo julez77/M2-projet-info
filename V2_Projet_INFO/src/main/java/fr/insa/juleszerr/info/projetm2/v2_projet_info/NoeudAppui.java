@@ -10,11 +10,6 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
  */
 public abstract class NoeudAppui extends Noeud {
     
-    private Terrain terrain ;
-    
-     
-    
-    
     public NoeudAppui(double px , double py){
       super(px , py);
     

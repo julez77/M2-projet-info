@@ -20,11 +20,9 @@ import javafx.scene.paint.Color;
  */
 public abstract class Figure {
     private Treillis treillis ;
-    private Terrain terrain ;
 
     public Figure (){
         this.treillis = null;
-        this.terrain = null ;
     }
 
  
@@ -171,20 +169,5 @@ public abstract class Figure {
         return treillis;
     }
 
-    /**
-     * @return the terrain
-     */
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    /**
-     * @param terrain the terrain to set
-     */
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
-    }
-
-
-   
+  
 }
