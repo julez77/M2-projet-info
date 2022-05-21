@@ -147,12 +147,6 @@ public class Treillis extends Figure {
                
             }
             
-            else if ((f instanceof Treillis)== true ){
-              f.setTreillis(this);
-                this.addTreillis((Treillis) f);
-
-            } 
-            
             else if ((f instanceof terrain3)== true ){
               f.setTreillis(this);
               
@@ -207,20 +201,6 @@ public class Treillis extends Figure {
        return barre3 ;
    }
 
-   
-   
-   
-    public void addTreillis(Treillis T){
-        this.elements.addAll(T.getElements());
-        this.barres.addAll(T.getBarres());
-        this.noeuds.addAll(T.getNoeuds());
-        this.treillise.addAll(T.getTreillise());
-        this.terrain3.addAll(T.getTerrain3());
-        this.elements.add(T);
-        this.treillise.add(T);
-    }
-    
-    
     public void addbarres(Barre b){
       if (this.barres.contains(b)==false){
         this.barres.add(b);
@@ -294,9 +274,7 @@ public class Treillis extends Figure {
                t.setTreillis(this);
             
           }
-        //}
-
-        //}
+      
 
     
     public void remove(Figure f) {                          // supprime une figure (barre, noeud, treillis)
@@ -360,20 +338,17 @@ public void removeterrain3(terrain3 t){
     
     
     public void removeAll(List<Figure> lf) {
-        for (Figure f : lf) {
-            this.remove(f);
-        }
-    }
+       for (Figure f : lf) {
+           this.remove(f);
+      }
+   }
 
     public void clear() {
         List<Figure> toRemove = new ArrayList<>(this.getElements());
         this.removeAll(toRemove);
     }
 
-    public int size() {
-        return this.getElements().size();
-    }
-  
+    
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {
         if (!num.objExist(this)) {
@@ -423,39 +398,7 @@ public void removeterrain3(terrain3 t){
         return g;
     }
     
-    public static Treillis treillisTest() {
-        NoeudSimple p1 = new  NoeudSimple(10, 10);
-        NoeudSimple p2 = new  NoeudSimple(100, 10);
-        NoeudSimple p3 = new  NoeudSimple(100, 100);
-        NoeudSimple p4 = new  NoeudSimple(10, 100);
-        NoeudSimple p5 = new  NoeudSimple(50, 50);
-        NoeudSimple p6 = new  NoeudSimple(400, 500);
-        NoeudSimple p7 = new  NoeudSimple(50, 100);
-        NoeudSimple p8 = new  NoeudSimple(650, 350);
-        NoeudSimple p9 = new  NoeudSimple(500, 500);
-        Barre s1 = new Barre(p1, p2);
-        Barre s2 = new Barre(p2, p3);
-        Barre s3 = new Barre(p3, p1);
-        Barre s4 = new Barre(p1, p4);
-        terrain3 triangle = new terrain3(p7, p8, p9);
-
-        Treillis res = new Treillis();
-        res.add(p5);
-        res.add(p6);
-        res.add(s4);
-       res.add(triangle);
-       /*
-        for (int i = 0; i < 10; i++) {
-            res.add(new NoeudSimple(Math.random() * 500, Math.random() * 500
-                   ));
-        }
-        for (int i = 0; i < 5; i++) {
-            res.add(new Barre(new NoeudSimple(Math.random() * 500, Math.random() * 500),
-                    new NoeudSimple(Math.random() * 500, Math.random() * 500)
-                    ));
-        }*/
-        return res;
-    }
+    
     @Override
     public double maxX() {
               if (this.getElements().isEmpty()) {
@@ -518,78 +461,6 @@ public void removeterrain3(terrain3 t){
             }
             return min;
         }
-    }
-public void menuTexte() {
-        int rep = -1;
-        while (rep != 0) {
-            System.out.println("Gestion textuelle d'un groupe de figure");
-            System.out.println("---------------------------------------");
-            System.out.println("1) afficher le groupe");
-            System.out.println("2) ajouter un noeud");
-            System.out.println("3) ajouter une Barre avec deux nouveaux points");
-            System.out.println("4) ajouter une Barre sur deux points existants");
-            System.out.println("5) créer un sous-groupe");
-            System.out.println("6) afficher le rectangle englobant");
-            System.out.println("7) calculer la distance à un point");
-            System.out.println("8) retirer des figures du groupe");
-            System.out.println("9) sauvegarder le groupe dans un fichier");
-            System.out.println("0) quitter");
-            System.out.println("votre choix : ");
-            rep = Lire.i();
-            if (rep == 1) {
-                System.out.println(this);
-            } else if (rep == 2) {
-                Noeud np = Noeud.entrenoeud();
-                this.add(np);
-            } else if (rep == 3) {
-                Barre ns = Barre.creeBarre();
-                this.add(ns);
-                this.add(ns.getNoeud1());
-                this.add(ns.getNoeud2());
-            } else if (rep == 4) {
-                System.out.println("choisissez le 1er noeud");
-                Noeud deb = this.choisiNoeud();
-                if (deb != null) {
-                    System.out.println("choisissez le 2eme noeud");
-                    Noeud fin = this.choisiNoeud();
-                    Barre ns = new Barre(deb, fin);
-                    this.add(ns);
-                }
-            } else if (rep == 5) {
-                List<Figure> select = this.choisiFigures();
-                this.sousTreillis(select);
-            } else if (rep == 6) {
-                System.out.println("maxX = " + this.maxX() + " ; "
-                        + "minX = " + this.minX() + "\n"
-                        + "maxY = " + this.maxY() + " ; "
-                        + "minY = " + this.minY() + "\n");
-            } else if (rep == 7) {
-                System.out.println("entrez un point :");
-                Noeud p = Noeud.entrenoeud();
-                System.out.println("distance : " + this.distanceNoeud(p));
-            } else if (rep == 8) {
-                List<Figure> select = this.choisiFigures();
-                this.removeAll(select);
-            } else if (rep == 9) {
-                System.out.println("répertoire courant : ");
-                System.out.println(System.getProperty("user.dir"));
-                System.out.println("entrez le chemin du fichier où sauvegarder le groupe de figure : ");
-                String path = Lire.S();
-                File fout = new File(path);
-                try {
-                    this.sauvegarde(fout);
-                    System.out.println("omegalul");
-                } catch (FileNotFoundException ex) {
-                    System.out.println("fichier non trouvé : " + fout.getAbsolutePath());;
-                } catch (IOException ex) {
-                    System.out.println("problème de lecture : " + ex.getLocalizedMessage());;
-                }
-
-            }System.out.println("lol");
-        System.out.println(noeuds);
-        System.out.println(barres);
-        }
-       
     }
 
     /**
@@ -680,81 +551,12 @@ public void menuTexte() {
     }
     
     
-    private Noeud choisiNoeud() {
-       List<Noeud> lp = new ArrayList<>();
-        System.out.println("liste des points disponibles : ");
-        int nbr = 0;
-        for (int i = 0; i < this.getElements().size(); i++) {
-            Figure f = this.getElements().get(i);
-            if (f instanceof Noeud) {
-                nbr++;
-                lp.add((Noeud) f);
-                System.out.println(nbr + ") " + f);
-            }
-        }
-        if (nbr == 0) {
-            System.out.println("Aucun point disponible");
-            return null;
-        } else {
-            int rep = -1;
-            while (rep < 0 || rep > nbr) {
-                System.out.println("votre choix (0 pour annuler) : ");
-                rep = Lire.i();
-            }
-            if (rep == 0) {
-                return null;
-            } else {
-                return lp.get(rep - 1);
-            }
-        }
-    }
-    
 
-    private List<Figure> choisiFigures() {
-        List<Figure> res = new ArrayList<>();
-        int rep = -1;
-        while (rep != 0) {
-            System.out.println("liste des figures disponibles : ");
-            for (int i = 0; i < this.getElements().size(); i++) {
-                System.out.println((i + 1) + ") " + this.getElements().get(i));
-            }
-            System.out.println("votre choix (0 pour finir) : ");
-            rep = Lire.i();
-            if (rep > 0 && rep <= this.getElements().size()) {
-                Figure f = this.getElements().get(rep - 1);
-                if (res.contains(f)) {
-                    System.out.println("déja selectionnée !!");
-                } else {
-                    res.add(f);
-                }
-                System.out.println(res.size() + " figure(s) séléctionnée(s)");
-            }
-        }
-        return res;
-    }
-
-    
-
-    private Treillis sousTreillis(List<Figure> lf) {
-       for (int i = 0; i < lf.size(); i++) {
-            Figure f = lf.get(i);
-            if (f.getTreillis()!= this) {
-                throw new Error(f + " n'appartient pas au groupe " + this);
-            }
-            this.getElements().remove(f);
-            f.setTreillis(null);
-        }
-        Treillis sg = new Treillis();
-        for (int i = 0; i < lf.size(); i++) {
-            sg.add(lf.get(i));
-        }
-        this.add(sg);
-        return sg;
-    }
 
     public static String indente(String toIndente, String prefix) {
         return prefix + toIndente.replaceAll("\n", "\n" + prefix);
     }
+    
        public static void TLecture() throws Exception {
         try {
             Figure lue = Figure.lecture(new File("sauv.txt"));

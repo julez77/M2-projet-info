@@ -165,7 +165,7 @@ public boolean barreincidente(Barre b){           //vérifie si une barre est in
         
         }else{
             return b.vecteurBarre().angleHorizontale() ;
-        }
+       }
         
     }
 
