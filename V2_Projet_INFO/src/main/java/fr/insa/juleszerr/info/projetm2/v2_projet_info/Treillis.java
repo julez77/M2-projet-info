@@ -61,8 +61,8 @@ public class Treillis extends Figure {
     }     
             
  
-    // à faire : afficher un message d'erreur si la distance saisie est plus élevée que la longueur de la barre 
-    public void poserAppuiSimple(Barre b, double distance){
+    
+    public void poserAppuiSimple(Barre b, double distance){  //pose un appui simple sur une barre à une distance sur la barre prise en compte à partir du noeud 1 de celle-ci
         
         double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
@@ -74,7 +74,7 @@ public class Treillis extends Figure {
         noeud.setTreillis(this);
     }
     
-    public void poserAppuiGlissant(Barre b, double distance){
+    public void poserAppuiGlissant(Barre b, double distance){ //pareil que appui simple mais la barre sur laquelle a été posée l'appui glissant est récupérée
         
         double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
@@ -88,7 +88,7 @@ public class Treillis extends Figure {
         this.add(noeud);
     }
     
-   public void poserNoeudSimple(Barre b, double distance){
+   public void poserNoeudSimple(Barre b, double distance){  //pareil que préccédemment, mais la barre est alors divisée en 2 nouvelles barres
         double T = b.getNoeud2().getPx() - b.getNoeud1().getPx() ;
         double C = b.getNoeud2().getPy() - b.getNoeud1().getPy() ;
         double D = b.longueurBarre() ;
@@ -103,7 +103,7 @@ public class Treillis extends Figure {
         
    }
    
-   public void ProjeterNoeud(Noeud noeud, Barre b){
+   public void ProjeterNoeud(Noeud noeud, Barre b){  //projete un noeud sur une barre : détermine notamment la distance requise par les méthodes "poser" 
        Barre barre = new Barre(b.getNoeud1(), noeud);
        Vecteur2d v1 = b.vecteurBarre();
        Vecteur2d v2 = barre.vecteurBarre();
@@ -124,7 +124,7 @@ public class Treillis extends Figure {
         }
    } 
     
-   public void add(Figure f) {
+   public void add(Figure f) { //ajoute une figure au treillis
 
         
             if(this.elements.contains(f)==false){
@@ -162,7 +162,7 @@ public class Treillis extends Figure {
             
    }
    
-   public List<Noeud> noeuds3(){
+   public List<Noeud> noeuds3(){     //renvoie la liste des noeuds utilisés pour la mise en équation
        List<Noeud> noeud3 = new ArrayList();
        for (int i=0 ; i<this.noeuds.size() ; i++){
            Noeud noeud = this.noeuds.get(i);
@@ -187,7 +187,7 @@ public class Treillis extends Figure {
    
    
    
-   public List<Barre> barres3(){
+   public List<Barre> barres3(){  //renvoie la liste des barres utilisés pour la mise en équation
        List<Barre> barre3 = new ArrayList();
        for (int i=0 ; i<this.barres.size() ; i++){
            Barre barre = this.barres.get(i);
@@ -763,7 +763,21 @@ public void menuTexte() {
             throw new Error(ex);
         }
     }
-       
+    
+       public boolean Isostatique(){
+           boolean isostatique ;
+           int NbEquations = 2*(this.noeuds3().size());
+           int NbInconnues = this.NbInconnues();
+           
+           if(NbEquations == NbInconnues){
+               isostatique = true ;
+           }
+           else{
+               isostatique = false ;
+           }
+           
+           return isostatique ;
+       }
        
     public int RoadToIsostatique(){
         int NbEquations = 2*(this.noeuds3().size());
@@ -776,7 +790,7 @@ public void menuTexte() {
     
        
 
-    public int NbInconnues(){
+    public int NbInconnues(){     
         int N=this.barres3().size() ;
         for (int i=0 ; i<this.noeuds3().size() ; i++){
             Noeud noeud = this.noeuds3().get(i) ;
@@ -792,7 +806,7 @@ public void menuTexte() {
         return N ;
     }
     
-    public double[][] Systeme(){
+    public double[][] Systeme(){   //renvoie la matrice associée au treillis, dont la dernière colonne comporte les compsoantes des forces appliquées par l'utilisateur
         int N = this.NbInconnues() ;
         double [][] S = new double[N][N+1];
         int i ; int j; 
@@ -877,7 +891,7 @@ public void menuTexte() {
         
         System.out.println(resol);
         
-        return resol.MultiplierMatrice(10).resolution() ;
+        return resol.resolution() ;
     }
     
     

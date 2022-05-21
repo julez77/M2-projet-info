@@ -36,7 +36,8 @@ public abstract class Figure {
 
    public abstract double minY();
    public abstract double distanceNoeud(Noeud p);
-  // public abstract Groupe dessine(GraphicsContext context);
+   
+   public abstract Group dessineSelection();
    
     public abstract Group dessine();
    
@@ -185,13 +186,5 @@ public abstract class Figure {
     }
 
 
-
-    public abstract Group dessineSelection();
-   
-   
-   
-   
-   
-   
    
 }

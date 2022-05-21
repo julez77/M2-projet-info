@@ -27,7 +27,7 @@ public class Vecteur2d {
        
    }
    
-   public static Vecteur2d ForceAngleNorme(double angle , double norme){
+   public static Vecteur2d ForceAngleNorme(double angle , double norme){  //determine les composantes d'un vecteur à partir de sa norme et de l'angle formé avec l'horizontal
        double vx = norme*cos(angle);
        double vy = norme*sin(angle);
        Vecteur2d force = new Vecteur2d(vx, vy);
@@ -62,7 +62,7 @@ public class Vecteur2d {
        }    
    }
    
-   public Vecteur2d vecteurNormal(){
+   public Vecteur2d vecteurNormal(){  //renvoie le vecteur normal à un vecteur (le vecteur renvoyé sera toujours dirigé vers le haut)
        Vecteur2d vecteurnormal ;
        if((vy/vx)<=0){
            vecteurnormal = new Vecteur2d(-abs(vy), -abs(vx)) ;

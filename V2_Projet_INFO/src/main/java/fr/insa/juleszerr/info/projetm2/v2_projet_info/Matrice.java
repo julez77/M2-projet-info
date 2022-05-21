@@ -13,10 +13,10 @@ import java.math.RoundingMode;
  *
  * @author IEUser
  */
-public class Matrice {
+public class Matrice {           
     private int NbrColonne ;
     private int NbrLigne ;
-    private double[][] coeff ;
+    private double[][] coeff ; //la matrice est construite à partir d'un tableau de tableaux qui a les mêmes dimesions
     
 
 public Matrice(int NbrLigne, int NbrColonne, double[][]coeff){
@@ -44,14 +44,6 @@ public String toString(){
 }
 
 
-
-//public String toString(){
-    
-//}
-
-
-
-    
 public void Matrice() {
     for(int i=0 ; i<NbrLigne ; i++){
         for (int j=0 ; j<NbrColonne ; j++) {
@@ -61,7 +53,7 @@ public void Matrice() {
         }
     }
 
-public boolean Inversible(){
+public boolean Inversible(){        //test d'inversibilité : cherche si la matrice comporte une ligne de 0 (sans tenir compte de la dernière colonne = colonne des solutions)
     boolean inversible=true ;
     
     int i = 0 ;
@@ -92,7 +84,7 @@ public boolean Inversible(){
 
 //méthode qui permute deux lignes de la matrice
 
-public void permutation(int lignePivot, int lignePermut){
+public void permutation(int lignePivot, int lignePermut){         //permutte 2 lignes données
     for(int i=0 ; i<NbrColonne ; i++){
         double T = this.coeff[lignePivot][i] ;
         this.setCoeff(lignePivot, i, this.coeff[lignePermut][i]) ;
@@ -101,7 +93,7 @@ public void permutation(int lignePivot, int lignePermut){
 }
 
 //méthode qui cherche la ligne contenant le plus grand pivot en valeur absolue
-public int recherchePivot(int lignePivot){
+public int recherchePivot(int lignePivot){   
     double max=0 ;
     double T=0 ;
     int lignePivotMax = lignePivot ;
@@ -218,7 +210,7 @@ public double[] resolution(){
        
 }
 
-public static double ArrondirDouble(double db1){
+public static double ArrondirDouble(double db1){         //arrondit un double à x chiffre après la virgule (voir valeur dans setScale)
 
     BigDecimal bd = new BigDecimal(db1).setScale(1, RoundingMode.HALF_UP);
     double db2 = bd.doubleValue() ;
@@ -235,7 +227,7 @@ public void ArrondirMatrice(){
     }
 }
 
-public Matrice MultiplierMatrice(int facteur){
+public Matrice MultiplierMatrice(int facteur){   
     
     for (int i=0 ; i<NbrLigne ; i++){
         for (int j=0 ; j<NbrColonne ; j++){
@@ -245,7 +237,7 @@ public Matrice MultiplierMatrice(int facteur){
     return this ;
 }
 
-public boolean MultiplierLigne1(int ligne){
+public boolean DiviserLigne(int ligne){      //vérifie si une ligne a besoin d'être divisée
     boolean multiplier = false ;
     int j=0 ;
     while ((multiplier == false) && (j<NbrLigne)){
@@ -260,7 +252,7 @@ public boolean MultiplierLigne1(int ligne){
     return multiplier ;
 }
 
-public boolean MultiplierLigne2(int ligne){
+public boolean MultiplierLigne(int ligne){      //vérifie si une ligne a besoin d'être multipliée      
     boolean multiplier = false ;
     int j=0 ;
     while ((multiplier == false) && (j<NbrLigne)){
@@ -274,22 +266,22 @@ public boolean MultiplierLigne2(int ligne){
     return multiplier ;
 }
 
-public void Multiplier(int ligne, double facteur){
+public void Multiplier(int ligne, double facteur){   //multiplie tous les coefficients d'une ligne par un facteur choisi
     for (int j=0 ; j<NbrColonne ; j++){
         double t=facteur*(this.coeff[ligne][j]);
         this.setCoeff(ligne, j, t);
     }
 }
 
-public void Equilibrage(){
+public void Equilibrage(){       //contrôle les coefficients de la matrice, en les empêchant de devenir trop grand ou trop petits, cette méthode est appelée à chaque étape de la résolution
     for(int i=0 ; i<NbrLigne ; i++){
         
-        if ((this.MultiplierLigne2(i))==true){
-            this.Multiplier(i, 10000000);
+        if ((this.MultiplierLigne(i))==true){
+            this.Multiplier(i, 100000000);
             
           }
         
-        while ((this.MultiplierLigne1(i))==true){
+        while ((this.DiviserLigne(i))==true){
           
           this.Multiplier(i, 0.5);
           

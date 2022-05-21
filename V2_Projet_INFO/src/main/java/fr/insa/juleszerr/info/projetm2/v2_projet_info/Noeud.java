@@ -75,11 +75,7 @@ public abstract class Noeud extends Figure{
      double px = Lire.d();
      System.out.println("ord");
      double  py = Lire.d();
- //  while (( type  !=0) ||(type !=1)||(type != 2)){
-    ///   System.out.println("entrer le type de  noeud 0 pour noueud 1 pour appuisimple  2 pour appui-glissant");
-   ///   type = Lire.d();
-     
- //  }
+
      
      if ( type == 0){
          return   new NoeudSimple (px,py);
@@ -115,28 +111,7 @@ public List<Barre> getBarredebut() {
     public List<Barre> getBarrefin() {
         return barrefin;
     }
-    
-    
-//public void addnoeud1(Barre b) {
-        //if (b.getNoeud1() != this) {
-           // if (b.getNoeud1() != null) {
-              //  throw new Error("figure déja dans un autre groupe");
-           // }
-           // this.barredebut.add(b);
-           // b.setNoeud1(this);
-       // }
-   // }
-
-//public void addnoeud2(Barre b) {     
-        //if (b.getNoeud2() != this) {
-            //if (b.getNoeud2() != null) {
-               // throw new Error("figure déja dans un autre groupe");
-            //}
-            //.barrefin.add(b);
-            //b.setNoeud2(this);
-        //}
-    //}
-
+  
 public List<Barre> barresincidentes(){             //renvoie la liste des barres incidentes au noeud
      List<Barre> liste = new ArrayList<>(); 
      
