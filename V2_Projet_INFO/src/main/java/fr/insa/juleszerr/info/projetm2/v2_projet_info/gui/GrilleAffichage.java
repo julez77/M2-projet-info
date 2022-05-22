@@ -4,6 +4,7 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Matrice;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -41,23 +42,20 @@ public class GrilleAffichage extends GridPane{
       
         
         if(main.getControleur().getBarreProche().getEffort() !=0){
-            this.setEffort(new Text("Effort barre: "+main.getControleur().getBarreProche().getEffort()));
+            this.setEffort(new Text("Effort : "+Matrice.ArrondirDouble(main.getControleur().getBarreProche().getEffort())));
             if(main.getControleur().getBarreProche().getEffort()>0){
-                this.setEffort(new Text("Effort :"+main.getControleur().getBarreProche().getEffort()));
                 this.setTypeEffort(new Text("Type d'effort :"));
                 this.setType(new Text("traction"));
-                this.add(getEffort(),0,0);
                 this.add(getTypeEffort(), 0, 1);
                 this.add(getType(), 0, 2);
             }else{
-                this.setEffort(new Text("Effort barre: "+main.getControleur().getBarreProche().getEffort()));
                 this.setTypeEffort(new Text("Type d'effort :"));
                 this.setType(new Text("compression"));
-                this.add(getEffort(),0,0);
                 this.add(getType(), 0, 2);
                 this.add(getTypeEffort(), 0, 1);
             }            
-           
+            this.add(getEffort(),0,0);
+
         }else{
             this.setEffort(new Text("Effort barre: 0"));
             this.setTypeEffort(new Text("Type d'effort :"));
