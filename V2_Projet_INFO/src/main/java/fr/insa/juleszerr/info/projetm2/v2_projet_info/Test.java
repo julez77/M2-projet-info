@@ -126,9 +126,23 @@ public class Test {
        
        List<Barre> barrestriees = muda.BarresTriees() ;
        
-       for (int i=0; i<barrestriees.size(); i++){
-           System.out.print(barrestriees.get(i)+" / ");
+//       for (int i=0; i<barrestriees.size(); i++){
+//           System.out.print(barrestriees.get(i)+" / ");
+//       }
+//       
+       List<Barre> barrestriees1 = muda.BarresTriees1();
+       System.out.println();
+       for (int i=0; i<barrestriees1.size(); i++){
+           System.out.print(barrestriees1.get(i)+" / ");
        }
+       List<Barre> barrestriees2 = muda.BarresTriees2();
+       System.out.println();
+       System.out.println();
+       
+       for (int i=0; i<barrestriees2.size(); i++){
+           System.out.print(barrestriees2.get(i)+" / ");
+       }
+       
        System.out.println();
        System.out.println(muda.QuantiteVert());
        
