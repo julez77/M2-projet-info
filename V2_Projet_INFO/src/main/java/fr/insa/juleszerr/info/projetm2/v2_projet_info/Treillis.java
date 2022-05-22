@@ -5,14 +5,12 @@
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Writer;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 import javafx.scene.Group;
 
 /**
@@ -30,6 +28,7 @@ public class Treillis extends Figure {
     private List<NoeudAppui> bonuster3 ;
     private List<Noeud> noeuds2 ;
     private List<Barre> barres2 ;
+    public static Materiau materiau;
     
   
   public Treillis(){
@@ -832,6 +831,20 @@ public void removeterrain3(terrain3 t){
      */
     public void setBarres2(List<Barre> barres2) {
         this.barres2 = barres2;
+    }
+
+    /**
+     * @return the materiau
+     */
+    public Materiau getMateriau() {
+        return materiau;
+    }
+
+    /**
+     * @param materiau the materiau to set
+     */
+    public void setMateriau(Materiau materiau) {
+        this.materiau = materiau;
     }
 
 

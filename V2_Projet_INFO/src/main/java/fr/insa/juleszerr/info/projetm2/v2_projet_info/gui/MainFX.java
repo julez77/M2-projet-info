@@ -45,7 +45,8 @@ public class MainFX extends Application  {
         main.setStyle("-fx-background-color: #fdfbf3; ");
         primaryStage.setScene(s);
         primaryStage.show();
-        this.main.getControleur().boutonAide(new ActionEvent());
+        this.main.getControleur().boutonAide();
+        this.main.getControleur().boutonParametreMateriau();
         //this.main.getControleur().boutonDefTreillis(new ActionEvent());
 
         

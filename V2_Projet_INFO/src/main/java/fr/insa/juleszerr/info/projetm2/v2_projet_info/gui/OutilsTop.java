@@ -19,9 +19,7 @@ import javax.swing.ImageIcon;
  * @author IEUser
  */
 public class OutilsTop extends HBox {
-    
-   ;
-    private Button bTest;
+
     
     private BoutonIcon bNouveu;
     private BoutonIcon bOuvrir;
@@ -49,10 +47,6 @@ public class OutilsTop extends HBox {
         this.controleur= contoleur;
         
         this.toolBar = new ToolBar();
-        
-        
-        
-        this.bTest = new Button("Affiche elmt du treillis");
         
         this.bNouveu = new BoutonIcon("icones/bNouveau1.png", 32, 32);   
         this.bNouveu.setOnAction((t) -> {
@@ -98,7 +92,7 @@ public class OutilsTop extends HBox {
          this.bAide = new BoutonIcon("icones/bAide.png", 32, 32); 
          
         this.bAide.setOnAction((t) -> {
-            this.controleur.boutonAide(t);
+            this.controleur.boutonAide();
         });
         
         /*
@@ -115,11 +109,7 @@ public class OutilsTop extends HBox {
              
         });*/
         
-        this.bTest.setOnAction((ActionEvent t) -> {
-            
-            this.controleur.boutonTest(t); 
-             
-        });
+    
         
         
        /* 
@@ -132,7 +122,7 @@ public class OutilsTop extends HBox {
        
        
         toolBar.getItems().addAll(bNouveu,bOuvrir, bSave,bSaveAs,bSelect,bSuppr,bTestIso,
-                bResol,bAide, bTest);
+                bResol,bAide);
         toolBar.setOrientation(Orientation.HORIZONTAL);
         toolBar.setStyle("-fx-background-color: #8dbdf0; ");
         
@@ -145,12 +135,6 @@ public class OutilsTop extends HBox {
    
   
 
-    /**
-     * @return the bTest
-     */
-    public Button getbTest() {
-        return bTest;
-    }
 
     /**
      * @return the bNouveu

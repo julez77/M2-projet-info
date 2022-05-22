@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Writer;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 /**
  *
@@ -26,7 +27,7 @@ public class terrain3 extends Figure{
     private Barre[] barres ; 
 
 public terrain3(NoeudSimple n1, NoeudSimple n2, NoeudSimple n3){
-    this.color= Color.INDIANRED;
+    this.color= Color.BURLYWOOD;
     this.noeuds = new NoeudSimple[4] ;
     this.barres = new Barre[4] ;
     this.noeud1 = n1;
@@ -165,6 +166,9 @@ public void addbarre(Barre b)throws Exception{
         g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine(),this.getNoeud3().dessine());      
         return g;
     }
+    
+    
+   
 //sauvegarde le terrain
     @Override
     public void save(Writer w, Numeroteur<Figure> num) throws IOException {

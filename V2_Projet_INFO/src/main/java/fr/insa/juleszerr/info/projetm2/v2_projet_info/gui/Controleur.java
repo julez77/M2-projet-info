@@ -8,6 +8,7 @@ import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiGlissant;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.AppuiSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Barre;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Figure;
+import fr.insa.juleszerr.info.projetm2.v2_projet_info.Materiau;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Noeud;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.NoeudSimple;
 import fr.insa.juleszerr.info.projetm2.v2_projet_info.Treillis;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,9 +43,16 @@ public class Controleur {
     private double pyTerrainHori;
     private boolean premierTerrain = true;
     private boolean isostatique = false;
+    private boolean premiereOuverture = true;
+    
+    public int effortMax;
+    public String choixDuMateriaux;
     
     private List<Figure> selection;
+    
+    private Vecteur2d force;
 
+   
     
 
     
@@ -66,6 +75,14 @@ public class Controleur {
     public void changeEtat(Etat nouvelEtat){
         Treillis treillis = this.vue.getTreillis();
         this.isostatique = treillis.Isostatique();
+        if(treillis.getMateriau()==null && this.premiereOuverture==false){
+            Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Le materiau n'a pas ete correctement selectionnne. ");
+                alert.showAndWait(); 
+                
+        }
+        this.premiereOuverture = false;
         if (treillis.noeuds3().size()==0 ||  isostatique == false){
             this.vue.getOutilsRight().getbResol().setDisable(true);
         } else {
@@ -287,9 +304,7 @@ public class Controleur {
             Treillis treillis =this.vue.getTreillis(); 
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Noeud proche = this.vue.getTreillis().NoeudPlusProche(nclic, 20);
-            Vecteur2d force1 = new Vecteur2d(0, -500) ;
-            Vecteur2d force2 = new Vecteur2d(0, -1000) ;        
-            proche.setForce(force1);
+            proche.setForce(force);
             this.vue.redrawAll();
         }else if(this.getEtat()==Etat.SUPPR){
             Treillis treillis =this.vue.getTreillis(); 
@@ -379,15 +394,7 @@ public class Controleur {
         }       
         
     }
-    void boutonTest(ActionEvent t) {
-        Treillis treillis = this.vue.getTreillis();            
-            System.out.println("Noeuds dans le treillis"+ treillis.getNoeuds().size());
-            System.out.println("Noeuds pris en compte dans la resolution"+ treillis.noeuds3().size());
-            System.out.println("Barres dans le treillis"+ treillis.getBarres().size());
-            System.out.println("Barres prise en compte dans la resolution"+ treillis.barres3().size());
-       
-    }
-    
+
     void boutonTestIsostaticite() {
         Treillis treillis = this.vue.getTreillis();
         Dialog alert = new Alert(AlertType.INFORMATION);
@@ -418,14 +425,14 @@ public class Controleur {
     }
     
     
-    void boutonAide(ActionEvent t) {
+    void boutonAide() {
        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Fonctionnement");
         alert.setHeaderText(null);
         alert.setContentText("A compléter avec le fonctionnnement");
 
         alert.setResizable(true);
-        alert.setWidth(500);
+        
         alert.showAndWait(); 
     }
     
@@ -514,7 +521,7 @@ public class Controleur {
         alert.setContentText("Création de barres:\n"
                 + "     Par defaut: création de barre libre \n"
                 + "     Ctrl: creation de barre à partir de noeuds\n"
-                + "     Ctrl+Shift: creation de barre a partir \n"
+                + "     Ctrl+Shift: creation de barre a partir d'un noeud et d'un clic libre \n"
                 + "     d'un noeud et d'un clic libre\n"
                 + "     Shift: création de barre horizontale/verticale\n"
                 + "Creation de noeuds:\n"
@@ -522,7 +529,7 @@ public class Controleur {
                 + "     Ctrl: appuis simple \n"
                 + "     Ctrl+Shift: appuis glissant");
         alert.setResizable(true);
-        //alert.setWidth(1000);
+        
         alert.showAndWait();
     }
     
@@ -557,6 +564,22 @@ public class Controleur {
         }
     }*/
 
+    
+    void boutonParametreForce() {
+        Optional<Vecteur2d> forceDialog = DialogParametreForce.demandeForce();
+        if(forceDialog.isPresent()){
+            this.force = forceDialog.get();
+        }
+    }
+
+    void boutonParametreMateriau() {
+        Optional<Materiau> materiauDialog = DialogParametreMateriaux.demandeMateriau();
+        if(materiauDialog.isPresent()){
+            this.vue.getTreillis().setMateriau(materiauDialog.get());
+        }
+        this.vue.redrawAll();
+    }
+    
     /**
      * @return the selection
      */

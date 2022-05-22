@@ -7,9 +7,11 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
@@ -29,6 +31,8 @@ public class OutilsLeft extends HBox {
     private ToggleButton bBarreLibre;
     private ToggleButton bForce;
     
+    private  Button bParaForce;
+    private Button bChoixMateriau;
     
     private DessinPane dessin;
     private MainPane main;
@@ -38,8 +42,7 @@ public class OutilsLeft extends HBox {
 public OutilsLeft(MainPane main, Controleur controleur) {
     this.main= main;
     this.controleur = controleur;
-    this.setStyle("-fx-background-color: #8dbdf0; ");
-    
+    this.setStyle("-fx-background-color: #8dbdf0; ");    
     this.toolBar = new ToolBar();
     
     Label lNouvelleBarre = new Label("Nouvelle barre:");
@@ -57,8 +60,12 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     this.bTerrainHori = new ToggleButton("Terrain plan");
     
     Label lNouvelleForce = new Label("Nouvelle Force:");
-    //FxUtils.setSimpleBorder(lNouvelleForce, Color.CYAN, 2);
     this.bForce = new ToggleButton("Sur un noeud");
+    
+    this.bParaForce = new Button("Réglages fore");
+    
+    Label lMateriau = new Label("Choix du materiau:");
+    this.bChoixMateriau = new Button("Materiau");
         
     Separator s1 = new Separator(Orientation.VERTICAL);
     Separator s2 = new Separator(Orientation.VERTICAL);
@@ -69,13 +76,13 @@ public OutilsLeft(MainPane main, Controleur controleur) {
        
     toolBar.getItems().addAll(lNouveauNoeud, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
     lNouveauTerrain, bTerrainLibre,bTerrainHori,
-    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud, lNouvelleForce,bForce);
+    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud, lNouvelleForce,bForce, bParaForce,lMateriau,bChoixMateriau);
     toolBar.setOrientation(Orientation.VERTICAL);
     toolBar.setStyle("-fx-background-color: #8dbdf0; ");     
-        /*
+        
         ToggleGroup gBoutons = new ToggleGroup(); 
         
-        
+        /*
         this.bNoeudSimple.setToggleGroup(gBoutons);
         this.bAppuiSimple.setToggleGroup(gBoutons);
         this.bAppuiGlissant.setToggleGroup(gBoutons);
@@ -86,27 +93,22 @@ public OutilsLeft(MainPane main, Controleur controleur) {
         this.bForce.setToggleGroup(gBoutons);
         */
         this.bBarreLibre.setOnAction((ActionEvent t) -> {
-              System.out.println("Barre select");
             this.controleur.boutonBarreLibre(t);
         });
         
         this.bForce.setOnAction((ActionEvent t) -> {
-              System.out.println("Barre select");
             this.controleur.boutonForce(t);
         });
         
         this.bBarreDepuisNoeud.setOnAction((ActionEvent t) -> {
-              System.out.println("Barre select");
             this.controleur.boutonBarreDepuisNoeud(t);
         });
          
         this.bAppuiSimple.setOnAction((ActionEvent t) -> {
-            System.out.println("Appuis simple select");
             this.controleur.boutonAppuiSimple(t);
              
         });
         
-        //bNoeudSimple.set(KeyCombination.keyCombination("Ctrl+N"));
         bNoeudSimple.setMinWidth(110);
         bAppuiGlissant.setMinWidth(110);
         bAppuiSimple.setMinWidth(110);
@@ -115,33 +117,33 @@ public OutilsLeft(MainPane main, Controleur controleur) {
         bForce.setMinWidth(110);
         bTerrainHori.setMinWidth(110);
         bTerrainLibre.setMinWidth(110);
-        //bNoeudSimple.setStyle("-fx-background-color: #fccf97; ");
+        bParaForce.setMinWidth(110);
+        bChoixMateriau.setMinWidth(110);
         this.bNoeudSimple.setOnAction((ActionEvent t)-> {
-            System.out.println("Noeud Simple select");
             this.controleur.boutonNoeudSimple(t);
 
            
         });
         this.bAppuiGlissant.setOnAction((ActionEvent t) -> {
-            System.out.println("Appui Glissant select");
             this.controleur.boutonAppuiGlissant(t);
   
              
         });
         this.bTerrainLibre.setOnAction((ActionEvent t) -> {
-            System.out.println("Terrain select");
             this.controleur.boutonTerrainLibre(t);            
         });
         
         this.bTerrainHori.setOnAction((ActionEvent t) -> {
-            System.out.println("Terrain select");
             this.controleur.boutonTerrainHori(t);            
         });
         
-        //FxUtils.setSimpleBorder(this.bAppuiGlissant, Color.CYAN, 2);
+        this.bParaForce.setOnAction((t) -> {
+            this.controleur.boutonParametreForce();
+        });
         
-        
-        
+        this.bChoixMateriau.setOnAction((t) -> {
+            this.controleur.boutonParametreMateriau();
+        });
         
         this.getChildren().addAll(this.bAppuiSimple,this.bAppuiGlissant,this.bNoeudSimple,
                 this.bTerrainLibre,this.bTerrainHori, this.toolBar, this.bBarreDepuisNoeud,this.bBarreLibre);

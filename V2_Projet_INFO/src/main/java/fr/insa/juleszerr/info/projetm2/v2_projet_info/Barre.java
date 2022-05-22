@@ -218,29 +218,81 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
     
     @Override
         public Group dessine() {
-        Line res1 = new Line();
-         Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+        Materiau mat = Treillis.materiau;    
+        if(this.getColor()==Color.BURLYWOOD){
+            Line res1 = new Line();
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
-        res.setStroke(this.getColor());
-        res.setFill(this.getColor());
-        res.setStrokeWidth(5);
-        Group g = new Group( res);
-        g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
-        return g;
-        
+            res.setStroke(this.getColor());
+            res.setFill(this.getColor());
+            res.setStrokeWidth(7);        
+            Group g = new Group( res);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
+        }else{
+        if(mat.getTypeMateriau() == "ACIER"){
+            Line res1 = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            res.setStroke(Color.BLACK);
+            res.setFill(Color.BLACK);
+            res.setStrokeWidth(7);
+            res1.setStroke(Color.DARKGRAY);
+            res1.setFill(Color.DARKGRAY);
+            res1.setStrokeWidth(3);
+            Group g = new Group( res,res1);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
+        }else if(mat.getTypeMateriau() == "BOIS" ||mat.getTypeMateriau()=="BAMBOO"){
+            Line res1 = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            res.setStroke(Color.BROWN);
+            res.setFill(Color.BROWN);
+            res.setStrokeWidth(7);
+            res1.setStroke(Color.BISQUE);
+            res1.setFill(Color.BISQUE);
+            res1.setStrokeWidth(3);
+            Group g = new Group( res,res1);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
+        }else if(mat.getTypeMateriau()=="PLASTIQUE"){
+            Line res1 = new Line();
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            res.setStroke(Color.ORCHID);
+            res.setFill(Color.ORCHID);
+            res.setStrokeWidth(7);        
+            Group g = new Group( res);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
+        }else{
+            Line res1 = new Line();
+            Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+            res.setStroke(this.getColor());
+            res.setFill(this.getColor());
+            res.setStrokeWidth(7);        
+            Group g = new Group( res);
+            g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
+            return g;
+        }
     }
+        }
 
     
         @Override
     public Group dessineSelection() {
+        Materiau materiau = Treillis.materiau;
         Line res1 = new Line();
          Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
         res.setStroke(NoeudSimple.COULEUR_SELECTION);
         res.setFill(NoeudSimple.COULEUR_SELECTION);
-        res.setStrokeWidth(5);
+        res.setStrokeWidth(7);
         Group g = new Group( res);
-        System.out.println("dess s");
        return g;
     }
 
@@ -251,16 +303,16 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
             bar.setStroke(RED);
             bar.setFill(RED);
-            bar.setStrokeWidth(5);
-            Group g = new Group( bar);
+            bar.setStrokeWidth(7);
+            Group g = new Group(bar);
             return g;
         }else if (this.getEffort()<0) {
             bar = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
-            bar.setStroke(Color.GREENYELLOW);
-            bar.setFill(Color.GREENYELLOW);
-            bar.setStrokeWidth(5);
-            Group g = new Group( bar);
+            bar.setStroke(Color.BLUE);
+            bar.setFill(Color.BLUE);
+            bar.setStrokeWidth(7);
+            Group g = new Group(bar);
             return g;
         }else{
             
@@ -269,7 +321,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
             bar.setStroke(this.getColor());
             bar.setFill(this.getColor());
             bar.setStrokeWidth(5);
-            Group g = new Group( bar);
+            Group g = new Group(bar);
             g.getChildren().addAll(this.getNoeud1().dessine(),this.getNoeud2().dessine());
             return g;
         }

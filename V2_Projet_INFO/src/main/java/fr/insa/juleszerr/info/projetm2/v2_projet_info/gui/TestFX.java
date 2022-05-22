@@ -3,13 +3,16 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info.gui;
 
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
 public class TestFX extends Application {
@@ -71,16 +74,6 @@ public class TestFX extends Application {
       launch(args);
    }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

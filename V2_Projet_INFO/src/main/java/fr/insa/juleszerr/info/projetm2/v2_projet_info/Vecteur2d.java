@@ -21,13 +21,15 @@ public class Vecteur2d {
    
    
    
+   
    public Vecteur2d (double vx ,  double  vy){
        this.vx =vx ;
        this.vy = vy ;
        
    }
    
-   public static Vecteur2d ForceAngleNorme(double angle , double norme){  //determine les composantes d'un vecteur à partir de sa norme et de l'angle formé avec l'horizontal
+    //determine les composantes d'un vecteur à partir de sa norme et de l'angle formé avec l'horizontal
+   public static Vecteur2d ForceAngleNorme(double angle , double norme){ 
        double vx = norme*cos(angle);
        double vy = norme*sin(angle);
        Vecteur2d force = new Vecteur2d(vx, vy);
@@ -36,7 +38,14 @@ public class Vecteur2d {
        
    }
    
-      
+    public  Vecteur2d ForceAvecAngleNorme(double angle , double norme){ 
+       double vx = norme*cos(angle);
+       double vy = norme*sin(angle);
+       Vecteur2d force = new Vecteur2d(vx, vy);
+       
+       return force ;
+       
+   }
    
    public double length(){
        return sqrt(Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) ;
