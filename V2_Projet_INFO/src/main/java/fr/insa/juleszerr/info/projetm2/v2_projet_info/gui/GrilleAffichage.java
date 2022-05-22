@@ -42,7 +42,7 @@ public class GrilleAffichage extends GridPane{
       
         
         if(main.getControleur().getBarreProche().getEffort() !=0){
-            this.setEffort(new Text("Effort : "+Matrice.ArrondirDouble(main.getControleur().getBarreProche().getEffort())));
+            this.setEffort(new Text("Effort : "+ (int)Matrice.ArrondirDouble(main.getControleur().getBarreProche().getEffort())));
             if(main.getControleur().getBarreProche().getEffort()>0){
                 this.setTypeEffort(new Text("Type d'effort :"));
                 this.setType(new Text("traction"));
@@ -66,10 +66,10 @@ public class GrilleAffichage extends GridPane{
         }
         
         if(main.getTreillis().barres3().size()>0){
-            this.setNbBarre(new Text("Nombre de barre: "+main.getTreillis().barres3().size()));
+            this.setNbBarre(new Text("Nbre de barre: "+main.getTreillis().barres3().size()));
             this.add(nbBarre, 0, 3);
         }if(main.getTreillis().noeuds3().size()>0){
-            this.setNbNoeud(new Text("Nombre de noeud: "+main.getTreillis().noeuds3().size())); 
+            this.setNbNoeud(new Text("Nbre de noeud: "+main.getTreillis().noeuds3().size())); 
             this.add(nbNoeud, 0, 4);
         }   
         
