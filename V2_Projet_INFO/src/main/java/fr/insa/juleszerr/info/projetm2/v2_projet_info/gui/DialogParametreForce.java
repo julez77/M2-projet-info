@@ -37,8 +37,8 @@ public class DialogParametreForce extends Dialog<Vecteur2d> {
         Label lNorme = new Label("                         Norme :     ");
         Label lAngle = new Label("                         Angle :     ");
         
-        this.tfAngleForce = new TextField("0.0");
-        this.tfNormeForce = new TextField("Par rapport au cercle trigo (en degré)");
+        this.tfAngleForce = new TextField("Par rapport au cercle trigo (en degré)");
+        this.tfNormeForce = new TextField("0.0");
         
         GridPane grid = new GridPane();
         grid.add(lNorme, 0, 0);
