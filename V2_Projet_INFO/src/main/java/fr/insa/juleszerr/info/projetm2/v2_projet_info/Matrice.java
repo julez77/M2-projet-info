@@ -128,7 +128,7 @@ public void DescenteGauss(){
                }
                else {
                 transvection(i, j);
-                System.out.println(this);
+                //System.out.println(this);
                 this.Equilibrage();
                 
             
@@ -150,7 +150,7 @@ public void RemonteeGauss(){
           }
            
           this.Equilibrage();
-          System.out.println(this);
+          //System.out.println(this);
           System.out.println();
             }
         }
@@ -170,14 +170,14 @@ public void transvection(int lignePivot, int ligneTrans){
         double d = this.coeff[lignePivot][i] ;
         double T = a*c - b*d ;
         this.setCoeff(ligneTrans, i, T) ; }
-}else{
+    }else{
         
         for(int i=lignePivot ; i<NbrColonne ; i++){
         double c = this.coeff[ligneTrans][i] ;
         double d = this.coeff[lignePivot][i] ;
         double T = a*c - b*d ;
         this.setCoeff(ligneTrans, i, T) ; 
-}
+    }
         
     }
 }

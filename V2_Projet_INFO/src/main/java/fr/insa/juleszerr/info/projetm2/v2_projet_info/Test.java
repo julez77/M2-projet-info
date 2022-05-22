@@ -4,8 +4,8 @@
  */
 package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 
-import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
+import java.util.List;
 
 
 
@@ -123,6 +123,15 @@ public class Test {
        
        muda.Resolution();
        System.out.println(muda);
+       
+       List<Barre> barrestriees = muda.BarresTriees() ;
+       
+       for (int i=0; i<barrestriees.size(); i++){
+           System.out.print(barrestriees.get(i)+" / ");
+       }
+       System.out.println();
+       System.out.println(muda.QuantiteVert());
+       
         
     }
     

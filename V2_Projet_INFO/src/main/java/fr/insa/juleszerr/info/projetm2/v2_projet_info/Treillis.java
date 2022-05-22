@@ -7,6 +7,7 @@ package fr.insa.juleszerr.info.projetm2.v2_projet_info;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
@@ -726,6 +727,93 @@ public void removeterrain3(terrain3 t){
         
     }
     
+    }
+    
+    
+    
+    public Barre[] ConversionListTableau(){
+        Barre[] tabbarre = new Barre[this.barres3().size()];
+        for (int i=0 ; i<this.barres3().size() ; i++){
+            tabbarre[i]=this.barres3().get(i);
+        }
+        return tabbarre ;
+    }
+     
+    public static List<Barre> ConversionTableauList(Barre[] tabbarre){
+        List<Barre> listbarre = new ArrayList<>();
+        for (int i=0 ; i<tabbarre.length ; i++){
+            listbarre.add(tabbarre[i]);
+ 
+        }
+        return listbarre ;
+    }
+    
+    public static int recherche_position (Barre[] tabbarre, int pos, double val) {
+	int i = 0;
+	int R = 0 ;
+	while (i < pos) {
+		if (val < abs(tabbarre[i+1].getEffort())) {
+			R = i ; i=pos ; } 
+		else {
+			tabbarre[i] = tabbarre[i+1] ;
+			 i=i+1 ;
+			 }
+		}
+		
+	return R ;
+		
+    }
+    
+    public static Barre[]  TriBarresParEffort(Barre[] barres){
+        int n = barres.length;
+        
+        for (int i=0 ; i<(n-1) ; i++) {
+	    if (abs(barres[i].getEffort())>abs(barres[i+1].getEffort())) {
+		
+                Barre B = barres[i+1];
+                
+                int pos2 = i+1 ;
+                for (int j=0 ; j < pos2 ; j++) {
+                    barres[pos2-j] = barres[pos2-1-j] ;
+	        }
+                
+                int pos = recherche_position(barres, i+1, abs(B.getEffort())) ;
+                barres[pos] = B ;
+                
+            }
+
+
+        }
+        
+        for (int i=0; i<barres.length ; i++){
+           System.out.print(barres[i]+" / ");
+        }
+        System.out.println();
+        
+        return barres ;
+    
+    }
+    
+    public List<Barre> BarresTriees(){
+        Barre[] tabbarre = new Barre[this.barres3().size()];
+        tabbarre = this.ConversionListTableau();
+        
+        for (int i=0; i<tabbarre.length ; i++){
+           System.out.print(tabbarre[i]+" / ");
+        }
+        System.out.println();
+        
+        tabbarre = Treillis.TriBarresParEffort(tabbarre);
+        
+        return Treillis.ConversionTableauList(tabbarre);
+    }
+    
+    public int QuantiteVert(){
+        int NbBarres = this.barres3().size();
+        double quantitevert1 = 255/NbBarres ;
+        int quantitevert2 = (int) quantitevert1 ;
+        
+        return quantitevert2 ;
     }
     
     /**
