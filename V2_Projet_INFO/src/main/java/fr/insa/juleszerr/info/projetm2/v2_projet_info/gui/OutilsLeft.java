@@ -14,7 +14,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -31,8 +33,10 @@ public class OutilsLeft extends HBox {
     private ToggleButton bBarreLibre;
     private ToggleButton bForce;
     
-    private  Button bParaForce;
+    private Button bParaForce;
     private Button bChoixMateriau;
+    
+    private GrilleAffichage grill;
     
     private DessinPane dessin;
     private MainPane main;
@@ -40,8 +44,10 @@ public class OutilsLeft extends HBox {
     private ToolBar toolBar ;
     
 public OutilsLeft(MainPane main, Controleur controleur) {
+    
     this.main= main;
     this.controleur = controleur;
+    this.grill = new GrilleAffichage(main);
     this.setStyle("-fx-background-color: #8dbdf0; ");    
     this.toolBar = new ToolBar();
     
@@ -62,10 +68,12 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     Label lNouvelleForce = new Label("Nouvelle Force:");
     this.bForce = new ToggleButton("Sur un noeud");
     
-    this.bParaForce = new Button("Réglages fore");
+    this.bParaForce = new Button("Réglages force");
     
     Label lMateriau = new Label("Choix du materiau:");
     this.bChoixMateriau = new Button("Materiau");
+    
+    
         
     Separator s1 = new Separator(Orientation.VERTICAL);
     Separator s2 = new Separator(Orientation.VERTICAL);

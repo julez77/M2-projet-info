@@ -33,6 +33,8 @@ import javafx.stage.Stage;
  * @author IEUser
  */
 public class Controleur {
+   
+    
     private MainPane vue;
     private Etat etat;
     
@@ -40,17 +42,20 @@ public class Controleur {
     private double[] pos1 = new double[2];
     private double[] pos2 = new double[2];
     
+    private Noeud clic;
+    private Barre barreProche;
+    
     private double pyTerrainHori;
     private boolean premierTerrain = true;
     private boolean isostatique = false;
-    private boolean premiereOuverture = true;
-    
-    public int effortMax;
+    private boolean resolu = false;
+    public int effortMax = 500;
     public String choixDuMateriaux;
     
     private List<Figure> selection;
     
     private Vecteur2d force;
+    
 
    
     
@@ -70,47 +75,48 @@ public class Controleur {
     public Controleur(MainPane vue){
         this.vue = vue;
         this.selection = new ArrayList<>();
+        this.force = new Vecteur2d(0, -500);
     }
     
     public void changeEtat(Etat nouvelEtat){
+        
         Treillis treillis = this.vue.getTreillis();
         this.isostatique = treillis.Isostatique();
-        if(treillis.getMateriau()==null && this.premiereOuverture==false){
-            Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setHeaderText("Le materiau n'a pas ete correctement selectionnne. ");
-                alert.showAndWait(); 
-                
-        }
-        this.premiereOuverture = false;
+        
         if (treillis.noeuds3().size()==0 ||  isostatique == false){
             this.vue.getOutilsRight().getbResol().setDisable(true);
         } else {
             this.vue.getOutilsRight().getbResol().setDisable(false);
         }
         if (nouvelEtat == Etat.SELECT){
+            this.resolu = false;
             this.getSelection().clear();
             this.vue.redrawAll();
         }
         else if (nouvelEtat == Etat.NOEUDSIMPLE){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
             //this.vue.getOutilsRight().getbCouleur
         }else if (nouvelEtat == Etat.APPUIGLISSANT){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
             
         }else if (nouvelEtat == Etat.APPUISIMPLE){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
             
         }else if (nouvelEtat == Etat.BARRE_N1_LIBRE){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
 
         }else if (nouvelEtat == Etat.BARRE_N2_LIBRE){
 
         }else if (nouvelEtat == Etat.TERRAIN_N1){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
             
@@ -119,9 +125,11 @@ public class Controleur {
         }else if (nouvelEtat == Etat.TERRAIN_N3){
             
         }else if (nouvelEtat == Etat.APPLIQUER_FORCE){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
         }else if(nouvelEtat == Etat.RESOUDRE){
+            this.resolu = false;
             this.getSelection().clear();            
             this.vue.redrawAll();
     }
@@ -130,7 +138,8 @@ public class Controleur {
     }
     
     public void clicDansDessin(MouseEvent t)  {
-
+        
+        
         if (this.getEtat() == Etat.SELECT) {
             NoeudSimple nclic = new NoeudSimple(t.getX(),t.getY());
             Figure proche = this.vue.getTreillis().plusProche(nclic, Double.MAX_VALUE);
@@ -325,6 +334,11 @@ public class Controleur {
             
        
     }
+        this.clic = new NoeudSimple(t.getX(),t.getY());
+        this.barreProche = this.vue.getTreillis().barrePlusProche(clic, Double.MAX_VALUE);
+        if(this.barreProche !=null){
+            this.vue.getGrille().actualiseGrille();
+        }
     }
 
    
@@ -375,10 +389,10 @@ public class Controleur {
     }
     
     void boutonResoudre(ActionEvent t) {
+        this.changeEtat(Etat.RESOUDRE);
         try {
             
             Treillis treillis =this.vue.getTreillis(); 
-            this.changeEtat(Etat.APPLIQUER_FORCE);
             treillis.Resolution();
         } catch (Error ex) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -388,8 +402,10 @@ public class Controleur {
 
             alert.showAndWait();
         } finally {
-            this.changeEtat(Etat.RESOUDRE);
+            this.resolu = true;
             this.vue.redrawAll();
+            this.changeEtat(Etat.NAN);
+
             
         }       
         
@@ -577,6 +593,7 @@ public class Controleur {
         if(materiauDialog.isPresent()){
             this.vue.getTreillis().setMateriau(materiauDialog.get());
         }
+        System.out.println("materiau "+Treillis.materiau);
         this.vue.redrawAll();
     }
     
@@ -613,5 +630,19 @@ public class Controleur {
      */
     public void setnPosClic(Noeud nPosClic) {
         this.nPosClic = nPosClic;
+    }
+
+    /**
+     * @return the barreProche
+     */
+    public Barre getBarreProche() {
+        return barreProche;
+    }
+
+    /**
+     * @return the resolu
+     */
+    public boolean isResolu() {
+        return resolu;
     }
 }

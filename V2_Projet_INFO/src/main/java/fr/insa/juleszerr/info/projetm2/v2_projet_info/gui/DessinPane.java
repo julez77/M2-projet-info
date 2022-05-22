@@ -36,7 +36,7 @@ public class DessinPane extends Pane{
         this.setOnMouseClicked((t)->{
           System.out.println("px2 = "+ t.getX() +"; py2 = "+ t.getY());
           this.main.getControleur().clicDansDessin(t);
-          this.redrawAll();
+          //this.redrawAll();
         });
         
         
@@ -58,10 +58,30 @@ public class DessinPane extends Pane{
                 this.getChildren().addAll(f.dessineSelection());
             }
             }   
-        }else if(this.main.getControleur().getEtat() == Etat.RESOUDRE) {
+        }else if(this.main.getControleur().isResolu() == true) {
+            System.out.println("Dessine couleur");
+            List<Barre> barreForceCroissante1 = this.main.getTreillis().BarresTriees1();
+            List<Barre> barreForceCroissante2 = this.main.getTreillis().BarresTriees2();
+            int pasVert = this.main.getTreillis().QuantiteVert();
+            int pasRouge = this.main.getTreillis().QuantiteRouge();
+            int totVert = 255;
+            int totRouge = 0;
+            for (Barre b : barreForceCroissante1){
+                this.getChildren().addAll(b.dessinForceCroissante(totVert, totRouge));
+                totRouge+=pasRouge;
+               
+            }
+            totVert = 255;
+            totRouge = 255;
+            for (Barre b : barreForceCroissante2){
+                this.getChildren().addAll(b.dessinForceCroissante(totVert, totRouge));
+                totVert-=pasVert;
+               
+            }
+            /*
             for(Barre b : barreContientForce){
                 this.getChildren().addAll(b.dessineForce());
-            }
+            }*/
             for(Noeud n : noeudsContraint){
                 this.getChildren().addAll(n.dessine());
             }

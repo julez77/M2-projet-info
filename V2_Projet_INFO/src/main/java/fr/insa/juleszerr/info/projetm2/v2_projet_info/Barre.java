@@ -11,8 +11,9 @@ import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 import java.io.IOException;
 import java.io.Writer;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+
 /**
  *
  * @author IEUser
@@ -285,7 +286,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
     
         @Override
     public Group dessineSelection() {
-        Materiau materiau = Treillis.materiau;
+        
         Line res1 = new Line();
          Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
                 this.getNoeud2().getPx(), this.getNoeud2().getPy());
@@ -296,6 +297,17 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
        return g;
     }
 
+    public Group dessinForceCroissante(int Vert, int Rouge) {
+        Line res1 = new Line();
+        Line res = new Line(this.getNoeud1().getPx(), this.getNoeud1().getPy(),
+                this.getNoeud2().getPx(), this.getNoeud2().getPy());
+        res.setStroke(Color.rgb(Rouge, Vert, 0, 1));
+        res.setFill(Color.rgb(Rouge, Vert, 0, 1));
+        res.setStrokeWidth(7);
+        Group g = new Group( res);
+       return g;
+    }
+    
     public Group dessineForce() {
         Line bar = new Line();
         if(this.getEffort()>0){
@@ -425,6 +437,8 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
     public void setTreillis(Treillis treillis) {
         this.treillis = treillis;
     }
+
+    
 
     
 

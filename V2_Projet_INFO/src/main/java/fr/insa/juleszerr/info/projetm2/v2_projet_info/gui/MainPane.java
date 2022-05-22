@@ -27,6 +27,8 @@ public class MainPane extends BorderPane {
     private OutilsLeft outilsLeft;
     private DessinPane dessin;
     
+    private GrilleAffichage grille;
+    
     private MainMenu menu;
     private Stage inStage;
     private File curFile;
@@ -45,6 +47,7 @@ public class MainPane extends BorderPane {
     }
     
     public MainPane(Stage inStage, File fromFile, Treillis treillis){
+        this.grille = new GrilleAffichage(this);
         this.top = new VBox();
         this.inStage = inStage;
         this.curFile = fromFile;
@@ -65,7 +68,7 @@ public class MainPane extends BorderPane {
         
     
         
-        
+        this.outilsLeft.getToolBar().getItems().add(grille);
         this.dessin = new DessinPane(this);
         Label titre = new Label("Titre ");                
         titre.setStyle("-fx-font-weight: bold;");
@@ -133,6 +136,20 @@ public class MainPane extends BorderPane {
      */
     public void setCurFile(File curFile) {
         this.curFile = curFile;
+    }
+
+    /**
+     * @return the grille
+     */
+    public GrilleAffichage getGrille() {
+        return grille;
+    }
+
+    /**
+     * @param grille the grille to set
+     */
+    public void setGrille(GrilleAffichage grille) {
+        this.grille = grille;
     }
 
     

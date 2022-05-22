@@ -37,12 +37,12 @@ public class DialogParametreMateriaux extends Dialog<Materiau> {
         
         
         this.cbbChoixMaterriau = new ComboBox<String>();
-        cbbChoixMaterriau.getItems().addAll("ACIER","BOIS","BAMBOO","PLASTIQUE","ACIER A FAIBLE TENEUR EN CARBONNE (DOUX)","ACIER ELECTRIQUE","ACIER MARAGING",
-            "FEUILLETAGE D'ACIER SANDVIK","ACIER DE CLAPET A BATTANT UDDEHOLMSTRIP","ACIER INOXIDABLE","AUTRE");
+        cbbChoixMaterriau.getItems().addAll("ACIER","BOIS","BAMBOO","PLASTIQUE","ACIER A FAIBLE TENEUR EN CARBONNE ","ACIER MARAGING",
+            "ACIER INOXIDABLE","AUTRE");
         cbbChoixMaterriau.setMinWidth(400);
         cbbChoixMaterriau.visibleRowCountProperty().set(4);
         cbbChoixMaterriau.setPromptText("Selectionnez un materiau");
-        this.tfResistanceMax = new TextField("Indiquez sa resistance max");
+        this.tfResistanceMax = new TextField("Resistance max: en cours de developpement");
         
         GridPane grid = new GridPane();
         //grid.add(lMateriau, 0, 0);
@@ -60,14 +60,14 @@ public class DialogParametreMateriaux extends Dialog<Materiau> {
         this.setResultConverter((p) -> {
             if (p == bOK) {
                 double effort;
-                
+                /*
                 try {
                     effort = Double.parseDouble(this.tfResistanceMax.getText());
                    
                 } catch (NumberFormatException ex) {
                     return null;
-                }
-                return new Materiau(cbbChoixMaterriau.getValue(), effort);
+                }*/
+                return new Materiau(cbbChoixMaterriau.getValue(), Double.MAX_VALUE);
             } else {
                 return null;
             }

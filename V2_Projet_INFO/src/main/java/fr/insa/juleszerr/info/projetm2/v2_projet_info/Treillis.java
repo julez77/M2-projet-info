@@ -33,6 +33,7 @@ public class Treillis extends Figure {
     
   
   public Treillis(){
+        this.materiau = new Materiau("DEFAUT", Double.MAX_VALUE);
         this.elements = new ArrayList() ;
         this.barres = new ArrayList() ;
         this.noeuds = new ArrayList() ;
@@ -42,6 +43,7 @@ public class Treillis extends Figure {
         this.bonuster3 = new ArrayList();
         this.noeuds2 = new ArrayList();
         this.barres2 = new ArrayList();
+        
     }
     
     
@@ -50,6 +52,11 @@ public class Treillis extends Figure {
         
     
 }
+    
+    public void restGridAffichage(){
+        
+    }
+    
  @Override
     public String toString() {
         String res = "Groupe {\n";

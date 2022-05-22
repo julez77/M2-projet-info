@@ -46,8 +46,7 @@ public class MainFX extends Application  {
         primaryStage.setScene(s);
         primaryStage.show();
         this.main.getControleur().boutonAide();
-        this.main.getControleur().boutonParametreMateriau();
-        //this.main.getControleur().boutonDefTreillis(new ActionEvent());
+       
 
         
         
