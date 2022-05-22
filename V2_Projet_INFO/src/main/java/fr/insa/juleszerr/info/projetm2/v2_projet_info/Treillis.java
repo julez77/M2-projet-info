@@ -785,11 +785,6 @@ public void removeterrain3(terrain3 t){
 
         }
         
-        for (int i=0; i<barres.length ; i++){
-           System.out.print(barres[i]+" / ");
-        }
-        System.out.println();
-        
         return barres ;
     
     }
@@ -797,19 +792,39 @@ public void removeterrain3(terrain3 t){
     public List<Barre> BarresTriees(){
         Barre[] tabbarre = new Barre[this.barres3().size()];
         tabbarre = this.ConversionListTableau();
-        
-        for (int i=0; i<tabbarre.length ; i++){
-           System.out.print(tabbarre[i]+" / ");
-        }
-        System.out.println();
-        
         tabbarre = Treillis.TriBarresParEffort(tabbarre);
         
         return Treillis.ConversionTableauList(tabbarre);
     }
     
-    public int QuantiteVert(){
-        int NbBarres = this.barres3().size();
+    public List<Barre> BarresTriees1(){
+        List<Barre> barrestriees1 = new ArrayList<>() ;
+        int tailleliste = (int) (this.BarresTriees().size())/2 ;
+        for (int i=0 ; i<tailleliste ; i++){
+            barrestriees1.add(this.BarresTriees().get(i));
+        }
+        return barrestriees1 ;
+    }
+    
+    public List<Barre> BarresTriees2(){
+        List<Barre> barrestriees2 = new ArrayList<>() ;
+        int tailleliste = (int) (this.BarresTriees().size())/2 ;
+        for (int i=tailleliste ; i<this.BarresTriees().size() ; i++){
+            barrestriees2.add(this.BarresTriees().get(i));
+        }
+        return barrestriees2 ;
+    }
+    
+    public int QuantiteRouge(){  //quantité de rouge à AJOUTER à chaque étape
+        int NbBarres = this.BarresTriees1().size();
+        double quantiterouge1 = 255/NbBarres ;
+        int quantiterouge2 = (int) quantiterouge1 ;
+        
+        return quantiterouge2 ;
+    }
+    
+    public int QuantiteVert(){  //quantité de vert à SOUSTRAIRE à chaque étape
+        int NbBarres = this.BarresTriees2().size();
         double quantitevert1 = 255/NbBarres ;
         int quantitevert2 = (int) quantitevert1 ;
         
