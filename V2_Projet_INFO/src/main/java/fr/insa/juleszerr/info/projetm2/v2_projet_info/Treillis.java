@@ -400,70 +400,7 @@ public void removeterrain3(terrain3 t){
     }
     
     
-    @Override
-    public double maxX() {
-              if (this.getElements().isEmpty()) {
-            return 0;
-        } else {
-            double max = this.getElements().get(0).maxX();
-            for (int i = 1; i < this.getElements().size(); i++) {
-                double cur = this.getElements().get(i).maxX();
-                if (cur > max) {
-                    max = cur;
-                }
-            }
-            return max;
-        }
-    }
-
-    @Override
-    public double minX() {
-         if (this.getElements().isEmpty()) {
-            return 0;
-        } else {
-            double min = this.getElements().get(0).minX();
-            for (int i = 1; i < this.getElements().size(); i++) {
-                double cur = this.getElements().get(i).minX();
-                if (cur < min) {
-                    min = cur;
-                }
-            }
-            return min;
-        }
-    }
-
-    @Override
-    public double maxY() {
-       if (this.getElements().isEmpty()) {
-            return 0;
-        } else {
-            double max = this.getElements().get(0).maxY();
-            for (int i = 1; i < this.getElements().size(); i++) {
-                double cur = this.getElements().get(i).maxY();
-                if (cur > max) {
-                    max = cur;
-                }
-            }
-            return max;
-        }
-    }
-
-    @Override
-    public double minY() {
-         if (this.getElements().isEmpty()) {
-            return 0;
-        } else {
-            double min = this.getElements().get(0).minY();
-            for (int i = 1; i < this.getElements().size(); i++) {
-                double cur = this.getElements().get(i).minY();
-                if (cur < min) {
-                    min = cur;
-                }
-            }
-            return min;
-        }
-    }
-
+    
     /**
      *
      * @param p
@@ -559,14 +496,7 @@ public void removeterrain3(terrain3 t){
         return prefix + toIndente.replaceAll("\n", "\n" + prefix);
     }
     
-       public static void TLecture() throws Exception {
-        try {
-            Figure lue = Figure.lecture(new File("sauv.txt"));
-            System.out.println("fig lue : " + lue);
-        } catch (IOException ex) {
-            throw new Error(ex);
-        }
-    }
+     
     //test si le treillis est isostatique
        public boolean Isostatique(){
            boolean isostatique ;

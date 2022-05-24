@@ -26,13 +26,7 @@ public abstract class Figure {
     }
 
  
-   public abstract double maxX();
    
-   public abstract double minX();
-
-   public abstract double maxY();
-
-   public abstract double minY();
    public abstract double distanceNoeud(Noeud p);
    
    public abstract Group dessineSelection();
@@ -49,14 +43,8 @@ public abstract class Figure {
             this.save(bout, num);
         }
     }
-    public static void testLecture() throws Exception {
-        try {
-            Figure lue = Figure.lecture(new File("sauv.txt"));
-            System.out.println("fig lue : " + lue);
-        } catch (IOException ex) {
-            throw new Error(ex);
-        }
-    }
+   
+   
     //lis un fichier et crée les figures corrspondnates a celle dans  le fichier
    public static Figure lecture(File fin) throws IOException, Exception {
         Numeroteur<Figure> num = new Numeroteur<Figure>();

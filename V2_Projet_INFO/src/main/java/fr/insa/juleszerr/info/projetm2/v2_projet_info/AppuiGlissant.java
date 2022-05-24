@@ -39,26 +39,7 @@ public class AppuiGlissant extends NoeudAppui{
      return "["+this.getPx()+","+this.getPy()+"] appuiglissant" ;
  }
  
-  @Override
-    public double maxX() {
-        return this.px;
-            
-    }
-    
-    @Override
-    public double minX() {
-        return this.px;
-    }
-
-    @Override
-    public double maxY() {
-      return this.py;
-    }
-
-    @Override
-    public double minY() {
-        return this.py;
-    }
+  
 
     @Override
     public  Group dessine() {

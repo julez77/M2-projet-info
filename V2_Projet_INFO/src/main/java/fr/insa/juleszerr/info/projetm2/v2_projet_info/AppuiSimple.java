@@ -37,27 +37,7 @@ public class AppuiSimple extends NoeudAppui {
        return "["+this.getPx()+","+this.getPy()+"] appui simple" ;
    }
 
- @Override
-    public double maxX() {
-        return this.px;
-            
-    }
-    
-    @Override
-    public double minX() {
-        return this.px;
-    }
-
-    @Override
-    public double maxY() {
-      return this.py;
-    }
-
-    @Override
-    public double minY() {
-        return this.py;
-    }
-
+ 
    /*
     @Override
     public Groupe dessine(GraphicsContext context) {

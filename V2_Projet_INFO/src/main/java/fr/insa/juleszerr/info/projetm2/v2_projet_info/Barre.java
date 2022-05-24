@@ -27,10 +27,8 @@ public  class Barre extends Figure  {
     private Noeud noeud2 ;
     private Color color;
     private Treillis treillis ;
-    private double prix ;
     private double effort ;
     private int id ;
-    private int materiau ; //0 pour bois, 1 pour acier, 
 
     Barre(Point p1, Point p2) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -81,7 +79,6 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         this.noeud2 = noeud2;
         this.id = 0;
         this.effort = 0;
-        this.prix = 0;
         
         
         noeud2.getBarrefin().add(this);
@@ -95,7 +92,6 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         this.id = 0;
         this.effort= 0;
         this.id=0;
-        this.prix = 0;
         
         noeud2.getBarrefin().add(this);
         noeud1.getBarredebut().add(this);
@@ -105,7 +101,6 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         this.noeud2 = noeud2;
         this.id = 0;
         this.effort = effort;
-        this.prix = prix;
         
         noeud2.getBarrefin().add(this);
         noeud1.getBarredebut().add(this);
@@ -119,7 +114,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
      */
     @Override
  public String toString() {
-        return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] effort :"+getEffort()+" prix"+prix  ;   
+        return "barre :[" + this.noeud1.toString()+ "," + this.noeud2.toString() + "] effort :"+getEffort() ;   
  }
     //nom explicite
   public static  Barre creeBarre() {
@@ -145,23 +140,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         return sqrt(Math.pow(noeud2.getPx() - noeud1.getPx(), 2) + Math.pow(noeud2.getPy() - noeud1.getPy(), 2)) ;
     }
     
-    
-    /**
-     * @return the prix
-     */
-    public double getPrix() {
-        return prix;
-    }
-
-    /**
-     * @param prix the prix to set
-     */
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    
-
+   
     /**
      * @return the id
      */
@@ -176,25 +155,7 @@ public Vecteur2d vecteurBarre(){            //renvoie le vecteur associé à une
         this.id = id;
     }
 
-    @Override
-    public double maxX() {
-        return Math.max(this.noeud1.maxX(), this.noeud2.maxX());
-    }
-
-    @Override
-    public double minX() {
-        return Math.min(this.noeud1.minX(), this.noeud2.minX());
-    }
-
-    @Override
-    public double maxY() {
-        return Math.max(this.noeud1.maxY(), this.noeud2.maxY());
-    }
-
-    @Override
-    public double minY() {
-        return Math.min(this.noeud1.minY(), this.noeud2.minY());
-    }
+    
 //nom explicite
   @Override
     public double distanceNoeud(Noeud p) {
