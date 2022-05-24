@@ -211,18 +211,13 @@ public class Controleur {
             double py = t.getY();
             Treillis treillis =this.vue.getTreillis(); 
             if(t.isControlDown()){
-                Barre b = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], py));                      
+                Barre b = new Barre(new NoeudSimple(px, pos1[1]), new NoeudSimple(pos1[0], pos1[1]));                      
                 treillis.add(b); 
-            }else if(t.isControlDown()&& t.isShiftDown()){
-                System.out.println("dupliquer barre");
-                Noeud nclic = new NoeudSimple(t.getX(), t.getY());
-                Barre b = this.vue.getTreillis().barrePlusProche(nclic, 50);
-                double taille = b.longueurBarre();
-                Barre nb = new Barre(b.getNoeud1(), new NoeudSimple(b.noeudPlusProche(nclic).getPx()+taille,
-                b.getNoeud1().getPy()));
-                treillis.add(nb);
+            }else if( t.isShiftDown()){
+                Barre b = new Barre(new NoeudSimple(pos1[0], py), new NoeudSimple(pos1[0], pos1[1]));                      
+                treillis.add(b);
             }else{
-                Barre b = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0], pos1[1]));                      
+                Barre b = new Barre(new NoeudSimple(px, py), new NoeudSimple(pos1[0],pos1[1] ));                      
                 treillis.add(b);
             }            
             this.vue.redrawAll();
