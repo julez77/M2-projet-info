@@ -35,6 +35,7 @@ public class OutilsLeft extends HBox {
     
     private Button bParaForce;
     private Button bChoixMateriau;
+    private Button bAffTraxComp;
     
     private GrilleAffichage grill;
     
@@ -44,7 +45,7 @@ public class OutilsLeft extends HBox {
     private ToolBar toolBar ;
     
 public OutilsLeft(MainPane main, Controleur controleur) {
-    
+    this.setMinWidth(135);
     this.main= main;
     this.controleur = controleur;
     this.grill = new GrilleAffichage(main);
@@ -73,6 +74,8 @@ public OutilsLeft(MainPane main, Controleur controleur) {
     Label lMateriau = new Label("Choix du materiau:");
     this.bChoixMateriau = new Button("Materiau");
     
+    this.bAffTraxComp = new Button("Affiche trax/comp");
+    
     
         
     Separator s1 = new Separator(Orientation.VERTICAL);
@@ -84,7 +87,7 @@ public OutilsLeft(MainPane main, Controleur controleur) {
        
     toolBar.getItems().addAll(lNouveauNoeud, bNoeudSimple, bAppuiSimple,bAppuiGlissant,
     lNouveauTerrain, bTerrainLibre,bTerrainHori,
-    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud, lNouvelleForce,bForce, bParaForce,lMateriau,bChoixMateriau);
+    lNouvelleBarre,bBarreLibre,bBarreDepuisNoeud, lNouvelleForce,bForce, bParaForce,lMateriau,bChoixMateriau,bAffTraxComp);
     toolBar.setOrientation(Orientation.VERTICAL);
     toolBar.setStyle("-fx-background-color: #8dbdf0; ");     
         
@@ -117,16 +120,17 @@ public OutilsLeft(MainPane main, Controleur controleur) {
              
         });
         
-        bNoeudSimple.setMinWidth(110);
-        bAppuiGlissant.setMinWidth(110);
-        bAppuiSimple.setMinWidth(110);
-        bBarreDepuisNoeud.setMinWidth(110);
-        bBarreLibre.setMinWidth(110);
-        bForce.setMinWidth(110);
-        bTerrainHori.setMinWidth(110);
-        bTerrainLibre.setMinWidth(110);
-        bParaForce.setMinWidth(110);
-        bChoixMateriau.setMinWidth(110);
+        bNoeudSimple.setMinWidth(125);
+        bAppuiGlissant.setMinWidth(125);
+        bAppuiSimple.setMinWidth(125);
+        bBarreDepuisNoeud.setMinWidth(125);
+        bBarreLibre.setMinWidth(125);
+        bForce.setMinWidth(125);
+        bTerrainHori.setMinWidth(125);
+        bTerrainLibre.setMinWidth(125);
+        bParaForce.setMinWidth(125);
+        bChoixMateriau.setMinWidth(125);
+        bAffTraxComp.setMinWidth(125);
         this.bNoeudSimple.setOnAction((ActionEvent t)-> {
             this.controleur.boutonNoeudSimple(t);
 
@@ -152,6 +156,11 @@ public OutilsLeft(MainPane main, Controleur controleur) {
         this.bChoixMateriau.setOnAction((t) -> {
             this.controleur.boutonParametreMateriau();
         });
+        
+         this.bAffTraxComp.setOnAction((t) -> {
+            this.controleur.boutonAfficheTraxComp();
+        });
+        
         
         this.getChildren().addAll(this.bAppuiSimple,this.bAppuiGlissant,this.bNoeudSimple,
                 this.bTerrainLibre,this.bTerrainHori, this.toolBar, this.bBarreDepuisNoeud,this.bBarreLibre);

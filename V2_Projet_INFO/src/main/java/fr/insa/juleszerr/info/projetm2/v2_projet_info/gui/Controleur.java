@@ -55,6 +55,8 @@ public class Controleur {
     private List<Figure> selection;
     
     private Vecteur2d force;
+
+    
     
 
    
@@ -65,7 +67,7 @@ public class Controleur {
     
      
         
-    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, NAN,
+    public enum Etat {DEBUT, SELECT , SUPPR, RESOUDRE, NAN, AFFICHE_TRAX_COMP,
     NOEUDSIMPLE , APPUIGLISSANT, APPUISIMPLE, 
     BARRE_N1_LIBRE, BARRE_N1_NOEUD, BARRE_N2_LIBRE, BARRE_N2_NOEUD, 
     TERRAIN_N1, TERRAIN_N2, TERRAIN_N3, TERRAIN_HORI_N1,TERRAIN_HORI_N2,TERRAIN_HORI_N3,
@@ -459,6 +461,11 @@ public class Controleur {
         alert.showAndWait();
     }
     
+    void boutonAfficheTraxComp() {
+        this.changeEtat(Etat.AFFICHE_TRAX_COMP);   
+        this.vue.redrawAll();
+    }
+    
     void menuNouveau(ActionEvent t) {
         Stage nouveau = new Stage();
         nouveau.setTitle("Nouveau");
@@ -529,17 +536,20 @@ public class Controleur {
         alert.setTitle("Racourci clavier");
         
         alert.setHeaderText(null);
-        alert.setContentText("Création de barres:\n"
-                + "     Par defaut: création de barre libre \n"
-                + "     Ctrl: creation de barre à partir de noeuds\n"
-                + "     Ctrl+Shift: creation de barre a partir d'un noeud et d'un clic libre \n"
-                + "     d'un noeud et d'un clic libre\n"
-                + "     Shift: création de barre horizontale/verticale\n"
-                + "Creation de noeuds:\n"
-                + "     Par defaut: noeud simple\n"
-                + "     Ctrl: appuis simple \n"
-                + "     Ctrl+Shift: appuis glissant");
+        alert.setContentText("Création de noeud:\n"
+                + "     Noeud simple: Ctrl -> pose d'un noeud simple sur  une barre \n"
+                + "     Appui Simle: Ctrl -> pose d'un appui simple sur  une barre\n"
+                + "     Appui Glissant;Ctrl -> pose d'un appuyi glissant sur  une barre\n"
+                + "Création de barres libre:\n"
+                + "     Ctrl: barre horizontale\n"
+                + "     Shift: barre verticale\n"
+                + "Création de barre a partir de noeudss:\n"
+                +"      Ctrl: creation de barre a partir d'un noeud et d'un clic libre \n"
+                +"      Shift: création de barre horizontale/verticale\n"
+                
+        );
         alert.setResizable(true);
+        
         
         alert.showAndWait();
     }
