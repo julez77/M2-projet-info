@@ -442,7 +442,11 @@ public class Controleur {
        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Fonctionnement");
         alert.setHeaderText(null);
-        alert.setContentText("A compléter avec le fonctionnnement");
+        alert.setContentText("1. création ou lecture d’un treillis \n" +
+"2. modifications et teste isostatique \n" +
+"3. réglages et applications des forces au treillis \n" +
+"3. mise en équation et résolution du treillis  \n" +
+"4. admirer le résultat !");
 
         alert.setResizable(true);
         
@@ -454,7 +458,7 @@ public class Controleur {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Fonctionnement");
         alert.setHeaderText(null);
-        alert.setContentText("A compléter avec le fonctionnnement");
+        alert.setContentText("Se référer au manuel");
 
         //alert.showAndWait();
         alert.setWidth(500);
@@ -558,16 +562,14 @@ public class Controleur {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("A propos");
         alert.setHeaderText(null);
-        alert.setContentText("A compléter");
+        alert.setContentText("Ceci n'est pas une section à propos.");
 
         //alert.showAndWait();
         alert.setWidth(500);
         alert.showAndWait();
     }
 
-    void menuAfficherBarOutils(ActionEvent t) {
-        throw new UnsupportedOperationException("Ici Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 
     void boutonBarreDepuisNoeud(ActionEvent t) {
         this.changeEtat(Etat.BARRE_N1_NOEUD);

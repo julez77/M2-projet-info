@@ -87,12 +87,12 @@ public class DessinPane extends Pane{
             }
         
             
-           
+         /*  
         } if(this.main.getControleur().getEtat()==Etat.AFFICHE_TRAX_COMP){
                 
                 for(Barre b : barreContientForce){
                 this.getChildren().addAll(b.dessineForce());
-            }
+            }*/
             }
     }
 

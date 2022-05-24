@@ -128,7 +128,7 @@ public void DescenteGauss(){
                }
                else {
                 transvection(i, j);
-                //System.out.println(this);
+                System.out.println(this);
                 this.Equilibrage();
                 
             
@@ -150,7 +150,7 @@ public void RemonteeGauss(){
           }
            
           this.Equilibrage();
-          //System.out.println(this);
+          System.out.println(this);
           System.out.println();
             }
         }

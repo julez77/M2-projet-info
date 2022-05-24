@@ -56,14 +56,9 @@ public class MainMenu extends MenuBar{
         });
         
         help.getItems().addAll(racourci, apropos);
+              
         
-        Menu outils = new Menu("Outils");
-        RadioMenuItem afficheBarOutils = new RadioMenuItem("Afficher la bar d'outils");
-        afficheBarOutils.setOnAction((t) -> {
-            this.main.getControleur().menuAfficherBarOutils(t);
-        });         
-        outils.getItems().addAll(afficheBarOutils);
         
-        this.getMenus().addAll(file, outils, help);
+        this.getMenus().addAll(file, help);
     }
 }
